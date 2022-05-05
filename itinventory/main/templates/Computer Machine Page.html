@@ -1,0 +1,1434 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta required name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+
+	<link rel="preconnect" href="https://fonts.gstatic.com">
+	<link rel="shortcut icon" href="{% static 'img/icons/icon-48x48.png' %}" />
+
+	<link rel="canonical" href="https://demo-basic.adminkit.io/pages-blank.html" />
+
+	<title>IT Inventory System</title>
+
+	<link href="{% static 'css/app.css' %}" rel="stylesheet">
+	<link href="{% static 'css/modalform.css' %}" rel="stylesheet">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+</head>
+
+<body>
+	<div class="wrapper">
+		<nav id="sidebar" class="sidebar js-sidebar">
+			<div class="sidebar-content js-simplebar">
+				<a class="sidebar-brand" href="index.html">
+          <span class="align-middle">IT Inventory System</span>
+        </a>
+
+				
+				<ul class="sidebar-nav">
+	<li class="sidebar-header">
+						Computer
+					</li>
+
+					<li class="sidebar-item">
+						<a class="sidebar-link" href="{% url 'computerpage' %}">
+              <i class="align-middle" data-feather="sliders"></i> <span class="align-middle">Computer Details</span>
+            </a>
+					</li>
+
+		
+
+				
+					<li class="sidebar-header">
+						Laptop
+					</li>
+
+					<li class="sidebar-item">
+						<a class="sidebar-link" href="{% url 'laptoppage' %}">
+              <i class="align-middle" data-feather="sliders"></i> <span class="align-middle">Laptop Detail</span>
+            </a>
+					</li>
+
+					<li class="sidebar-header">
+						Computer Machine
+					</li>
+					<li class="sidebar-item">
+						<a class="sidebar-link" href="{% url 'computermachinepage' %}">
+              <i class="align-middle" data-feather="sliders"></i> <span class="align-middle">Computer Machine Detail</span>
+            </a>
+					</li>
+
+			
+					<li class="sidebar-header">
+						Hardware
+					</li>
+
+					<li class="sidebar-item">
+						<a class="sidebar-link" href="{% url 'Networkhardwarepage' %}">
+              <i class="align-middle" data-feather="sliders"></i> <span class="align-middle">Network Hardware Detail</span>
+            </a>
+					</li>
+
+					<li class="sidebar-header">
+						IP
+					</li>
+
+					<li class="sidebar-item">
+						<a class="sidebar-link" href="{% url 'ippage' %}">
+              <i class="align-middle" data-feather="sliders"></i> <span class="align-middle">IP Detail</span>
+            </a>
+					</li>
+
+					
+					<li class="sidebar-header">
+						User
+					</li>
+
+					<li class="sidebar-item">
+						<a class="sidebar-link" href="{% url 'userpage' %}">
+              <i class="align-middle" data-feather="sliders"></i> <span class="align-middle">User Detail</span>
+            </a>
+					</li>
+					<li class="sidebar-header">
+						Loan
+					</li>
+	
+
+					<li class="sidebar-item">
+						<a class="sidebar-link" href="{% url 'loanpage' %}">
+              <i class="align-middle" data-feather="sliders"></i> <span class="align-middle">Loan Detail</span>
+            </a>
+					</li>
+
+	
+
+			
+			</div>
+		</nav>
+
+		<div class="main">
+			<nav class="navbar navbar-expand navbar-light navbar-bg">
+				<a class="sidebar-toggle js-sidebar-toggle">
+          <i class="hamburger align-self-center"></i>
+        </a>
+
+				<div class="navbar-collapse collapse">
+					<ul class="navbar-nav navbar-align">
+					
+						<li class="nav-item dropdown">
+							<a class="nav-icon dropdown-toggle d-inline-block d-sm-none" href="#" data-bs-toggle="dropdown">
+                <i class="align-middle" data-feather="settings"></i>
+              </a>
+
+							<a class="nav-link dropdown-toggle d-none d-sm-inline-block" href="#" data-bs-toggle="dropdown">
+                <img src="img/avatars/avatar.jpg" class="avatar img-fluid rounded me-1" alt="Charles Hall" /> <span class="text-dark">Charles Hall</span>
+              </a>
+							<div class="dropdown-menu dropdown-menu-end">
+								<a class="dropdown-item" href="pages-profile.html"><i class="align-middle me-1" data-feather="user"></i> Histtory</a>
+								
+								<div class="dropdown-divider"></div>
+								<a class="dropdown-item" href="#">Log out</a>
+							</div>
+						</li>
+					</ul>
+				</div>
+			</nav>
+
+			<main class="content">
+				<div class="container-fluid p-0">
+
+					<h1 class="h3 mb-3">Computer Machine List</h1>
+                   
+					<div class="row">
+						<div class="col-12">
+							<div class="card">
+								<div class="card-header">
+									<button onclick="openform()" class="btn btn-primary">Add computer Machine</button>
+                                    <div class="table-responsive ">
+                                        <table class="table" id="computertable">
+                                            <thead class="table-dark" id="computer-list">
+                                              <tr>
+												
+                                                <th scope="col">Computer ID</th>
+												<th scope="col">Current Computer ID</th>
+                                                <th scope="col">PIC</th>
+                                                <th scope="col">Previous-PIC</th>
+												<th scope="col">Computer Status</th>
+                                                <th scope="col">Brand</th>
+                                                <th scope="col">Model</th>
+												<th scope="col">Windows Version</th>
+                                                <th scope="col">S/N</th>
+                                                <th scope="col">Asset No</th>
+												<th scope="col">Block</th>
+                                                <th scope="col">Location</th>
+												<th scope="col">Standard Installation</th>
+                                                <th scope="col">Microsoft Office</th>
+                                                <th scope="col">Microsoft Office Licensed Key</th>
+												<th scope="col">DOP</th>
+                                                <th scope="col">DOP (Years) / Warranty-end-date</th>
+                                                <th scope="col">PO</th>
+                                                <th scope="col">Invoice</th>
+												
+                                                <th scope="col">Vendor</th>
+                                               
+                                                <th scope="col">Processor Type</th>
+                                                <th scope="col">RAM Type</th>
+                                                <th scope="col">RAM Slot</th>
+                                                <th scope="col">Total RAM</th>
+                                                <th scope="col">Storage Type</th>
+                                                <th scope="col">Storage space</th>
+                                              
+                                               
+                                                
+                                                <th scope="col">LAN MAC Address</th>
+                                                <th scope="col">LAN IP Address</th>
+                                                <th scope="col">WLAN MAC Address</th>
+                                                <th scope="col">WLAN IP Address</th>
+                                                <th scope="col">Joined-Domain</th>
+                                                <th scope="col">Connection Type</th>
+												<th scope="col">Update</th>
+                                                
+                                              </tr>
+                                            </thead>
+                                            <tbody id="trtable">
+											
+											
+
+                                            
+                                              
+                                            </tbody>
+                                          </table>
+                                        </div>
+								</div>
+								<div class="card-body">
+								</div>
+							</div>
+						</div>
+					</div>
+
+				</div>
+			</main>
+
+			<footer class="footer">
+			
+			</footer>
+		</div>
+	</div>
+	<!-- The Modal -->
+<div id="addform" class="modalform">
+
+	<!-- Modal content -->
+	<div class="modalform-header">
+	  <span onclick="closeform()" class="closeform">&times;</span>
+	 <h1 class="text-center">Add Computer</h1>
+	</div>
+	<div class="modalform-content">
+		<form method="POST" class="post-form" id="add-computer">  
+		
+				{% csrf_token %}
+			   
+				 <h3 class="text-center" style=" color: #564953;">Computer Details</h3>
+					<label for="inputEmail3" class="col-sm-2 col-form-label">Computer Status :</label>
+					<div class="col-sm-3">
+					  <select class="form-control" required name="Computer_Status" id="Computer_Status">
+							<option value="default">Default</option>
+						  <option value="In-use">In-use</option>
+						  <option value="Not in-use">Not in-use</option>
+
+					  </select>
+					</div>
+				  
+				 <br>
+				 <div class="form-group row">
+					<label for="inputEmail3" class="col-sm-2 col-form-label">Computer ID  :</label>
+					<br><br>
+					<div class="col-sm-3">
+					  <input type="text"  readonly="readonly" class="form-control" required name="Computer_ID"  id="final_Computer_ID" placeholder="">
+					</div>
+				   
+					  <label for="inputEmail3" class="col-sm-2 col-form-label">Current Computer ID :</label>
+ 
+				   
+					<div class="col-sm-3">
+					  <input type="text" class="form-control" required name="Current_Computer_ID" id="final_Current_Computer">
+					</div>
+				  </div>
+				  <br>
+				 <div class="form-group row">
+				   <label for="inputEmail3" class="col-sm-2 col-form-label">PIC(User)  :</label>
+				   <div class="col-sm-3">
+					 <input type="text" class="form-control" required name="pic"  id="final_pic">
+				   </div>
+				  
+					 <label for="inputEmail3" class="col-sm-2 col-form-label">Previous-PIC(User) :</label>
+
+				   <div class="col-sm-3">
+					 <input type="text" class="form-control" required name="Previous_PIC" id="final_previous_pIC" >
+				   </div>
+				 </div>
+				 <br>
+				 <div class="form-group row">
+					<label for="inputEmail3" class="col-sm-2 col-form-label">S/N :</label>
+					<div class="col-sm-3">
+					  <input type="text" class="form-control" required name="serial_number" id="final_serial_number" placeholder="">
+					</div>
+				   
+					  <label for="inputEmail3" class="col-sm-2 col-form-label">Asset No :</label>
+ 
+				   
+					<div class="col-sm-3">
+					  <input type="text" class="form-control" required name="asset_no" id="final_asset_no" placeholder="">
+					</div>
+				  </div>
+				 <br>
+				 <div class="form-group row">
+					<label for="inputEmail3" class="col-sm-2 col-form-label">Block :</label>
+					<div class="col-sm-3">
+					  <select class="form-control" required name="block" id="block">
+						  <option value="default">Default</option>
+						  <option value="2">2</option>
+						  <option value="4">4</option>
+						  <option value="6">6</option>
+						  <option value="8">8</option>
+						  <option value="10">10</option>
+						  <option value="12">12</option>
+						  <option value="15">15</option>
+						  <option value="17">17</option>
+					  </select>
+					</div>
+				   
+					  <label for="inputEmail3" class="col-sm-2 col-form-label">Location :</label>
+ 
+				   
+					  <div class="col-sm-3">
+						 <select class="form-control" required name="location" id="location">
+							<option value="default">Default</option>
+							{% for entry in location %}
+							<option value="{{ entry.location }}">{{ entry.location }}</option>
+						{% endfor %}
+						 </select>
+					   </div>
+				  </div>
+				 <br>
+				 <div class="form-group row">
+					<label for="inputEmail3" class="col-sm-2 col-form-label">Standard Installation  :</label>
+					<div class="col-sm-3">
+					<div class="form-check-inline">
+					   <input class="form-check-input" type="radio" required name="Standard_Installation" id="inlineRadio1" value="Yes">
+					   <label class="form-check-label" for="inlineRadio1">Yes</label>
+					 </div>
+					 <div class="form-check-inline">
+					   <input class="form-check-input" type="radio" required name="Standard_Installation" id="inlineRadio2" value="No">
+					   <label class="form-check-label" for="inlineRadio2">No</label>
+					 </div>
+				   </div>
+				   
+				   <label for="inputEmail3" class="col-sm-2 col-form-label">Windows Version  :</label>
+				   <div class="col-sm-3">
+					   <select class="form-control" required name="Window_version" id="Window_version">
+						  <option value="default">Default</option>
+						  {% for entry in window %}
+						  <option value="{{ entry.windows }}">{{ entry.windows }}</option>
+					  {% endfor %}
+					   </select>
+					 </div>
+				  </div>
+				  <br>
+				   <div class="form-group row">
+					<label for="inputEmail3" class="col-sm-2 col-form-label">Microsoft Office  :</label>
+					<div class="col-sm-3">
+						<select class="form-control" required name="Microsoft_Office" id="Microsoft_Office">
+							<option value="default">Default</option>
+							{% for entry in microsoft_office %}
+							<option value="{{ entry.microsoft_office }}">{{ entry.microsoft_office }}</option>
+						{% endfor %}
+						 </select>
+				   </div>
+				   
+				   <label for="inputEmail3" class="col-sm-2 col-form-label">Microsoft Office Licensed :</label>
+				   <div class="col-sm-3">
+					<input type="text" class="form-control" required name="Licensed_key" id="final_invoice" placeholder="">
+					 </div>
+				  </div>
+				  <br>
+				  <div class="form-group row">
+					<label for="inputEmail3" class="col-sm-2 col-form-label">Date of Purchase :</label>
+					<div class="col-sm-3">
+					  <input type="date" class="form-control" required name="dop" id="final_dop" placeholder="">
+					</div>
+				   
+					  <label for="inputEmail3" class="col-sm-3 col-form-label">DOP (Years) / Warranty-end-date :</label>
+ 
+				   
+					<div class="col-sm-3">
+					  <input type="date" class="form-control" required name="dopYear" id="final_dopYear" placeholder="">
+					</div>
+				  </div>
+				  <br>
+				  <div class="form-group row">
+					<label for="inputEmail3" class="col-sm-2 col-form-label">PO :</label>
+					<div class="col-sm-3">
+					  <input type="text" class="form-control" required name="po" id="final_po" placeholder="">
+					</div>
+				   
+					  <label for="inputEmail3" class="col-sm-2 col-form-label">Invoice :</label>
+ 
+				   
+					<div class="col-sm-3">
+					  <input type="text" class="form-control" required name="invoice" id="final_invoice" placeholder="">
+					</div>
+				  </div>
+				  <br>
+				 
+				 <div class="form-group row">
+				   <label for="inputEmail3" class="col-sm-2 col-form-label">Brand  :</label>
+				   <div class="col-sm-3">
+				   <select class="form-control" required name="Brand" id="Brand">
+					<option value="default">Default</option>
+					{% for entry in brand %}
+					<option value="{{ entry.Brand_name }}">{{ entry.Brand_name }}</option>
+				{% endfor %}
+				 </select>
+				</div>
+				  
+					 <label for="inputEmail3" class="col-sm-2 col-form-label">Model :</label>
+
+				  
+				   <div class="col-sm-3">
+					 <select class="form-control" required name="model" id="model">
+						<option value="default">Default</option>
+
+						{% for entry in pctype %}
+						<option value="{{ entry.ModelPC_name }}">{{ entry.ModelPC_name }}</option>
+					{% endfor %}
+					 </select>
+				   </div>
+				 </div>
+				 <br>
+				 
+				 <br>
+				 <div class="form-group row">
+				   <label for="inputEmail3" class="col-sm-2 col-form-label">Vendor :</label>
+				   <div class="col-sm-3">
+					<select class="form-control" required name="vendor" id="vendor">
+						<option value="default">Default</option>
+					   {% for entry in Vendor %}
+					   <option value="{{ entry.vendorname }}">{{ entry.vendorname }}</option>
+				   {% endfor %}
+					</select>
+				  </div>
+				  <label for="inputEmail3" class="col-sm-2 col-form-label">Processor Type :</label>
+				  <div class="col-sm-3">
+				   <select class="form-control" required name="processor" id="processor">
+						<option value="default">Default</option>
+					   {% for entry in processorType %}
+					   <option value="{{ entry.Processor_name }}">{{ entry.Processor_name }}</option>
+				   {% endfor %}
+					</select>
+				  </div>
+					 
+				   </div>
+				 
+				 <br>
+				 <div class="form-group row">
+				  
+				  
+					 <label for="inputEmail3" class="col-sm-2 col-form-label">RAM Type :</label>
+
+					 <div class="col-sm-3">
+					 <select class="form-control" required name="ram_type" id="ram_type">
+						<option value="default">Default</option>
+						{% for entry in ram_type %}
+						<option value="{{ entry.ram_type }}">{{ entry.ram_type }}</option>
+					{% endfor %}
+					 </select>
+				 </div>
+				 <label for="inputEmail3" class="col-sm-2 col-form-label">RAM Slot :</label>
+				 <div class="col-sm-3">
+				   <input type="text" class="form-control" required name="ram_slot" id="final_ram_slot" >
+				 </div>
+				</div>
+				 <br>
+				 <div class="form-group row">
+					 <label for="inputEmail3" class="col-sm-2 col-form-label">Total RAM :</label>
+				   <div class="col-sm-3">
+					 <input type="text" class="form-control" required name="total_RAM"  id="final_total_RAM" placeholder="">
+				   </div>
+				   <label for="inputEmail3" class="col-sm-2 col-form-label">Storage Type :</label>
+				   <div class="col-sm-3">
+					<select class="form-control" required name="storage_type" id="storage_type">
+						<option value="default">Default</option>
+						<option value="HDD">HDD</option>
+						<option value="SDD">SDD</option>
+
+					</select>
+				   </div>
+
+				 </div>
+				 <br>
+				 <div class="form-group row">
+				  
+				  
+					 <label for="inputEmail3" class="col-sm-2 col-form-label">Storage space :</label>
+
+				  
+				   <div class="col-sm-3">
+					 <input type="text" class="form-control" required name="storageSpace" id="final_storageSpace" placeholder="">
+				   </div>
+				 </div>
+				 <br>
+				
+				 <br>
+				 
+				 
+				
+				  
+				   
+				 
+				 <div class="container-c5 " id="formtab4">
+				  
+				   <h3 class="text-center" style=" color: #564953;">Connection status</h3>
+				   <br>
+				   <div class="form-group row">
+					 <label for="inputEmail3" class="col-sm-3 col-form-label">LAN MAC Address  :</label>
+					 <div class="col-sm-3">
+					   <input type="text" class="form-control" required name="lan_mac_address" id="final_lan_mac_address" >
+					 </div>
+					
+					   <label for="inputEmail3" class="col-sm-3 col-form-label">LAN IP Address  :</label>
+
+					 <div class="col-sm-3">
+					   <input type="text" class="form-control" required name="lan_ip_address" id="final_lan_ip_address">
+					 </div>
+				   </div>
+				   <br>
+				   <div class="form-group row">
+					 <label for="inputEmail3" class="col-sm-3 col-form-label">WLAN MAC Address :</label>
+					 <div class="col-sm-3">
+					   <input type="text" class="form-control" required name="wlan_mac_address" id="wlan_ip_address" placeholder="">
+					 </div>
+					 <label for="inputEmail3" class="col-sm-3 col-form-label">WLAN IP Address :</label>
+					 <div class="col-sm-3">
+					   <input type="text" class="form-control" required name="wlan_ip_address" id="wlan_ip_address" placeholder="">
+					 </div>
+					 </div>
+<br>
+					 <div class="form-group row">
+					   <label for="inputEmail3" class="col-sm-3 col-form-label">Joined-Domain :</label>
+					   <div class="col-sm-3">
+					   <div class="form-check form-check-inline">
+						<input class="form-check-input" type="radio" required name="Joined_Domain" id="inlineRadio1" value="Yes">
+						<label class="form-check-label" for="inlineRadio1">Yes</label>
+					  </div>
+					  <div class="form-check form-check-inline">
+						<input class="form-check-input" type="radio" required name="Joined_Domain" id="inlineRadio2" value="No">
+						<label class="form-check-label" for="inlineRadio2">No</label>
+					  </div>
+					</div>
+					<label for="inputEmail3" class="col-sm-3 col-form-label">Connection Type :</label>
+				   <div class="col-sm-3">
+					<select class="form-control" required name="ConnectionType" id="ConnectionType">
+						<option value="default">Default</option>
+
+						<option value="Intranet">Intranet</option>
+						<option value="Internet">Internet</option>
+						<option value="Offline">Offline</option>
+						
+
+					</select>
+				   </div>
+
+					
+					
+				 </div>
+				 <br>
+				 
+				
+
+				  
+				  
+			   </div>
+			   <br>
+			  
+				  </form>
+				  <div class="text-center">
+					<button class="btn btn-primary" onclick="addPCMC()">Submit</button>
+	
+				   </div>
+			
+	</div>
+	<div class="modalform-footer">
+		
+	</div>
+  
+  </div>
+
+<div id="updateformmodal" class="modalform">
+
+	<!-- Modal content -->
+	<div class="modalform-header">
+	  <span onclick="closeformupdate()" class="closeform">&times;</span>
+	 <h1 class="text-center">Add Computer Machine</h1>
+	</div>
+	<div class="modalform-content">
+		<form method="POST" class="post-form" id="update-computer">  
+		
+				{% csrf_token %}
+			   
+				 <h3 class="text-center" style=" color: #564953;">Computer Machine Details</h3>
+
+					
+				   
+					<label for="inputEmail3" class="col-sm-2 col-form-label">Computer Status :</label>
+					<div class="col-sm-3">
+					  <select class="form-control" required name="update_Computer_Status" id="update_Computer_Status">
+							<option value="default">Default</option>
+						  <option value="Dispose">Dispose</option>
+						  <option value="In-use">In-use</option>
+						  <option value="Pending Dispose">Pending Dispose</option>
+						  <option value="Not in-use">Not in-use</option>
+
+					  </select>
+					</div>
+				 
+				 <br>
+				 <div class="form-group row">
+					<label for="inputEmail3" class="col-sm-2 col-form-label">Computer ID  :</label>
+					<br><br>
+					<div class="col-sm-3">
+					  <input type="text"  readonly="readonly" value="UTM-PC{{ runing_number.running_number }}"class="form-control" required name="update_Computer_ID"  id="update_Computer_ID" placeholder="">
+					</div>
+				   
+					  <label for="inputEmail3" class="col-sm-2 col-form-label">Current Computer ID :</label>
+ 
+				   
+					<div class="col-sm-3">
+					  <input type="text" class="form-control" required name="update_Current_Computer_ID" id="update_Current_Computer">
+					</div>
+				  </div>
+				  <br>
+				 <div class="form-group row">
+				   <label for="inputEmail3" class="col-sm-2 col-form-label">PIC(User)  :</label>
+				   <div class="col-sm-3">
+					 <input type="text" class="form-control" required name="update_pic"  id="update_pic">
+				   </div>
+				  
+					 <label for="inputEmail3" class="col-sm-2 col-form-label">Previous-PIC(User) :</label>
+
+				   <div class="col-sm-3">
+					 <input type="text" class="form-control" required name="update_Previous_PIC" id="update_previous_pic" >
+				   </div>
+				 </div>
+				 <br>
+				 <div class="form-group row">
+					<label for="inputEmail3" class="col-sm-2 col-form-label">S/N :</label>
+					<div class="col-sm-3">
+					  <input type="text" class="form-control" required name="update_serial_number" id="update_serial_number" placeholder="">
+					</div>
+				   
+					  <label for="inputEmail3" class="col-sm-2 col-form-label">Asset No :</label>
+ 
+				   
+					<div class="col-sm-3">
+					  <input type="text" class="form-control" required name="update_asset_no" id="update_asset_no" placeholder="">
+					</div>
+				  </div>
+				 <br>
+				 <div class="form-group row">
+					<label for="inputEmail3" class="col-sm-2 col-form-label">Block :</label>
+					<div class="col-sm-3">
+					  <select class="form-control" required name="update_block" id="update_block">
+						  <option value="default">Default</option>
+						  <option value="2">2</option>
+						  <option value="4">4</option>
+						  <option value="6">6</option>
+						  <option value="8">8</option>
+						  <option value="10">10</option>
+						  <option value="12">12</option>
+						  <option value="15">15</option>
+						  <option value="17">17</option>
+					  </select>
+					</div>
+				   
+					  <label for="inputEmail3" class="col-sm-2 col-form-label">Location :</label>
+ 
+				   
+					  <div class="col-sm-3">
+						 <select class="form-control" required name="update_location" id="update_location">
+							<option value="default">Default</option>
+							{% for entry in location %}
+							<option value="{{ entry.location }}">{{ entry.location }}</option>
+						{% endfor %}
+						 </select>
+					   </div>
+				  </div>
+				 <br>
+				 <div class="form-group row">
+					<label for="inputEmail3" class="col-sm-2 col-form-label">Standard Installation  :</label>
+					<div class="col-sm-3">
+					<div class="form-check-inline">
+					   <input class="form-check-input" type="radio" required name="update_Standard_Installation" id="update_Standard_Installation_yes" value="Yes">
+					   <label class="form-check-label" for="inlineRadio1">Yes</label>
+					 </div>
+					 <div class="form-check-inline">
+					   <input class="form-check-input" type="radio" required name="update_Standard_Installation" id="update_Standard_Installation_no" value="No">
+					   <label class="form-check-label" for="inlineRadio2">No</label>
+					 </div>
+				   </div>
+				   
+				   <label for="inputEmail3" class="col-sm-2 col-form-label">Windows Version  :</label>
+				   <div class="col-sm-3">
+					   <select class="form-control" required name="update_Window_version" id="update_Window_version">
+						  <option value="default">Default</option>
+						  {% for entry in window %}
+						  <option value="{{ entry.windows }}">{{ entry.windows }}</option>
+					  {% endfor %}
+					   </select>
+					 </div>
+				  </div>
+				  <br>
+				   <div class="form-group row">
+					<label for="inputEmail3" class="col-sm-2 col-form-label">Microsoft Office  :</label>
+					<div class="col-sm-3">
+						<select class="form-control" required name="update_Microsoft_Office" id="update_Microsoft_Office">
+							<option value="default">Default</option>
+							{% for entry in microsoft_office %}
+							<option value="{{ entry.microsoft_office }}">{{ entry.microsoft_office }}</option>
+						{% endfor %}
+						 </select>
+				   </div>
+				   
+				   <label for="inputEmail3" class="col-sm-2 col-form-label">Microsoft Office Licensed :</label>
+				   <div class="col-sm-3">
+					<input type="text" class="form-control" required name="update_Licensed" id="update_Licensed" placeholder="">
+					 </div>
+				  </div>
+				  <br>
+				  <div class="form-group row">
+					<label for="inputEmail3" class="col-sm-2 col-form-label">Date of Purchase :</label>
+					<div class="col-sm-3">
+					  <input type="date" class="form-control" required name="update_dop" id="update_dop" placeholder="">
+					</div>
+				   
+					  <label for="inputEmail3" class="col-sm-3 col-form-label">DOP (Years) / Warranty-end-date :</label>
+ 
+				   
+					<div class="col-sm-3">
+					  <input type="date" class="form-control" required name="update_dopYear" id="update_dopYear" placeholder="">
+					</div>
+				  </div>
+				  <br>
+				  <div class="form-group row">
+					<label for="inputEmail3" class="col-sm-2 col-form-label">PO :</label>
+					<div class="col-sm-3">
+					  <input type="text" class="form-control" required name="update_po" id="update_po" placeholder="">
+					</div>
+				   
+					  <label for="inputEmail3" class="col-sm-2 col-form-label">Invoice :</label>
+ 
+				   
+					<div class="col-sm-3">
+					  <input type="text" class="form-control" required name="update_invoice" id="update_invoice" placeholder="">
+					</div>
+				  </div>
+				  <br>
+				 
+				 <div class="form-group row">
+				   <label for="inputEmail3" class="col-sm-2 col-form-label">Brand  :</label>
+				   <div class="col-sm-3">
+				   <select class="form-control" required name="update_Brand" id="update_Brand">
+					<option value="default">Default</option>
+					{% for entry in brand %}
+					<option value="{{ entry.Brand_name }}">{{ entry.Brand_name }}</option>
+				{% endfor %}
+				 </select>
+				</div>
+				  
+					 <label for="inputEmail3" class="col-sm-2 col-form-label">Model :</label>
+
+				  
+				   <div class="col-sm-3">
+					 <select class="form-control" required name="update_model" id="update_model">
+						<option value="default">Default</option>
+
+						{% for entry in pctype %}
+						<option value="{{ entry.ModelPC_name }}">{{ entry.ModelPC_name }}</option>
+					{% endfor %}
+					 </select>
+				   </div>
+				 </div>
+				 <br>
+				 
+				 <br>
+				 <div class="form-group row">
+				   <label for="inputEmail3" class="col-sm-2 col-form-label">Vendor :</label>
+				   <div class="col-sm-3">
+					<select class="form-control" required name="update_vendor" id="update_vendor">
+						<option value="default">Default</option>
+					   {% for entry in Vendor %}
+					   <option value="{{ entry.vendorname }}">{{ entry.vendorname }}</option>
+				   {% endfor %}
+					</select>
+				  </div>
+				  <label for="inputEmail3" class="col-sm-2 col-form-label">Processor Type :</label>
+				  <div class="col-sm-3">
+				   <select class="form-control" required name="update_processor" id="update_processor">
+						<option value="default">Default</option>
+					   {% for entry in processorType %}
+					   <option value="{{ entry.Processor_name }}">{{ entry.Processor_name }}</option>
+				   {% endfor %}
+					</select>
+				  </div>
+					 
+				   </div>
+				 
+				 <br>
+				 <div class="form-group row">
+				  
+				  
+					 <label for="inputEmail3" class="col-sm-2 col-form-label">RAM Type :</label>
+
+					 <div class="col-sm-3">
+					 <select class="form-control" required name="update_ram_type" id="update_ram_type">
+						<option value="default">Default</option>
+						{% for entry in ram_type %}
+						<option value="{{ entry.ram_type }}">{{ entry.ram_type }}</option>
+					{% endfor %}
+					 </select>
+				 </div>
+				 <label for="inputEmail3" class="col-sm-2 col-form-label">RAM Slot :</label>
+				 <div class="col-sm-3">
+				   <input type="text" class="form-control" required name="update_ram_slot" id="update_ram_slot" >
+				 </div>
+				</div>
+				 <br>
+				 <div class="form-group row">
+					 <label for="inputEmail3" class="col-sm-2 col-form-label">Total RAM :</label>
+				   <div class="col-sm-3">
+					 <input type="text" class="form-control" required name="update_total_RAM"  id="update_total_RAM" placeholder="">
+				   </div>
+				   <label for="inputEmail3" class="col-sm-2 col-form-label">Storage Type :</label>
+				   <div class="col-sm-3">
+					<select class="form-control" required name="update_storage_type" id="update_storage_type">
+						<option value="default">Default</option>
+						<option value="HDD">HDD</option>
+						<option value="SDD">SDD</option>
+
+					</select>
+				   </div>
+
+				 </div>
+				 <br>
+				 <div class="form-group row">
+				  
+				  
+					 <label for="inputEmail3" class="col-sm-2 col-form-label">Storage space :</label>
+
+				  
+				   <div class="col-sm-3">
+					 <input type="text" class="form-control" required name="update_storageSpace" id="update_storageSpace" placeholder="">
+				   </div>
+				 </div>
+				 <br>
+				
+				 <br>
+				 
+				 
+				
+				  
+				   
+				 
+				 <div class="container-c5 " id="formtab4">
+				  
+				   <h3 class="text-center" style=" color: #564953;">Connection status</h3>
+				   <br>
+				   <div class="form-group row">
+					 <label for="inputEmail3" class="col-sm-3 col-form-label">LAN MAC Address  :</label>
+					 <div class="col-sm-3">
+					   <input type="text" class="form-control" required name="update_lan_mac_address" id="update_lan_mac_address" >
+					 </div>
+					
+					   <label for="inputEmail3" class="col-sm-3 col-form-label">LAN IP Address  :</label>
+
+					 <div class="col-sm-3">
+					   <input type="text" class="form-control" required name="update_lan_ip_address" id="update_lan_ip_address">
+					 </div>
+				   </div>
+				   <br>
+				   <div class="form-group row">
+					 <label for="inputEmail3" class="col-sm-3 col-form-label">WLAN MAC Address :</label>
+					 <div class="col-sm-3">
+					   <input type="text" class="form-control" required name="update_wlan_mac_address" id="update_wlan_mac_address" placeholder="">
+					 </div>
+					 <label for="inputEmail3" class="col-sm-3 col-form-label">WLAN IP Address :</label>
+					 <div class="col-sm-3">
+					   <input type="text" class="form-control" required name="update_wlan_ip_address" id="update_wlan_ip_address" placeholder="">
+					 </div>
+					 </div>
+<br>
+					 <div class="form-group row">
+					   <label for="inputEmail3" class="col-sm-3 col-form-label">Joined-Domain :</label>
+					   <div class="col-sm-3">
+					   <div class="form-check form-check-inline">
+						<input class="form-check-input" type="radio" required name="update_Joined_Domain" id="update_Joined_Domain_yes" value="Yes">
+						<label class="form-check-label" for="inlineRadio1">Yes</label>
+					  </div>
+					  <div class="form-check form-check-inline">
+						<input class="form-check-input" type="radio" required name="update_Joined_Domain" id="update_Joined_Domain_no" value="No">
+						<label class="form-check-label" for="inlineRadio2">No</label>
+					  </div>
+					</div>
+					<label for="inputEmail3" class="col-sm-3 col-form-label">Connection Type :</label>
+				   <div class="col-sm-3">
+					<select class="form-control" required name="update_ConnectionType" id="update_ConnectionType">
+						<option value="default">Default</option>
+
+						<option value="Intranet">Intranet</option>
+						<option value="Internet">Internet</option>
+						<option value="Offline">Offline</option>
+						
+
+					</select>
+				   </div>
+
+					
+					
+				 </div>
+				 <br>
+				 
+				
+
+				  
+				  
+			   </div>
+			   <br>
+			  
+				  </form>
+				  <div class="text-center">
+					<button class="btn btn-primary" onclick="UpdatePCMC()">Submit</button>
+	
+				   </div>
+			
+	</div>
+	<div class="modalform-footer">
+		
+	</div>
+  
+  </div>
+  {% block javascript %}
+  <script>
+$(document).ready(function() {
+	setInterval(function() {
+		$.ajax({
+			type: 'Get',
+			
+			url: "{% url 'getPCMCdata' %}",
+		
+			success: function(response){
+				$(trtable).empty();
+				for (var item in response.data){
+					var tr = document.createElement("tr");
+						var td1 = document.createElement("td");
+						td1.innerHTML =response.data[item].computer_id;
+						var td2 = document.createElement("td");
+						td2.innerHTML =response.data[item].current_computer_id;
+						var td3 = document.createElement("td");
+						td3.innerHTML =response.data[item].pic;
+						var td4 = document.createElement("td");
+						td4.innerHTML =response.data[item].previous_pic;
+						var td6 = document.createElement("td");
+						td6.innerHTML =response.data[item].pccurrentstatus;
+						var td7 = document.createElement("td");
+						td7.innerHTML =response.data[item].Brand;
+						var td8 = document.createElement("td");
+						td8.innerHTML =response.data[item].Model;
+						var td9 = document.createElement("td");
+						td9.innerHTML =response.data[item].windows;
+						var td10 = document.createElement("td");
+						td10.innerHTML =response.data[item].serial_number;
+						var td11 = document.createElement("td");
+						td11.innerHTML =response.data[item].asset_no;
+						var td12 = document.createElement("td");
+						td12.innerHTML =response.data[item].block;
+						var td13 = document.createElement("td");
+						td13.innerHTML =response.data[item].location;
+						var td14 = document.createElement("td");
+						td14.innerHTML =response.data[item].standard_installation;
+						var td15 = document.createElement("td");
+						td15.innerHTML =response.data[item].microsoft_office;
+						var td16 = document.createElement("td");
+						td16.innerHTML =response.data[item].microsoft_office_keys;
+						var td17 = document.createElement("td");
+						td17.innerHTML =response.data[item].dop;
+						var td18 = document.createElement("td");
+						td18.innerHTML =response.data[item].dop_Warranty_end_date;
+						var td19 = document.createElement("td");
+						td19.innerHTML =response.data[item].po;
+						var td20 = document.createElement("td");
+						td20.innerHTML =response.data[item].invoice;
+						var td21 = document.createElement("td");
+						td21.innerHTML =response.data[item].vendor;
+						var td22 = document.createElement("td");
+						td22.innerHTML =response.data[item].processor_type;
+						var td23 = document.createElement("td");
+						td23.innerHTML =response.data[item].ram_type;
+						var td24 = document.createElement("td");
+						td24.innerHTML =response.data[item].ram_slot;
+						var td25 = document.createElement("td");
+						td25.innerHTML =response.data[item].total_ram;
+						var td26 = document.createElement("td");
+						td26.innerHTML =response.data[item].storage_type;
+						var td27 = document.createElement("td");
+						td27.innerHTML =response.data[item].storage_space;
+						var td28 = document.createElement("td");
+						td28.innerHTML =response.data[item].lan_mac_address;
+						var td29 = document.createElement("td");
+						td29.innerHTML =response.data[item].lan_ip_address;
+						var td30 = document.createElement("td");
+						td30.innerHTML =response.data[item].wlan_mac_address;
+						var td31 = document.createElement("td");
+						td31.innerHTML =response.data[item].wlan_ip_address;
+						var td32 = document.createElement("td");
+						td32.innerHTML =response.data[item].joined_domain;
+						var td33 = document.createElement("td");
+						td33.innerHTML =response.data[item].connection_type;
+						var td34 = document.createElement("td");
+						var btnupdate = document.createElement("Button");
+						btnupdate.id= response.data[item].computer_id;
+						btnupdate.classList.add("btn");
+						btnupdate.classList.add("btn-primary");
+						btnupdate.innerHTML="Update";
+						btnupdate.addEventListener( "click", function() {
+							datatoUform(this.id)
+						
+						});
+						td34.append(btnupdate);
+						tr.append(td1);
+						tr.append(td2);
+						tr.append(td3);
+						tr.append(td4);
+						tr.append(td6);
+						tr.append(td7);
+						tr.append(td8);
+						tr.append(td9);
+						tr.append(td10);
+						tr.append(td11);
+						tr.append(td12);
+						tr.append(td13);
+						tr.append(td14);
+						tr.append(td15);
+						tr.append(td16);
+						tr.append(td17);
+						tr.append(td18);
+						tr.append(td19);
+						tr.append(td20);
+						tr.append(td21);
+						tr.append(td22);
+						tr.append(td23);
+						tr.append(td24);
+						tr.append(td25);
+						tr.append(td26);
+						tr.append(td27);
+						tr.append(td28);
+						tr.append(td29);
+						tr.append(td30);
+						tr.append(td31);
+						tr.append(td32);
+						tr.append(td33);
+						tr.append(td34);
+						
+					
+						$(trtable).append(tr);
+						
+				}
+				
+				
+				
+			
+			
+				
+			}
+		});
+
+
+	}, 1000);
+});	
+
+
+function openform(){
+
+
+const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+
+$.ajax({
+	type: 'POST',
+	headers: {'X-CSRFToken': csrftoken},
+	mode: 'same-origin', // Do not send CSRF token to another domain.
+	url: "{% url 'runPCMCform' %}",
+	data :{
+		'type' : 'PC',
+	
+
+	}, 
+	success: function(data){
+		console.log(data);
+		var modalform = document.getElementById('addform');
+		modalform.style.display = 'block';
+		console.log(data);
+		document.getElementById("add-computer").reset();
+		document.getElementById('final_Computer_ID').value = "UTM-PC"+data.runnumber ;
+		
+
+		
+		
+	}
+});
+}
+
+
+
+function addPCMC(){
+		var pic = $('input[name="pic"]').val().trim();
+		var Previous_PIC = $('input[name="Previous_PIC"]').val().trim();
+		var Computer_ID = $('input[name="Computer_ID"]').val().trim();
+		var Current_Computer_ID = $('input[name="Current_Computer_ID"]').val().trim();
+		var Brand = document.getElementById("Brand").value;
+		var model = document.getElementById("model").value;
+		var serial_number = $('input[name="serial_number"]').val().trim();
+		var asset_no = $('input[name="asset_no"]').val().trim();
+		var vendor = document.getElementById("vendor").value;
+		var processor = document.getElementById("processor").value;
+		var ram_type = document.getElementById("ram_type").value;
+		var ram_slot = $('input[name="ram_slot"]').val().trim();
+		var total_RAM = $('input[name="total_RAM"]').val().trim();
+		var storage_type = document.getElementById("storage_type").value;
+		var storageSpace = $('input[name="storageSpace"]').val().trim();
+		var dop = $('input[name="dop"]').val().trim();
+		var dopYear = $('input[name="dopYear"]').val().trim();
+		var po = $('input[name="po"]').val().trim();
+		var invoice = $('input[name="invoice"]').val().trim();
+		var block = document.getElementById("block").value;
+		var location = document.getElementById("location").value;
+		var Standard_Installation = $('input[name="Standard_Installation"]').val();
+		var Microsoft_Office = document.getElementById("Microsoft_Office").value;
+		var Licensed_key = $('input[name="Licensed_key"]').val().trim();
+		var Window_version = document.getElementById("Window_version").value;
+		var lan_mac_address = $('input[name="lan_mac_address"]').val().trim();
+		var lan_ip_address = $('input[name="lan_ip_address"]').val().trim();
+		var wlan_mac_address = $('input[name="wlan_mac_address"]').val().trim();
+		var wlan_ip_address = $('input[name="wlan_ip_address"]').val().trim();
+		var Joined_Domain = $('input[name="Joined_Domain"]').val();
+		var ConnectionType = document.getElementById("ConnectionType").value;
+		var Computer_Status = document.getElementById("Computer_Status").value;
+		const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+		$.ajax({
+			type: 'POST',
+			headers: {'X-CSRFToken': csrftoken},
+        	mode: 'same-origin', // Do not send CSRF token to another domain.
+			url: "{% url 'addPCMCform' %}",
+			data :{
+				'pic' : pic, 'Previous_PIC' : Previous_PIC, 'Computer_ID' : Computer_ID,
+				'Current_Computer_ID' : Current_Computer_ID, 'Brand' : Brand, 'model' : model,
+				'serial_number' : serial_number, 'asset_no' : asset_no, 'vendor' : vendor,
+				'processor' : processor, 'ram_type' : ram_type,
+				'ram_slot' : ram_slot, 'total_RAM' : total_RAM, 'storage_type' : storage_type,
+				'storageSpace' : storageSpace, 'dop' : dop, 'dopYear' : dopYear,
+				'po' : po, 'invoice' : invoice, 'block' : block,
+				'location' : location, 'Standard_Installation' : Standard_Installation, 'Microsoft_Office' : Microsoft_Office,
+				'Licensed_key' : Licensed_key, 'Window_version' : Window_version, 'lan_mac_address' : lan_mac_address,
+				'lan_ip_address' : lan_ip_address, 'wlan_mac_address' : wlan_mac_address, 'wlan_ip_address' : wlan_ip_address,
+				'Joined_Domain' : Joined_Domain, 'ConnectionType' : ConnectionType, 'Computer_Status' : Computer_Status,
+			
+
+			}, 
+			success: function(data){
+				console.log(data);
+				console.log("Success Post");
+				closeform();
+
+				
+
+			}
+		});
+
+		
+}
+	
+function datatoUform(btnid){
+	const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+
+	$.ajax({
+			type: 'POST',
+			headers: {'X-CSRFToken': csrftoken},
+        	mode: 'same-origin', // Do not send CSRF token to another domain.
+			url: "{% url 'getPCMCdataupdate' %}",
+			data :{
+				'id' : btnid,
+			
+
+			}, 
+			success: function(data){
+				var modalform = document.getElementById('updateformmodal');
+				modalform.style.display = 'block';
+				document.getElementById('update_pic').value = data.pic ;
+				document.getElementById('update_previous_pic').value = data.previous_pic ;
+				document.getElementById('update_Computer_ID').value = data.computer_id ;
+				 document.getElementById('update_Current_Computer').value = data.current_computer_id ;
+				document.getElementById("update_Brand").value = data.Brand ;
+				document.getElementById("update_model").value = data.Model ;
+				document.getElementById('update_serial_number').value = data.serial_number ;
+				document.getElementById('update_asset_no').value = data.asset_no ;
+				document.getElementById("update_vendor").value = data.vendor ;
+				
+				document.getElementById("update_processor").value = data.processor_type ;
+				document.getElementById("update_ram_type").value = data.ram_type ;
+				document.getElementById('update_ram_slot').value = data.ram_slot ;
+				document.getElementById('update_total_RAM').value = data.total_ram ;
+				document.getElementById("update_storage_type").value = data.storage_type ;
+				document.getElementById('update_storageSpace').value = data.storage_space ;
+				document.getElementById('update_dop').value = data.dop ;
+				document.getElementById('update_dopYear').value = data.dop_Warranty_end_date ;
+				document.getElementById('update_po').value = data.po ;
+				document.getElementById('update_invoice').value = data.invoice ;
+				document.getElementById('update_block').value = data.block ;
+				document.getElementById("update_location").value = data.location ;
+				if(data.standard_installation == 'Yes'){
+					document.getElementById('update_Standard_Installation_yes').checked = true ;
+				} else {
+					document.getElementById('update_Standard_Installation_no').checked = true ;
+				}
+
+				
+				document.getElementById("update_Microsoft_Office").value = data.microsoft_office ;
+				document.getElementById('update_Licensed').value = data.microsoft_office_keys ;
+				document.getElementById("update_Window_version").value = data.windows ;
+				document.getElementById('update_lan_mac_address').value = data.lan_mac_address ;
+				document.getElementById('update_lan_ip_address').value = data.lan_ip_address ;
+				document.getElementById('update_wlan_mac_address').value = data.wlan_mac_address ;
+				document.getElementById('update_wlan_ip_address').value = data.wlan_ip_address ;
+				if(data.joined_domain == 'Yes'){
+					document.getElementById('update_Joined_Domain_yes').checked = true ;
+				} else {
+					document.getElementById('update_Joined_Domain_no').checked = true ;
+				}
+				document.getElementById("update_ConnectionType").value = data.connection_type ;
+				document.getElementById("update_Computer_Status").value = data.pccurrentstatus ;
+
+				
+				
+			}
+		});
+
+}
+
+
+
+
+function updatetable(data){
+		
+	var tr = document.createElement("tr");
+						var td1 = document.createElement("td");
+						td1.innerHTML =response.data[item].computer_id;
+						var td2 = document.createElement("td");
+						td2.innerHTML =response.data[item].current_computer_id;
+						var td3 = document.createElement("td");
+						td3.innerHTML =response.data[item].pic;
+						var td4 = document.createElement("td");
+						td4.innerHTML =response.data[item].previous_pic;
+						var td5 = document.createElement("td");
+						td5.innerHTML =response.data[item].pccurrentstatus;
+						var td6 = document.createElement("td");
+						td6.innerHTML =response.data[item].pctype;
+						var td7 = document.createElement("td");
+						td7.innerHTML =response.data[item].Brand;
+						var td8 = document.createElement("td");
+						td8.innerHTML =response.data[item].Model;
+						var td9 = document.createElement("td");
+						td9.innerHTML =response.data[item].windows;
+						var td10 = document.createElement("td");
+						td10.innerHTML =response.data[item].serial_number;
+						var td11 = document.createElement("td");
+						td11.innerHTML =response.data[item].asset_no;
+						var td12 = document.createElement("td");
+						td12.innerHTML =response.data[item].block;
+						var td13 = document.createElement("td");
+						td13.innerHTML =response.data[item].location;
+						var td14 = document.createElement("td");
+						td14.innerHTML =response.data[item].standard_installation;
+						var td15 = document.createElement("td");
+						td15.innerHTML =response.data[item].microsoft_office;
+						var td16 = document.createElement("td");
+						td16.innerHTML =response.data[item].microsoft_office_0s;
+						var td17 = document.createElement("td");
+						td17.innerHTML =response.data[item].dop;
+						var td18 = document.createElement("td");
+						td18.innerHTML =response.data[item].dop_Warranty_end_date;
+						var td19 = document.createElement("td");
+						td19.innerHTML =response.data[item].po;
+						var td20 = document.createElement("td");
+						td20.innerHTML =response.data[item].invoice;
+						var td21 = document.createElement("td");
+						td21.innerHTML =response.data[item].vendor;
+						var td22 = document.createElement("td");
+						td22.innerHTML =response.data[item].processor_type;
+						var td23 = document.createElement("td");
+						td23.innerHTML =response.data[item].ram_type;
+						var td24 = document.createElement("td");
+						td24.innerHTML =response.data[item].ram_slot;
+						var td25 = document.createElement("td");
+						td25.innerHTML =response.data[item].total_ram;
+						var td26 = document.createElement("td");
+						td26.innerHTML =response.data[item].storage_type;
+						var td27 = document.createElement("td");
+						td27.innerHTML =response.data[item].storage_space;
+						var td28 = document.createElement("td");
+						td28.innerHTML =response.data[item].lan_mac_address;
+						var td29 = document.createElement("td");
+						td29.innerHTML =response.data[item].lan_ip_address;
+						var td30 = document.createElement("td");
+						td30.innerHTML =response.data[item].wlan_mac_address;
+						var td31 = document.createElement("td");
+						td31.innerHTML =response.data[item].wlan_ip_address;
+						var td32 = document.createElement("td");
+						td32.innerHTML =response.data[item].joined_domain;
+						var td33 = document.createElement("td");
+						td33.innerHTML =response.data[item].connection_type;
+						var td34 = document.createElement("td");
+						var btnupdate = document.createElement("Button");
+						btnupdate.id= response.data[item].computer_id;
+						btnupdate.classList.add("btn");
+						btnupdate.classList.add("btn-primary");
+						btnupdate.innerHTML="Update";
+						td34.append(btnupdate);
+
+						var td35 = document.createElement("td");
+						var btndelete = document.createElement("Button");
+						btndelete.id= response.data[item].computer_id;
+						btndelete.classList.add("btn");
+						btndelete.classList.add("btn-primary");
+						btndelete.innerHTML="Delete";
+						//btnupdate.onclick= function() 
+						td35.append(btndelete);
+
+						tr.append(td1);
+						tr.append(td2);
+						tr.append(td3);
+						tr.append(td4);
+						tr.append(td5);
+						tr.append(td6);
+						tr.append(td7);
+						tr.append(td8);
+						tr.append(td9);
+						tr.append(td10);
+						tr.append(td11);
+						tr.append(td12);
+						tr.append(td13);
+						tr.append(td14);
+						tr.append(td15);
+						tr.append(td16);
+						tr.append(td17);
+						tr.append(td18);
+						tr.append(td19);
+						tr.append(td20);
+						tr.append(td21);
+						tr.append(td22);
+						tr.append(td23);
+						tr.append(td24);
+						tr.append(td25);
+						tr.append(td26);
+						tr.append(td27);
+						tr.append(td28);
+						tr.append(td29);
+						tr.append(td30);
+						tr.append(td31);
+						tr.append(td32);
+						tr.append(td33);
+						tr.append(td34);
+						tr.append(td35);
+					
+						$(trtable).append(tr);
+}
+ 
+
+function UpdatePCMC(){
+		var pic = $('input[name="update_pic"]').val().trim();
+		var Previous_PIC = $('input[name="update_Previous_PIC"]').val().trim();
+		var Computer_ID = $('input[name="update_Computer_ID"]').val().trim();
+		var Current_Computer_ID = $('input[name="update_Current_Computer_ID"]').val().trim();
+		var Brand = document.getElementById("update_Brand").value;
+		var model = document.getElementById("update_model").value;
+		var serial_number = $('input[name="update_serial_number"]').val().trim();
+		var asset_no = $('input[name="update_asset_no"]').val().trim();
+		var vendor = document.getElementById("update_vendor").value;
+		
+		var processor = document.getElementById("update_processor").value;
+		var ram_type = document.getElementById("update_ram_type").value;
+		var ram_slot = $('input[name="update_ram_slot"]').val().trim();
+		var total_RAM = $('input[name="update_total_RAM"]').val();
+		var storage_type = document.getElementById("update_storage_type").value;
+		var storageSpace = $('input[name="update_storageSpace"]').val().trim();
+		var dop = $('input[name="update_dop"]').val().trim();
+		var dopYear = $('input[name="update_dopYear"]').val().trim();
+		var po = $('input[name="update_po"]').val().trim();
+		var invoice = $('input[name="update_invoice"]').val().trim();
+		var block = document.getElementById("update_block").value;
+		var location = document.getElementById("update_location").value;
+		var Standard_Installation = $('input[name="update_Standard_Installation"]').val();
+		var Microsoft_Office = document.getElementById("update_Microsoft_Office").value;
+		var Licensed_key = $('input[name="update_Licensed"]').val();
+		var Window_version = document.getElementById("update_Window_version").value;
+		var lan_mac_address = $('input[name="update_lan_mac_address"]').val();
+		var lan_ip_address = $('input[name="update_lan_ip_address"]').val();
+		var wlan_mac_address = $('input[name="update_wlan_mac_address"]').val();
+		var wlan_ip_address = $('input[name="update_wlan_ip_address"]').val();
+		var Joined_Domain = $('input[name="update_Joined_Domain"]').val();
+		var ConnectionType = document.getElementById("update_ConnectionType").value;
+		var Computer_Status = document.getElementById("update_Computer_Status").value;
+		const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+		$.ajax({
+			type: 'POST',
+			headers: {'X-CSRFToken': csrftoken},
+        	mode: 'same-origin', // Do not send CSRF token to another domain.
+			url: "{% url 'updateformPCMC' %}",
+			data :{
+				'pic' : pic, 'Previous_PIC' : Previous_PIC, 'Computer_ID' : Computer_ID,
+				'Current_Computer_ID' : Current_Computer_ID, 'Brand' : Brand, 'model' : model,
+				'serial_number' : serial_number, 'asset_no' : asset_no, 'vendor' : vendor,
+				 'processor' : processor, 'ram_type' : ram_type,
+				'ram_slot' : ram_slot, 'total_RAM' : total_RAM, 'storage_type' : storage_type,
+				'storageSpace' : storageSpace, 'dop' : dop, 'dopYear' : dopYear,
+				'po' : po, 'invoice' : invoice, 'block' : block,
+				'location' : location, 'Standard_Installation' : Standard_Installation, 'Microsoft_Office' : Microsoft_Office,
+				'Licensed_key' : Licensed_key, 'Window_version' : Window_version, 'lan_mac_address' : lan_mac_address,
+				'lan_ip_address' : lan_ip_address, 'wlan_mac_address' : wlan_mac_address, 'wlan_ip_address' : wlan_ip_address,
+				'Joined_Domain' : Joined_Domain, 'ConnectionType' : ConnectionType, 'Computer_Status' : Computer_Status,
+			
+
+			}, 
+			success: function(data){
+				console.log(data);
+				console.log("Success Post");
+				closeformupdate();
+
+				
+
+			}
+		});
+
+		
+}
+ </script>
+  {% endblock javascript %}
+	<script src="{% static 'js/app.js' %}"></script>
+	<script src="{% static 'js/open form modal.js' %}"></script>
+	<script src="{% static 'js/computeradd.js' %}"></script>
+
+
+</body>
+
+</html>

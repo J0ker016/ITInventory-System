@@ -1,0 +1,1597 @@
+{% load static %}
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<!DOCTYPE html>
+	<html lang="en">
+	
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta required name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	
+	
+		<link rel="preconnect" href="https://fonts.gstatic.com">
+		<link rel="shortcut icon" href="/static/img/icons/icon-48x48.png" />
+	
+		<link rel="canonical" href="https://demo-basic.adminkit.io/pages-blank.html" />
+	
+		<title>IT Inventory System</title>
+	
+		<link href="/static/css/app.css" rel="stylesheet">
+		<link href="/static/css/modalform.css" rel="stylesheet">
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+		<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+	</head>
+	
+	<body>
+		<div class="wrapper">
+			<nav id="sidebar" class="sidebar js-sidebar">
+				<div class="sidebar-content js-simplebar">
+					<a class="sidebar-brand" href="/dashboard">
+						<span class="align-middle">IT Inventory System</span>
+					</a>
+					<div style="display:block">
+					<li class="sidebar-header">
+						Administrator Page
+					</li>
+			
+				<li class="sidebar-item">
+					<a class="sidebar-link" href="/admin/">
+		  <i class="align-middle" data-feather="sliders"></i> <span class="align-middle">Go to Admin </span>
+		</a>
+				</li>
+			</div>
+			<li class="sidebar-header">
+				Loan
+			</li>
+	
+	
+			<li class="sidebar-item">
+				<a class="sidebar-link" href="/loanpage">
+	  <i class="align-middle" data-feather="sliders"></i> <span class="align-middle">Loan Detail</span>
+	</a>
+			</li>
+			
+			
+							<li class="sidebar-header">
+									Computer
+								</li>
+			
+								<li class="sidebar-item">
+									<a class="sidebar-link" href="/computerpage">
+						  <i class="align-middle" data-feather="sliders"></i> <span class="align-middle">Computer Details</span>
+						</a>
+								</li>
+			
+					
+			
+							
+								<li class="sidebar-header">
+									Laptop
+								</li>
+			
+								<li class="sidebar-item">
+									<a class="sidebar-link" href="/laptoppage">
+						  <i class="align-middle" data-feather="sliders"></i> <span class="align-middle">Laptop Detail</span>
+						</a>
+								</li>
+			
+					
+			
+						
+								<li class="sidebar-header">
+									Other
+								</li>
+			
+								<li class="sidebar-item">
+									<a class="sidebar-link" href="/Networkhardwarepage">
+						  <i class="align-middle" data-feather="sliders"></i> <span class="align-middle">Network Hardware Detail</span>
+						</a>
+								</li>
+			
+								<li class="sidebar-header">
+									IP
+								</li>
+			
+								<li class="sidebar-item">
+									<a class="sidebar-link" href="/ippage">
+						  <i class="align-middle" data-feather="sliders"></i> <span class="align-middle">IP Detail</span>
+						</a>
+								</li>
+			
+								
+								<li class="sidebar-header">
+									User
+								</li>
+			
+								<li class="sidebar-item">
+									<a class="sidebar-link" href="/userpage">
+						  <i class="align-middle" data-feather="sliders"></i> <span class="align-middle">User Detail</span>
+						</a>
+								</li>
+								
+								<li class="sidebar-header">
+									software
+								</li>
+				
+			
+								<li class="sidebar-item">
+									<a class="sidebar-link" href="/software">
+						  <i class="align-middle" data-feather="sliders"></i> <span class="align-middle">software User</span>
+						</a>
+								</li>
+								<div style="display:block">
+									<li class="sidebar-header">
+										Upload Page
+									</li>
+							
+								<li class="sidebar-item">
+									<a class="sidebar-link" href="/uploadcsvdata">
+						  <i class="align-middle" data-feather="sliders"></i> <span class="align-middle">Upload Page </span>
+						</a>
+								</li>
+							</div>
+				
+			
+			
+						
+						</div>
+					</nav>
+	
+			<div class="main">
+				<nav class="navbar navbar-expand navbar-light navbar-bg">
+					<a class="sidebar-toggle js-sidebar-toggle">
+			  <i class="hamburger align-self-center"></i>
+			</a>
+	
+					<div class="navbar-collapse collapse">
+						<ul class="navbar-nav navbar-align">
+						
+							<li class="nav-item dropdown">
+								<a class="nav-icon dropdown-toggle d-inline-block d-sm-none" href="#" data-bs-toggle="dropdown">
+					<i class="align-middle" data-feather="settings"></i>
+				  </a>
+	
+								<a class="nav-link dropdown-toggle d-none d-sm-inline-block" href="#" data-bs-toggle="dropdown">
+					 <span class="text-dark">administrator</span>
+				  </a>
+								<div class="dropdown-menu dropdown-menu-end">
+									<div style="display:block">
+									<a class="dropdown-item" href="/historypage"><i class="align-middle me-1" data-feather="user"></i> History</a>
+								</div>
+									
+									<div class="dropdown-divider"></div>
+									<a class="dropdown-item" href="/logoutsystem">Log out</a>
+								</div>
+							</li>
+						</ul>
+					</div>
+				</nav>
+	
+	
+				<main class="content">
+					<div class="container-fluid p-0">
+	
+						<h1 class="h3 mb-3">IP List</h1>
+					   
+						<div class="row">
+							<div class="col-12">
+								<div class="card">
+									<div class="card-header">
+										<div class="d-flex justify-content-around">
+											<button id="Add" onclick="openform()" class="btn btn-primary">Add IP</button>
+	
+		
+												
+												
+												<button id="export" onclick="openexport()" class="btn btn-primary">export data</button>
+											</div>
+											<br>
+										<div class="table-responsive ">
+											<table class="table limittablesize" id="computertable">
+												<thead class="table-dark" id="computer-list">
+												  <tr>
+													
+													<th scope="col">IP Address</th>
+													<th scope="col">Current Computer Assign to</th>
+													<th scope="col">Status</th>
+													<th scope="col">Remark</th>
+													<th scope="col">Update</th>
+													
+													
+												  </tr>
+												</thead>
+												<tbody id="trtable">
+												
+												
+	
+												
+												  
+												</tbody>
+											  </table>
+											</div>
+									</div>
+									<div class="card-body">
+									</div>
+								</div>
+							</div>
+						</div>
+	
+					</div>
+				</main>
+	
+				<footer class="footer">
+				
+				</footer>
+			</div>
+		</div>
+		<!-- The Modal -->
+	<div id="addform" class="modalform">
+	
+		<!-- Modal content -->
+		<div class="modalform-header">
+		  <span onclick="closeform()" class="closeform">&times;</span>
+		 <h1 class="text-center">Add IP</h1>
+		</div>
+		<div class="modalform-content">
+			<form method="POST" class="post-form" id="add-IP" onsubmit="addIP(); return false">  
+			
+					<input type="hidden" name="csrfmiddlewaretoken" value="hXGidNY3bpgeCVSQ24qT7ma0ocNTfRX6Gz1AUbHY24zgRYZBeHx7vw3QMBL4QPfh">
+				   
+					 <h3 class="text-center" style=" color: #564953;">IP Details</h3>
+	
+					 <div class="form-group row">
+						<label for="inputEmail3" class="col-sm-2 col-form-label">IP Address:</label>
+						<div class="col-sm-3">
+							<input type="text" class="form-control" required pattern="^((\d|[1-9]\d|1\d\d|2[0-4]\d|25[0-5])\.){3}(\d|[1-9]\d|1\d\d|2[0-4]\d|25[0-5])$" name="IP_Address" id="IP_Address">
+						</div>
+						
+					   
+						<label for="inputEmail3" class="col-sm-2 col-form-label">Computer Assign to :</label>
+						<div class="col-sm-3">
+							<input type="text"  list ="addsearchresult" class="form-control" required name="Computer_Assign_to" id="Computer_Assign_to" value="None" onkeyup="showResult(this.value)">
+						</div>
+					  </div>
+					 <br>
+					 <div class="form-group row">
+						<label for="inputEmail3" class="col-sm-2 col-form-label">Status  :</label>
+						<br><br>
+						<div class="col-sm-3">
+							
+								<div class="form-check-inline">
+									<input class="form-check-input" type="radio" required name="Status_ip" id="Status_notuse" value="Not-inuse">
+									<label class="form-check-label" for="inlineRadio2">Not-inuse</label>
+								  </div>
+								  <div class="form-check-inline">
+								<input class="form-check-input" type="radio" required name="Status_ip" id="Status_use" value="In-Use">
+								<label class="form-check-label" for="inlineRadio1">In-Use</label>
+							  </div>
+							
+	
+						</div>
+					   
+						  <label for="inputEmail3" class="col-sm-2 col-form-label">Remark :</label>
+	 
+					   
+						<div class="col-sm-3">
+						  <input type="text" class="form-control" required name="Remark" id="Remark" value="None">
+						</div>
+					  </div>
+					
+					 
+					  <div class="text-center">
+						<input type="submit" value="Submit" class="btn btn-primary" >
+		
+					   </div>
+					</form>
+		</div>
+		<div class="modalform-footer">
+			
+		</div>
+	  
+	  </div>
+	
+	<div id="updateformmodal" class="modalform">
+	
+		<!-- Modal content -->
+		<div class="modalform-header">
+		  <span onclick="closeformupdate()" class="closeform">&times;</span>
+		 <h1 class="text-center">IP</h1>
+		</div>
+		<div class="modalform-content">
+			<form method="POST" class="post-form" id="update-computer" onsubmit="UpdateIP(); return false">  
+			
+				<input type="hidden" name="csrfmiddlewaretoken" value="hXGidNY3bpgeCVSQ24qT7ma0ocNTfRX6Gz1AUbHY24zgRYZBeHx7vw3QMBL4QPfh">
+				<div style="display:none">
+					<input type="text" class="form-control" required name="Update_ip_id" id="Update_ip_id">
+				</div>
+					 <h3 class="text-center" style=" color: #564953;">IP Details</h3>
+	
+					 <div class="form-group row">
+						<label for="inputEmail3" class="col-sm-2 col-form-label">IP Address:</label>
+						<div class="col-sm-3">
+							<input type="text" class="form-control" required pattern="^((\d|[1-9]\d|1\d\d|2[0-4]\d|25[0-5])\.){3}(\d|[1-9]\d|1\d\d|2[0-4]\d|25[0-5])$" name="Update_IP_Address" id="Update_IP_Address">
+						</div>
+						
+					   
+						<label for="inputEmail3" class="col-sm-2 col-form-label">Computer Assign to :</label>
+						<div class="col-sm-3">
+							<input type="text" class="form-control" list ="addsearchresult" required name="Update_Computer_Assign_to" id="Update_Computer_Assign_to" value="None" onkeyup="showResult(this.value)">
+						</div>
+					  </div>
+					 <br>
+					 <div class="form-group row">
+						<label for="inputEmail3" class="col-sm-2 col-form-label">Status  :</label>
+						<br><br>
+						<div class="col-sm-3">
+							<div class="form-check-inline">
+								<input class="form-check-input" type="radio" required name="Update_Status" id="Update_Status_use" value="In-Use">
+								<label class="form-check-label" for="inlineRadio1">In-Use</label>
+							  </div>
+							  <div class="form-check-inline">
+								<input class="form-check-input" type="radio" required name="Update_Status" id="Update_Status_Not" value="Not-inuse">
+								<label class="form-check-label" for="inlineRadio2">Not-inuse</label>
+							  </div>
+						 
+						</div>
+					   
+						  <label for="inputEmail3" class="col-sm-2 col-form-label">Remark :</label>
+	 
+					   
+						<div class="col-sm-3">
+						  <input type="text" class="form-control" required name="Update_Remark" id="Update_Remark">
+						</div>
+					  </div>
+					
+					
+					  
+				   <br>
+				  
+					
+					  <div class="text-center">
+						<input type="submit" value="Submit" class="btn btn-primary" >
+	
+					
+					</form>
+					   </div>
+				
+		</div>
+		<div class="modalform-footer">
+			
+		</div>
+	  
+	  </div>
+	  <datalist id="addsearchresult">
+	
+	</datalist>
+<div id="exportdata" class="modalform">
+	
+		<!-- Modal content -->
+		<div class="modalform-header">
+		  <span onclick="closeexportdata()" class="closeform">&times;</span>
+		 <h1 class="text-center">Export data</h1>
+		</div>
+		<div class="modalform-content">
+			<form method="POST" class="post-form" id="exportdata" onsubmit="exportdata(); return false">  
+				<input type="hidden" name="csrfmiddlewaretoken" value="hXGidNY3bpgeCVSQ24qT7ma0ocNTfRX6Gz1AUbHY24zgRYZBeHx7vw3QMBL4QPfh">
+				   
+				<h3 class="text-center" style=" color: #564953;">Export data IP Details</h3>
+				<div>
+					<div class="form-check form-check-inline" style="padding-left: 2.5em;">
+						<input class="form-check-input" type="radio" name="inlineRadioOptions" id="allselect" value="all" onchange="openexport();" checked>
+						<label class="form-check-label" for="inlineRadio1">All Selection</label>
+					  </div>
+	
+					  
+					<div class="form-check form-check-inline" style="padding-left: 7.5em;">
+						<input class="form-check-input" type="radio" name="inlineRadioOptions" id="customselect" value="custom" onchange="customexport();">
+						<label class="form-check-label" for="inlineRadio1">Custom Selection</label>
+					  </div>
+					<div class="form-group form-check-inline" style="padding-left: 3.5em;">
+						<label for="inputEmail3" class="col-sm-2 col-form-label">IP Status </label>
+					
+						<select class="form-control" required name="export_IPStatus" id="export_IPStatus" onchange="Searchcustomexport()" disabled>
+							  <option value="default">Default</option>
+							<option value="In-Use">In-Use</option>
+							<option value="Not-inuse">Not-inuse</option>
+							
+	  
+						
+						</select>
+					 
+					  </div>
+					  <!-- 
+					<div class="form-group form-check-inline" >
+						<label class="form-check-label" for="inlineRadio1">Custom Selection End</label>
+						<div class="col-sm-3">
+						 <input type="text" class="" name="customselectEnd" id="customselectEnd" >
+						</div>
+					  </div>
+					  <div class="form-group form-check-inline" >
+						<button type="button" id="SelectexportBTN" onclick="Searchcustomexport()" class="btn btn-primary">Search</button>
+					  </div>
+					</div> -->
+	<br>
+				   <!-- <div class="text-center">
+					<div class="input-group flex-nowrap">
+						<span class="input-group-text" id="addon-wrapping">Hardware Type</span>
+						<select class="form-control" required name="Network_Hardware_Type_export" id="Network_Hardware_Type_export" onchange="exporttypehardware()">
+							<option value="All">All</option>
+						  <option value="AP">Access Point</option>
+						  <option value="CCTV">CCTV Camera</option>
+						  <option value="CCTV_DVR">CCTV DVR</option>
+						  <option value="CP">Conference Phone</option>
+						  <option value="Door_Access">Door Access</option>
+						  <option value="Switches">Switches</option>
+						  <option value="Tape_Library">Tape Library</option>
+						  <option value="Wireless_Dongle">Wireless Dongle</option>
+						  <option value="Server">Server</option>
+						 
+						  <option value="UPS">UPS</option>
+						  <option value="Firewall">Firewall</option>
+					  </select>
+					  </div>
+				
+				   </div> -->
+				   
+				
+				<br>
+			
+				<h3 class="text-center" style=" color: #564953;">Expected Output</h3>
+				<br>
+				<div class="text-center">
+					<button type="button" id="SelectexportBTN" onclick="downloadexport()" class="btn btn-primary">download</button>
+				</div>
+				<br>
+				<div class="table-responsive " style="height: 400px;">
+					<table class="table" id="computertable">
+						<thead class="table-dark" id="computer-list">
+						  <tr id="TRexport">
+							
+							<th scope="col">IP Address</th>
+							<th scope="col">Current Computer Assign to</th>
+							<th scope="col">Status</th>
+							<th scope="col">Remark</th>
+						
+							
+	
+							
+						  </tr>
+						</thead>
+						
+						<tbody id="exportdataTD">
+						
+						
+	
+						
+						  
+						</tbody>
+					  </table>
+					</div>
+				 
+		</div>
+		<div class="modalform-footer">
+			
+		</div>
+	  
+	  </div>
+</div>
+	  
+<script>
+ $(document).ready(function() {
+		$.ajax({
+			type: 'Get',
+			cache: false,
+			url: "/getipdata",
+		
+			success: function(response){
+				console.log(response);
+				$(trtable).empty();
+				for (var item in response.data){
+					var tr = document.createElement("tr");
+						var td1 = document.createElement("td");
+						td1.innerHTML =response.data[item].ip_address;
+						var td2 = document.createElement("td");
+						td2.innerHTML =response.data[item].ip_assisgned;
+						var td3 = document.createElement("td");
+						td3.innerHTML =response.data[item].status;
+						var td4 = document.createElement("td");
+						td4.innerHTML =response.data[item].remark;
+					
+						var td5 = document.createElement("td");
+						var btnupdate = document.createElement("Button");
+						btnupdate.id= response.data[item].id;
+						btnupdate.classList.add("btn");
+						btnupdate.classList.add("btn-primary");
+						btnupdate.innerHTML="Update";
+						btnupdate.addEventListener( "click", function() {
+							datatoUform(this.id)
+						
+						});
+						var role =  "display:block";
+						if(role == "display:none"){
+							btnupdate.disabled =true;
+
+						}
+						else{
+							btnupdate.disabled =false;
+						}
+						td5.append(btnupdate);
+						tr.append(td1);
+						tr.append(td2);
+						tr.append(td3);
+						tr.append(td4);
+						tr.append(td5);
+						
+						
+					
+						$(trtable).append(tr);
+						
+				}
+				var role =  "display:block";
+				if(role == "display:none"){
+					document.getElementById('Add').disabled =true;
+
+				}
+				else{
+					document.getElementById('Add').disabled =false;
+				}
+				
+				
+			
+			
+				
+			}
+		});
+
+
+	
+});	
+
+function showResult(str) {
+	const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+
+  if (str.length==0) {
+    return;
+  }
+	  if(str.includes("UTM-PC")){
+		$.ajax({
+			type: 'POST',
+			headers: {'X-CSRFToken': csrftoken},
+        	mode: 'same-origin', // Do not send CSRF token to another domain.
+			url: "/searchUserinput",
+			data :{
+				'User_ID': str,
+				'Type' : "PC"
+			
+
+			}, 
+			success: function(response){
+				console.log(response);
+				$(addsearchresult).empty();
+				var y =  document.getElementById('addsearchresult');
+
+				
+				if(response.data.length > 0){
+					for (var item in response.data){
+                    var option = document.createElement('option');
+                    option.id = response.data[item].computer_id;
+
+                    option.innerHTML = response.data[item].computer_id;
+					option.addEventListener("click",function() {
+						clicksearchoption(this.id)
+						
+						}); 
+						y.append(option);
+
+                    
+                }
+			
+
+				}
+				else{
+					var btn = document.createElement('span');
+                    btn.innerHTML = "There were no id based on the input";
+                    y.append(btn);
+				}
+              
+
+				
+
+			}
+		});
+	  }
+	  else if(str.includes("UTM-NB")){
+		$.ajax({
+			type: 'POST',
+			headers: {'X-CSRFToken': csrftoken},
+        	mode: 'same-origin', // Do not send CSRF token to another domain.
+			url: "/searchUserinput",
+			data :{
+				'User_ID': str,
+				'Type' : "Laptop"
+			
+
+			}, 
+			success: function(response){
+				console.log(response);
+				$(addsearchresult).empty();
+				var y =  document.getElementById('addsearchresult');
+			
+				if(response.data.length > 0){
+					for (var item in response.data){
+                    var option = document.createElement('option');
+                    option.id = response.data[item].computer_id;
+
+                    option.innerHTML = response.data[item].computer_id;
+					option.addEventListener("click",function() {
+						clicksearchoption(this.id)
+						
+						}); 
+					
+                    y.append(option);
+                }
+				
+				}
+				else{
+					var btn = document.createElement('span');
+                    btn.innerHTML = "There were no id based on the input";
+                    y.append(btn);
+				}
+              
+
+				
+
+			}
+		});
+	  }
+	  else if(str.includes("UTM-AP")){
+		$.ajax({
+			type: 'POST',
+			headers: {'X-CSRFToken': csrftoken},
+        	mode: 'same-origin', // Do not send CSRF token to another domain.
+			url: "/searchUserinput",
+			data :{
+				'User_ID': str,
+				'Type' : "AP"
+			
+
+			}, 
+			success: function(response){
+				console.log(response);
+				$(addsearchresult).empty();
+				var y =  document.getElementById('addsearchresult');
+			
+				if(response.data.length > 0){
+					for (var item in response.data){
+                    var option = document.createElement('option');
+                    option.id = response.data[item].computer_id;
+
+                    option.innerHTML = response.data[item].computer_id;
+					option.addEventListener("click",function() {
+						clicksearchoption(this.id)
+						
+						}); 
+					
+                    y.append(option);
+                }
+				
+				}
+				else{
+					var btn = document.createElement('span');
+                    btn.innerHTML = "There were no id based on the input";
+                    y.append(btn);
+				}
+              
+
+				
+
+			}
+		});
+	  }
+	  else if(str.includes("UTM-CM")){
+		$.ajax({
+			type: 'POST',
+			headers: {'X-CSRFToken': csrftoken},
+        	mode: 'same-origin', // Do not send CSRF token to another domain.
+			url: "/searchUserinput",
+			data :{
+				'User_ID': str,
+				'Type' : "CCTV"
+			
+
+			}, 
+			success: function(response){
+				console.log(response);
+				$(addsearchresult).empty();
+				var y =  document.getElementById('addsearchresult');
+			
+				if(response.data.length > 0){
+					for (var item in response.data){
+                    var option = document.createElement('option');
+                    option.id = response.data[item].computer_id;
+
+                    option.innerHTML = response.data[item].computer_id;
+					option.addEventListener("click",function() {
+						clicksearchoption(this.id)
+						
+						}); 
+					
+                    y.append(option);
+                }
+				
+				}
+				else{
+					var btn = document.createElement('span');
+                    btn.innerHTML = "There were no id based on the input";
+                    y.append(btn);
+				}
+              
+
+				
+
+			}
+		});
+	  }
+	  else if(str.includes("CCTV")){
+		$.ajax({
+			type: 'POST',
+			headers: {'X-CSRFToken': csrftoken},
+        	mode: 'same-origin', // Do not send CSRF token to another domain.
+			url: "/searchUserinput",
+			data :{
+				'User_ID': str,
+				'Type' : "CCTV_DVR"
+			
+
+			}, 
+			success: function(response){
+				console.log(response);
+				$(addsearchresult).empty();
+				var y =  document.getElementById('addsearchresult');
+			
+				if(response.data.length > 0){
+					for (var item in response.data){
+                    var option = document.createElement('option');
+                    option.id = response.data[item].computer_id;
+
+                    option.innerHTML = response.data[item].computer_id;
+					option.addEventListener("click",function() {
+						clicksearchoption(this.id)
+						
+						}); 
+					
+                    y.append(option);
+                }
+				
+				}
+				else{
+					var btn = document.createElement('span');
+                    btn.innerHTML = "There were no id based on the input";
+                    y.append(btn);
+				}
+              
+
+				
+
+			}
+		});
+	  }
+	  else if(str.includes("UTM-CP")){
+		$.ajax({
+			type: 'POST',
+			headers: {'X-CSRFToken': csrftoken},
+        	mode: 'same-origin', // Do not send CSRF token to another domain.
+			url: "/searchUserinput",
+			data :{
+				'User_ID': str,
+				'Type' : "CP"
+			
+
+			}, 
+			success: function(response){
+				console.log(response);
+				$(addsearchresult).empty();
+				var y =  document.getElementById('addsearchresult');
+			
+				if(response.data.length > 0){
+					for (var item in response.data){
+                    var option = document.createElement('option');
+                    option.id = response.data[item].computer_id;
+
+                    option.innerHTML = response.data[item].computer_id;
+					option.addEventListener("click",function() {
+						clicksearchoption(this.id)
+						
+						}); 
+					
+                    y.append(option);
+                }
+				
+				}
+				else{
+					var btn = document.createElement('span');
+                    btn.innerHTML = "There were no id based on the input";
+                    y.append(btn);
+				}
+              
+
+				
+
+			}
+		});
+	  }
+	  else if(str.includes("DoorController")){
+		$.ajax({
+			type: 'POST',
+			headers: {'X-CSRFToken': csrftoken},
+        	mode: 'same-origin', // Do not send CSRF token to another domain.
+			url: "/searchUserinput",
+			data :{
+				'User_ID': str,
+				'Type' : "Door_Access"
+			
+
+			}, 
+			success: function(response){
+				console.log(response);
+				$(addsearchresult).empty();
+				var y =  document.getElementById('addsearchresult');
+			
+				if(response.data.length > 0){
+					for (var item in response.data){
+                    var option = document.createElement('option');
+                    option.id = response.data[item].computer_id;
+
+                    option.innerHTML = response.data[item].computer_id;
+					option.addEventListener("click",function() {
+						clicksearchoption(this.id)
+						
+						}); 
+					
+                    y.append(option);
+                }
+				
+				}
+				else{
+					var btn = document.createElement('span');
+                    btn.innerHTML = "There were no id based on the input";
+                    y.append(btn);
+				}
+              
+
+				
+
+			}
+		});
+	  }
+	  else if(str.includes("UTM-NW")){
+		$.ajax({
+			type: 'POST',
+			headers: {'X-CSRFToken': csrftoken},
+        	mode: 'same-origin', // Do not send CSRF token to another domain.
+			url: "/searchUserinput",
+			data :{
+				'User_ID': str,
+				'Type' : "Switches"
+			
+
+			}, 
+			success: function(response){
+				console.log(response);
+				$(addsearchresult).empty();
+				var y =  document.getElementById('addsearchresult');
+			
+				if(response.data.length > 0){
+					for (var item in response.data){
+                    var option = document.createElement('option');
+                    option.id = response.data[item].computer_id;
+
+                    option.innerHTML = response.data[item].computer_id;
+					option.addEventListener("click",function() {
+						clicksearchoption(this.id)
+						
+						}); 
+					
+                    y.append(option);
+                }
+				
+				}
+				else{
+					var btn = document.createElement('span');
+                    btn.innerHTML = "There were no id based on the input";
+                    y.append(btn);
+				}
+              
+
+				
+
+			}
+		});
+	  }
+	  else if(str.includes("UTM-TL")){
+		$.ajax({
+			type: 'POST',
+			headers: {'X-CSRFToken': csrftoken},
+        	mode: 'same-origin', // Do not send CSRF token to another domain.
+			url: "/searchUserinput",
+			data :{
+				'User_ID': str,
+				'Type' : "Tape_Library"
+			
+
+			}, 
+			success: function(response){
+				console.log(response);
+				$(addsearchresult).empty();
+				var y =  document.getElementById('addsearchresult');
+			
+				if(response.data.length > 0){
+					for (var item in response.data){
+                    var option = document.createElement('option');
+                    option.id = response.data[item].computer_id;
+
+                    option.innerHTML = response.data[item].computer_id;
+					option.addEventListener("click",function() {
+						clicksearchoption(this.id)
+						
+						}); 
+					
+                    y.append(option);
+                }
+				
+				}
+				else{
+					var btn = document.createElement('span');
+                    btn.innerHTML = "There were no id based on the input";
+                    y.append(btn);
+				}
+              
+
+				
+
+			}
+		});
+	  }
+	  else if(str.includes("Tenda Wireless")){
+		$.ajax({
+			type: 'POST',
+			headers: {'X-CSRFToken': csrftoken},
+        	mode: 'same-origin', // Do not send CSRF token to another domain.
+			url: "/searchUserinput",
+			data :{
+				'User_ID': str,
+				'Type' : "Wireless_Dongle"
+			
+
+			}, 
+			success: function(response){
+				console.log(response);
+				$(addsearchresult).empty();
+				var y =  document.getElementById('addsearchresult');
+			
+				if(response.data.length > 0){
+					for (var item in response.data){
+                    var option = document.createElement('option');
+                    option.id = response.data[item].computer_id;
+
+                    option.innerHTML = response.data[item].computer_id;
+					option.addEventListener("click",function() {
+						clicksearchoption(this.id)
+						
+						}); 
+					
+                    y.append(option);
+                }
+				
+				}
+				else{
+					var btn = document.createElement('span');
+                    btn.innerHTML = "There were no id based on the input";
+                    y.append(btn);
+				}
+              
+
+				
+
+			}
+		});
+	  }
+	  else if(str.includes("UPS")){
+		$.ajax({
+			type: 'POST',
+			headers: {'X-CSRFToken': csrftoken},
+        	mode: 'same-origin', // Do not send CSRF token to another domain.
+			url: "/searchUserinput",
+			data :{
+				'User_ID': str,
+				'Type' : "UPS"
+			
+
+			}, 
+			success: function(response){
+				console.log(response);
+				$(addsearchresult).empty();
+				var y =  document.getElementById('addsearchresult');
+			
+				if(response.data.length > 0){
+					for (var item in response.data){
+                    var option = document.createElement('option');
+                    option.id = response.data[item].computer_id;
+
+                    option.innerHTML = response.data[item].computer_id;
+					option.addEventListener("click",function() {
+						clicksearchoption(this.id)
+						
+						}); 
+					
+                    y.append(option);
+                }
+				
+				}
+				else{
+					var btn = document.createElement('span');
+                    btn.innerHTML = "There were no id based on the input";
+                    y.append(btn);
+				}
+              
+
+				
+
+			}
+		});
+	  }
+	  else if(str.includes("UTM-FW")){
+		$.ajax({
+			type: 'POST',
+			headers: {'X-CSRFToken': csrftoken},
+        	mode: 'same-origin', // Do not send CSRF token to another domain.
+			url: "/searchUserinput",
+			data :{
+				'User_ID': str,
+				'Type' : "Firewall"
+			
+
+			}, 
+			success: function(response){
+				console.log(response);
+				$(addsearchresult).empty();
+				var y =  document.getElementById('addsearchresult');
+			
+				if(response.data.length > 0){
+					for (var item in response.data){
+                    var option = document.createElement('option');
+                    option.id = response.data[item].computer_id;
+
+                    option.innerHTML = response.data[item].computer_id;
+					option.addEventListener("click",function() {
+						clicksearchoption(this.id)
+						
+						}); 
+					
+                    y.append(option);
+                }
+				
+				}
+				else{
+					var btn = document.createElement('span');
+                    btn.innerHTML = "There were no id based on the input";
+                    y.append(btn);
+				}
+              
+
+				
+
+			}
+		});
+	  }
+	  
+  else{
+	  
+	$.ajax({
+			type: 'POST',
+			headers: {'X-CSRFToken': csrftoken},
+        	mode: 'same-origin', // Do not send CSRF token to another domain.
+			url: "/searchUserinput",
+			data :{
+				'User_ID': str,
+				'Type' : "Employee"
+			
+
+			}, 
+			success: function(response){
+				console.log(response);
+				$(addsearchresult).empty();
+				var y =  document.getElementById('addsearchresult');
+				if(response.data.length > 0){
+					for (var item in response.data){
+                    var option = document.createElement('option');
+                    option.id = response.data[item].employee_number;
+
+                    option.innerHTML = response.data[item].employee_number;
+					option.addEventListener("click",function() {
+						clicksearchoption(this.id)
+						
+						}); 
+                    y.append(option);
+
+                    
+                }
+				}
+				else{
+					var option = document.createElement('option');
+                    option.innerHTML = "There were no id based on the input";
+                    y.append(option);
+				}
+              
+
+				
+
+			}
+		});
+  }
+
+
+}
+
+
+
+function openform(){
+
+
+		var modalform = document.getElementById('addform');
+		modalform.style.display = 'block';
+
+		document.getElementById("add-IP").reset();
+	
+		
+
+		
+		
+	}
+
+
+
+function addIP(){
+		var IP_address = $('input[name="IP_Address"]').val().trim();
+		var Computer_assign = $('input[name="Computer_Assign_to"]').val().trim();
+		if(document.getElementById('Status_notuse').checked == true){
+			var Status = document.getElementById('Status_notuse').value;
+		}
+		else{
+			var Status = document.getElementById('Status_use').value;
+		}
+		
+		var Remark = $('input[name="Remark"]').val().trim();
+console.log(Status);
+		const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+		$.ajax({
+			type: 'POST',
+			headers: {'X-CSRFToken': csrftoken},
+        	mode: 'same-origin', // Do not send CSRF token to another domain.
+			url: "/addipform",
+			data :{
+				'IP_address' : IP_address, 'Computer_assign' : Computer_assign, 'Status' : Status,
+				'Remark' : Remark, 
+			
+
+			}, 
+			success: function(data){
+				console.log(data);
+				console.log("Success Post");
+				updatetable();
+				closeform();
+
+				
+
+			}
+		});
+
+		
+}
+
+
+
+
+function updatetable(){
+	$.ajax({
+			type: 'Get',
+			cache: false,
+			url: "/getipdata",
+		
+			success: function(response){
+				console.log(response);
+				$(trtable).empty();
+				for (var item in response.data){
+					var tr = document.createElement("tr");
+						var td1 = document.createElement("td");
+						td1.innerHTML =response.data[item].ip_address;
+						var td2 = document.createElement("td");
+						td2.innerHTML =response.data[item].ip_assisgned;
+						var td3 = document.createElement("td");
+						td3.innerHTML =response.data[item].status;
+						var td4 = document.createElement("td");
+						td4.innerHTML =response.data[item].remark;
+					
+						var td5 = document.createElement("td");
+						var btnupdate = document.createElement("Button");
+						btnupdate.id= response.data[item].id;
+						btnupdate.classList.add("btn");
+						btnupdate.classList.add("btn-primary");
+						btnupdate.innerHTML="Update";
+						btnupdate.addEventListener( "click", function() {
+							datatoUform(this.id)
+						
+						});
+						var role =  "display:block";
+						if(role == "display:none"){
+							btnupdate.disabled =true;
+
+						}
+						else{
+							btnupdate.disabled =false;
+						}
+						td5.append(btnupdate);
+						tr.append(td1);
+						tr.append(td2);
+						tr.append(td3);
+						tr.append(td4);
+						tr.append(td5);
+						
+						
+					
+						$(trtable).append(tr);
+					}
+				}
+		});
+	}
+		
+
+
+
+
+
+
+
+
+function UpdateIP(){
+		var IP_address = $('input[name="Update_IP_Address"]').val().trim();
+		var Computer_assign = $('input[name="Update_Computer_Assign_to"]').val().trim();
+		var statusrad1 = document.getElementById('Update_Status_Not').checked;
+		var statusrad2 = document.getElementById('Update_Status_use').checked;
+
+
+		if(statusrad1 = true){
+			var Status = document.getElementById('Update_Status_Not').value;
+
+			}
+		else if(statusrad2 = true){
+			var Status = document.getElementById('Update_Status_use').value;
+
+					
+			}
+	
+		var Remark = $('input[name="Update_Remark"]').val().trim();
+		var id = $('input[name="Update_ip_id"]').val().trim();
+		const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+		$.ajax({
+			type: 'POST',
+			headers: {'X-CSRFToken': csrftoken},
+        	mode: 'same-origin', // Do not send CSRF token to another domain.
+			url: "/updateformip",
+			data :{
+				'IP_address' : IP_address, 'Computer_assign' : Computer_assign, 'Status' : Status,
+				'Remark' : Remark, 'id' : id,
+			}, 
+			success: function(data){
+				console.log(data);
+				console.log("Success Post");
+				updatetable();
+				closeformupdate();
+
+				
+
+			}
+		});
+
+		
+}
+
+
+
+
+// function datatoUform(btnid){
+// 	console.log("test update");
+
+// 	const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+// 	console.log(csrftoken);
+
+// 	$.ajax({
+// 			type: 'POST',
+// 			headers: {'X-CSRFToken': csrftoken},
+//         	mode: 'same-origin', // Do not send CSRF token to another domain.
+// 			url: "{% url 'getipupdate' %}",
+			
+// 			data :{
+// 				'id' : btnid,
+			
+
+// 			}, 
+// 			success: function(data){
+// 				var modalform = document.getElementById('updateformmodal');
+// 				modalform.style.display = 'block';
+// 				document.getElementById('Update_IP_Address').value = data.IP_address ;
+// 				document.getElementById('Update_Computer_Assign_to').value = data.Computer_assign ;
+// 				if(data.Status == "Not-inuse"){
+// 					document.getElementById('Update_Status_notuse').checked = true;
+// 				}
+// 				else{
+// 					document.getElementById('Update_Status_use').checked = true;
+// 				}
+				
+// 				document.getElementById('Update_Remark').value = data.Remark ;
+// 				document.getElementById('Update_ip_id').value = data.id ;
+// 				console.log(data);
+
+				
+				
+// 			}
+// 		});
+
+// }
+
+function datatoUform(btnid){
+	const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+
+	$.ajax({
+			type: 'POST',
+			headers: {'X-CSRFToken': csrftoken},
+        	mode: 'same-origin', // Do not send CSRF token to another domain.
+			url: "{% url 'getipupdate' %}",
+			data :{
+				'id' : btnid,
+			
+
+			}, 
+			success: function(data){
+				var modalform = document.getElementById('updateformmodal');
+				modalform.style.display = 'block';
+				document.getElementById('Update_IP_Address').value = data.IP_address ;
+				document.getElementById('Update_Computer_Assign_to').value = data.Computer_assign ;
+				if(data.Status == "Not-inuse"){
+					document.getElementById('Update_Status_Not').checked = true;
+				}
+				if(data.Status == "In-Use" || data.Status == "In-use"){
+					document.getElementById('Update_Status_use').checked = true;
+				}
+				
+				document.getElementById('Update_Remark').value = data.Remark ;
+				document.getElementById('Update_ip_id').value = data.id ;
+				console.log(data);
+			
+				
+			}
+		});
+
+}
+
+function openexport(){
+		
+		$.ajax({
+				type: 'Get',
+				
+				url: "/getipdata",
+			
+				success: function(response){
+					document.getElementById("exportdata").style.display = 'block';
+					document.getElementById('export_IPStatus').disabled = true;
+	
+					
+					$(exportdataTD).empty();
+					for (var item in response.data){
+						var tr = document.createElement("tr");
+							var td1 = document.createElement("td");
+							td1.innerHTML =response.data[item].ip_address;
+							var td2 = document.createElement("td");
+							td2.innerHTML =response.data[item].ip_assisgned;
+							var td3 = document.createElement("td");
+							td3.innerHTML =response.data[item].status;
+							var td4 = document.createElement("td");
+							td4.innerHTML =response.data[item].remark;
+							
+							
+						
+							tr.append(td1);
+							tr.append(td2);
+							tr.append(td3);
+							tr.append(td4);
+				
+							
+							$(exportdataTD).append(tr);
+							
+					}
+				
+	
+					
+					
+				
+				
+					
+				}
+			});
+	}
+	
+function customexport(){
+		document.getElementById('export_IPStatus').disabled = false;
+		
+	}
+	
+function Searchcustomexport(){
+		
+	
+			var status = document.getElementById("export_IPStatus").value;
+		
+			if((status == "default")){
+				alert("Fill the box first");
+			}
+			else
+			{
+					
+					const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+					
+					$.ajax({
+						type: 'POST',
+						headers: {'X-CSRFToken': csrftoken},
+						mode: 'same-origin', // Do not send CSRF token to another domain.
+						url: "/getcustomIPdata",
+						data : { 'IPStatus': status}, 
+						
+						success: function(response){
+							console.log(response);
+							$(exportdataTD).empty();
+					for (var item in response.data){
+						var tr = document.createElement("tr");
+							var td1 = document.createElement("td");
+							td1.innerHTML =response.data[item].ip_address;
+							var td2 = document.createElement("td");
+							td2.innerHTML =response.data[item].ip_assisgned;
+							var td3 = document.createElement("td");
+							td3.innerHTML =response.data[item].status;
+							var td4 = document.createElement("td");
+							td4.innerHTML =response.data[item].remark;
+							
+							
+						
+							tr.append(td1);
+							tr.append(td2);
+							tr.append(td3);
+							tr.append(td4);
+				
+				
+							
+							$(exportdataTD).append(tr);
+							
+					}
+					
+	
+			
+			
+		}
+	});
+	}
+						
+			}
+	
+function closeexportdata(){
+		document.getElementById("exportdata").style.display = 'none';
+	}
+	
+function downloadexport(){
+		const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+	
+		if(document.getElementById("allselect").checked == true){
+		type = 'all';
+	
+		$.ajax({
+						type: 'POST',
+						headers: {'X-CSRFToken': csrftoken},
+						mode: 'same-origin', // Do not send CSRF token to another domain.
+						url: "/exportIPdataNetwork",
+						data : {'type': type}, 
+						
+						success: function(response){
+							download_csv(response)
+	
+						
+	
+			
+			
+		}
+	});
+	
+	}
+	else{
+		type = 'custom';
+		var status = document.getElementById("export_IPStatus").value;
+			
+			if((status == "default")){
+				alert("Fill the box first");
+			}
+			else
+			{
+				
+				$.ajax({
+						type: 'POST',
+						headers: {'X-CSRFToken': csrftoken},
+						mode: 'same-origin', // Do not send CSRF token to another domain.
+						url: "/exportIPdataNetwork",
+						data : {'type': type, 'IPStatus':status}, 
+						
+						success: function(response){
+							download_csv(response)
+	
+						
+	
+			
+			
+		}
+	});
+	
+		
+	}
+	}
+	}
+function download_csv(dataexport) {
+	
+		var headercsv  = ['IP Address', 'Current Computer Assign to', 'Status', 'Remark'];
+		let header = headercsv.join(',') + '\n';
+		let csv = header;
+		var data = dataexport.data;
+		console.log(dataexport)
+		console.log(data);
+		data.forEach( obj => {
+					let row = [];
+					for (key in obj) {
+						if (obj.hasOwnProperty(key)) {
+							row.push(obj[key]);
+						}
+					}
+					csv += row.join(',')+"\n";
+				});
+			
+		
+		var hiddenElement = document.createElement('a');
+		hiddenElement.href = 'data:text/csv;charset=utf-8,' + encodeURI(csv);
+		hiddenElement.target = '_blank';
+		hiddenElement.download = 'IP data.csv';
+		hiddenElement.click();
+	}
+
+
+$.ajaxSetup({
+	data: {csrfmiddlewaretoken: '{{ csrf_token }}' },
+});
+
+
+
+ 
+
+
+</script>
+	  
+		<script src="/static/js/app.js"></script>
+		<script src="/static/js/open%20form%20modal.js"></script>
+		<script src="/static/js/computeradd.js"></script>
+	
+	
+	</body>
+	
+	</html>
+	
+ 
+
+

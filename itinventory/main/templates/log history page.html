@@ -1,0 +1,274 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta required name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+
+	<link rel="preconnect" href="https://fonts.gstatic.com">
+	<link rel="shortcut icon" href="{% static 'img/icons/icon-48x48.png' %}" />
+
+	<link rel="canonical" href="https://demo-basic.adminkit.io/pages-blank.html" />
+
+	<title>IT Inventory System</title>
+
+	<link href="{% static 'css/app.css' %}" rel="stylesheet">
+	<link href="{% static 'css/modalform.css' %}" rel="stylesheet">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+</head>
+
+<body>
+	<div class="wrapper">
+		<nav id="sidebar" class="sidebar js-sidebar">
+			<div class="sidebar-content js-simplebar">
+				<a class="sidebar-brand" href="{% url 'dashboard' %}">
+					<span class="align-middle">IT Inventory System</span>
+				</a>
+				<div style="{{Style}}">
+				<li class="sidebar-header">
+					Administrator Page
+				</li>
+		
+			<li class="sidebar-item">
+				<a class="sidebar-link" href="{% url 'admin:index' %}">
+	  <i class="align-middle" data-feather="sliders"></i> <span class="align-middle">Go to Admin </span>
+	</a>
+			</li>
+		</div>
+		<li class="sidebar-header">
+			Loan
+		</li>
+
+
+		<li class="sidebar-item">
+			<a class="sidebar-link" href="{% url 'loanpage' %}">
+  <i class="align-middle" data-feather="sliders"></i> <span class="align-middle">Loan Detail</span>
+</a>
+		</li>
+		
+		
+						<li class="sidebar-header">
+								Computer
+							</li>
+		
+							<li class="sidebar-item">
+								<a class="sidebar-link" href="{% url 'computerpage' %}">
+					  <i class="align-middle" data-feather="sliders"></i> <span class="align-middle">Computer Details</span>
+					</a>
+							</li>
+		
+				
+		
+						
+							<li class="sidebar-header">
+								Laptop
+							</li>
+		
+							<li class="sidebar-item">
+								<a class="sidebar-link" href="{% url 'laptoppage' %}">
+					  <i class="align-middle" data-feather="sliders"></i> <span class="align-middle">Laptop Detail</span>
+					</a>
+							</li>
+		
+				
+		
+					
+							<li class="sidebar-header">
+								Other
+							</li>
+		
+							<li class="sidebar-item">
+								<a class="sidebar-link" href="{% url 'Networkhardwarepage' %}">
+					  <i class="align-middle" data-feather="sliders"></i> <span class="align-middle">Network Hardware Detail</span>
+					</a>
+							</li>
+		
+							<li class="sidebar-header">
+								IP
+							</li>
+		
+							<li class="sidebar-item">
+								<a class="sidebar-link" href="{% url 'ippage' %}">
+					  <i class="align-middle" data-feather="sliders"></i> <span class="align-middle">IP Detail</span>
+					</a>
+							</li>
+		
+							
+							<li class="sidebar-header">
+								User
+							</li>
+		
+							<li class="sidebar-item">
+								<a class="sidebar-link" href="{% url 'userpage' %}">
+					  <i class="align-middle" data-feather="sliders"></i> <span class="align-middle">User Detail</span>
+					</a>
+							</li>
+							
+							<li class="sidebar-header">
+								software
+							</li>
+			
+		
+							<li class="sidebar-item">
+								<a class="sidebar-link" href="{% url 'software' %}">
+					  <i class="align-middle" data-feather="sliders"></i> <span class="align-middle">software User</span>
+					</a>
+							</li>
+							<div style="{{Style}}">
+								<li class="sidebar-header">
+									Upload Page
+								</li>
+						
+							<li class="sidebar-item">
+								<a class="sidebar-link" href="{% url 'uploadcsvdata' %}">
+					  <i class="align-middle" data-feather="sliders"></i> <span class="align-middle">Upload Page </span>
+					</a>
+							</li>
+						</div>
+			
+		
+		
+					
+					</div>
+				</nav>
+
+		<div class="main">
+			<nav class="navbar navbar-expand navbar-light navbar-bg">
+				<a class="sidebar-toggle js-sidebar-toggle">
+          <i class="hamburger align-self-center"></i>
+        </a>
+
+				<div class="navbar-collapse collapse">
+					<ul class="navbar-nav navbar-align">
+					
+						<li class="nav-item dropdown">
+							<a class="nav-icon dropdown-toggle d-inline-block d-sm-none" href="#" data-bs-toggle="dropdown">
+                <i class="align-middle" data-feather="settings"></i>
+              </a>
+
+							<a class="nav-link dropdown-toggle d-none d-sm-inline-block" href="#" data-bs-toggle="dropdown">
+                 <span class="text-dark">{{Username}}</span>
+              </a>
+							<div class="dropdown-menu dropdown-menu-end">
+								<div style="{{Style}}">
+								<a class="dropdown-item" href="{% url 'historypage' %}"><i class="align-middle me-1" data-feather="user"></i> History</a>
+							</div>
+								
+								<div class="dropdown-divider"></div>
+								<a class="dropdown-item" href="{% url 'logoutsystem' %}">Log out</a>
+							</div>
+						</li>
+					</ul>
+				</div>
+			</nav>
+
+
+			<main class="content">
+				<div class="container-fluid p-0">
+
+					<h1 class="h3 mb-3">Log History</h1>
+                   
+					<div class="row">
+						<div class="col-12">
+							<div class="card">
+								<div class="card-header">
+								
+                                    <div class="table-responsive ">
+                                        <table class="table limittablesize" id="computertable">
+                                            <thead class="table-dark" id="computer-list">
+                                              <tr>
+												
+                                                <th scope="col">Time</th>
+												<th scope="col">Current User</th>
+                                                <th scope="col">Activity</th>
+                                              
+												
+                                                
+                                              </tr>
+                                            </thead>
+                                            <tbody id="trtable">
+											
+											
+
+                                            
+                                              
+                                            </tbody>
+                                          </table>
+                                        </div>
+								</div>
+								<div class="card-body">
+								</div>
+							</div>
+						</div>
+					</div>
+
+				</div>
+			</main>
+
+			<footer class="footer">
+			
+			</footer>
+		</div>
+	</div>
+
+  
+  </div>
+  {% block javascript %}
+  <script>
+$(document).ready(function() {
+		$.ajax({
+			type: 'Get',
+			cache: false,
+			url: "{% url 'getloghistory' %}",
+		
+			success: function(response){
+				console.log(response);
+				$(trtable).empty();
+				for (var item in response.data){
+					var tr = document.createElement("tr");
+						var td1 = document.createElement("td");
+						td1.innerHTML =response.data[item].Time;
+						var td2 = document.createElement("td");
+						td2.innerHTML =response.data[item].Username;
+						var td3 = document.createElement("td");
+						td3.innerHTML =response.data[item].Activity;
+						
+					
+					
+						
+						tr.append(td1);
+						tr.append(td2);
+						tr.append(td3);
+						
+						
+						
+					
+						$(trtable).append(tr);
+						
+				}
+				
+				
+			
+			
+				
+			}
+		});
+
+
+	
+});	
+
+ </script>
+  {% endblock javascript %}
+	<script src="{% static 'js/app.js' %}"></script>
+	<script src="{% static 'js/open form modal.js' %}"></script>
+	<script src="{% static 'js/computeradd.js' %}"></script>
+
+
+</body>
+
+</html>

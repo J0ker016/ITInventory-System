@@ -1,0 +1,260 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta name="description" content="Responsive Admin &amp; Dashboard Template based on Bootstrap 5">
+	<meta name="author" content="AdminKit">
+	<meta name="keywords" content="adminkit, bootstrap, bootstrap 5, admin, dashboard, template, responsive, css, sass, html, theme, front-end, ui kit, web">
+
+	<link rel="preconnect" href="https://fonts.gstatic.com">
+	<link rel="shortcut icon" href="{% static 'img/icons/icon-48x48.png' %}" />
+
+	<link rel="canonical" href="https://demo-basic.adminkit.io/pages-blank.html" />
+
+	<title>IT Inventory System</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+	<link href="{% static 'css/app.css' %}" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+</head>
+
+<body>
+	<div class="wrapper">
+		<nav id="sidebar" class="sidebar js-sidebar">
+			<div class="sidebar-content js-simplebar">
+				<a class="sidebar-brand" href="{% url 'dashboard' %}">
+					<span class="align-middle">IT Inventory System</span>
+				</a>
+				<div style="{{Style}}">
+				<li class="sidebar-header">
+					Administrator Page
+				</li>
+		
+			<li class="sidebar-item">
+				<a class="sidebar-link" href="{% url 'admin:index' %}">
+	  <i class="align-middle" data-feather="sliders"></i> <span class="align-middle">Go to Admin </span>
+	</a>
+			</li>
+		</div>
+				
+		
+		
+						<li class="sidebar-header">
+								Computer
+							</li>
+		
+							<li class="sidebar-item">
+								<a class="sidebar-link" href="{% url 'computerpage' %}">
+					  <i class="align-middle" data-feather="sliders"></i> <span class="align-middle">Computer Details</span>
+					</a>
+							</li>
+		
+				
+		
+						
+							<li class="sidebar-header">
+								Laptop
+							</li>
+		
+							<li class="sidebar-item">
+								<a class="sidebar-link" href="{% url 'laptoppage' %}">
+					  <i class="align-middle" data-feather="sliders"></i> <span class="align-middle">Laptop Detail</span>
+					</a>
+							</li>
+		
+				
+		
+					
+							<li class="sidebar-header">
+								Other
+							</li>
+		
+							<li class="sidebar-item">
+								<a class="sidebar-link" href="{% url 'Networkhardwarepage' %}">
+					  <i class="align-middle" data-feather="sliders"></i> <span class="align-middle">Network Hardware Detail</span>
+					</a>
+							</li>
+		
+							<li class="sidebar-header">
+								IP
+							</li>
+		
+							<li class="sidebar-item">
+								<a class="sidebar-link" href="{% url 'ippage' %}">
+					  <i class="align-middle" data-feather="sliders"></i> <span class="align-middle">IP Detail</span>
+					</a>
+							</li>
+		
+							
+							<li class="sidebar-header">
+								User
+							</li>
+		
+							<li class="sidebar-item">
+								<a class="sidebar-link" href="{% url 'userpage' %}">
+					  <i class="align-middle" data-feather="sliders"></i> <span class="align-middle">User Detail</span>
+					</a>
+							</li>
+							<li class="sidebar-header">
+								Loan
+							</li>
+			
+		
+							<li class="sidebar-item">
+								<a class="sidebar-link" href="{% url 'loanpage' %}">
+					  <i class="align-middle" data-feather="sliders"></i> <span class="align-middle">Loan Detail</span>
+					</a>
+							</li>
+							<li class="sidebar-header">
+								software
+							</li>
+			
+		
+							<li class="sidebar-item">
+								<a class="sidebar-link" href="{% url 'software' %}">
+					  <i class="align-middle" data-feather="sliders"></i> <span class="align-middle">software User</span>
+					</a>
+							</li>
+		
+			
+		
+		
+					
+					</div>
+				</nav>
+
+		<div class="main">
+			<nav class="navbar navbar-expand navbar-light navbar-bg">
+				<a class="sidebar-toggle js-sidebar-toggle">
+          <i class="hamburger align-self-center"></i>
+        </a>
+
+				<div class="navbar-collapse collapse">
+					<ul class="navbar-nav navbar-align">
+					
+						<li class="nav-item dropdown">
+							<a class="nav-icon dropdown-toggle d-inline-block d-sm-none" href="#" data-bs-toggle="dropdown">
+                <i class="align-middle" data-feather="settings"></i>
+              </a>
+
+							<a class="nav-link dropdown-toggle d-none d-sm-inline-block" href="#" data-bs-toggle="dropdown">
+                 <span class="text-dark">{{Username}}</span>
+              </a>
+							<div class="dropdown-menu dropdown-menu-end">
+								<div style="{{Style}}">
+								<a class="dropdown-item" href="{% url 'historypage' %}"><i class="align-middle me-1" data-feather="user"></i> History</a>
+							</div>
+								
+								<div class="dropdown-divider"></div>
+								<a class="dropdown-item" href="{% url 'logoutsystem' %}">Log out</a>
+							</div>
+						</li>
+					</ul>
+				</div>
+			</nav>
+
+			<main class="content">
+				<div class="container-fluid p-0">
+
+					<h1 class="h3 mb-3"></h1>
+
+					<div class="row">
+						<div class="col-12">
+							<div class="card">
+								<div class="card-header">
+									<h5 class="card-title mb-0">Upload Page</h5>
+								</div>
+								<div class="card-body">
+								
+									<form  method="POST" enctype="multipart/form-data" class="form-horizontal" > 
+                                        {% csrf_token %}
+										<div class="form-group row">
+											
+										<label for="inputEmail3" class="col-sm-2 col-form-label">Database :</label>
+										
+													  
+										<div class="col-sm-3">
+										   <select class="form-control" required name="Main_database" id="Main_database">
+											  <option value="default">Default</option>
+											  <option value="Computer">Computer</option>
+											  <option value="Laptop">Laptop</option>
+											  <option value="NetworkHardware">NetworkHardware</option>
+											  <option value="IP">IP</option>
+											  <option value="User">User</option>
+											  <option value="Software User">Software User</option>
+											 
+											
+
+											 
+										   </select>
+										 </div>
+										 <label for="inputEmail3" class="col-sm-2 col-form-label">Type of upload :</label>
+										
+													  
+										<div class="col-sm-3">
+											<div class="form-check-inline">
+												<input class="form-check-input" type="radio" required name="typeofupload" id="typeofupload_add" value="Add">
+												<label class="form-check-label" for="inlineRadio1">Add</label>
+											  </div>
+											  <div class="form-check-inline">
+												<input class="form-check-input" type="radio" required name="typeofupload" id="typeofupload_update" value="Update">
+												<label class="form-check-label" for="inlineRadio2">Update</label>
+											  </div>
+											 
+										
+										 </div>
+										</div>
+										<br>
+									
+                                        <div class="form-group">
+                                            <label for="name" class="col-md-3 col-sm-3 col-xs-12 control-label">File: </label>
+                                            <div class="col-md-8">
+                                                <input type="file" name="csv_file" id="csv_file" required="True" class="form-control">
+                                            </div>                    
+                                        </div>
+                                        <div class="form-group">                    
+                                            <div class="col-md-3 col-sm-3 col-xs-12 col-md-offset-3" style="margin-bottom:10px;">
+                                                 <button class="btn btn-primary"> <span class="glyphicon glyphicon-upload" style="margin-right:5px;"></span>Upload </button>
+                                            </div> 
+                                        </div>
+                                        </form>
+								</div>
+							</div>
+						</div>
+					</div>
+
+				</div>
+			</main>
+
+			<footer class="footer">
+			
+			</footer>
+		</div>
+	</div>
+	<script>
+$(document).ready(function() {
+		var errormsg = "{{error}}";
+		var errortype = "{{typeerror}}";
+
+		if (errormsg == "Yes"){
+			if (errortype == "IP"){
+				var row = "{{row}}";
+				var iperror = "{{iperror}}";
+				var Computer_assign = "{{Computer_assign}}";
+				alert("There were a same data that use the same the same ip"+ iperror + "Which has ID :" + Computer_assign + "On CSV Row data : "+ row);
+			}
+			alert("There were a duplicate data in csv file based on the data from database");
+		}
+	});
+			
+	</script>
+
+<script src="{% static 'js/app.js' %}"></script>
+
+</body>
+
+</html>

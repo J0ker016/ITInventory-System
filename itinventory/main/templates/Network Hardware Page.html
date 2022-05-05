@@ -1,0 +1,2518 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta required name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+
+	<link rel="preconnect" href="https://fonts.gstatic.com">
+	<link rel="shortcut icon" href="{% static 'img/icons/icon-48x48.png' %}" />
+
+	<link rel="canonical" href="https://demo-basic.adminkit.io/pages-blank.html" />
+
+	<title>IT Inventory System</title>
+
+	<link href="{% static 'css/app.css' %}" rel="stylesheet">
+	<link href="{% static 'css/modalform.css' %}" rel="stylesheet">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+</head>
+
+<body>
+	<div class="wrapper">
+		<nav id="sidebar" class="sidebar js-sidebar">
+			<div class="sidebar-content js-simplebar">
+				<a class="sidebar-brand" href="{% url 'dashboard' %}">
+					<span class="align-middle">IT Inventory System</span>
+				</a>
+				<div style="{{Style}}">
+				<li class="sidebar-header">
+					Administrator Page
+				</li>
+		
+			<li class="sidebar-item">
+				<a class="sidebar-link" href="{% url 'admin:index' %}">
+	  <i class="align-middle" data-feather="sliders"></i> <span class="align-middle">Go to Admin </span>
+	</a>
+			</li>
+		</div>
+		<li class="sidebar-header">
+			Loan
+		</li>
+
+
+		<li class="sidebar-item">
+			<a class="sidebar-link" href="{% url 'loanpage' %}">
+  <i class="align-middle" data-feather="sliders"></i> <span class="align-middle">Loan Detail</span>
+</a>
+		</li>
+		
+		
+						<li class="sidebar-header">
+								Computer
+							</li>
+		
+							<li class="sidebar-item">
+								<a class="sidebar-link" href="{% url 'computerpage' %}">
+					  <i class="align-middle" data-feather="sliders"></i> <span class="align-middle">Computer Details</span>
+					</a>
+							</li>
+		
+				
+		
+						
+							<li class="sidebar-header">
+								Laptop
+							</li>
+		
+							<li class="sidebar-item">
+								<a class="sidebar-link" href="{% url 'laptoppage' %}">
+					  <i class="align-middle" data-feather="sliders"></i> <span class="align-middle">Laptop Detail</span>
+					</a>
+							</li>
+		
+				
+		
+					
+							<li class="sidebar-header">
+								Other
+							</li>
+		
+							<li class="sidebar-item">
+								<a class="sidebar-link" href="{% url 'Networkhardwarepage' %}">
+					  <i class="align-middle" data-feather="sliders"></i> <span class="align-middle">Network Hardware Detail</span>
+					</a>
+							</li>
+		
+							<li class="sidebar-header">
+								IP
+							</li>
+		
+							<li class="sidebar-item">
+								<a class="sidebar-link" href="{% url 'ippage' %}">
+					  <i class="align-middle" data-feather="sliders"></i> <span class="align-middle">IP Detail</span>
+					</a>
+							</li>
+		
+							
+							<li class="sidebar-header">
+								User
+							</li>
+		
+							<li class="sidebar-item">
+								<a class="sidebar-link" href="{% url 'userpage' %}">
+					  <i class="align-middle" data-feather="sliders"></i> <span class="align-middle">User Detail</span>
+					</a>
+							</li>
+							
+							<li class="sidebar-header">
+								software
+							</li>
+			
+		
+							<li class="sidebar-item">
+								<a class="sidebar-link" href="{% url 'software' %}">
+					  <i class="align-middle" data-feather="sliders"></i> <span class="align-middle">software User</span>
+					</a>
+							</li>
+							<div style="{{Style}}">
+								<li class="sidebar-header">
+									Upload Page
+								</li>
+						
+							<li class="sidebar-item">
+								<a class="sidebar-link" href="{% url 'uploadcsvdata' %}">
+					  <i class="align-middle" data-feather="sliders"></i> <span class="align-middle">Upload Page </span>
+					</a>
+							</li>
+						</div>
+			
+		
+		
+					
+					</div>
+				</nav>
+
+		<div class="main">
+			<nav class="navbar navbar-expand navbar-light navbar-bg">
+				<a class="sidebar-toggle js-sidebar-toggle">
+          <i class="hamburger align-self-center"></i>
+        </a>
+
+				<div class="navbar-collapse collapse">
+					<ul class="navbar-nav navbar-align">
+					
+						<li class="nav-item dropdown">
+							<a class="nav-icon dropdown-toggle d-inline-block d-sm-none" href="#" data-bs-toggle="dropdown">
+                <i class="align-middle" data-feather="settings"></i>
+              </a>
+
+							<a class="nav-link dropdown-toggle d-none d-sm-inline-block" href="#" data-bs-toggle="dropdown">
+                 <span class="text-dark">{{Username}}</span>
+              </a>
+							<div class="dropdown-menu dropdown-menu-end">
+								<div style="{{Style}}">
+								<a class="dropdown-item" href="{% url 'historypage' %}"><i class="align-middle me-1" data-feather="user"></i> History</a>
+							</div>
+								
+								<div class="dropdown-divider"></div>
+								<a class="dropdown-item" href="{% url 'logoutsystem' %}">Log out</a>
+							</div>
+						</li>
+					</ul>
+				</div>
+			</nav>
+
+
+			<main class="content">
+				<div class="container-fluid p-0">
+
+					<h1 class="h3 mb-3">Network Hardware List</h1>
+                   
+					<div class="row">
+						<div class="col-12">
+							<div class="card">
+								<div class="card-header">
+									<div class="d-flex justify-content-around">
+									<button id="Add" onclick="openNetworkform()" class="btn btn-primary">Add Network hardware</button>
+
+										
+										<br>
+										<label for="filtertable">Table Filter : </label>
+										<select  id="filtertable" onchange="filtertableHardware()" class="btn btn-primary"></select>
+										<br>
+										<button id="export" onclick="openexport()" class="btn btn-primary">export data</button>
+									</div>
+									<br>
+                                    <div class="table-responsive ">
+                                        <table class="table" id="computertable">
+                                            <thead class="table-dark" id="computer-list">
+                                              <tr>
+												
+												<th scope="col">Network Hardware ID</th>
+												<th scope="col">NetworkHardware Type</th>
+												<th scope="col">S/N</th>
+												<th scope="col">Asset No</th>
+												<th scope="col">PO</th>
+												<th scope="col">Invoice</th>
+												<th scope="col">DOP</th>
+												<th scope="col">Warranty End Date</th>
+												<th scope="col">Block</th>
+												<th scope="col">Location</th>
+												<th scope="col">Current Status</th>
+											
+												
+												
+												<th scope="col">Brand</th>
+												<th scope="col">Model</th>
+												<th scope="col">Vendor</th>
+											
+												<th scope="col">MAC Address</th>
+												<th scope="col">IP Address</th>
+												
+												
+											
+												<th scope="col">Update</th>
+                                                
+                                              </tr>
+                                            </thead>
+                                            <tbody id="trtable">
+											
+											
+
+                                            
+                                              
+                                            </tbody>
+                                          </table>
+                                        </div>
+								</div>
+								<div class="card-body">
+								</div>
+							</div>
+						</div>
+					</div>
+
+				</div>
+			</main>
+
+			<footer class="footer">
+			
+			</footer>
+		</div>
+	</div>
+	<!-- The Modal -->
+<div id="addform" class="modalform">
+
+	<!-- Modal content -->
+	<div class="modalform-header">
+	  <span onclick="closeform()" class="closeform">&times;</span>
+	 <h1 class="text-center">Add Network Hardware</h1>
+	</div>
+	<div class="modalform-content">
+		<form method="POST" class="post-form" id="add-network" onsubmit="addNetwork(); return false">  
+		
+				{% csrf_token %}
+				<div class="form-group row">
+					<label for="inputEmail3" class="col-sm-2 col-form-label">Hardware Type :</label>
+					<div class="col-sm-3">
+					  <select class="form-control" required name="Network_Hardware_Type" id="Network_Hardware_Type" onchange="typehardware()">
+							<option value="default">Default</option>
+						  <option value="AP">Access Point</option>
+						  <option value="CCTV">CCTV Camera</option>
+						  <option value="CCTV_DVR">CCTV DVR</option>
+						  <option value="CP">Conference Phone</option>
+						  <option value="Door_Access">Door Access</option>
+						  <option value="Switches">Switches</option>
+						  <option value="Tape_Library">Tape Library</option>
+						  <option value="Wireless_Dongle">Wireless Dongle</option>
+						  <option value="Server">Server</option>
+						 
+						  <option value="UPS">UPS</option>
+						  <option value="Firewall">Firewall</option>
+					  </select>
+					</div>
+					<label for="inputEmail3" class="col-sm-2 col-form-label">Current Status :</label>
+					<div class="col-sm-3">
+					  <select class="form-control" required name="Current_Status" id="Current_Status">
+							<option value="default">Default</option>
+						  <option value="In-use">In-use</option>
+						  <option value="Not in-use">Not in-use</option>
+
+					  </select>
+					</div>
+					</div>
+				  
+				 <br>
+				 <div class="form-group row">
+					<label for="inputEmail3" class="col-sm-2 col-form-label">Network Hardware ID  :</label>
+					<br><br>
+					<div class="col-sm-3">
+					  <input type="text"  readonly class="form-control" required name="Network_Hardware_ID"  id="Network_Hardware_ID" placeholder="">
+					</div>
+				   
+					<label for="inputEmail3" class="col-sm-2 col-form-label">S/N  :</label>
+					<div class="col-sm-3">
+					  <input type="text" class="form-control" required name="serial_number"  id="serial_number">
+					</div>
+				  </div>
+				  <br>
+				 <div class="form-group row">
+					 <label for="inputEmail3" class="col-sm-2 col-form-label">Asset_No :</label>
+
+				   <div class="col-sm-3">
+					 <input type="text" class="form-control" required name="Asset_No" id="Asset_No" >
+				   </div>
+				   <label for="inputEmail3" class="col-sm-2 col-form-label">Block :</label>
+ 
+				   
+					<div class="col-sm-3">
+						<select class="form-control" required name="block" id="block">
+							<option value="default">Default</option>
+							{% for entry in block %}
+							<option value="{{ entry.networkAsset_block }}">{{ entry.networkAsset_block }}</option>
+						{% endfor %}
+						 </select>
+					</div>
+				  
+				  
+				 </div>
+				 <br>
+				 <div class="form-group row">
+					<label for="inputEmail3" class="col-sm-2 col-form-label">Location :</label>
+ 
+				   
+					<div class="col-sm-3">
+						<select class="form-control" required name="location" id="location">
+							<option value="default">Default</option>
+							{% for entry in location %}
+							<option value="{{ entry.networkAsset_location }}">{{ entry.networkAsset_location }}</option>
+						{% endfor %}
+						 </select>
+					</div>
+
+					
+					<label for="inputEmail3" class="col-sm-2 col-form-label">DOP :</label>
+					<div class="col-sm-3">
+					  <input type="date" class="form-control" required name="dop" id="final_dop" placeholder="">
+					</div>
+				 </div>
+					
+				 <br>
+				
+				
+				  <div class="form-group row">
+					
+				  
+					  <label for="inputEmail3" class="col-sm-3 col-form-label">DOP (Years) / Warranty-end-date :</label>
+					<div class="col-sm-3">
+					  <input type="date" class="form-control" required name="dopYear" id="final_dopYear" placeholder="">
+					</div>
+					<label for="inputEmail3" class="col-sm-2 col-form-label">Brand :</label>
+					<div class="col-sm-3">
+						<select name="Brand" id="Brand" class="form-control">
+						<option value="default">Default</option>
+						{% for entry in brand %}
+						<option value="{{ entry.networkAsset_brand }}">{{ entry.networkAsset_brand }}</option>
+						{% endfor %}
+				</select>
+					</div>
+					
+				  </div>
+				  <br>
+				  <div class="form-group row">
+					
+					  <label for="inputEmail3" class="col-sm-2 col-form-label">Model :</label>
+					<div class="col-sm-3">
+					  <select name="Model" id="Model" class="form-control">
+						  
+					  </select>
+					</div>
+					<label for="inputEmail3" class="col-sm-2 col-form-label">Vendor  :</label>
+					<div class="col-sm-3">
+						<select class="form-control" required name="Vendor" id="Vendor">
+						<option value="default">Default</option>
+							{% for entry in vendor %}
+							<option value="{{ entry.networkAsset_vendor }}">{{ entry.networkAsset_vendor }}</option>
+							{% endfor %}
+					</select>
+				 </div>
+					
+				  </div>
+				  <br>
+				 
+				 <div class="form-group row">
+					
+				  
+				<label for="inputEmail3" class="col-sm-2 col-form-label">PO :</label>
+				<div class="col-sm-3">
+					<input type="text" class="form-control" required name="PO" id="PO" placeholder="">
+			   </div>
+			   <label for="inputEmail3" class="col-sm-2 col-form-label">Invoice :</label>
+					<div class="col-sm-3">
+					 <input type="text" class="form-control" required name="Invoice" id="Invoice" placeholder="">
+					</div>
+			  
+				   </div>
+				
+				   <br>
+				 
+				 
+			
+		
+				 <div class="form-group row">
+					
+				    <label for="inputEmail3" class="col-sm-2 col-form-label">MAC Address :</label>
+				   <div class="col-sm-3">
+					<input type="text" class="form-control" required name="MAC_Address" id="MAC_Address" placeholder="">
+				  </div>
+				 
+				  <label for="inputEmail3" class="col-sm-2 col-form-label">IP Address :</label>
+				   <div class="col-sm-3">
+					   <select  class="form-control" name="IP_Address" id="IP_Address">
+						   <option value="Default">Default</option>
+					   </select>
+					 
+				   </div>
+				  
+				  </div>
+					 
+				   
+				   <br>
+				   
+			  
+				  <div class="text-center">
+					<input type="submit" value="Submit" class="btn btn-primary" >
+				</form>
+	
+				   </div>
+			
+	</div>
+	<div class="modalform-footer">
+		
+	</div>
+  
+  </div>
+
+<div id="updateformmodal" class="modalform">
+
+	<!-- Modal content -->
+	<div class="modalform-header">
+	  <span onclick="closeformupdate()" class="closeform">&times;</span>
+	 <h1 class="text-center">Network Hardware</h1>
+	</div>
+	<div class="modalform-content">
+		<form method="POST" class="post-form" id="update-network" onsubmit="UpdateNetwork(); return false">  
+			
+			{% csrf_token %}
+			
+			<div class="form-group row">
+				<label for="inputEmail3" class="col-sm-2 col-form-label">Hardware Type :</label>
+				<div class="col-sm-3">
+				  <select class="form-control" required name="Update_Network_Hardware_Type" id="Update_Network_Hardware_Type" onchange="updatetypehardware()">
+						<option value="default">Default</option>
+					  <option value="AP">Access Point</option>
+					  <option value="CCTV">CCTV Camera</option>
+					  <option value="CCTV_DVR">CCTV DVR</option>
+					  <option value="CP">Conference Phone</option>
+					  <option value="Door_Access">Door Access</option>
+					  <option value="Switches">Switches</option>
+					  <option value="Tape_Library">Tape Library</option>
+					  <option value="Wireless_Dongle">Wireless Dongle</option>
+					  <option value="Server">Server</option>
+
+					  
+					  <option value="UPS">UPS</option>
+					  <option value="Firewall">Firewall</option>
+				  </select>
+				</div>
+				<label for="inputEmail3" class="col-sm-2 col-form-label">Current Status :</label>
+				<div class="col-sm-3">
+				  <select class="form-control" required name="Update_Current_Status" id="Update_Current_Status">
+						<option value="default">Default</option>
+					  <option value="In-use">In-use</option>
+					  <option value="Not in-use">Not in-use</option>
+
+				  </select>
+				</div>
+				</div>
+			  
+			 <br>
+			 <div class="form-group row">
+				<label for="inputEmail3" class="col-sm-2 col-form-label">Network Hardware ID  :</label>
+				<br><br>
+				<div class="col-sm-3">
+				  <input type="text"  readonly class="form-control" required name="Update_Network_Hardware_ID"  id="Update_Network_Hardware_ID" placeholder="">
+				</div>
+			   
+				<label for="inputEmail3" class="col-sm-2 col-form-label">S/N  :</label>
+				<div class="col-sm-3">
+				  <input type="text" class="form-control" required name="Update_serial_number"  id="Update_serial_number">
+				</div>
+			  </div>
+			  <br>
+			 <div class="form-group row">
+				 <label for="inputEmail3" class="col-sm-2 col-form-label">Asset_No :</label>
+
+			   <div class="col-sm-3">
+				 <input type="text" class="form-control" required name="Update_Asset_No" id="Update_Asset_No" >
+			   </div>
+			   <label for="inputEmail3" class="col-sm-2 col-form-label">Block :</label>
+
+			   
+			   <div class="col-sm-3">
+				   <select class="form-control" required name="Update_block" id="Update_block">
+					   <option value="default">Default</option>
+					   {% for entry in block %}
+					   <option value="{{ entry.networkAsset_block }}">{{ entry.networkAsset_block }}</option>
+				   {% endfor %}
+					</select>
+			   </div>
+			   
+			  
+			 </div>
+			 <br>
+			 <div class="form-group row">
+				<label for="inputEmail3" class="col-sm-2 col-form-label">Location :</label>
+
+			   
+				<div class="col-sm-3">
+					<select class="form-control" required name="Update_location" id="Update_location">
+						<option value="default">Default</option>
+						{% for entry in location %}
+						<option value="{{ entry.networkAsset_location }}">{{ entry.networkAsset_location }}</option>
+					{% endfor %}
+					 </select>
+				</div>
+
+			
+				<label for="inputEmail3" class="col-sm-2 col-form-label">DOP :</label>
+				<div class="col-sm-3">
+				  <input type="date" class="form-control" required name="Update_dop" id="Update_dop" placeholder="">
+				</div>
+			 </div>
+				
+			 <br>
+			
+			
+			  <div class="form-group row">
+				
+			  
+				  <label for="inputEmail3" class="col-sm-3 col-form-label">DOP (Years) / Warranty-end-date :</label>
+				<div class="col-sm-3">
+				  <input type="date" class="form-control" required name="Update_dopYear" id="Update_dopYear" placeholder="">
+				</div>
+				<label for="inputEmail3" class="col-sm-2 col-form-label">Brand :</label>
+				<div class="col-sm-3">
+					<select name="Update_Brand" id="Update_Brand" class="form-control">
+					<option value="default">Default</option>
+					{% for entry in brand %}
+					<option value="{{ entry.networkAsset_brand }}">{{ entry.networkAsset_brand }}</option>
+					{% endfor %}
+			</select>
+				</div>
+				
+			  </div>
+			  <br>
+			  <div class="form-group row">
+				
+				  <label for="inputEmail3" class="col-sm-2 col-form-label">Model :</label>
+				<div class="col-sm-3">
+				  <select name="Update_Model" id="Update_Model" class="form-control">
+					  
+				  </select>
+				</div>
+				<label for="inputEmail3" class="col-sm-2 col-form-label">Vendor  :</label>
+				<div class="col-sm-3">
+					<select class="form-control" required name="Update_Vendor" id="Update_Vendor">
+					<option value="default">Default</option>
+						{% for entry in vendor %}
+						<option value="{{ entry.networkAsset_vendor }}">{{ entry.networkAsset_vendor }}</option>
+						{% endfor %}
+				</select>
+			 </div>
+				
+			  </div>
+			  <br>
+			 
+			 <div class="form-group row">
+				
+			  
+			<label for="inputEmail3" class="col-sm-2 col-form-label">PO :</label>
+			<div class="col-sm-3">
+				<input type="text" class="form-control" required name="Update_PO" id="Update_PO" placeholder="">
+		   </div>
+		   <label for="inputEmail3" class="col-sm-2 col-form-label">Invoice :</label>
+				<div class="col-sm-3">
+				 <input type="text" class="form-control" required name="Update_Invoice" id="Update_Invoice" placeholder="">
+				</div>
+		  
+			   </div>
+			
+			   <br>
+			 
+			 
+		
+	
+			 <div class="form-group row">
+				
+				<label for="inputEmail3" class="col-sm-2 col-form-label">MAC Address :</label>
+			   <div class="col-sm-3">
+				<input type="text" class="form-control" required name="Update_MAC_Address" id="Update_MAC_Address" placeholder="">
+			  </div>
+			 
+			  <label for="inputEmail3" class="col-sm-2 col-form-label">IP Address :</label>
+			   <div class="col-sm-3">
+				<select  class="form-control" name="Update_IP_Address" id="Update_IP_Address">
+					<option value="Default">Default</option>
+				</select>
+				 
+			   </div>
+			  
+			  </div>
+				 
+			   
+			   <br>
+			   
+		  
+		  
+			  
+			  <div class="text-center">
+				<input type="submit" value="Submit" class="btn btn-primary" >
+
+			   </div>
+			</form>
+		
+</div>
+	<div class="modalform-footer">
+		
+	</div>
+  
+  </div>
+
+<div id="exportdata" class="modalform">
+
+	<!-- Modal content -->
+	<div class="modalform-header">
+	  <span onclick="closeexportdata()" class="closeform">&times;</span>
+	 <h1 class="text-center">Export data</h1>
+	</div>
+	<div class="modalform-content">
+		<form method="POST" class="post-form" id="exportdata" onsubmit="exportdata(); return false">  
+			{% csrf_token %}
+			   
+			<h3 class="text-center" style=" color: #564953;">Export data Network Hardware Details</h3>
+			<div>
+				<div class="form-check form-check-inline" style="padding-left: 2.5em;">
+					<input class="form-check-input" type="radio" name="inlineRadioOptions" id="allselect" value="all" onchange="openexport();" checked>
+					<label class="form-check-label" for="inlineRadio1">All Selection</label>
+				  </div>
+
+				  
+				<div class="form-check form-check-inline" style="padding-left: 7.5em;">
+					<input class="form-check-input" type="radio" name="inlineRadioOptions" id="customselect" value="custom" onchange="customexport();">
+					<label class="form-check-label" for="inlineRadio1">Custom Selection</label>
+				  </div>
+				<div class="form-group form-check-inline" style="padding-left: 3.5em;">
+					<label for="inputEmail3" class="col-sm-2 col-form-label">Hardware Type </label>
+				
+					<select class="form-control" required name="export_hardwareType" id="export_hardwareType" onchange="Searchcustomexport()" disabled>
+						  <option value="default">Default</option>
+						<option value="AP">Access Point</option>
+						<option value="CCTV">CCTV Camera</option>
+						<option value="CCTV_DVR">CCTV DVR</option>
+						<option value="CP">Conference Phone</option>
+						<option value="Door_Access">Door Access</option>
+						<option value="Switches">Switches</option>
+						<option value="Tape_Library">Tape Library</option>
+						<option value="Wireless_Dongle">Wireless Dongle</option>
+						<option value="Server">Server</option>
+  
+						
+						<option value="UPS">UPS</option>
+						<option value="Firewall">Firewall</option>
+					</select>
+				 
+				  </div>
+				  <!-- 
+				<div class="form-group form-check-inline" >
+					<label class="form-check-label" for="inlineRadio1">Custom Selection End</label>
+					<div class="col-sm-3">
+					 <input type="text" class="" name="customselectEnd" id="customselectEnd" >
+					</div>
+				  </div>
+				  <div class="form-group form-check-inline" >
+					<button type="button" id="SelectexportBTN" onclick="Searchcustomexport()" class="btn btn-primary">Search</button>
+				  </div>
+				</div> -->
+<br>
+			   <!-- <div class="text-center">
+				<div class="input-group flex-nowrap">
+					<span class="input-group-text" id="addon-wrapping">Hardware Type</span>
+					<select class="form-control" required name="Network_Hardware_Type_export" id="Network_Hardware_Type_export" onchange="exporttypehardware()">
+						<option value="All">All</option>
+					  <option value="AP">Access Point</option>
+					  <option value="CCTV">CCTV Camera</option>
+					  <option value="CCTV_DVR">CCTV DVR</option>
+					  <option value="CP">Conference Phone</option>
+					  <option value="Door_Access">Door Access</option>
+					  <option value="Switches">Switches</option>
+					  <option value="Tape_Library">Tape Library</option>
+					  <option value="Wireless_Dongle">Wireless Dongle</option>
+					  <option value="Server">Server</option>
+					 
+					  <option value="UPS">UPS</option>
+					  <option value="Firewall">Firewall</option>
+				  </select>
+				  </div>
+			
+			   </div> -->
+			   
+			
+			<br>
+		
+			<h3 class="text-center" style=" color: #564953;">Expected Output</h3>
+			<br>
+			<div class="text-center">
+				<button type="button" id="SelectexportBTN" onclick="downloadexport()" class="btn btn-primary">download</button>
+			</div>
+			<br>
+			<div class="table-responsive " style="height: 400px;">
+				<table class="table" id="computertable">
+					<thead class="table-dark" id="computer-list">
+					  <tr id="TRexport">
+						
+						<th scope="col">Hardware ID</th>
+						<th scope="col">NetworkHardware Type</th>
+						<th scope="col">Brand</th>
+						<th scope="col">Model</th>
+						<th scope="col">S/N</th>
+						<th scope="col">Asset No</th>
+						<th scope="col">DOP</th>
+						<th scope="col">Warranty End Date</th>
+						<th scope="col">Vendor</th>
+
+						<th scope="col">PO</th>
+						<th scope="col">Invoice</th>
+						<th scope="col">Block</th>
+						<th scope="col">Location</th>
+						<th scope="col">MAC  Address</th>
+						<th scope="col">IP MAC  Address</th>
+						<th scope="col">Current Status</th>
+
+						
+
+						
+					  </tr>
+					</thead>
+					
+					<tbody id="exportdataTD">
+					
+					
+
+					
+					  
+					</tbody>
+				  </table>
+				</div>
+			 
+	</div>
+	<div class="modalform-footer">
+		
+	</div>
+  
+  </div>
+  {% block javascript %}
+  <script>
+$(document).ready(function() {
+	
+		$.ajax({
+			type: 'Get',
+			
+			url: "{% url 'getNetworkdata' %}",
+		
+			success: function(response){
+				$(trtable).empty();
+				var arraydata = [];
+				for (var item in response.data){
+					var tr = document.createElement("tr");
+						var td1 = document.createElement("td");
+						td1.innerHTML =response.data[item].hardware_id;
+						var td2 = document.createElement("td");
+						td2.innerHTML =response.data[item].hardware_type;
+						arraydata.push(response.data[item].hardware_type);
+						var td3 = document.createElement("td");
+						td3.innerHTML =response.data[item].serial_number;
+						var td4 = document.createElement("td");
+						td4.innerHTML =response.data[item].asset_no;
+						var td5 = document.createElement("td");
+						td5.innerHTML =response.data[item].po;
+						var td6 = document.createElement("td");
+						td6.innerHTML =response.data[item].invoice;
+						var td7 = document.createElement("td");
+						td7.innerHTML =response.data[item].dop;
+						var td8 = document.createElement("td");
+						td8.innerHTML =response.data[item].dop_Warranty_end_date;
+						var td9 = document.createElement("td");
+						td9.innerHTML =response.data[item].block;
+						var td10 = document.createElement("td");
+						td10.innerHTML =response.data[item].location;
+						var td11 = document.createElement("td");
+						td11.innerHTML =response.data[item].Current_Status;
+						var td12 = document.createElement("td");
+						td12.innerHTML =response.data[item].Brand;
+						var td13 = document.createElement("td");
+						td13.innerHTML =response.data[item].Model;
+						var td14 = document.createElement("td");
+						td14.innerHTML =response.data[item].vendor;
+						var td15 = document.createElement("td");
+						td15.innerHTML =response.data[item].mac_address;
+						var td16 = document.createElement("td");
+						td16.innerHTML =response.data[item].ip_address;
+
+						
+					
+					
+					
+						
+						var td17 = document.createElement("td");
+						var btnupdate = document.createElement("Button");
+						btnupdate.id= response.data[item].hardware_id;
+						btnupdate.classList.add("btn");
+						btnupdate.classList.add("btn-primary");
+						btnupdate.innerHTML="Update";
+						btnupdate.addEventListener( "click", function() {
+							datatoUform(this.id)
+						
+						});
+						var role =  "{{Style}}";
+						if(role == "display:none"){
+							btnupdate.disabled =true;
+
+						}
+						else{
+							btnupdate.disabled =false;
+						}
+						td17.append(btnupdate);
+						tr.append(td1);
+						tr.append(td2);
+						tr.append(td3);
+						tr.append(td4);
+						tr.append(td5);
+						tr.append(td6);
+						tr.append(td7);
+						tr.append(td8);
+						tr.append(td9);
+						tr.append(td10);
+						tr.append(td11);
+						tr.append(td12);
+						tr.append(td13);
+						tr.append(td14);
+						tr.append(td15);
+						tr.append(td16);
+						tr.append(td17);
+					
+						
+					
+						
+					
+						$(trtable).append(tr);
+						
+				}
+				var role =  "{{Style}}";
+				if(role == "display:none"){
+					document.getElementById('Add').disabled =true;
+
+				}
+				else{
+					document.getElementById('Add').disabled =false;
+				}
+				
+				xdata1 = removeDuplicates(arraydata);
+			
+
+				for (var xr in xdata1){
+			
+					var option = document.createElement("Option")
+					option.value = xdata1[xr];
+					option.innerHTML = xdata1[xr];
+					document.getElementById('filtertable').append(option);
+				}
+			
+			
+				
+			}
+		});
+
+
+	
+});	
+
+function removeDuplicates(arr) {
+					return arr.filter((item, 
+						index) => arr.indexOf(item) === index);
+				}
+
+function openNetworkform(){
+
+		$.ajax({
+			type: 'GET',
+			url: "{% url 'getNetworkdata' %}",
+			
+			success: function(data){
+				var modalform = document.getElementById('addform');
+				modalform.style.display = 'block';
+				document.getElementById("add-network").reset();
+	
+				var optionsOffline = document.createElement("option");
+				optionsOffline.innerHTML = "Offline";
+				optionsOffline.value = "Offline";
+				var select = document.getElementById('IP_Address');
+				select.append(optionsOffline);
+			for (var key in data.ip){
+				var options = document.createElement("option");
+				options.innerHTML = data.ip[key].ip_address;
+				options.value = data.ip[key].ip_address;
+				var select = document.getElementById('IP_Address');
+				select.append(options);
+				console.log(data.ip[key].ip_address)
+				}
+			
+				
+				
+
+				
+				
+			}
+		});
+
+}
+
+function typehardware(){
+	var type = document.getElementById('Network_Hardware_Type').value;
+	const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+	switch(type) {
+		case "AP":
+		
+
+		$.ajax({
+			type: 'POST',
+			headers: {'X-CSRFToken': csrftoken},
+			mode: 'same-origin', // Do not send CSRF token to another domain.
+			url: "{% url 'runNetworkform' %}",
+			data :{
+				'type' : 'AP',
+				'modeltype' : 'AP',
+			
+
+			}, 
+			success: function(data){
+			console.log(data);
+			$(Model).empty();
+				var Network_Hardware_ID = document.getElementById('Network_Hardware_ID');
+				document.getElementById('Network_Hardware_ID').readOnly  = true;
+
+				if(parseInt(data.runnumber) < 10){
+					document.getElementById('Network_Hardware_ID').value = "UTM-AP000"+data.runnumber ;
+				} else if(parseInt(data.runnumber) >= 10 && parseInt(data.runnumber) < 100){
+					document.getElementById('Network_Hardware_ID').value = "UTM-AP00"+data.runnumber ;
+				}
+				else if(parseInt(data.runnumber) >= 100 && parseInt(data.runnumber) < 1000){
+					document.getElementById('Network_Hardware_ID').value = "UTM-AP0"+data.runnumber ;
+				}
+				else if(parseInt(data.runnumber) >= 1000 && parseInt(data.runnumber) < 10000){
+					document.getElementById('Network_Hardware_ID').value = "UTM-AP"+data.runnumber ;
+		}
+				var Network_Hardware_ID = document.getElementById('Model');
+				for(var i in data.model){
+					var option = document.createElement("option");
+					option.value = data.model[i].model;
+					option.innerHTML = data.model[i].model;
+					Network_Hardware_ID.append(option);
+					console.log(data.model[i].model)
+
+				}
+			
+				
+				
+
+				
+				
+			}
+		});
+    	break;
+  	case "CCTV":
+		
+
+		$.ajax({
+			type: 'POST',
+			headers: {'X-CSRFToken': csrftoken},
+			mode: 'same-origin', // Do not send CSRF token to another domain.
+			url: "{% url 'runNetworkform' %}",
+			data :{
+				'type' : 'CCTV',
+				'modeltype' : 'CCTV Camera',
+			
+
+			}, 
+			success: function(data){
+				$(Model).empty();
+				console.log(data);
+				var Network_Hardware_ID = document.getElementById('Network_Hardware_ID');
+				document.getElementById('Network_Hardware_ID').readOnly  = true;
+
+				if(parseInt(data.runnumber) < 10){
+					document.getElementById('Network_Hardware_ID').value = "UTM-CM000"+data.runnumber ;
+				} else if(parseInt(data.runnumber) >= 10 && parseInt(data.runnumber) < 100){
+					document.getElementById('Network_Hardware_ID').value = "UTM-CM00"+data.runnumber ;
+				}
+				else if(parseInt(data.runnumber) >= 100 && parseInt(data.runnumber) < 1000){
+					document.getElementById('Network_Hardware_ID').value = "UTM-CM0"+data.runnumber ;
+				}
+				else if(parseInt(data.runnumber) >= 1000 && parseInt(data.runnumber) < 10000){
+					document.getElementById('Network_Hardware_ID').value = "UTM-CM"+data.runnumber ;
+		}
+				
+				var Network_Hardware_ID = document.getElementById('Model');
+				for(var i in data.model){
+					var option = document.createElement("option");
+					option.value = data.model[i].model;
+					option.innerHTML = data.model[i].model;
+					Network_Hardware_ID.append(option);
+					console.log(data.model[i].model)
+
+				}
+				
+				
+				
+
+				
+				
+			}
+		});
+    	break;
+	case "CCTV_DVR":
+		
+
+		$.ajax({
+			type: 'POST',
+			headers: {'X-CSRFToken': csrftoken},
+			mode: 'same-origin', // Do not send CSRF token to another domain.
+			url: "{% url 'runNetworkform' %}",
+			data :{
+				'type' : 'CCTV_DVR',
+				'modeltype' : 'CCTV DVR',
+			
+
+			}, 
+			success: function(data){
+				console.log(data);
+				$(Model).empty();
+				var Network_Hardware_ID = document.getElementById('Network_Hardware_ID');
+				document.getElementById('Network_Hardware_ID').readOnly  = true;
+
+				if(parseInt(data.runnumber) < 10){
+					document.getElementById('Network_Hardware_ID').value = "CCTV000"+data.runnumber ;
+				} else if(parseInt(data.runnumber) >= 10 && parseInt(data.runnumber) < 100){
+					document.getElementById('Network_Hardware_ID').value = "CCTV00"+data.runnumber ;
+				}
+				else if(parseInt(data.runnumber) >= 100 && parseInt(data.runnumber) < 1000){
+					document.getElementById('Network_Hardware_ID').value = "CCTV0"+data.runnumber ;
+				}
+				else if(parseInt(data.runnumber) >= 1000 && parseInt(data.runnumber) < 10000){
+					document.getElementById('Network_Hardware_ID').value = "CCTV"+data.runnumber ;
+		}
+				
+				var Network_Hardware_ID = document.getElementById('Model');
+				for(var i in data.model){
+					var option = document.createElement("option");
+					option.value = data.model[i].model;
+					option.innerHTML = data.model[i].model;
+					Network_Hardware_ID.append(option);
+					console.log(data.model[i].model)
+
+				}
+				
+				
+
+				
+				
+			}
+		});
+    	break;
+
+	case "CP":
+		
+	$.ajax({
+			type: 'POST',
+			headers: {'X-CSRFToken': csrftoken},
+			mode: 'same-origin', // Do not send CSRF token to another domain.
+			url: "{% url 'runNetworkform' %}",
+			data :{
+				'type' : 'CP',
+				'modeltype' : 'Conference Phone',
+			
+
+			}, 
+			success: function(data){
+				console.log(data);
+				$(Model).empty();
+				var Network_Hardware_ID = document.getElementById('Network_Hardware_ID');
+				document.getElementById('Network_Hardware_ID').readOnly  = true;
+
+				if(parseInt(data.runnumber) < 10){
+			document.getElementById('Network_Hardware_ID').value = "UTM-CP000"+data.runnumber ;
+		} else if(parseInt(data.runnumber) >= 10 && parseInt(data.runnumber) < 100){
+			document.getElementById('Network_Hardware_ID').value = "UTM-CP00"+data.runnumber ;
+		}
+		else if(parseInt(data.runnumber) >= 100 && parseInt(data.runnumber) < 1000){
+			document.getElementById('Network_Hardware_ID').value = "UTM-CP0"+data.runnumber ;
+		}
+		else if(parseInt(data.runnumber) >= 1000 && parseInt(data.runnumber) < 10000){
+			document.getElementById('Network_Hardware_ID').value = "UTM-CP"+data.runnumber ;
+		}
+				
+				var Network_Hardware_ID = document.getElementById('Model');
+				for(var i in data.model){
+					var option = document.createElement("option");
+					option.value = data.model[i].model;
+					option.innerHTML = data.model[i].model;
+					Network_Hardware_ID.append(option);
+					console.log(data.model[i].model)
+
+				}
+				
+				
+
+				
+				
+			}
+		});
+		
+    	break;
+	case "Door_Access":
+		
+
+		$.ajax({
+			type: 'POST',
+			headers: {'X-CSRFToken': csrftoken},
+			mode: 'same-origin', // Do not send CSRF token to another domain.
+			url: "{% url 'runNetworkform' %}",
+			data :{
+				'type' : 'Door_Access',
+				'modeltype' : 'Door Access',
+			
+
+			}, 
+			success: function(data){
+				console.log(data);
+				$(Model).empty();
+				document.getElementById('Network_Hardware_ID').readOnly  = true;
+				
+				if(parseInt(data.runnumber) < 10){
+			document.getElementById('Network_Hardware_ID').value = "DoorController000"+data.runnumber ;
+		} else if(parseInt(data.runnumber) >= 10 && parseInt(data.runnumber) < 100){
+			document.getElementById('Network_Hardware_ID').value = "DoorController00"+data.runnumber ;
+		}
+		else if(parseInt(data.runnumber) >= 100 && parseInt(data.runnumber) < 1000){
+			document.getElementById('Network_Hardware_ID').value = "DoorController0"+data.runnumber ;
+		}
+		else if(parseInt(data.runnumber) >= 1000 && parseInt(data.runnumber) < 10000){
+			document.getElementById('Network_Hardware_ID').value = "DoorController"+data.runnumber ;
+		}
+				
+				var Network_Hardware_ID = document.getElementById('Model');
+				for(var i in data.model){
+					var option = document.createElement("option");
+					option.value = data.model[i].model;
+					option.innerHTML = data.model[i].model;
+					Network_Hardware_ID.append(option);
+					console.log(data.model[i].model)
+
+				}
+				
+				
+
+				
+				
+			}
+		});
+    	break;
+	case "Switches":
+		
+
+		$.ajax({
+			type: 'POST',
+			headers: {'X-CSRFToken': csrftoken},
+			mode: 'same-origin', // Do not send CSRF token to another domain.
+			url: "{% url 'runNetworkform' %}",
+			data :{
+				'type' : 'Switches',
+				'modeltype' : 'Switches',
+			
+
+			}, 
+			success: function(data){
+				console.log(data);
+				$(Model).empty();
+				var Network_Hardware_ID = document.getElementById('Network_Hardware_ID');
+				Network_Hardware_ID.readOnly  = true;
+
+				if(parseInt(data.runnumber) < 10){
+			document.getElementById('Network_Hardware_ID').value = "UTM-NW000"+data.runnumber ;
+		} else if(parseInt(data.runnumber) >= 10 && parseInt(data.runnumber) < 100){
+			document.getElementById('Network_Hardware_ID').value = "UTM-NW00"+data.runnumber ;
+		}
+		else if(parseInt(data.runnumber) >= 100 && parseInt(data.runnumber) < 1000){
+			document.getElementById('Network_Hardware_ID').value = "UTM-NW0"+data.runnumber ;
+		}
+		else if(parseInt(data.runnumber) >= 1000 && parseInt(data.runnumber) < 10000){
+			document.getElementById('Network_Hardware_ID').value = "UTM-NW"+data.runnumber ;
+		}
+				
+				var Network_Hardware_ID = document.getElementById('Model');
+				for(var i in data.model){
+					var option = document.createElement("option");
+					option.value = data.model[i].model;
+					option.innerHTML = data.model[i].model;
+					Network_Hardware_ID.append(option);
+					console.log(data.model[i].model)
+
+				}
+				
+				
+				
+
+				
+				
+			}
+		});
+    	break;
+	case "Tape_Library":
+		
+
+		$.ajax({
+			type: 'POST',
+			headers: {'X-CSRFToken': csrftoken},
+			mode: 'same-origin', // Do not send CSRF token to another domain.
+			url: "{% url 'runNetworkform' %}",
+			data :{
+				'type' : 'Tape_Library',
+				'modeltype' : 'Tape Library',
+			
+
+			}, 
+			success: function(data){
+				console.log(data);
+				$(Model).empty();
+				var Network_Hardware_ID = document.getElementById('Network_Hardware_ID');
+				Network_Hardware_ID.readOnly  = true;
+
+				if(parseInt(data.runnumber) < 10){
+			document.getElementById('Network_Hardware_ID').value = "UTM-TL000"+data.runnumber ;
+		} else if(parseInt(data.runnumber) >= 10 && parseInt(data.runnumber) < 100){
+			document.getElementById('Network_Hardware_ID').value = "UTM-TL00"+data.runnumber ;
+		}
+		else if(parseInt(data.runnumber) >= 100 && parseInt(data.runnumber) < 1000){
+			document.getElementById('Network_Hardware_ID').value = "UTM-TL0"+data.runnumber ;
+		}
+		else if(parseInt(data.runnumber) >= 1000 && parseInt(data.runnumber) < 10000){
+			document.getElementById('Network_Hardware_ID').value = "UTM-TL"+data.runnumber ;
+		}
+				
+				var Network_Hardware_ID = document.getElementById('Model');
+				for(var i in data.model){
+					var option = document.createElement("option");
+					option.value = data.model[i].model;
+					option.innerHTML = data.model[i].model;
+					Network_Hardware_ID.append(option);
+					console.log(data.model[i].model)
+
+				}
+				
+
+				
+				
+			}
+		});
+    	break;
+	case "Wireless_Dongle":
+		
+
+		$.ajax({
+			type: 'POST',
+			headers: {'X-CSRFToken': csrftoken},
+			mode: 'same-origin', // Do not send CSRF token to another domain.
+			url: "{% url 'runNetworkform' %}",
+			data :{
+				'type' : 'Wireless_Dongle',
+				'modeltype' : 'Wireless Dongle',
+			
+
+			}, 
+			success: function(data){
+				console.log(data);
+				$(Model).empty();
+				var Network_Hardware_ID = document.getElementById('Network_Hardware_ID');
+				Network_Hardware_ID.readOnly  = true;
+
+				if(parseInt(data.runnumber) < 10){
+					document.getElementById('Network_Hardware_ID').value = "Tenda Wireless000"+data.runnumber ;
+				} else if(parseInt(data.runnumber) >= 10 && parseInt(data.runnumber) < 100){
+					document.getElementById('Network_Hardware_ID').value = "Tenda Wireless00"+data.runnumber ;
+				}
+				else if(parseInt(data.runnumber) >= 100 && parseInt(data.runnumber) < 1000){
+					document.getElementById('Network_Hardware_ID').value = "Tenda Wireless0"+data.runnumber ;
+				}
+				else if(parseInt(data.runnumber) >= 1000 && parseInt(data.runnumber) < 10000){
+					document.getElementById('Network_Hardware_ID').value = "Tenda Wireless"+data.runnumber ;
+		}
+				
+				var Network_Hardware_ID = document.getElementById('Model');
+				for(var i in data.model){
+					var option = document.createElement("option");
+					option.value = data.model[i].model;
+					option.innerHTML = data.model[i].model;
+					Network_Hardware_ID.append(option);
+					console.log(data.model[i].model)
+
+				}
+				
+
+				
+				
+			}
+		});
+    	break;		
+	case "Print_Server":
+		
+
+		$.ajax({
+			type: 'POST',
+			headers: {'X-CSRFToken': csrftoken},
+			mode: 'same-origin', // Do not send CSRF token to another domain.
+			url: "{% url 'runNetworkform' %}",
+			data :{
+				'type' : 'Print_Server',
+				'modeltype' : 'Print Server',
+			
+
+			}, 
+			success: function(data){
+				console.log(data);
+				$(Model).empty();
+				var Network_Hardware_ID = document.getElementById('Network_Hardware_ID');
+				Network_Hardware_ID.readOnly  = true;
+
+				if(parseInt(data.runnumber) < 10){
+					document.getElementById('Network_Hardware_ID').value = "UTM-PS000"+data.runnumber ;
+				} else if(parseInt(data.runnumber) >= 10 && parseInt(data.runnumber) < 100){
+					document.getElementById('Network_Hardware_ID').value = "UTM-PS00"+data.runnumber ;
+				}
+				else if(parseInt(data.runnumber) >= 100 && parseInt(data.runnumber) < 1000){
+					document.getElementById('Network_Hardware_ID').value = "UTM-PS0"+data.runnumber ;
+				}
+				else if(parseInt(data.runnumber) >= 1000 && parseInt(data.runnumber) < 10000){
+					document.getElementById('Network_Hardware_ID').value = "UTM-PS"+data.runnumber ;
+		}
+				
+			
+				var Network_Hardware_ID = document.getElementById('Model');
+				for(var i in data.model){
+					var option = document.createElement("option");
+					option.value = data.model[i].model;
+					option.innerHTML = data.model[i].model;
+					Network_Hardware_ID.append(option);
+					console.log(data.model[i].model)
+
+				}
+				
+				
+
+				
+				
+			}
+		});
+    	break;		
+	case "Firewall":
+		
+
+		$.ajax({
+			type: 'POST',
+			headers: {'X-CSRFToken': csrftoken},
+			mode: 'same-origin', // Do not send CSRF token to another domain.
+			url: "{% url 'runNetworkform' %}",
+			data :{
+				'type' : 'Firewall',
+				'modeltype' : 'Firewall',
+			
+
+			}, 
+			success: function(data){
+				console.log(data);
+				$(Model).empty();
+				$(IP_Address).empty();
+				var Network_Hardware_ID = document.getElementById('Network_Hardware_ID');
+				Network_Hardware_ID.readOnly  = true;
+				if(parseInt(data.runnumber) < 10){
+					document.getElementById('Network_Hardware_ID').value = "UTM-FW000"+data.runnumber ;
+				} else if(parseInt(data.runnumber) >= 10 && parseInt(data.runnumber) < 100){
+					document.getElementById('Network_Hardware_ID').value = "UTM-FW00"+data.runnumber ;
+				}
+				else if(parseInt(data.runnumber) >= 100 && parseInt(data.runnumber) < 1000){
+					document.getElementById('Network_Hardware_ID').value = "UTM-FW0"+data.runnumber ;
+				}
+				else if(parseInt(data.runnumber) >= 1000 && parseInt(data.runnumber) < 10000){
+					document.getElementById('Network_Hardware_ID').value = "UTM-FW"+data.runnumber ;
+		}
+				
+				var Network_Hardware_ID = document.getElementById('Model');
+				for(var i in data.model){
+					var option = document.createElement("option");
+					option.value = data.model[i].model;
+					option.innerHTML = data.model[i].model;
+					Network_Hardware_ID.append(option);
+					console.log(data.model[i].model)
+
+				}
+				
+				
+
+				
+				
+			}
+		});
+    	break;		
+	case "UPS":
+		$(Model).empty();
+		document.getElementById('Network_Hardware_ID').readOnly  = false;
+
+		var option = document.createElement("option");
+		option.value = "ULC3";
+		option.innerHTML = "ULC3";
+		document.getElementById('Model').append(option);
+
+
+				
+
+	
+    	break;
+	case "Server":
+		
+
+		$.ajax({
+			type: 'POST',
+			headers: {'X-CSRFToken': csrftoken},
+			mode: 'same-origin', // Do not send CSRF token to another domain.
+			url: "{% url 'runNetworkform' %}",
+			data :{
+				'type' : 'Server',
+				'modeltype' : 'Server',
+			
+
+			}, 
+			success: function(data){
+				console.log(data);
+				$(Model).empty();
+				$(IP_Address).empty();
+				var Network_Hardware_ID = document.getElementById('Network_Hardware_ID');
+				Network_Hardware_ID.readOnly  = true;
+				if(parseInt(data.runnumber) < 10){
+					document.getElementById('Network_Hardware_ID').value = "UTM-SV000"+data.runnumber ;
+				} else if(parseInt(data.runnumber) >= 10 && parseInt(data.runnumber) < 100){
+					document.getElementById('Network_Hardware_ID').value = "UTM-SV00"+data.runnumber ;
+				}
+				else if(parseInt(data.runnumber) >= 100 && parseInt(data.runnumber) < 1000){
+					document.getElementById('Network_Hardware_ID').value = "UTM-SV0"+data.runnumber ;
+				}
+				else if(parseInt(data.runnumber) >= 1000 && parseInt(data.runnumber) < 10000){
+					document.getElementById('Network_Hardware_ID').value = "UTM-SV"+data.runnumber ;
+		}
+				
+				var Network_Hardware_ID = document.getElementById('Model');
+				for(var i in data.model){
+					var option = document.createElement("option");
+					option.value = data.model[i].model;
+					option.innerHTML = data.model[i].model;
+					Network_Hardware_ID.append(option);
+					console.log(data.model[i].model)
+
+				}
+				
+				
+
+				
+				
+			}
+		});
+		
+    	break;
+	default:
+    // code block
+	}	
+
+}
+
+function addNetwork(){
+		var Network_Hardware_ID = $('input[name="Network_Hardware_ID"]').val().trim();
+		var Network_Hardware_Type =document.getElementById("Network_Hardware_Type").value;
+		var serial_number = $('input[name="serial_number"]').val().trim();
+		var Asset_No = $('input[name="Asset_No"]').val().trim();
+		var block = document.getElementById("block").value;
+		var location = document.getElementById("location").value;
+		var dop = $('input[name="dop"]').val().trim();
+		var dopYear = $('input[name="dopYear"]').val().trim();
+		var Brand = document.getElementById("Brand").value;
+		var Current_status = document.getElementById("Current_Status").value;
+		var Model = document.getElementById("Model").value;
+		var Vendor = document.getElementById("Vendor").value;
+		var PO = $('input[name="PO"]').val();
+		var MAC_Address = $('input[name="MAC_Address"]').val();
+		var Invoice = $('input[name="Invoice"]').val();
+		var IP_Address = document.getElementById("IP_Address").value;
+		const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+		if(Network_Hardware_Type == "default"){
+			alert("You can't pick default in Network Type option");
+		}
+		else if(Current_status == "default"){
+			alert("You can't pick default in Current Status option");
+
+		}
+		else if(block == "default"){
+			alert("You can't pick default in Block option");
+
+		}
+		else if(location == "default"){
+			alert("You can't pick default in Location option");
+
+		}
+		else if(Brand == "default"){
+			alert("You can't pick default in Brand option");
+
+		}
+		
+		else if(Vendor == "default"){
+			alert("You can't pick default in Vendor option");
+
+		}
+		else if(IP_Address == "default"){
+			alert("You can't pick default in IP Address option");
+
+		}
+		else{
+		$.ajax({
+			type: 'POST',
+			headers: {'X-CSRFToken': csrftoken},
+        	mode: 'same-origin', // Do not send CSRF token to another domain.
+			url: "{% url 'Networkhardwareadd' %}",
+			data :{
+				'Network_Hardware_ID' : Network_Hardware_ID, 'Network_Hardware_Type' : Network_Hardware_Type, 'serial_number' : serial_number,
+				'serial_number' : serial_number, 'Asset_No' : Asset_No, 'block' : block,
+				'location' : location, 'dop' : dop, 'dopYear' : dopYear,
+				'Brand' : Brand, 'Model' : Model,
+				'Vendor' : Vendor, 'PO' : PO, 'MAC_Address' : MAC_Address,
+				'Invoice' : Invoice, 'IP_Address' : IP_Address, "networkstatus":Current_status
+				
+			
+
+			}, 
+			success: function(data){
+				console.log(data);
+				console.log("Success Post");
+				closeform();
+				updatetable();
+
+				
+
+			}
+		});
+		}
+
+		
+}
+	
+function datatoUform(btnid){
+	const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+
+	$.ajax({
+			type: 'POST',
+			headers: {'X-CSRFToken': csrftoken},
+        	mode: 'same-origin', // Do not send CSRF token to another domain.
+			url: "{% url 'getNetworkdataupdate' %}",
+			data :{
+				'id' : btnid,
+			
+
+			}, 
+			success: function(data){
+				console.log(data);
+				var modalform = document.getElementById('updateformmodal');
+				modalform.style.display = 'block';
+				document.getElementById("update-network").reset();
+
+				if (data.hardware_type == "UPS"){
+				$(Update_Model).empty();
+				document.getElementById('Update_Network_Hardware_ID').readOnly  = false;
+
+				var option = document.createElement("option");
+				option.value = "ULC3";
+				option.innerHTML = "ULC3";
+				document.getElementById('Update_Model').append(option);
+				}
+				else{
+					for(var key in data.list_model){
+					var select = document.getElementById("Update_Model");
+					var option = document.createElement('option');
+					option.value = data.list_model[key].model;
+					option.innerHTML = data.list_model[key].model;
+					select.append(option);
+					console.log(data.list_model[key].model)
+				}
+				}
+			
+				
+
+				document.getElementById('Update_Network_Hardware_ID').value = data.hardware_id ;
+				document.getElementById('Update_Network_Hardware_Type').value = data.hardware_type ;
+				document.getElementById('Update_serial_number').value = data.serial_number ;
+				 document.getElementById('Update_Asset_No').value = data.asset_no ;
+				document.getElementById("Update_block").value = data.block ;
+				document.getElementById("Update_location").value = data.location ;
+				document.getElementById('Update_dop').value = data.dop ;
+				document.getElementById('Update_dopYear').value = data.dop_Warranty_end_date ;
+				document.getElementById("Update_Brand").value = data.brand ;
+				document.getElementById("Update_PO").value = data.po ;
+				document.getElementById("Update_Current_Status").value = data.Current_Status ;
+				document.getElementById("Update_Model").value = data.Model ;
+				document.getElementById('Update_Vendor').value = data.vendor ;
+				document.getElementById('Update_IP_Address').options.length = 0;
+
+				var optionRelease = document.createElement("option");
+				optionRelease.value = "Release";
+				optionRelease.innerHTML = "Release";
+				var select = document.getElementById("Update_IP_Address");
+				var option1 = document.createElement('option');
+					option1.value = data.ip_address;
+					option1.innerHTML = data.ip_address + "(Current IP )";
+					select.append(option1);
+					select.append(optionRelease);
+
+				for(var key in data.ip){
+					
+					var option = document.createElement('option');
+					option.value = data.ip[key].ip_address;
+					option.innerHTML = data.ip[key].ip_address;
+					select.append(option);
+					console.log(data.ip[key].ip_address)
+				}
+				document.getElementById('Update_IP_Address').value = data.ip_address ;
+				document.getElementById("Update_MAC_Address").value = data.mac_address ;
+				document.getElementById('Update_Invoice').value = data.invoice ;
+				
+				
+			}
+		});
+
+}
+
+
+function openexport(){
+	
+	$.ajax({
+			type: 'Get',
+			
+			url: "{% url 'getNetworkdata' %}",
+		
+			success: function(response){
+				document.getElementById("exportdata").style.display = 'block';
+				document.getElementById('export_hardwareType').disabled = true;
+
+				
+				$(exportdataTD).empty();
+				for (var item in response.data){
+					var tr = document.createElement("tr");
+						var td1 = document.createElement("td");
+						td1.innerHTML =response.data[item].hardware_id;
+						var td2 = document.createElement("td");
+						td2.innerHTML =response.data[item].hardware_type;
+						var td3 = document.createElement("td");
+						td3.innerHTML =response.data[item].Brand;
+						var td4 = document.createElement("td");
+						td4.innerHTML =response.data[item].Model;
+						var td5 = document.createElement("td");
+						td5.innerHTML =response.data[item].serial_number;
+						var td6 = document.createElement("td");
+						td6.innerHTML =response.data[item].asset_no;
+						var td7 = document.createElement("td");
+						td7.innerHTML =response.data[item].dop;
+						var td8 = document.createElement("td");
+						td8.innerHTML =response.data[item].dop_Warranty_end_date;
+						var td9 = document.createElement("td");
+						td9.innerHTML =response.data[item].vendor;
+						var td10 = document.createElement("td");
+						td10.innerHTML =response.data[item].po;
+						var td11 = document.createElement("td");
+						td11.innerHTML =response.data[item].invoice;
+						var td12 = document.createElement("td");
+						td12.innerHTML =response.data[item].block;
+						var td13 = document.createElement("td");
+						td13.innerHTML =response.data[item].location;
+						var td14 = document.createElement("td");
+						td14.innerHTML =response.data[item].mac_address;
+						var td15 = document.createElement("td");
+						td15.innerHTML =response.data[item].ip_address;
+						var td16 = document.createElement("td");
+						td16.innerHTML =response.data[item].Current_Status;
+						
+						
+					
+						tr.append(td1);
+						tr.append(td2);
+					
+						tr.append(td3);
+					
+						tr.append(td4);
+						tr.append(td5);
+						tr.append(td6);
+						tr.append(td7);
+						tr.append(td8);
+						tr.append(td9);
+						tr.append(td10);
+						tr.append(td11);
+						tr.append(td12);
+						tr.append(td13);
+						tr.append(td14);
+						tr.append(td15);
+						tr.append(td16);
+			
+						
+						$(exportdataTD).append(tr);
+						
+				}
+			
+
+				
+				
+			
+			
+				
+			}
+		});
+}
+
+function customexport(){
+	document.getElementById('export_hardwareType').disabled = false;
+	
+}
+
+function Searchcustomexport(){
+	
+
+		var hardwaretype = document.getElementById("export_hardwareType").value;
+	
+		if((hardwaretype == "default")){
+			alert("Fill the box first");
+		}
+		else
+		{
+				
+				const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+				
+				$.ajax({
+					type: 'POST',
+					headers: {'X-CSRFToken': csrftoken},
+					mode: 'same-origin', // Do not send CSRF token to another domain.
+					url: "{% url 'getcustomhardwaredata' %}",
+					data : { 'HardwareType': hardwaretype}, 
+					
+					success: function(response){
+						console.log(response);
+						$(exportdataTD).empty();
+				for (var item in response.data){
+					var tr = document.createElement("tr");
+						var td1 = document.createElement("td");
+						td1.innerHTML =response.data[item].hardware_id;
+						var td2 = document.createElement("td");
+						td2.innerHTML =response.data[item].hardware_type;
+						var td3 = document.createElement("td");
+						td3.innerHTML =response.data[item].Brand;
+						var td4 = document.createElement("td");
+						td4.innerHTML =response.data[item].Model;
+						var td5 = document.createElement("td");
+						td5.innerHTML =response.data[item].serial_number;
+						var td6 = document.createElement("td");
+						td6.innerHTML =response.data[item].asset_no;
+						var td7 = document.createElement("td");
+						td7.innerHTML =response.data[item].dop;
+						var td8 = document.createElement("td");
+						td8.innerHTML =response.data[item].dop_Warranty_end_date;
+						var td9 = document.createElement("td");
+						td9.innerHTML =response.data[item].vendor;
+						var td10 = document.createElement("td");
+						td10.innerHTML =response.data[item].po;
+						var td11 = document.createElement("td");
+						td11.innerHTML =response.data[item].invoice;
+						var td12 = document.createElement("td");
+						td12.innerHTML =response.data[item].block;
+						var td13 = document.createElement("td");
+						td13.innerHTML =response.data[item].location;
+						var td14 = document.createElement("td");
+						td14.innerHTML =response.data[item].mac_address;
+						var td15 = document.createElement("td");
+						td15.innerHTML =response.data[item].ip_address;
+						var td16 = document.createElement("td");
+						td16.innerHTML =response.data[item].Current_Status;
+						
+						
+					
+						tr.append(td1);
+						tr.append(td2);
+					
+						tr.append(td3);
+					
+						tr.append(td4);
+						tr.append(td5);
+						tr.append(td6);
+						tr.append(td7);
+						tr.append(td8);
+						tr.append(td9);
+						tr.append(td10);
+						tr.append(td11);
+						tr.append(td12);
+						tr.append(td13);
+						tr.append(td14);
+						tr.append(td15);
+						tr.append(td16);
+			
+						
+						$(exportdataTD).append(tr);
+						
+				}
+				
+
+		
+		
+	}
+});
+}
+					
+		}
+
+function closeexportdata(){
+	document.getElementById("exportdata").style.display = 'none';
+}
+
+function downloadexport(){
+	const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+
+	if(document.getElementById("allselect").checked == true){
+	type = 'all';
+
+	$.ajax({
+					type: 'POST',
+					headers: {'X-CSRFToken': csrftoken},
+					mode: 'same-origin', // Do not send CSRF token to another domain.
+					url: "{% url 'exporthardwaredataNetwork' %}",
+					data : {'type': type}, 
+					
+					success: function(response){
+						download_csv(response)
+
+					
+
+		
+		
+	}
+});
+
+}
+else{
+	type = 'custom';
+	var hardwaretype = document.getElementById("export_hardwareType").value;
+		
+		if((hardwaretype == "default")){
+			alert("Fill the box first");
+		}
+		else
+		{
+			
+			$.ajax({
+					type: 'POST',
+					headers: {'X-CSRFToken': csrftoken},
+					mode: 'same-origin', // Do not send CSRF token to another domain.
+					url: "{% url 'exporthardwaredataNetwork' %}",
+					data : {'type': type, 'datafinal1':hardwaretype}, 
+					
+					success: function(response){
+						download_csv(response)
+
+					
+
+		
+		
+	}
+});
+
+	
+}
+}
+}
+
+function download_csv(dataexport) {
+
+    var headercsv  = ['Hardware ID', 'NetworkHardware Type', 'Brand', 'Model', 'S/N','Asset No','DOP','Warranty End Date',
+	'Vendor', 'PO', 'Invoice', 'Block',  'Location', 'MAC', 'IP Address', 'Current Status'];
+	let header = headercsv.join(',') + '\n';
+	let csv = header;
+	var data = dataexport.data;
+	console.log(dataexport)
+	console.log(data);
+	data.forEach( obj => {
+                let row = [];
+                for (key in obj) {
+                    if (obj.hasOwnProperty(key)) {
+                        row.push(obj[key]);
+                    }
+                }
+                csv += row.join(',')+"\n";
+            });
+		
+    
+    var hiddenElement = document.createElement('a');
+    hiddenElement.href = 'data:text/csv;charset=utf-8,' + encodeURI(csv);
+    hiddenElement.target = '_blank';
+    hiddenElement.download = 'Network Hardware data.csv';
+    hiddenElement.click();
+}
+ 
+
+
+function updatetable(){
+	$.ajax({
+			type: 'Get',
+			
+			url: "{% url 'getNetworkdata' %}",
+		
+			success: function(response){
+				$(trtable).empty();
+				for (var item in response.data){
+					var tr = document.createElement("tr");
+						var td1 = document.createElement("td");
+						td1.innerHTML =response.data[item].hardware_id;
+						var td2 = document.createElement("td");
+						td2.innerHTML =response.data[item].hardware_type;
+						var td3 = document.createElement("td");
+						td3.innerHTML =response.data[item].serial_number;
+						var td4 = document.createElement("td");
+						td4.innerHTML =response.data[item].asset_no;
+						var td5 = document.createElement("td");
+						td5.innerHTML =response.data[item].po;
+						var td6 = document.createElement("td");
+						td6.innerHTML =response.data[item].invoice;
+						var td7 = document.createElement("td");
+						td7.innerHTML =response.data[item].dop;
+						var td8 = document.createElement("td");
+						td8.innerHTML =response.data[item].dop_Warranty_end_date;
+						var td9 = document.createElement("td");
+						td9.innerHTML =response.data[item].block;
+						var td10 = document.createElement("td");
+						td10.innerHTML =response.data[item].location;
+						var td11 = document.createElement("td");
+						td11.innerHTML =response.data[item].Current_Status;
+						var td12 = document.createElement("td");
+						td12.innerHTML =response.data[item].Brand;
+						var td13 = document.createElement("td");
+						td13.innerHTML =response.data[item].Model;
+						var td14 = document.createElement("td");
+						td14.innerHTML =response.data[item].vendor;
+						var td15 = document.createElement("td");
+						td15.innerHTML =response.data[item].mac_address;
+						var td16 = document.createElement("td");
+						td16.innerHTML =response.data[item].ip_address;
+						
+					
+					
+					
+						
+						var td17 = document.createElement("td");
+						var btnupdate = document.createElement("Button");
+						btnupdate.id= response.data[item].hardware_id;
+						btnupdate.classList.add("btn");
+						btnupdate.classList.add("btn-primary");
+						btnupdate.innerHTML="Update";
+						btnupdate.addEventListener( "click", function() {
+							datatoUform(this.id)
+						
+						});
+						var role =  "{{Style}}";
+						if(role == "display:none"){
+							btnupdate.disabled =true;
+
+						}
+						else{
+							btnupdate.disabled =false;
+						}
+						td17.append(btnupdate);
+						tr.append(td1);
+						tr.append(td2);
+						tr.append(td3);
+						tr.append(td4);
+						tr.append(td5);
+						tr.append(td6);
+						tr.append(td7);
+						tr.append(td8);
+						tr.append(td9);
+						tr.append(td10);
+						tr.append(td11);
+						tr.append(td12);
+						tr.append(td13);
+						tr.append(td14);
+						tr.append(td15);
+						tr.append(td16);
+						tr.append(td17);
+					
+						
+					
+						
+					
+						$(trtable).append(tr);
+						
+				}
+				var role =  "{{Style}}";
+				if(role == "display:none"){
+					document.getElementById('Add').disabled =true;
+
+				}
+				else{
+					document.getElementById('Add').disabled =false;
+				}
+				
+			
+			
+				
+			}
+		});
+
+}
+ 
+
+function UpdateNetwork(){
+	const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+	var Network_Hardware_ID = $('input[name="Update_Network_Hardware_ID"]').val().trim();
+		var Network_Hardware_Type =document.getElementById("Update_Network_Hardware_Type").value;
+		var serial_number = $('input[name="Update_serial_number"]').val().trim();
+		var Asset_No = $('input[name="Update_Asset_No"]').val().trim();
+		var block = document.getElementById("Update_block").value;
+		var location = document.getElementById("Update_location").value;
+		var dop = $('input[name="Update_dop"]').val().trim();
+		var dopYear = $('input[name="Update_dopYear"]').val().trim();
+		var Brand = document.getElementById("Update_Brand").value;
+		var Current_status = document.getElementById("Update_Current_Status").value;
+		var Model = document.getElementById("Update_Model").value;
+		var Vendor = document.getElementById("Update_Vendor").value;
+		var PO = $('input[name="Update_PO"]').val().trim();
+		var MAC_Address = $('input[name="Update_MAC_Address"]').val().trim();
+		var Invoice = $('input[name="Update_Invoice"]').val().trim();
+		var IP_Address = document.getElementById("Update_IP_Address").value;
+		$.ajax({
+			type: 'POST',
+			headers: {'X-CSRFToken': csrftoken},
+        	mode: 'same-origin', // Do not send CSRF token to another domain.
+			url: "{% url 'Networkhardwareupdate' %}",
+			data :{
+				'Network_Hardware_ID' : Network_Hardware_ID, 'Network_Hardware_Type' : Network_Hardware_Type, 'serial_number' : serial_number,
+				'serial_number' : serial_number, 'Asset_No' : Asset_No, 'block' : block,
+				'location' : location, 'dop' : dop, 'dopYear' : dopYear,
+				'Brand' : Brand, 'Model' : Model,
+				'Vendor' : Vendor, 'PO' : PO, 'MAC_Address' : MAC_Address,
+				'Invoice' : Invoice, 'IP_Address' : IP_Address, "networkstatus":Current_status
+			
+
+			}, 
+			success: function(data){
+				console.log(data);
+				console.log("Success Post");
+				closeformupdate();
+				updatetable();
+
+
+				
+
+			}
+		});
+
+		
+}
+ 
+function updatetypehardware(){
+	var type = document.getElementById('Update_Network_Hardware_Type').value;
+	const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+	switch(type) {
+		case "AP":
+		
+
+		$.ajax({
+			type: 'POST',
+			headers: {'X-CSRFToken': csrftoken},
+			mode: 'same-origin', // Do not send CSRF token to another domain.
+			url: "{% url 'runNetworkform' %}",
+			data :{
+				'type' : 'AP',
+				'modeltype' : 'AP',
+			
+
+			}, 
+			success: function(data){
+			console.log(data);
+			$(Update_Model).empty();
+				
+				var Network_Hardware_ID = document.getElementById('Update_Model');
+				for(var i in data.model){
+					var option = document.createElement("option");
+					option.value = data.model[i].model;
+					option.innerHTML = data.model[i].model;
+					Network_Hardware_ID.append(option);
+					console.log(data.model[i].model)
+
+				}
+			
+				
+				
+
+				
+				
+			}
+		});
+    	break;
+  	case "CCTV":
+		
+
+		$.ajax({
+			type: 'POST',
+			headers: {'X-CSRFToken': csrftoken},
+			mode: 'same-origin', // Do not send CSRF token to another domain.
+			url: "{% url 'runNetworkform' %}",
+			data :{
+				'type' : 'CCTV',
+				'modeltype' : 'CCTV Camera',
+			
+
+			}, 
+			success: function(data){
+				$(Update_Model).empty();
+				console.log(data);
+				
+				var Network_Hardware_ID = document.getElementById('Update_Model');
+				for(var i in data.model){
+					var option = document.createElement("option");
+					option.value = data.model[i].model;
+					option.innerHTML = data.model[i].model;
+					Network_Hardware_ID.append(option);
+					console.log(data.model[i].model)
+
+				}
+				
+				
+				
+
+				
+				
+			}
+		});
+    	break;
+	case "CCTV_DVR":
+		
+
+		$.ajax({
+			type: 'POST',
+			headers: {'X-CSRFToken': csrftoken},
+			mode: 'same-origin', // Do not send CSRF token to another domain.
+			url: "{% url 'runNetworkform' %}",
+			data :{
+				'type' : 'CCTV_DVR',
+				'modeltype' : 'CCTV DVR',
+			
+
+			}, 
+			success: function(data){
+				console.log(data);
+				$(Update_Model).empty();
+				
+				var Network_Hardware_ID = document.getElementById('Update_Model');
+				for(var i in data.model){
+					var option = document.createElement("option");
+					option.value = data.model[i].model;
+					option.innerHTML = data.model[i].model;
+					Network_Hardware_ID.append(option);
+					console.log(data.model[i].model)
+
+				}
+				
+				
+
+				
+				
+			}
+		});
+    	break;
+
+	case "CP":
+		
+	$.ajax({
+			type: 'POST',
+			headers: {'X-CSRFToken': csrftoken},
+			mode: 'same-origin', // Do not send CSRF token to another domain.
+			url: "{% url 'runNetworkform' %}",
+			data :{
+				'type' : 'CP',
+				'modeltype' : 'Conference Phone',
+			
+
+			}, 
+			success: function(data){
+				console.log(data);
+				$(Update_Model).empty();
+				
+				var Network_Hardware_ID = document.getElementById('Update_Model');
+				for(var i in data.model){
+					var option = document.createElement("option");
+					option.value = data.model[i].model;
+					option.innerHTML = data.model[i].model;
+					Network_Hardware_ID.append(option);
+					console.log(data.model[i].model)
+
+				}
+				
+				
+
+				
+				
+			}
+		});
+		
+    	break;
+	case "Door_Access":
+		
+
+		$.ajax({
+			type: 'POST',
+			headers: {'X-CSRFToken': csrftoken},
+			mode: 'same-origin', // Do not send CSRF token to another domain.
+			url: "{% url 'runNetworkform' %}",
+			data :{
+				'type' : 'Door_Access',
+				'modeltype' : 'Door Access',
+			
+
+			}, 
+			success: function(data){
+				console.log(data);
+				$(Update_Model).empty();
+			
+				var Network_Hardware_ID = document.getElementById('Update_Model');
+				for(var i in data.model){
+					var option = document.createElement("option");
+					option.value = data.model[i].model;
+					option.innerHTML = data.model[i].model;
+					Network_Hardware_ID.append(option);
+					console.log(data.model[i].model)
+
+				}
+				
+				
+
+				
+				
+			}
+		});
+    	break;
+	case "Switches":
+		
+
+		$.ajax({
+			type: 'POST',
+			headers: {'X-CSRFToken': csrftoken},
+			mode: 'same-origin', // Do not send CSRF token to another domain.
+			url: "{% url 'runNetworkform' %}",
+			data :{
+				'type' : 'Switches',
+				'modeltype' : 'Switches',
+			
+
+			}, 
+			success: function(data){
+				console.log(data);
+				$(Update_Model).empty();
+				
+				var Network_Hardware_ID = document.getElementById('Update_Model');
+				for(var i in data.model){
+					var option = document.createElement("option");
+					option.value = data.model[i].model;
+					option.innerHTML = data.model[i].model;
+					Network_Hardware_ID.append(option);
+					console.log(data.model[i].model)
+
+				}
+				
+				
+				
+
+				
+				
+			}
+		});
+    	break;
+	case "Tape_Library":
+		
+
+		$.ajax({
+			type: 'POST',
+			headers: {'X-CSRFToken': csrftoken},
+			mode: 'same-origin', // Do not send CSRF token to another domain.
+			url: "{% url 'runNetworkform' %}",
+			data :{
+				'type' : 'Tape_Library',
+				'modeltype' : 'Tape Library',
+			
+
+			}, 
+			success: function(data){
+				console.log(data);
+				$(Update_Model).empty();
+			
+				var Network_Hardware_ID = document.getElementById('Update_Model');
+				for(var i in data.model){
+					var option = document.createElement("option");
+					option.value = data.model[i].model;
+					option.innerHTML = data.model[i].model;
+					Network_Hardware_ID.append(option);
+					console.log(data.model[i].model)
+
+				}
+				
+
+				
+				
+			}
+		});
+    	break;
+	case "Wireless_Dongle":
+		
+
+		$.ajax({
+			type: 'POST',
+			headers: {'X-CSRFToken': csrftoken},
+			mode: 'same-origin', // Do not send CSRF token to another domain.
+			url: "{% url 'runNetworkform' %}",
+			data :{
+				'type' : 'Wireless_Dongle',
+				'modeltype' : 'Wireless Dongle',
+			
+
+			}, 
+			success: function(data){
+				console.log(data);
+				$(Update_Model).empty();
+				
+				var Network_Hardware_ID = document.getElementById('Update_Model');
+				for(var i in data.model){
+					var option = document.createElement("option");
+					option.value = data.model[i].model;
+					option.innerHTML = data.model[i].model;
+					Network_Hardware_ID.append(option);
+					console.log(data.model[i].model)
+
+				}
+				
+
+				
+				
+			}
+		});
+    	break;		
+	case "Print_Server":
+		
+
+		$.ajax({
+			type: 'POST',
+			headers: {'X-CSRFToken': csrftoken},
+			mode: 'same-origin', // Do not send CSRF token to another domain.
+			url: "{% url 'runNetworkform' %}",
+			data :{
+				'type' : 'Print_Server',
+				'modeltype' : 'Print Server',
+			
+
+			}, 
+			success: function(data){
+				console.log(data);
+				$(Update_Model).empty();
+			
+				var Network_Hardware_ID = document.getElementById('Update_Model');
+				for(var i in data.model){
+					var option = document.createElement("option");
+					option.value = data.model[i].model;
+					option.innerHTML = data.model[i].model;
+					Network_Hardware_ID.append(option);
+					console.log(data.model[i].model)
+
+				}
+				
+				
+
+				
+				
+			}
+		});
+    	break;		
+		case "Firewall": 
+		
+
+		$.ajax({
+			type: 'POST',
+			headers: {'X-CSRFToken': csrftoken},
+			mode: 'same-origin', // Do not send CSRF token to another domain.
+			url: "{% url 'runNetworkform' %}",
+			data :{
+				'type' : 'Firewall',
+				'modeltype' : 'Firewall',
+			
+
+			}, 
+			success: function(data){
+				console.log(data);
+				$(Update_Model).empty();
+				
+				var Network_Hardware_ID = document.getElementById('Update_Model');
+				for(var i in data.model){
+					var option = document.createElement("option");
+					option.value = data.model[i].model;
+					option.innerHTML = data.model[i].model;
+					Network_Hardware_ID.append(option);
+					console.log(data.model[i].model)
+
+				}
+				
+				
+
+				
+				
+			}
+		});
+    	break;		
+		case "Server": 
+		
+
+		$.ajax({
+			type: 'POST',
+			headers: {'X-CSRFToken': csrftoken},
+			mode: 'same-origin', // Do not send CSRF token to another domain.
+			url: "{% url 'runNetworkform' %}",
+			data :{
+				'type' : 'Server',
+				'modeltype' : 'Server',
+			
+
+			}, 
+			success: function(data){
+				console.log(data);
+				$(Update_Model).empty();
+				
+				var Network_Hardware_ID = document.getElementById('Update_Model');
+				for(var i in data.model){
+					var option = document.createElement("option");
+					option.value = data.model[i].model;
+					option.innerHTML = data.model[i].model;
+					Network_Hardware_ID.append(option);
+					console.log(data.model[i].model)
+
+				}
+				
+				
+
+				
+				
+			}
+		});
+    	break;		
+	default:
+    // code block
+	}	
+
+}
+
+function filtertableHardware(){
+	// Declare variables
+	var input, filter, table, tr, td, i, txtValue;
+  input = document.getElementById("filtertable");
+  filter = input.value.toUpperCase();
+  table = document.getElementById("computertable");
+  tr = table.getElementsByTagName("tr");
+
+  // Loop through all table rows, and hide those who don't match the search query
+  for (i = 0; i < tr.length; i++) {
+    td = tr[i].getElementsByTagName("td")[1];
+    if (td) {
+      txtValue = td.textContent || td.innerText;
+      if (txtValue.toUpperCase().indexOf(filter) > -1) {
+        tr[i].style.display = "";
+      } else {
+        tr[i].style.display = "none";
+      }
+    }
+  }
+}
+
+
+ </script>
+  {% endblock javascript %}
+	<script src="{% static 'js/app.js' %}"></script>
+	<script src="{% static 'js/open form modal.js' %}"></script>
+	<script src="{% static 'js/computeradd.js' %}"></script>
+
+
+</body>
+
+</html>

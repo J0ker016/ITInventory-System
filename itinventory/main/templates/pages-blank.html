@@ -1,0 +1,1132 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<meta name="description" content="Responsive Admin &amp; Dashboard Template based on Bootstrap 5">
+	<meta name="author" content="AdminKit">
+	<meta name="keywords" content="adminkit, bootstrap, bootstrap 5, admin, dashboard, template, responsive, css, sass, html, theme, front-end, ui kit, web">
+
+	<link rel="preconnect" href="https://fonts.gstatic.com">
+	<link rel="shortcut icon" href="{% static 'img/icons/icon-48x48.png' %}" />
+
+	<link rel="canonical" href="https://demo-basic.adminkit.io/pages-blank.html" />
+
+	<title>IT Inventory System</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+	<link href="{% static 'css/app.css' %}" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+	<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.es.min.js"></script>
+</head>
+
+<body>
+	<div class="wrapper">
+		<nav id="sidebar" class="sidebar js-sidebar">
+			<div class="sidebar-content js-simplebar">
+				<a class="sidebar-brand" href="{% url 'dashboard' %}">
+					<span class="align-middle">IT Inventory System</span>
+				</a>
+				<div style="{{Style}}"> 
+				<li class="sidebar-header">
+					Administrator Page
+				</li>
+		
+			<li class="sidebar-item">
+				<a class="sidebar-link" href="{% url 'admin:index' %}">
+	  <i class="align-middle" data-feather="sliders"></i> <span class="align-middle">Go to Admin </span>
+	</a>
+			</li>
+		</div>
+		<li class="sidebar-header">
+			Loan
+		</li>
+
+
+		<li class="sidebar-item">
+			<a class="sidebar-link" href="{% url 'loanpage' %}">
+  <i class="align-middle" data-feather="sliders"></i> <span class="align-middle">Loan Detail</span>
+</a>
+		</li>
+		
+		
+						<li class="sidebar-header">
+								Computer
+							</li>
+		
+							<li class="sidebar-item">
+								<a class="sidebar-link" href="{% url 'computerpage' %}">
+					  <i class="align-middle" data-feather="sliders"></i> <span class="align-middle">Computer Details</span>
+					</a>
+							</li>
+		
+				
+		
+						
+							<li class="sidebar-header">
+								Laptop
+							</li>
+		
+							<li class="sidebar-item">
+								<a class="sidebar-link" href="{% url 'laptoppage' %}">
+					  <i class="align-middle" data-feather="sliders"></i> <span class="align-middle">Laptop Detail</span>
+					</a>
+							</li>
+		
+				
+		
+					
+							<li class="sidebar-header">
+								Other
+							</li>
+		
+							<li class="sidebar-item">
+								<a class="sidebar-link" href="{% url 'Networkhardwarepage' %}">
+					  <i class="align-middle" data-feather="sliders"></i> <span class="align-middle">Network Hardware Detail</span>
+					</a>
+							</li>
+		
+							<li class="sidebar-header">
+								IP
+							</li>
+		
+							<li class="sidebar-item">
+								<a class="sidebar-link" href="{% url 'ippage' %}">
+					  <i class="align-middle" data-feather="sliders"></i> <span class="align-middle">IP Detail</span>
+					</a>
+							</li>
+		
+							
+							<li class="sidebar-header">
+								User
+							</li>
+		
+							<li class="sidebar-item">
+								<a class="sidebar-link" href="{% url 'userpage' %}">
+					  <i class="align-middle" data-feather="sliders"></i> <span class="align-middle">User Detail</span>
+					</a>
+							</li>
+							
+							<li class="sidebar-header">
+								software
+							</li>
+			
+		
+							<li class="sidebar-item">
+								<a class="sidebar-link" href="{% url 'software' %}">
+					  <i class="align-middle" data-feather="sliders"></i> <span class="align-middle">software User</span>
+					</a>
+							</li>
+							<div style="{{Style}}">
+								<li class="sidebar-header">
+									Upload Page
+								</li>
+						
+							<li class="sidebar-item">
+								<a class="sidebar-link" href="{% url 'uploadcsvdata' %}">
+					  <i class="align-middle" data-feather="sliders"></i> <span class="align-middle">Upload Page </span>
+					</a>
+							</li>
+						</div>
+			
+		
+		
+					
+					</div>
+				</nav>
+
+		<div class="main">
+			<nav class="navbar navbar-expand navbar-light navbar-bg">
+				<a class="sidebar-toggle js-sidebar-toggle">
+          <i class="hamburger align-self-center"></i>
+        </a>
+
+				<div class="navbar-collapse collapse">
+					<ul class="navbar-nav navbar-align">
+					
+						<li class="nav-item dropdown">
+							<a class="nav-icon dropdown-toggle d-inline-block d-sm-none" href="#" data-bs-toggle="dropdown">
+                <i class="align-middle" data-feather="settings"></i>
+              </a>
+
+							<a class="nav-link dropdown-toggle d-none d-sm-inline-block" href="#" data-bs-toggle="dropdown">
+                 <span class="text-dark">{{Username}}</span>
+              </a>
+							<div class="dropdown-menu dropdown-menu-end">
+								<div style="{{Style}}">
+								<a class="dropdown-item" href="{% url 'historypage' %}"><i class="align-middle me-1" data-feather="user"></i> History</a>
+							</div>
+								
+								<div class="dropdown-divider"></div>
+								<a class="dropdown-item" href="{% url 'logoutsystem' %}">Log out</a>
+							</div>
+						</li>
+					</ul>
+				</div>
+			</nav>
+
+			<main class="content">
+				<div class="container-fluid p-0">
+
+					<h1 class="h3 mb-3"></h1>
+
+					<div class="row">
+						<div class="col-12">
+							<div class="card">
+								<div class="card-header">
+									<h5 class="card-title mb-0">Dashboard</h5>
+								</div>
+								<div class="card-body">
+									<div class="card" >
+										<h5 class="card-title text-dark">Computer Details</h5>
+										
+										<div class="card-body">
+											<div class="card-body">
+												<div class="d-flex justify-content-around">
+													<div class="card" style="width: 30rem;">
+														<h5 class="card-title text-dark">Type of Windows in Computer Details</h5>
+														<div class="card-body">
+															<canvas id="myChart"></canvas>
+														</div>
+													  </div>
+													  <div class="card" style="width: 30rem;">
+														<h5 class="card-title text-dark">Usage of PC in Computer Details</h5>
+														<div class="card-body">
+															<canvas id="pc"></canvas>
+														</div>
+													  </div> 
+												</div>
+												<br>
+												<div class="d-flex justify-content-around">
+													<div class="card" style="width: 30rem;">
+														<h5 class="card-title text-dark">Type of PC in Computer Details</h5>
+														<div class="card-body">
+															<canvas id="pctype"></canvas>
+														</div>
+													  </div>
+													  <div class="card" style="width: 30rem;">
+														<h5 class="card-title text-dark">Type of PC Connection in Computer Details</h5>
+														<div class="card-body">
+															<canvas id="conPC"></canvas>
+														</div>
+													  </div> 
+												</div>
+												<div class="d-flex justify-content-around">
+													<div class="card" style="width: 30rem;">
+														<h5 class="card-title text-dark">Percentage of USB Block in Computer Details</h5>
+														<div class="card-body">
+															<canvas id="USBPC"></canvas>
+														</div>
+													  </div>
+													  <div class="card" style="width: 30rem;">
+														<h5 class="card-title text-dark">Percentage of CD Block in Computer Details</h5>
+														<div class="card-body">
+															<canvas id="CDPC"></canvas>
+														</div>
+													  </div> 
+												</div>
+												
+												
+											</div>
+											
+										</div>
+									  </div>
+									  <br>
+									  <div class="card" >
+										<h5 class="card-title text-dark">Laptop Details</h5>
+										<div class="card-body">
+											<div class="card-body">
+												<div class="d-flex justify-content-around">
+													<div class="card" style="width: 30rem;">
+														<h5 class="card-title text-dark">Type of Windows in Laptop Details</h5>
+														<div class="card-body">
+															<canvas id="windowlaptop"></canvas>
+														</div>
+													  </div>
+													  <div class="card" style="width: 30rem;">
+														<h5 class="card-title text-dark">Usage of PC in Laptop Details</h5>
+														<div class="card-body">
+															<canvas id="usagelaptop"></canvas>
+														</div>
+													  </div> 
+												</div>
+												<br>
+												<div class="d-flex justify-content-around">
+												
+													  <div class="card" style="width: 30rem;">
+														<h5 class="card-title text-dark">Type of PC Connection in Laptop Details</h5>
+														<div class="card-body">
+															<canvas id="conLpatop"></canvas>
+														</div>
+													  </div> 
+
+													  <div class="card" style="width: 30rem;">
+														<h5 class="card-title text-dark">Percentage of USB Block in Laptop Details</h5>
+														<div class="card-body">
+															<canvas id="USBLaptop"></canvas>
+														</div>
+													  </div> 
+												</div>
+												
+												<div class="d-flex justify-content-around">
+												
+										
+													<div class="card" style="width: 30rem;">
+													  <h5 class="card-title text-dark">Percentage of CD Block in Laptop Details</h5>
+													  <div class="card-body">
+														  <canvas id="CDLaptop"></canvas>
+													  </div>
+													</div> 
+											  </div>
+												
+											</div>
+											
+										</div>
+									  </div>
+									  
+									
+								</div>
+							</div>
+						</div>
+					</div>
+
+				</div>
+			</main>
+
+			<footer class="footer">
+			
+			</footer>
+		</div>
+	</div>
+	
+
+<script src="{% static 'js/app.js' %}"></script>
+<script>
+$(document).ready(function() {
+		// computer detail
+		setInterval(computer_graph_Window(), 1000);
+		setInterval(laptop_graph_Window(), 1000);
+		// setInterval(imagedata(), 1000);
+		// setInterval(displayHello, 1000);
+		// setInterval(displayHello, 1000);
+		// setInterval(displayHello, 1000);
+		// setInterval(displayHello, 1000);
+	});
+// Computer Details
+function computer_graph_Window(){
+	$.ajax({
+			type: 'Get',
+			cache: false,
+			url: "{% url 'getcomputerdata' %}",
+		
+			success: function(response){
+				// data type for the graph
+				var officepc = [];
+				var machinepc = [];
+				var Window_98 = [];
+				var Window_10 = [];
+				var Window_7 = [];
+				var Window_xp = [];
+				var Window_8 = [];
+				var con_intranet = [];
+				var con_internet = [];
+				var con_offline = [];
+				var status_not_inuse = [];
+				var status_inuse = [];
+				var status_dispose = [];
+				var status_pending_dispose = [];
+				var status_loan = [];
+				// data for the data type
+				var data_status = [];
+				var data_window = [];
+				var data_type = [];
+				var data_typeCon = [];
+
+				var data_CD = [];
+				var data_USB = [];
+
+				var data_USB_Y = [];
+				var data_USB_N = [];
+
+				var data_CD_Y = [];
+				var data_CD_N = [];
+				var data_USAGEPC = [];
+				var PCFree = [];
+				var PCNotfree = [];
+
+				for (var item in response.data){
+					data_status.push(response.data[item].pccurrentstatus);
+					data_window.push(response.data[item].windows);
+					data_type.push(response.data[item].pctype);
+					data_typeCon.push(response.data[item].connection_type);
+					data_USB.push(response.data[item].usbunlock);
+					data_CD.push(response.data[item].cdunlock);
+					datax = [response.data[item].pccurrentstatus, response.data[item].pic ]
+					data_USAGEPC.push(datax);
+
+
+
+				}
+				officepc = data_type.filter(function(item) {
+			
+				return item == 'Office PC';
+				});
+				machinepc = data_type.filter(function(item) {
+			
+				return item == 'PC Machine' ;
+				});
+				Window_98 = data_window.filter(function(item) {
+			
+			return item == 'Windows 98';
+			});
+			Window_95 = data_window.filter(function(item) {
+		
+		return item == 'Windows 95';
+		});
+			var Window_2000 = data_window.filter(function(item) {
+			
+			return item == 'Windows 2000 Professional';
+			});
+			var Window_8 = data_window.filter(function(item) {
+			
+			return item == 'Windows 8.1 Pro 32bit';
+			});
+			var Window_nt = data_window.filter(function(item) {
+			
+			return item == 'Windows NT4 workstation';
+			});
+			Window_10 = data_window.filter(function(item) {
+		
+			return item == 'Windows 10 Pro 64bit' || item == 'Windows 10 Pro' || item == 'Windows 10 Enterprise LTSC' || item == 'Windows 10 PRo'  || item == 'Windows 10 Iot Ent2019' ;
+			});
+			Window_7 = data_window.filter(function(item) {
+		
+			return item == 'Windows 7 Ultimate' || item == 'Windows 7 Pro 32bit' || item == 'Windows 7 Pro 64bit';
+			});
+			Window_xp = data_window.filter(function(item) {
+			
+			return item == 'Windows XP Pro 32bit' || item == 'Windows Vista' ;
+			});
+			
+			status_dispose = data_status.filter(function(item) {
+			
+			return item == 'Dispose'  ;
+			});
+			status_pending_dispose = data_status.filter(function(item) {
+			
+			return item == 'Pending Dispose'  ;
+			});
+			status_inuse = data_status.filter(function(item) {
+			
+			return item == 'In-use'  || item == 'In-Use';
+			});
+			status_not_inuse = data_status.filter(function(item) {
+			
+			return item == 'Not in-use'  ;
+			});
+		
+			status_loan = data_status.filter(function(item) {
+			
+			return item == 'Loan' ||  item == 'loan' ;
+			});
+			
+			con_intranet = data_typeCon.filter(function(item) {
+			
+			return item == 'Intranet'  ;
+			});
+			con_internet = data_typeCon.filter(function(item) {
+			
+			return item == 'Internet' || item == 'Online' ;
+			});
+			con_offline = data_typeCon.filter(function(item) {
+			
+			return item == 'Offline'  ;
+			});
+
+			YesUSb = data_USB.filter(function(item) {
+			
+			return item == 'Yes';
+			});
+
+			NoUsb = data_USB.filter(function(item) {
+			
+			return item == 'No';
+			});
+
+			YesCD = data_CD.filter(function(item) {
+			
+			return item == 'Yes';
+			});
+
+			NoCD = data_CD.filter(function(item) {
+			
+			return item == 'No';
+			});
+
+		
+			PCFreeStatusV1 = data_USAGEPC.filter(function(item) {
+			
+			return item[0] != 'In-use' && item[1]== "None" || item[1]== "None";
+			});
+			PCFreeStatusloan = PCFreeStatusV1.filter(function(item) {
+			
+			return item[0] == 'Loan' || item[0] == 'loan';
+			});
+			PCFreeStatusNotinuse = PCFreeStatusV1.filter(function(item) {
+			
+			return item[0] == 'Not in-use' || item[0] == 'not in-use';
+			});
+			PCFreeStatusinuse = PCFreeStatusV1.filter(function(item) {
+			
+			return item[0]  == 'In-use'  || item[0]  == 'In-Use';
+			});
+			
+
+		
+
+
+	
+
+			computer_detail_graph_window(Window_98,Window_95, Window_2000, Window_nt, Window_xp,Window_7,Window_8,Window_10);
+		
+				computer_detail_graph_usage(status_not_inuse, status_inuse, status_pending_dispose, status_dispose, status_loan);
+				computer_detail_graph_pctype(officepc, machinepc);
+				computer_detail_graph_connection(con_internet, con_intranet, con_offline);
+				computer_detail_graph_USB(YesUSb, NoUsb);
+				computer_detail_graph_CD(YesCD, NoCD);
+
+				
+			}
+		});
+
+}
+function computer_detail_graph_window(array1, array2, array3, array4, array5, array6, array7, array8){
+	var w98 = array1.length;
+	var w95 = array2.length;
+	var w2000 = array3.length;
+	var wNT = array4.length;
+	var wXP = array5.length;
+	var w7 = array6.length;
+	var w8 = array7.length;
+	var w10 = array8.length;
+
+	const data = {
+  labels: [
+  'Window 98',
+  'Window 95',
+  'Window 2000',
+  'Window NT',
+
+    'Window xp',
+    'Windows 7',
+	'Window 8',
+
+    'Windows 10',
+	
+
+
+  ],
+  datasets: [{
+    label: 'Type of windows in Computer Details',
+    data: [w98, w95, w2000, wNT, wXP, w7, w8, w10],
+    backgroundColor: [
+      'rgb(255, 99, 132)',
+      'rgb(54, 162, 235)',
+      'rgb(255, 205, 86)',
+      'rgb(137, 109, 93)',
+	  'rgb(255, 86, 0)',
+      'rgb(255, 86, 143)',
+      'rgb(184, 86, 143)',
+      'rgb(184, 86, 247)',
+
+    ],
+    hoverOffset: 4
+  }]
+};
+const config = {
+  type: 'pie',
+  data: data,
+};
+const myChart = new Chart(
+    document.getElementById('myChart'),
+    config
+  );
+}
+
+function computer_detail_graph_usage(array1, array2, array3, array4, array5){
+	var not_use = array1.length;
+	var use = array2.length;
+	var pending = array3.length;
+	var dispose = array4.length;
+	var loan = array5.length;
+
+
+
+	const data = {
+  labels: [
+  'Not In-Use',
+    'In-use',
+    'Loan',
+    'Pending Dispose',
+    'Dispose',
+
+
+
+  ],
+  datasets: [{
+    label: 'Usage of PC in Computer Details',
+    data: [not_use, use, loan, pending, dispose],
+    backgroundColor: [
+      'rgb(169, 186, 180)',
+      'rgb(76, 212, 166)',
+      'rgb(236, 242, 46)',
+      'rgb(224, 64, 20)',
+      'rgb(247, 2, 2)',
+
+
+    ],
+    hoverOffset: 4
+  }]
+};
+const config = {
+  type: 'pie',
+  data: data,
+};
+const myChart = new Chart(
+    document.getElementById('pc'),
+    config
+  );
+}
+
+function computer_detail_graph_pctype(array1, array2){
+	var office = array1.length;
+	var machine = array2.length;
+
+
+	const data = {
+  labels: [
+  'Office PC',
+    'Machine PC',
+   
+
+
+  ],
+  datasets: [{
+    label: 'Type of PC in Computer Details',
+    data: [office, machine],
+    backgroundColor: [
+      'rgb(255, 99, 132)',
+      'rgb(54, 162, 235)',
+    
+
+    ],
+    hoverOffset: 4
+  }]
+};
+const config = {
+  type: 'pie',
+  data: data,
+};
+const myChart = new Chart(
+    document.getElementById('pctype'),
+    config
+  );
+}
+
+function computer_detail_graph_connection(array1, array2, array3){
+	var Internet = array1.length;
+	var Intranet = array2.length;
+	var Offline = array3.length;
+
+
+
+
+	const data = {
+  labels: [
+  'Internet',
+    'Intranet',
+    'Offline'
+
+
+
+  ],
+  datasets: [{
+    label: 'Type of connection in Computer Details',
+    data: [Internet, Intranet, Offline],
+    backgroundColor: [
+      'rgb(255, 99, 132)',
+      'rgb(54, 162, 235)',
+      'rgb(255, 205, 86)'
+      
+
+    ],
+    hoverOffset: 4
+  }]
+};
+const config = {
+  type: 'pie',
+  data: data,
+};
+const myChart = new Chart(
+    document.getElementById('conPC'),
+    config
+  );
+}
+
+function computer_detail_graph_USB(array1, array2){
+	var data1 = array1.length;
+	var data2 = array2.length;
+
+
+
+
+
+	const data = {
+  labels: [
+  'Unlock',
+    'Block',
+  
+
+
+
+  ],
+  datasets: [{
+    label: 'Percentage of USB Block in Computer Details',
+    data: [data1, data2],
+    backgroundColor: [
+	'rgb(46, 199, 87)',
+      'rgb(255, 99, 132)'
+      
+      
+
+    ],
+    hoverOffset: 4
+  }]
+};
+const config = {
+  type: 'pie',
+  data: data,
+};
+const myChart = new Chart(
+    document.getElementById('USBPC'),
+    config
+  );
+}
+
+function computer_detail_graph_CD(array1, array2){
+	var data1 = array1.length;
+	var data2 = array2.length;
+
+
+
+
+	const data = {
+  labels: [
+  'Unlock',
+    'Block'
+
+
+
+  ],
+  datasets: [{
+    label: 'Percentage of CD Block in Computer Details',
+    data: [data1, data2],
+    backgroundColor: [
+	'rgb(46, 199, 87)',
+      'rgb(255, 99, 132)'
+
+    ],
+    hoverOffset: 4
+  }]
+};
+const config = {
+  type: 'pie',
+  data: data,
+};
+const myChart = new Chart(
+    document.getElementById('CDPC'),
+    config
+  );
+}
+
+
+// Laptop Details
+function laptop_graph_Window(){
+	$.ajax({
+			type: 'Get',
+			cache: false,
+			url: "{% url 'getlaptopdata' %}",
+		
+			success: function(response){
+				// data type for the graph
+				var officepc = [];
+				var machinepc = [];
+				var Window_98 = [];
+				var Window_10 = [];
+				var Window_7 = [];
+				var Window_xp = [];
+				var Window_8 = [];
+				var con_intranet = [];
+				var con_internet = [];
+				var con_offline = [];
+				var status_not_inuse = [];
+				var status_inuse = [];
+				var status_dispose = [];
+				var status_pending_dispose = [];
+				var status_loan = [];
+				// data for the data type
+				var data_status = [];
+				var data_window = [];
+				var data_type = [];
+				var data_typeCon = [];
+
+				var data_CD = [];
+				var data_USB = [];
+
+				var data_USB_Y = [];
+				var data_USB_N = [];
+
+				var data_CD_Y = [];
+				var data_CD_N = [];
+
+				for (var item in response.data){
+					data_status.push(response.data[item].pccurrentstatus);
+					data_window.push(response.data[item].windows);
+				
+					data_typeCon.push(response.data[item].connection_type);
+					data_USB.push(response.data[item].usbunlock);
+					data_CD.push(response.data[item].cdunlock);
+
+				}
+				
+				Window_98 = data_window.filter(function(item) {
+			
+			return item == 'Windows 98';
+			});
+			Window_95 = data_window.filter(function(item) {
+		
+		return item == 'Windows 95';
+		});
+			var Window_2000 = data_window.filter(function(item) {
+			
+			return item == 'Windows 2000 Professional';
+			});
+			var Window_8 = data_window.filter(function(item) {
+			
+			return item == 'Windows 8.1 Pro 32bit';
+			});
+			var Window_nt = data_window.filter(function(item) {
+			
+			return item == 'Windows NT4 workstation';
+			});
+			Window_10 = data_window.filter(function(item) {
+		
+			return item == 'Windows 10 Pro 64bit' || item == 'Windows 10 Pro';
+			});
+			Window_7 = data_window.filter(function(item) {
+		
+			return item == 'Windows 7 Ultimate' || item == 'Windows 7 Pro 32bit' || item == 'Windows 7 Pro 64bit';
+			});
+			Window_xp = data_window.filter(function(item) {
+			
+			return item == 'Windows XP Pro 32bit' || item == 'Windows Vista' ;
+			});
+			
+			status_dispose = data_status.filter(function(item) {
+			
+			return item == 'Dispose'  ;
+			});
+			status_pending_dispose = data_status.filter(function(item) {
+			
+			return item == 'Pending Dispose'  ;
+			});
+			status_inuse = data_status.filter(function(item) {
+			
+			return item == 'In-use'  ;
+			});
+			status_not_inuse = data_status.filter(function(item) {
+			
+			return item == 'Not in-use'  ;
+			});
+		
+			status_loan = data_status.filter(function(item) {
+			
+			return item == 'Loan'  ;
+			});
+			
+			con_intranet = data_typeCon.filter(function(item) {
+			
+			return item == 'Intranet'  ;
+			});
+			con_internet = data_typeCon.filter(function(item) {
+			
+			return item == 'Internet' || item == 'Online'  ;
+			});
+			con_offline = data_typeCon.filter(function(item) {
+			
+			return item == 'Offline'  ;
+			});
+			YesUSb = data_USB.filter(function(item) {
+			
+			return item == 'Yes';
+			});
+
+			NoUsb = data_USB.filter(function(item) {
+			
+			return item == 'No';
+			});
+
+			YesCD = data_CD.filter(function(item) {
+			
+			return item == 'Yes';
+			});
+
+			NoCD = data_CD.filter(function(item) {
+			
+			return item == 'No';
+			});
+				laptop_detail_graph_window(Window_98, Window_xp, Window_7, Window_10);
+				laptop_detail_graph_usage(status_not_inuse, status_inuse, status_pending_dispose, status_dispose, status_loan);
+				
+				laptop_detail_graph_connection(con_internet, con_intranet, con_offline);
+				laptop_detail_graph_USB(YesUSb, NoUsb)
+				laptop_detail_graph_CD(YesCD, NoCD)
+
+				
+			}
+		});
+
+}
+
+function laptop_detail_graph_window(array1, array2, array3, array4){
+	var w98 = array1.length;
+	var wXP = array2.length;
+	var w7 = array3.length;
+	var w10 = array4.length;
+
+
+	const data = {
+  labels: [
+  'Window 98',
+    'Window xp',
+    'Windows 7',
+    'Windows 10',
+
+
+  ],
+  datasets: [{
+    label: 'Type of windows in Computer Details',
+    data: [w98, wXP, w7, w10],
+    backgroundColor: [
+      'rgb(255, 99, 132)',
+      'rgb(54, 162, 235)',
+      'rgb(255, 205, 86)',
+      'rgb(137, 109, 93)',
+
+    ],
+    hoverOffset: 4
+  }]
+};
+const config = {
+  type: 'doughnut',
+  data: data,
+};
+const myChart = new Chart(
+    document.getElementById('windowlaptop'),
+    config
+  );
+}
+
+function laptop_detail_graph_usage(array1, array2, array3, array4, array5){
+	var not_use = array1.length;
+	var use = array2.length;
+	var pending = array3.length;
+	var dispose = array4.length;
+	var loan = array5.length;
+
+
+
+	const data = {
+  labels: [
+  'Not In-Use',
+    'In-use',
+    'Loan',
+    'Pending Dispose',
+    'Dispose',
+
+
+
+  ],
+  datasets: [{
+    label: 'Usage of PC in Computer Details',
+    data: [not_use, use, loan, pending, dispose],
+    backgroundColor: [
+    'rgb(169, 186, 180)',
+      'rgb(76, 212, 166)',
+      'rgb(236, 242, 46)',
+      'rgb(224, 64, 20)',
+      'rgb(247, 2, 2)',
+
+
+    ],
+    hoverOffset: 4
+  }]
+};
+const config = {
+  type: 'doughnut',
+  data: data,
+};
+const myChart = new Chart(
+    document.getElementById('usagelaptop'),
+    config
+  );
+}
+
+function laptop_detail_graph_connection(array1, array2, array3){
+	var Internet = array1.length;
+	var Intranet = array2.length;
+	var Offline = array3.length;
+
+
+
+
+	const data = {
+  labels: [
+  'Internet',
+    'Intranet',
+    'Offline'
+
+
+
+  ],
+  datasets: [{
+    label: 'Type of connection in Computer Details',
+    data: [Internet, Intranet, Offline],
+    backgroundColor: [
+      'rgb(255, 99, 132)',
+      'rgb(54, 162, 235)',
+      'rgb(255, 205, 86)'
+      
+
+    ],
+    hoverOffset: 4
+  }]
+};
+const config = {
+  type: 'doughnut',
+  data: data,
+};
+const myChart = new Chart(
+    document.getElementById('conLpatop'),
+    config
+  );
+}
+
+function laptop_detail_graph_USB(array1, array2){
+	var data1 = array1.length;
+	var data2 = array2.length;
+
+
+
+
+
+	const data = {
+  labels: [
+  'Unlock',
+    'Block',
+  
+
+
+
+  ],
+  datasets: [{
+    label: 'Percentage of USB Block in Laptop Details',
+    data: [data1, data2],
+    backgroundColor: [
+      'rgb(46, 199, 87)',
+      'rgb(255, 99, 132)'
+      
+      
+
+    ],
+    hoverOffset: 4
+  }]
+};
+const config = {
+  type: 'pie',
+  data: data,
+};
+const myChart = new Chart(
+    document.getElementById('USBLaptop'),
+    config
+  );
+}
+
+function laptop_detail_graph_CD(array1, array2){
+	var data1 = array1.length;
+	var data2 = array2.length;
+
+
+
+
+	const data = {
+  labels: [
+  'Unlock',
+    'Block'
+
+
+
+  ],
+  datasets: [{
+    label: 'Percentage of CD Block in Laptop Details',
+    data: [data1, data2],
+    backgroundColor: [
+	'rgb(46, 199, 87)',
+      'rgb(255, 99, 132)'
+    
+
+    ],
+    hoverOffset: 4
+  }]
+};
+const config = {
+  type: 'pie',
+  data: data,
+};
+const myChart = new Chart(
+    document.getElementById('CDLaptop'),
+    config
+  );
+}
+
+
+
+function Downloadimagedata(){
+	xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+        var a, today;
+        if (xhttp.readyState === 4 && xhttp.status === 200) {
+            a = document.createElement('a');
+            a.href = window.URL.createObjectURL(xhttp.response);
+            today = new Date();
+            a.download = "users_" + today.toDateString().split(" ").join("_") + ".pdf";
+            a.style.display = 'none';
+            document.body.appendChild(a);
+            return a.click();
+        }
+    };
+    xhttp.open("GET", "getImagedata", true);
+    xhttp.setRequestHeader("Content-Type", "application/json");
+    xhttp.responseType = 'blob';
+    xhttp.send();
+
+}
+</script>
+</script>
+</body>
+
+</html>

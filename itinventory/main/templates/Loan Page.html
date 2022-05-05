@@ -1,0 +1,1453 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta required name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+
+	<link rel="preconnect" href="https://fonts.gstatic.com">
+	<link rel="shortcut icon" href="{% static 'img/icons/icon-48x48.png' %}" />
+
+	<link rel="canonical" href="https://demo-basic.adminkit.io/pages-blank.html" />
+
+	<title>IT Inventory System</title>
+
+	<link href="{% static 'css/app.css' %}" rel="stylesheet">
+	<link href="{% static 'css/modalform.css' %}" rel="stylesheet">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+</head>
+
+<body>
+	<div class="wrapper">
+		<nav id="sidebar" class="sidebar js-sidebar">
+			<div class="sidebar-content js-simplebar">
+				<a class="sidebar-brand" href="{% url 'dashboard' %}">
+					<span class="align-middle">IT Inventory System</span>
+				</a>
+				<div style="{{Style}}">
+				<li class="sidebar-header">
+					Administrator Page
+				</li>
+		
+			<li class="sidebar-item">
+				<a class="sidebar-link" href="{% url 'admin:index' %}">
+	  <i class="align-middle" data-feather="sliders"></i> <span class="align-middle">Go to Admin </span>
+	</a>
+			</li>
+		</div>
+		<li class="sidebar-header">
+			Loan
+		</li>
+
+
+		<li class="sidebar-item">
+			<a class="sidebar-link" href="{% url 'loanpage' %}">
+  <i class="align-middle" data-feather="sliders"></i> <span class="align-middle">Loan Detail</span>
+</a>
+		</li>
+		
+		
+						<li class="sidebar-header">
+								Computer
+							</li>
+		
+							<li class="sidebar-item">
+								<a class="sidebar-link" href="{% url 'computerpage' %}">
+					  <i class="align-middle" data-feather="sliders"></i> <span class="align-middle">Computer Details</span>
+					</a>
+							</li>
+		
+				
+		
+						
+							<li class="sidebar-header">
+								Laptop
+							</li>
+		
+							<li class="sidebar-item">
+								<a class="sidebar-link" href="{% url 'laptoppage' %}">
+					  <i class="align-middle" data-feather="sliders"></i> <span class="align-middle">Laptop Detail</span>
+					</a>
+							</li>
+		
+				
+		
+					
+							<li class="sidebar-header">
+								Other
+							</li>
+		
+							<li class="sidebar-item">
+								<a class="sidebar-link" href="{% url 'Networkhardwarepage' %}">
+					  <i class="align-middle" data-feather="sliders"></i> <span class="align-middle">Network Hardware Detail</span>
+					</a>
+							</li>
+		
+							<li class="sidebar-header">
+								IP
+							</li>
+		
+							<li class="sidebar-item">
+								<a class="sidebar-link" href="{% url 'ippage' %}">
+					  <i class="align-middle" data-feather="sliders"></i> <span class="align-middle">IP Detail</span>
+					</a>
+							</li>
+		
+							
+							<li class="sidebar-header">
+								User
+							</li>
+		
+							<li class="sidebar-item">
+								<a class="sidebar-link" href="{% url 'userpage' %}">
+					  <i class="align-middle" data-feather="sliders"></i> <span class="align-middle">User Detail</span>
+					</a>
+							</li>
+							
+							<li class="sidebar-header">
+								software
+							</li>
+			
+		
+							<li class="sidebar-item">
+								<a class="sidebar-link" href="{% url 'software' %}">
+					  <i class="align-middle" data-feather="sliders"></i> <span class="align-middle">software User</span>
+					</a>
+							</li>
+							<div style="{{Style}}">
+								<li class="sidebar-header">
+									Upload Page
+								</li>
+						
+							<li class="sidebar-item">
+								<a class="sidebar-link" href="{% url 'uploadcsvdata' %}">
+					  <i class="align-middle" data-feather="sliders"></i> <span class="align-middle">Upload Page </span>
+					</a>
+							</li>
+						</div>
+			
+		
+		
+					
+					</div>
+				</nav>
+
+		<div class="main">
+			<nav class="navbar navbar-expand navbar-light navbar-bg">
+				<a class="sidebar-toggle js-sidebar-toggle">
+          <i class="hamburger align-self-center"></i>
+        </a>
+
+				<div class="navbar-collapse collapse">
+					<ul class="navbar-nav navbar-align">
+					
+						<li class="nav-item dropdown">
+							<a class="nav-icon dropdown-toggle d-inline-block d-sm-none" href="#" data-bs-toggle="dropdown">
+                <i class="align-middle" data-feather="settings"></i>
+              </a>
+
+							<a class="nav-link dropdown-toggle d-none d-sm-inline-block" href="#" data-bs-toggle="dropdown">
+                 <span class="text-dark">{{Username}}</span>
+              </a>
+							<div class="dropdown-menu dropdown-menu-end">
+								<div style="{{Style}}">
+								<a class="dropdown-item" href="{% url 'historypage' %}"><i class="align-middle me-1" data-feather="user"></i> History</a>
+							</div>
+								
+								<div class="dropdown-divider"></div>
+								<a class="dropdown-item" href="{% url 'logoutsystem' %}">Log out</a>
+							</div>
+						</li>
+					</ul>
+				</div>
+			</nav>
+
+
+			<main class="content">
+				<div class="container-fluid p-0">
+
+					<h1 class="h3 mb-3">Loan List</h1>
+                   
+					<div class="row">
+						<div class="col-12">
+							<div class="card">
+								<div class="card-header">
+									<button id="Add" onclick="openform()" class="btn btn-primary">Add Loan</button>
+                                    <div class="table-responsive ">
+                                        <table class="table limittablesize" id="computertable">
+                                            <thead class="table-dark" id="computer-list">
+                                              <tr>
+												<th scope="col">Loan ID</th>
+                                                <th scope="col">Employee Number</th>
+												<th scope="col">Asset ID</th>
+                                                <th scope="col">Email</th>
+                                                <th scope="col">Designation</th>
+												<th scope="col">Department</th>
+												
+												<th scope="col">Date Start Loan</th>
+                                                <th scope="col">Date End Loan</th>
+                                                <th scope="col">Status</th>
+												<th scope="col">Update</th>
+												<th scope="col">Return</th>
+												
+                                                
+                                              </tr>
+                                            </thead>
+                                            <tbody id="trtable">
+											
+											
+
+                                            
+                                              
+                                            </tbody>
+                                          </table>
+                                        </div>
+								</div>
+								<div class="card-body">
+								</div>
+							</div>
+						</div>
+					</div>
+
+				</div>
+			</main>
+
+			<footer class="footer">
+			
+			</footer>
+		</div>
+	</div>
+	<!-- The Modal -->
+<div id="addform" class="modalform">
+
+	<!-- Modal content -->
+	<div class="modalform-header">
+	  <span onclick="closeform()" class="closeform">&times;</span>
+	 <h1 class="text-center">Add Loan</h1>
+	</div>
+	<div class="modalform-content">
+		<form method="POST" class="post-form" id="add-IP" onsubmit="addLoan();return false">  
+		
+				{% csrf_token %}
+			   
+				 <h3 class="text-center" style=" color: #564953;">Loan Details</h3>
+
+				 <div class="form-group row">
+					<label for="inputEmail3" class="col-sm-2 col-form-label">Loan ID:</label>
+					<div class="col-sm-3">
+						<input type="text" readonly class="form-control" required name="loan_id" id="loan_id">
+					</div>
+					</div>
+					<br>
+				 <div class="form-group row">
+					<label for="inputEmail3" class="col-sm-2 col-form-label">Employee Number:</label>
+					<div class="col-sm-3">
+						<input type="text" class="form-control" list="addsearchresult" required name="employee_number" id="employee_number" onkeyup="showResult(this.value)" oninput="clicksearchoption()" >
+					</div>
+					
+				   
+					<label for="inputEmail3" class="col-sm-2 col-form-label">Asset ID :</label>
+					<div class="col-sm-3">
+						<input type="text" list="addsearchresult" class="form-control" required name="asset_id" id="asset_id" onkeyup="showResult(this.value)">
+					</div>
+				  </div>
+				 <br>
+				 <div class="form-group row">
+					<label for="inputEmail3" class="col-sm-2 col-form-label">Email  :</label>
+					<br><br>
+					<div class="col-sm-3">
+					  <input type="text"   class="form-control" required name="email"  id="email" placeholder="">
+					</div>
+				   
+					  <label for="inputEmail3" class="col-sm-2 col-form-label">Designation :</label>
+ 
+				   
+					<div class="col-sm-3">
+					  <input type="text" class="form-control" required name="designation" id="designation">
+					</div>
+				  </div><br>
+				  <div class="form-group row">
+					<label for="inputEmail3" class="col-sm-2 col-form-label">Department  :</label>
+					<br><br>
+					<div class="col-sm-3">
+					  <input type="text"   class="form-control" required name="department"  id="department" placeholder="">
+					</div>
+					<label for="inputEmail3" class="col-sm-2 col-form-label">Status  :</label>
+					<br><br>
+					<div class="col-sm-3">
+					<select name="status" id="status"  class="form-control">
+						<option value="Default">Default</option>
+						<option value="In-Use">In-Use</option>
+						<option value="Not In-Use">Not In-Use</option>
+					</select>
+					</div>
+				  </div>
+				  <br>
+				  <div class="form-group row">
+					<label for="inputEmail3" class="col-sm-2 col-form-label">Date Start Loan  :</label>
+					<br><br>
+					<div class="col-sm-3">
+					  <input type="date"   class="form-control" required name="date_start"  id="date_start" placeholder="">
+					</div>
+				   
+					  <label for="inputEmail3" class="col-sm-2 col-form-label">Date End Loan :</label>
+ 
+				   
+					<div class="col-sm-3">
+					  <input type="date" class="form-control" required name="date_end" id="date_end">
+					</div>
+				  </div>
+				
+				 
+				  <div class="text-center">
+					<input type="submit" value="Submit" class="btn btn-primary" >
+				</form>
+	
+				   </div>
+			
+	</div>
+	<div class="modalform-footer">
+		
+	</div>
+  
+  </div>
+
+<div id="updateformmodal" class="modalform">
+
+	<!-- Modal content -->
+	<div class="modalform-header">
+	  <span onclick="closeformupdate()" class="closeform">&times;</span>
+	 <h1 class="text-center">Loan</h1>
+	</div>
+	<div class="modalform-content">
+		<form method="POST" class="post-form" id="update-loan" onsubmit="UpdateLoan();return false">  
+		
+			{% csrf_token %}
+			
+			<h3 class="text-center" style=" color: #564953;">Loan Details</h3>
+			<div class="form-group row">
+				<label for="inputEmail3" class="col-sm-2 col-form-label">Loan ID:</label>
+				<div class="col-sm-3">
+					<input type="text" class="form-control" readonly required name="Update_loanid" id="Update_loanid">
+				</div>
+				</div>
+				<br>
+			<div class="form-group row">
+			   <label for="inputEmail3" class="col-sm-2 col-form-label">Employee Number:</label>
+			   <div class="col-sm-3">
+				   <input type="text" class="form-control" list="addsearchresult"  required name="Update_employee_number" id="Update_employee_number" onkeyup="showResult(this.value)" oninput="clicksearchoption()">
+			   </div>
+			   
+			  
+			   <label for="inputEmail3" class="col-sm-2 col-form-label">Asset ID :</label>
+			   <div class="col-sm-3">
+				   <input type="text" class="form-control" list="addsearchresult" required name="Update_asset_id" id="Update_asset_id" onkeyup="showResult(this.value)">
+			   </div>
+			 </div>
+			<br>
+			<div class="form-group row">
+			   <label for="inputEmail3" class="col-sm-2 col-form-label">Email  :</label>
+			   <br><br>
+			   <div class="col-sm-3">
+				 <input type="text"   class="form-control" required name="Update_email"  id="Update_email" placeholder="">
+			   </div>
+			  
+				 <label for="inputEmail3" class="col-sm-2 col-form-label">Designation :</label>
+
+			  
+			   <div class="col-sm-3">
+				 <input type="text" class="form-control" required name="Update_designation" id="Update_designation">
+			   </div>
+			 </div><br>
+			 <div class="form-group row">
+			   <label for="inputEmail3" class="col-sm-2 col-form-label">Department  :</label>
+			   <br><br>
+			   <div class="col-sm-3">
+				 <input type="text"   class="form-control" required name="Update_department"  id="Update_department" placeholder="">
+			   </div>
+			   <label for="inputEmail3" class="col-sm-2 col-form-label">Status  :</label>
+			   <br><br>
+			   <div class="col-sm-3">
+			   <select name="status" class="form-control" id="Update_status" required >
+				   <option value="Default">Default</option>
+				   <option value="In-Use">In-Use</option>
+				   <option value="Not In-Use">Not In-Use</option>
+				   <option value="Overdue">Overdue</option>
+			   </select>
+			   </div>
+			 </div>
+			 <br>
+			 <div class="form-group row">
+			   <label for="inputEmail3" class="col-sm-2 col-form-label">Date Start Loan  :</label>
+			   <br><br>
+			   <div class="col-sm-3">
+				 <input type="date"   class="form-control" required name="Update_date_start"  id="Update_date_start" placeholder="">
+			   </div>
+			  
+				 <label for="inputEmail3" class="col-sm-2 col-form-label">Date End Loan :</label>
+
+			  
+			   <div class="col-sm-3">
+				 <input type="date" class="form-control" required name="Update_date_end" id="Update_date_end">
+			   </div>
+			 </div>
+				 
+				
+				
+				  
+			   <br>
+			  
+				  
+				  <div class="text-center">
+					<input type="submit" value="Submit" class="btn btn-primary" >
+
+				</form>
+				   </div>
+			
+	</div>
+	<div class="modalform-footer">
+		
+	</div>
+  
+  </div>
+  <datalist id="addsearchresult" >
+
+</datalist>
+  {% block javascript %}
+  <script>
+$(document).ready(function() {
+		$.ajax({
+			type: 'Get',
+			cache: false,
+			url: "{% url 'loandata' %}",
+		
+			success: function(response){
+				console.log(response);
+				$(trtable).empty();
+				for (var item in response.data){
+					var tr = document.createElement("tr");
+						var td10 = document.createElement("td");
+						td10.innerHTML =response.data[item].loan_id;
+						var td1 = document.createElement("td");
+						td1.innerHTML =response.data[item].employee_number;
+						var td2 = document.createElement("td");
+						td2.innerHTML =response.data[item].asset_id;
+						var td3 = document.createElement("td");
+						td3.innerHTML =response.data[item].email;
+						var td4 = document.createElement("td");
+						td4.innerHTML =response.data[item].department;
+						var td5 = document.createElement("td");
+						td5.innerHTML =response.data[item].designation;
+						var td6 = document.createElement("td");
+						td6.innerHTML =response.data[item].date_start;
+						var td7 = document.createElement("td");
+						td7.innerHTML =response.data[item].date_end;
+						var td8 = document.createElement("td");
+						td8.innerHTML =response.data[item].status;
+					
+					
+						var td9 = document.createElement("td");
+						var btnupdate = document.createElement("Button");
+						btnupdate.id= response.data[item].id;
+						btnupdate.classList.add("btn");
+						btnupdate.classList.add("btn-primary");
+						btnupdate.innerHTML="Update";
+						btnupdate.addEventListener( "click", function() {
+							datatoUform(this.id)
+						
+						});
+						var td11 = document.createElement("td");
+						var btnreturn = document.createElement("Button");
+						btnreturn.id= response.data[item].id;
+						btnreturn.classList.add("btn");
+						btnreturn.classList.add("btn-primary");
+						btnreturn.innerHTML="Return";
+						btnreturn.addEventListener( "click", function() {
+							returnloan(this.id)
+						
+						});
+						var role =  "{{Style}}";
+						if(role == "display:none"){
+							btnupdate.disabled =true;
+							btnreturn.disabled =true;
+
+						}
+						else{
+							btnupdate.disabled =false;
+							btnreturn.disabled =false;
+						}
+						td9.append(btnupdate);
+						td11.append(btnreturn);
+						tr.append(td10);
+
+						tr.append(td1);
+						tr.append(td2);
+						tr.append(td3);
+						tr.append(td4);
+						tr.append(td5);
+						tr.append(td6);
+						tr.append(td7);
+						tr.append(td8);
+						tr.append(td9);
+						tr.append(td11);
+						
+					
+						$(trtable).append(tr);
+						
+				}
+				var role =  "{{Style}}";
+				if(role == "display:none"){
+					document.getElementById('Add').disabled =true;
+
+				}
+				else{
+					document.getElementById('Add').disabled =false;
+				}
+				
+			
+			
+				
+			}
+		});
+
+
+	
+});	
+
+function showResult(str) {
+	const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+
+  if (str.length==0) {
+    return;
+  }
+	  if(str.includes("UTM-PC")){
+		$.ajax({
+			type: 'POST',
+			headers: {'X-CSRFToken': csrftoken},
+        	mode: 'same-origin', // Do not send CSRF token to another domain.
+			url: "{% url 'searchUserinput' %}",
+			data :{
+				'User_ID': str,
+				'Type' : "PC"
+			
+
+			}, 
+			success: function(response){
+				console.log(response);
+				$(addsearchresult).empty();
+				var y =  document.getElementById('addsearchresult');
+
+				
+				if(response.data.length > 0){
+					for (var item in response.data){
+                    var option = document.createElement('option');
+                    option.id = response.data[item].computer_id;
+
+                    option.innerHTML = response.data[item].computer_id;
+				
+						y.append(option);
+
+                    
+                }
+			
+
+				}
+				else{
+					var btn = document.createElement('span');
+                    btn.innerHTML = "There were no id based on the input";
+                    y.append(btn);
+				}
+              
+
+				
+
+			}
+		});
+	  }
+	  else if(str.includes("UTM-NB")){
+		$.ajax({
+			type: 'POST',
+			headers: {'X-CSRFToken': csrftoken},
+        	mode: 'same-origin', // Do not send CSRF token to another domain.
+			url: "{% url 'searchUserinput' %}",
+			data :{
+				'User_ID': str,
+				'Type' : "Laptop"
+			
+
+			}, 
+			success: function(response){
+				console.log(response);
+				$(addsearchresult).empty();
+				var y =  document.getElementById('addsearchresult');
+			
+				if(response.data.length > 0){
+					for (var item in response.data){
+                    var option = document.createElement('option');
+                    option.id = response.data[item].computer_id;
+
+                    option.innerHTML = response.data[item].computer_id;
+				
+					
+                    y.append(option);
+                }
+				
+				}
+				else{
+					var btn = document.createElement('span');
+                    btn.innerHTML = "There were no id based on the input";
+                    y.append(btn);
+				}
+              
+
+				
+
+			}
+		});
+	  }
+	  else if(str.includes("UTM-AP")){
+		$.ajax({
+			type: 'POST',
+			headers: {'X-CSRFToken': csrftoken},
+        	mode: 'same-origin', // Do not send CSRF token to another domain.
+			url: "{% url 'searchUserinput' %}",
+			data :{
+				'User_ID': str,
+				'Type' : "AP"
+			
+
+			}, 
+			success: function(response){
+				console.log(response);
+				$(addsearchresult).empty();
+				var y =  document.getElementById('addsearchresult');
+			
+				if(response.data.length > 0){
+					for (var item in response.data){
+                    var option = document.createElement('option');
+                    option.id = response.data[item].computer_id;
+
+                    option.innerHTML = response.data[item].computer_id;
+				
+					
+                    y.append(option);
+                }
+				
+				}
+				else{
+					var btn = document.createElement('span');
+                    btn.innerHTML = "There were no id based on the input";
+                    y.append(btn);
+				}
+              
+
+				
+
+			}
+		});
+	  }
+	  else if(str.includes("UTM-CM")){
+		$.ajax({
+			type: 'POST',
+			headers: {'X-CSRFToken': csrftoken},
+        	mode: 'same-origin', // Do not send CSRF token to another domain.
+			url: "{% url 'searchUserinput' %}",
+			data :{
+				'User_ID': str,
+				'Type' : "CCTV"
+			
+
+			}, 
+			success: function(response){
+				console.log(response);
+				$(addsearchresult).empty();
+				var y =  document.getElementById('addsearchresult');
+			
+				if(response.data.length > 0){
+					for (var item in response.data){
+                    var option = document.createElement('option');
+                    option.id = response.data[item].computer_id;
+
+                    option.innerHTML = response.data[item].computer_id;
+				
+					
+                    y.append(option);
+                }
+				
+				}
+				else{
+					var btn = document.createElement('span');
+                    btn.innerHTML = "There were no id based on the input";
+                    y.append(btn);
+				}
+              
+
+				
+
+			}
+		});
+	  }
+	  else if(str.includes("CCTV")){
+		$.ajax({
+			type: 'POST',
+			headers: {'X-CSRFToken': csrftoken},
+        	mode: 'same-origin', // Do not send CSRF token to another domain.
+			url: "{% url 'searchUserinput' %}",
+			data :{
+				'User_ID': str,
+				'Type' : "CCTV_DVR"
+			
+
+			}, 
+			success: function(response){
+				console.log(response);
+				$(addsearchresult).empty();
+				var y =  document.getElementById('addsearchresult');
+			
+				if(response.data.length > 0){
+					for (var item in response.data){
+                    var option = document.createElement('option');
+                    option.id = response.data[item].computer_id;
+
+                    option.innerHTML = response.data[item].computer_id;
+				
+					
+                    y.append(option);
+                }
+				
+				}
+				else{
+					var btn = document.createElement('span');
+                    btn.innerHTML = "There were no id based on the input";
+                    y.append(btn);
+				}
+              
+
+				
+
+			}
+		});
+	  }
+	  else if(str.includes("UTM-CP")){
+		$.ajax({
+			type: 'POST',
+			headers: {'X-CSRFToken': csrftoken},
+        	mode: 'same-origin', // Do not send CSRF token to another domain.
+			url: "{% url 'searchUserinput' %}",
+			data :{
+				'User_ID': str,
+				'Type' : "CP"
+			
+
+			}, 
+			success: function(response){
+				console.log(response);
+				$(addsearchresult).empty();
+				var y =  document.getElementById('addsearchresult');
+			
+				if(response.data.length > 0){
+					for (var item in response.data){
+                    var option = document.createElement('option');
+                    option.id = response.data[item].computer_id;
+
+                    option.innerHTML = response.data[item].computer_id;
+				
+					
+                    y.append(option);
+                }
+				
+				}
+				else{
+					var btn = document.createElement('span');
+                    btn.innerHTML = "There were no id based on the input";
+                    y.append(btn);
+				}
+              
+
+				
+
+			}
+		});
+	  }
+	  else if(str.includes("DoorController")){
+		$.ajax({
+			type: 'POST',
+			headers: {'X-CSRFToken': csrftoken},
+        	mode: 'same-origin', // Do not send CSRF token to another domain.
+			url: "{% url 'searchUserinput' %}",
+			data :{
+				'User_ID': str,
+				'Type' : "Door_Access"
+			
+
+			}, 
+			success: function(response){
+				console.log(response);
+				$(addsearchresult).empty();
+				var y =  document.getElementById('addsearchresult');
+			
+				if(response.data.length > 0){
+					for (var item in response.data){
+                    var option = document.createElement('option');
+                    option.id = response.data[item].computer_id;
+
+                    option.innerHTML = response.data[item].computer_id;
+				
+					
+                    y.append(option);
+                }
+				
+				}
+				else{
+					var btn = document.createElement('span');
+                    btn.innerHTML = "There were no id based on the input";
+                    y.append(btn);
+				}
+              
+
+				
+
+			}
+		});
+	  }
+	  else if(str.includes("UTM-NW")){
+		$.ajax({
+			type: 'POST',
+			headers: {'X-CSRFToken': csrftoken},
+        	mode: 'same-origin', // Do not send CSRF token to another domain.
+			url: "{% url 'searchUserinput' %}",
+			data :{
+				'User_ID': str,
+				'Type' : "Switches"
+			
+
+			}, 
+			success: function(response){
+				console.log(response);
+				$(addsearchresult).empty();
+				var y =  document.getElementById('addsearchresult');
+			
+				if(response.data.length > 0){
+					for (var item in response.data){
+                    var option = document.createElement('option');
+                    option.id = response.data[item].computer_id;
+
+                    option.innerHTML = response.data[item].computer_id;
+				
+					
+                    y.append(option);
+                }
+				
+				}
+				else{
+					var btn = document.createElement('span');
+                    btn.innerHTML = "There were no id based on the input";
+                    y.append(btn);
+				}
+              
+
+				
+
+			}
+		});
+	  }
+	  else if(str.includes("UTM-TL")){
+		$.ajax({
+			type: 'POST',
+			headers: {'X-CSRFToken': csrftoken},
+        	mode: 'same-origin', // Do not send CSRF token to another domain.
+			url: "{% url 'searchUserinput' %}",
+			data :{
+				'User_ID': str,
+				'Type' : "Tape_Library"
+			
+
+			}, 
+			success: function(response){
+				console.log(response);
+				$(addsearchresult).empty();
+				var y =  document.getElementById('addsearchresult');
+			
+				if(response.data.length > 0){
+					for (var item in response.data){
+                    var option = document.createElement('option');
+                    option.id = response.data[item].computer_id;
+
+                    option.innerHTML = response.data[item].computer_id;
+				
+					
+                    y.append(option);
+                }
+				
+				}
+				else{
+					var btn = document.createElement('span');
+                    btn.innerHTML = "There were no id based on the input";
+                    y.append(btn);
+				}
+              
+
+				
+
+			}
+		});
+	  }
+	  else if(str.includes("Tenda Wireless")){
+		$.ajax({
+			type: 'POST',
+			headers: {'X-CSRFToken': csrftoken},
+        	mode: 'same-origin', // Do not send CSRF token to another domain.
+			url: "{% url 'searchUserinput' %}",
+			data :{
+				'User_ID': str,
+				'Type' : "Wireless_Dongle"
+			
+
+			}, 
+			success: function(response){
+				console.log(response);
+				$(addsearchresult).empty();
+				var y =  document.getElementById('addsearchresult');
+			
+				if(response.data.length > 0){
+					for (var item in response.data){
+                    var option = document.createElement('option');
+                    option.id = response.data[item].computer_id;
+
+                    option.innerHTML = response.data[item].computer_id;
+				
+					
+                    y.append(option);
+                }
+				
+				}
+				else{
+					var btn = document.createElement('span');
+                    btn.innerHTML = "There were no id based on the input";
+                    y.append(btn);
+				}
+              
+
+				
+
+			}
+		});
+	  }
+	  else if(str.includes("UPS")){
+		$.ajax({
+			type: 'POST',
+			headers: {'X-CSRFToken': csrftoken},
+        	mode: 'same-origin', // Do not send CSRF token to another domain.
+			url: "{% url 'searchUserinput' %}",
+			data :{
+				'User_ID': str,
+				'Type' : "UPS"
+			
+
+			}, 
+			success: function(response){
+				console.log(response);
+				$(addsearchresult).empty();
+				var y =  document.getElementById('addsearchresult');
+			
+				if(response.data.length > 0){
+					for (var item in response.data){
+                    var option = document.createElement('option');
+                    option.id = response.data[item].computer_id;
+
+                    option.innerHTML = response.data[item].computer_id;
+				
+					
+                    y.append(option);
+                }
+				
+				}
+				else{
+					var btn = document.createElement('span');
+                    btn.innerHTML = "There were no id based on the input";
+                    y.append(btn);
+				}
+              
+
+				
+
+			}
+		});
+	  }
+	  else if(str.includes("UTM-FW")){
+		$.ajax({
+			type: 'POST',
+			headers: {'X-CSRFToken': csrftoken},
+        	mode: 'same-origin', // Do not send CSRF token to another domain.
+			url: "{% url 'searchUserinput' %}",
+			data :{
+				'User_ID': str,
+				'Type' : "Firewall"
+			
+
+			}, 
+			success: function(response){
+				console.log(response);
+				$(addsearchresult).empty();
+				var y =  document.getElementById('addsearchresult');
+			
+				if(response.data.length > 0){
+					for (var item in response.data){
+                    var option = document.createElement('option');
+                    option.id = response.data[item].computer_id;
+
+                    option.innerHTML = response.data[item].computer_id;
+				
+					
+                    y.append(option);
+                }
+				
+				}
+				else{
+					var btn = document.createElement('span');
+                    btn.innerHTML = "There were no id based on the input";
+                    y.append(btn);
+				}
+              
+
+				
+
+			}
+		});
+	  }
+	  
+  else{
+	  
+	$.ajax({
+			type: 'POST',
+			headers: {'X-CSRFToken': csrftoken},
+        	mode: 'same-origin', // Do not send CSRF token to another domain.
+			url: "{% url 'searchUserinput' %}",
+			data :{
+				'User_ID': str,
+				'Type' : "Employee"
+			
+
+			}, 
+			success: function(response){
+				console.log(response);
+				$(addsearchresult).empty();
+				var y =  document.getElementById('addsearchresult');
+				if(response.data.length > 0){
+					for (var item in response.data){
+                    var option = document.createElement('option');
+                    option.id = response.data[item].employee_number;
+
+                    option.innerHTML = response.data[item].employee_number;
+				
+                    y.append(option);
+
+                    
+                }
+				}
+				else{
+					var option = document.createElement('option');
+                    option.innerHTML = "There were no id based on the input";
+                    y.append(option);
+				}
+              
+
+				
+
+			}
+		});
+  }
+
+
+}
+
+function clicksearchoption(idspan){
+	const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+	if(document.getElementById("addform").style.display == "block"){
+		var val = document.getElementById("employee_number").value;
+    var opts = document.getElementById('addsearchresult').childNodes;
+    for (var i = 0; i < opts.length; i++) {
+      if (opts[i].value === val) {
+		$.ajax({
+			type: 'POST',
+			headers: {'X-CSRFToken': csrftoken},
+        	mode: 'same-origin', // Do not send CSRF token to another domain.
+			url: "{% url 'GetEmployeeLoanDetail' %}",
+			data :{
+				'id' :val
+			
+
+			}, 
+			success: function(data){  
+				console.log(data.employee_number);
+			
+				document.getElementById("employee_number").value = data.employee_number;
+				document.getElementById("email").value = data.email;
+				document.getElementById("designation").value = data.designation;
+				document.getElementById("department").value = data.department;
+
+				$(addsearchresult).empty();
+			
+
+				
+
+			}
+		});
+
+        
+        break;
+      }
+    }
+				
+				}
+				else{
+					var val = document.getElementById("employee_number").value;
+    var opts = document.getElementById('addsearchresult').childNodes;
+    for (var i = 0; i < opts.length; i++) {
+      if (opts[i].value === val) {
+		$.ajax({
+			type: 'POST',
+			headers: {'X-CSRFToken': csrftoken},
+        	mode: 'same-origin', // Do not send CSRF token to another domain.
+			url: "{% url 'GetEmployeeLoanDetail' %}",
+			data :{
+				'id' :val
+			
+
+			}, 
+			success: function(data){  
+				console.log(data.employee_number);
+			
+				document.getElementById("Update_employee_number").value = data.employee_number;
+				document.getElementById("Update_email").value = data.email;
+				document.getElementById("Update_designation").value = data.designation;
+				document.getElementById("Update_department").value = data.department;
+
+				$(addsearchresult).empty();
+
+				
+
+			}
+		});
+
+        
+        break;
+				
+				}
+	
+  }
+	
+	
+
+
+	
+}
+}
+function openform(){
+
+
+		
+		$.ajax({
+			type:'Get',
+			url: "{% url 'openloandataform' %}",
+			success: function(response){
+				var modalform = document.getElementById('addform');
+				modalform.style.display = 'block';
+				console.log(response);
+				document.getElementById("add-IP").reset();
+				if(parseInt(response.running_number) < 10){
+					document.getElementById('loan_id').value = "UTM-LO000"+response.running_number ;
+					
+				} else if(parseInt(response.running_number) >= 10 && parseInt(response.running_number) < 100){
+					document.getElementById('loan_id').value = "UTM-LO00"+response.running_number ;
+				
+				}
+				else if(parseInt(response.running_number) >= 100 && parseInt(response.running_number) < 1000){
+					document.getElementById('loan_id').value = "UTM-LO0"+response.running_number ;
+					
+				}
+				else if(parseInt(response.running_number) >= 1000 && parseInt(response.running_number) < 10000){
+					document.getElementById('loan_id').value = "UTM-LO"+response.running_number ;
+					
+		}
+				
+				
+				
+			}
+
+		})
+		
+
+		
+		
+	}
+
+function returnloan(btnid){
+	const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+	$.ajax({
+			type: 'POST',
+			headers: {'X-CSRFToken': csrftoken},
+        	mode: 'same-origin', // Do not send CSRF token to another domain.
+			url: "{% url 'returnloan' %}",
+			data :{
+				'id' :btnid
+			
+
+			}, 
+			success: function(data){
+				console.log(data);
+				console.log("Success Delete");
+				updatetable();
+				
+				
+
+			}
+		});
+}
+
+function addLoan(){
+	
+		var loan_id = $('input[name="loan_id"]').val().trim();
+		var employee_number = $('input[name="employee_number"]').val().trim();
+		var asset_id = $('input[name="asset_id"]').val().trim();
+		var email = $('input[name="email"]').val().trim();
+		var designation = $('input[name="designation"]').val().trim();
+		var department = $('input[name="department"]').val().trim();
+		var date_start = $('input[name="date_start"]').val().trim();
+		var date_end = $('input[name="date_end"]').val().trim();
+		var status = document.getElementById("status").value;
+
+		const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+		if(status == "Default"){
+			
+			alert("You can't pick default in status option ");
+		}
+		else{
+			$.ajax({
+			type: 'POST',
+			headers: {'X-CSRFToken': csrftoken},
+        	mode: 'same-origin', // Do not send CSRF token to another domain.
+			url: "{% url 'addLoanform' %}",
+			data :{
+				'loan_id' :  loan_id,
+				'employee_number' : employee_number, 'asset_id' : asset_id, 'email' : email,
+				'designation' : designation, 'department' : department, 'date_start' : date_start, 'date_end' : date_end,
+				'status' : status, 
+			
+
+			}, 
+			success: function(data){
+				console.log(data);
+				console.log("Success Post");
+				closeform();
+				updatetable();
+				
+
+				
+
+			}
+		});
+
+		}
+		
+
+		
+}
+	
+function datatoUform(btnid){
+
+	const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+
+	$.ajax({
+			type: 'POST',
+			headers: {'X-CSRFToken': csrftoken},
+        	mode: 'same-origin', // Do not send CSRF token to another domain.
+			url: "{% url 'Loandataupdate' %}",
+			data :{
+				'id' : btnid,
+			
+
+			}, 
+			success: function(data){
+				var modalform = document.getElementById('updateformmodal');
+				modalform.style.display = 'block';
+				document.getElementById('Update_employee_number').value = data.employee_number ;
+				document.getElementById('Update_asset_id').value = data.asset_id ;
+				document.getElementById('Update_email').value = data.email ;
+				document.getElementById('Update_designation').value = data.designation ;
+				document.getElementById('Update_department').value = data.department ;
+				document.getElementById('Update_date_start').value = data.date_start ;
+				document.getElementById('Update_date_end').value = data.date_end ;
+				document.getElementById('Update_status').value = data.status ;
+				document.getElementById('Update_loanid').value = data.loan_id ;
+				console.log(data);
+
+				
+				
+			}
+		});
+
+}
+
+
+function closeformupdate(){
+	var modalform = document.getElementById('updateformmodal');
+				modalform.style.display = 'block';	
+}
+
+function closeformupdate(){
+	var modalform = document.getElementById('updateformmodal');
+				modalform.style.display = 'block';	
+}
+function updatetable(){
+	$.ajax({
+			type: 'Get',
+			cache: false,
+			url: "{% url 'loandata' %}",
+		
+			success: function(response){
+				console.log(response);
+				$(trtable).empty();
+				for (var item in response.data){
+					var tr = document.createElement("tr");
+						var td10 = document.createElement("td");
+						td10.innerHTML =response.data[item].loan_id;
+						var td1 = document.createElement("td");
+						td1.innerHTML =response.data[item].employee_number;
+						var td2 = document.createElement("td");
+						td2.innerHTML =response.data[item].asset_id;
+						var td3 = document.createElement("td");
+						td3.innerHTML =response.data[item].email;
+						var td4 = document.createElement("td");
+						td4.innerHTML =response.data[item].department;
+						var td5 = document.createElement("td");
+						td5.innerHTML =response.data[item].designation;
+						var td6 = document.createElement("td");
+						td6.innerHTML =response.data[item].date_start;
+						var td7 = document.createElement("td");
+						td7.innerHTML =response.data[item].date_end;
+						var td8 = document.createElement("td");
+						td8.innerHTML =response.data[item].status;
+					
+					
+						var td9 = document.createElement("td");
+						var btnupdate = document.createElement("Button");
+						btnupdate.id= response.data[item].id;
+						btnupdate.classList.add("btn");
+						btnupdate.classList.add("btn-primary");
+						btnupdate.innerHTML="Update";
+						btnupdate.addEventListener( "click", function() {
+							datatoUform(this.id)
+						
+						});
+						var td11 = document.createElement("td");
+						var btnreturn = document.createElement("Button");
+						btnreturn.id= response.data[item].id;
+						btnreturn.classList.add("btn");
+						btnreturn.classList.add("btn-primary");
+						btnreturn.innerHTML="Return";
+						btnreturn.addEventListener( "click", function() {
+							returnloan(this.id)
+						
+						});
+						var role =  "{{Style}}";
+						if(role == "display:none"){
+							btnupdate.disabled =true;
+							btnreturn.disabled =true;
+
+						}
+						else{
+							btnupdate.disabled =false;
+							btnreturn.disabled =false;
+						}
+						td9.append(btnupdate);
+						td11.append(btnreturn);
+						tr.append(td10);
+
+						tr.append(td1);
+						tr.append(td2);
+						tr.append(td3);
+						tr.append(td4);
+						tr.append(td5);
+						tr.append(td6);
+						tr.append(td7);
+						tr.append(td8);
+						tr.append(td9);
+						tr.append(td11);
+						
+					
+						$(trtable).append(tr);
+						
+				}
+				var role =  "{{Style}}";
+				if(role == "display:none"){
+					document.getElementById('Add').disabled =true;
+
+				}
+				else{
+					document.getElementById('Add').disabled =false;
+				}
+				
+			
+			
+				
+			}
+		});
+}
+ 
+
+function UpdateLoan(){
+	
+	var employee_number = $('input[name="Update_employee_number"]').val().trim();
+		var asset_id = $('input[name="Update_asset_id"]').val().trim();
+		var email = $('input[name="Update_email"]').val().trim();
+		var designation = $('input[name="Update_designation"]').val().trim();
+		var department = $('input[name="Update_department"]').val().trim();
+		var date_start = $('input[name="Update_date_start"]').val().trim();
+		var date_end = $('input[name="Update_date_end"]').val().trim();
+		var status = document.getElementById("Update_status").value;
+		var id = $('input[name="Update_loanid"]').val().trim();
+		const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+		if(status == "Default"){
+			alert("You can't pick default in status option ");
+		}
+		else{
+			$.ajax({
+			type: 'POST',
+			headers: {'X-CSRFToken': csrftoken},
+        	mode: 'same-origin', // Do not send CSRF token to another domain.
+			url: "{% url 'updateformLoan' %}",
+			data :{
+				'employee_number' : employee_number, 'asset_id' : asset_id, 'email' : email,
+				'designation' : designation, 'department' : department, 'date_start' : date_start, 'date_end' : date_end,
+				'status' : status, 'id' : id
+			}, 
+			success: function(data){
+				console.log(data);
+				console.log("Success Post");
+				updatetable();
+				closeformupdate();
+
+				
+
+			}
+		});
+		}
+	
+
+		
+}
+ </script>
+  {% endblock javascript %}
+	<script src="{% static 'js/app.js' %}"></script>
+	<script src="{% static 'js/open form modal.js' %}"></script>
+	<script src="{% static 'js/computeradd.js' %}"></script>
+
+
+</body>
+
+</html>

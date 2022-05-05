@@ -1,0 +1,84 @@
+/* The Modal (background) */
+.modalform {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+  }
+ 
+  /* Modal head/Box */
+  .modalform-header {
+    background-color: #fefefe;
+    margin: auto;
+    margin-top: 15%;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%; /* Could be more or less, depending on screen size */
+    border:black 1px;
+    box-shadow: black;
+    flex-wrap: wrap;
+    align-content: center;
+  }
+  /* Modal Content/Box */
+  .modalform-content {
+    background-color: #fefefe;
+    margin:auto;
+   
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%; /* Could be more or less, depending on screen size */
+    border:black 1px;
+    flex-wrap: wrap;
+    align-content: center;
+    
+  }
+  /* Modal footer/Box */
+  .modalform-footer {
+    background-color: #fefefe;
+    margin:auto;
+    
+    padding: 20px;
+    border: 1px solid #888;
+    width: 80%; /* Could be more or less, depending on screen size */
+    border:black 1px;
+    
+    flex-wrap: wrap;
+    align-content: center;
+  }
+  
+  /* The Close Button */
+  .closeform {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+  }
+  
+  .closeform:hover,
+  .closeform:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+  }
+  .sticky-col {
+    position: -webkit-sticky;
+    position: sticky;
+    background-color: white;
+  }
+  
+  .first-col {
+    width: 100px;
+    min-width: 100px;
+    max-width: 100px;
+    left: 0px;
+  }
+
+  .limittablesize{
+    height: 500px
+  }

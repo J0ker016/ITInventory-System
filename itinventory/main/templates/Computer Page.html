@@ -1,0 +1,3344 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta required name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+
+	<link rel="preconnect" href="https://fonts.gstatic.com">
+	<link rel="shortcut icon" href="{% static 'img/icons/icon-48x48.png' %}" />
+
+	<link rel="canonical" href="https://demo-basic.adminkit.io/pages-blank.html" />
+
+	<title>IT Inventory System</title>
+
+	<link href="{% static 'css/app.css' %}" rel="stylesheet">
+	<link href="{% static 'css/modalform.css' %}" rel="stylesheet">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+	<style>
+		table {
+    border-collapse: separate;
+    text-indent: initial;
+    border-spacing: 0;
+}
+		 .table>:not(caption)>*>* {
+    background-color: var(--bs-table-bg);
+    border-bottom-width: 1px;
+    box-shadow: inset 0 0 0 9999px var(--bs-table-accent-bg);
+    padding: 0.3rem;
+}
+	</style>
+</head>
+
+<body>
+	<div class="wrapper">
+		<nav id="sidebar" class="sidebar js-sidebar">
+			<div class="sidebar-content js-simplebar">
+				<a class="sidebar-brand" href="{% url 'dashboard' %}">
+					<span class="align-middle">IT Inventory System</span>
+				</a>
+				<div style="{{Style}}">
+				<li class="sidebar-header">
+					Administrator Page
+				</li>
+		
+			<li class="sidebar-item">
+				<a class="sidebar-link" href="{% url 'admin:index' %}">
+	  <i class="align-middle" data-feather="sliders"></i> <span class="align-middle">Go to Admin </span>
+	</a>
+			</li>
+		</div>
+		<li class="sidebar-header">
+			Loan
+		</li>
+
+
+		<li class="sidebar-item">
+			<a class="sidebar-link" href="{% url 'loanpage' %}">
+  <i class="align-middle" data-feather="sliders"></i> <span class="align-middle">Loan Detail</span>
+</a>
+		</li>
+		
+		
+						<li class="sidebar-header">
+								Computer
+							</li>
+		
+							<li class="sidebar-item">
+								<a class="sidebar-link" href="{% url 'computerpage' %}">
+					  <i class="align-middle" data-feather="sliders"></i> <span class="align-middle">Computer Details</span>
+					</a>
+							</li>
+		
+				
+		
+						
+							<li class="sidebar-header">
+								Laptop
+							</li>
+		
+							<li class="sidebar-item">
+								<a class="sidebar-link" href="{% url 'laptoppage' %}">
+					  <i class="align-middle" data-feather="sliders"></i> <span class="align-middle">Laptop Detail</span>
+					</a>
+							</li>
+		
+				
+		
+					
+							<li class="sidebar-header">
+								Other
+							</li>
+		
+							<li class="sidebar-item">
+								<a class="sidebar-link" href="{% url 'Networkhardwarepage' %}">
+					  <i class="align-middle" data-feather="sliders"></i> <span class="align-middle">Network Hardware Detail</span>
+					</a>
+							</li>
+		
+							<li class="sidebar-header">
+								IP
+							</li>
+		
+							<li class="sidebar-item">
+								<a class="sidebar-link" href="{% url 'ippage' %}">
+					  <i class="align-middle" data-feather="sliders"></i> <span class="align-middle">IP Detail</span>
+					</a>
+							</li>
+		
+							
+							<li class="sidebar-header">
+								User
+							</li>
+		
+							<li class="sidebar-item">
+								<a class="sidebar-link" href="{% url 'userpage' %}">
+					  <i class="align-middle" data-feather="sliders"></i> <span class="align-middle">User Detail</span>
+					</a>
+							</li>
+							
+							<li class="sidebar-header">
+								software
+							</li>
+			
+		
+							<li class="sidebar-item">
+								<a class="sidebar-link" href="{% url 'software' %}">
+					  <i class="align-middle" data-feather="sliders"></i> <span class="align-middle">software User</span>
+					</a>
+							</li>
+							<div style="{{Style}}">
+								<li class="sidebar-header">
+									Upload Page
+								</li>
+						
+							<li class="sidebar-item">
+								<a class="sidebar-link" href="{% url 'uploadcsvdata' %}">
+					  <i class="align-middle" data-feather="sliders"></i> <span class="align-middle">Upload Page </span>
+					</a>
+							</li>
+						</div>
+			
+		
+		
+					
+					</div>
+				</nav>
+
+		<div class="main">
+			<nav class="navbar navbar-expand navbar-light navbar-bg">
+				<a class="sidebar-toggle js-sidebar-toggle">
+          <i class="hamburger align-self-center"></i>
+        </a>
+
+				<div class="navbar-collapse collapse">
+					<ul class="navbar-nav navbar-align">
+					
+						<li class="nav-item dropdown">
+							<a class="nav-icon dropdown-toggle d-inline-block d-sm-none" href="#" data-bs-toggle="dropdown">
+                <i class="align-middle" data-feather="settings"></i>
+              </a>
+
+							<a class="nav-link dropdown-toggle d-none d-sm-inline-block" href="#" data-bs-toggle="dropdown">
+                 <span class="text-dark">{{Username}}</span>
+              </a>
+							<div class="dropdown-menu dropdown-menu-end">
+								<div style="{{Style}}">
+								<a class="dropdown-item" href="{% url 'historypage' %}"><i class="align-middle me-1" data-feather="user"></i> History</a>
+							</div>
+								
+								<div class="dropdown-divider"></div>
+								<a class="dropdown-item" href="{% url 'logoutsystem' %}">Log out</a>
+							</div>
+						</li>
+					</ul>
+				</div>
+			</nav>
+
+
+			<main class="content"  style="padding: 0; padding-top: 2.5rem;">
+				<div class="container-fluid p-0"  style="width: 100%;">
+
+					<h1 class="h3 mb-3">Computer List</h1>
+                   
+					<div class="row">
+						<div class="col-12">
+							<div class="card">
+								<div class="card-header" style="padding: 0;">
+									<div class="d-flex justify-content-around" style="padding-top: 2.0rem; padding-bottom: 1.0rem;">
+										<button id="Add" onclick="openform()" class="btn btn-primary">Add computer</button>
+										<br>
+										<button id="qr" onclick="openQRexport()" class="btn btn-primary">QR Code</button>
+										<br>
+										<button id="export" onclick="openexport()" class="btn btn-primary">export data</button>
+									</div>
+									<div class="form-group row" style="padding-left: 2.0rem;">
+										<label for="searchbar" class="col-sm-2 " style="width: 8.66667%;">searchbar</label>
+										<div class="col-sm-6">
+											<input type="text" class="form-control" list="addsearchresult" required name="searchbar" id="searchbar" onkeyup="showResult(this.value)">
+										</div>
+										
+										
+									</div>
+									<br>
+									
+                                    <div class="table-responsive " style="height: 500px; font-size: 13px;">
+                                        <table class="table" id="computertable"x>
+                                            <thead class="table-dark" id="computer-list" style="padding: 0;">
+                                              <tr style="padding: 0;" >
+												
+                                                <th scope="col">Computer ID</th>
+												<th scope="col">Current ID</th>
+												<th scope="col">Type of Purchase</th>
+                                                <th scope="col">PIC</th>
+                                                <th scope="col">Previous-PIC</th>
+												<th scope="col">Computer Status</th>
+												<th scope="col">Computer Type</th>
+                                                <th scope="col">Brand</th>
+                                                <th scope="col">Model</th>
+												<th scope="col">Windows Version</th>
+                                                <th scope="col">S/N</th>
+                                                <th scope="col">Asset No</th>
+												<th scope="col">Block</th>
+                                                <th scope="col">Location</th>
+												<th scope="col">Standard Installation</th>
+												<th scope="col">USB Unlock</th>
+												<th scope="col">CD Unlock</th>
+                                                <th scope="col">Microsoft Office</th>
+                                                <th scope="col">Microsoft Office Licensed Key</th>
+												<th scope="col">DOP</th>
+                                                <th scope="col">DOP (Years) / Warranty-end-date</th>
+                                                <th scope="col">PO</th>
+                                                <th scope="col">Invoice</th>
+												
+                                                <th scope="col">Vendor</th>
+                                               
+                                                <th scope="col">Processor Type</th>
+                                                <th scope="col">RAM Type</th>
+                                                <th scope="col">RAM Slot</th>
+                                                <th scope="col">Total RAM</th>
+                                                <th scope="col">Storage Type</th>
+                                                <th scope="col">Storage space</th>
+                                              
+                                               
+                                                
+                                                <th scope="col">LAN MAC Address</th>
+                                                <th scope="col">LAN IP Address</th>
+                                                <th scope="col">WLAN MAC Address</th>
+                                                <th scope="col">WLAN IP Address</th>
+                                                <th scope="col">Joined-Domain</th>
+                                                <th scope="col">Connection Type</th>
+												<th scope="col">Update</th>
+												<th scope="col">QR Code</th>
+
+
+                                                
+                                              </tr>
+                                            </thead>
+                                            <tbody id="trtable">
+											
+											
+
+                                            
+                                              
+                                            </tbody>
+                                          </table>
+                                        </div>
+								</div>
+								<div class="card-body">
+								</div>
+							</div>
+						</div>
+					</div>
+
+				</div>
+			</main>
+
+			<footer class="footer">
+			
+			</footer>
+		</div>
+	</div>
+	<!-- The Modal -->
+<div id="addform" class="modalform">
+
+	<!-- Modal content -->
+	<div class="modalform-header">
+	  <span onclick="closeform()" class="closeform">&times;</span>
+	 <h1 class="text-center">Add Computer</h1>
+	</div>
+	<div class="modalform-content">
+		<form method="POST" class="post-form" id="add-computer" onsubmit="addPC();return false">  
+		
+				{% csrf_token %}
+			   
+				
+				<h3 class="text-center" style=" color: #564953;">Computer Details</h3>
+
+				<div class="form-group row">
+				   <label for="inputEmail3" class="col-sm-2 col-form-label">PC Type:</label>
+				   <div class="col-sm-3">
+					   <select onchange="addpctypechange()" class="form-control" required name="machineType" id="machineType">
+						   <option value="default">Default</option>
+						   <option value="Office PC">Office PC</option>
+						   <option value="PC Machine">PC Machine</option>
+					   
+						</select>
+				   </div>
+				   
+				   <label for="inputEmail3" class="col-sm-2 col-form-label">Type of Purchase:</label>
+				  <div class="col-sm-3">
+				   <div class="form-check-inline">
+					   <input class="form-check-input" type="radio" required name="type_of_purchase" id="type_of_purchase_it" value="IT">
+					   <label class="form-check-label" for="inlineRadio1">IT</label>
+					 </div>
+					 <div class="form-check-inline">
+					   <input class="form-check-input" type="radio" required name="type_of_purchase" id="type_of_purchase_other" value="Other">
+					   <label class="form-check-label" for="inlineRadio2">Other</label>
+					 </div>
+			   
+				  </div>
+				   
+				 </div>
+				<br>
+				<div class="form-group row">
+				   <label for="inputEmail3" class="col-sm-2 col-form-label">Computer Status :</label>
+				   <div class="col-sm-3">
+					 <select class="form-control" required name="Computer_Status" id="Computer_Status">
+						   <option value="default">Default</option>
+						 <option value="In-use">In-use</option>
+						 <option value="Not in-use">Not in-use</option>
+
+					 </select>
+				   </div>
+				   <label for="inputEmail3" class="col-sm-2 col-form-label">Computer ID  :</label>
+				   <br><br>
+				   <div class="col-sm-3">
+					 <input type="text"  readonly="readonly" class="form-control" required name="Computer_ID"  id="final_Computer_ID" placeholder="">
+				   </div>
+				  
+					
+				 </div>
+				 <br>
+				<div class="form-group row">
+				   <label for="inputEmail3" class="col-sm-2 col-form-label">Current Computer ID :</label>
+
+				  
+				   <div class="col-sm-3">
+					 <input type="text" class="form-control" required name="Current_Computer_ID" id="final_Current_Computer">
+				   </div>
+				  <label for="inputEmail3" class="col-sm-2 col-form-label">PIC(User)  :</label>
+				  <div class="col-sm-3">
+					<input type="text" class="form-control"  name="pic"  id="final_pic">
+				  </div>
+				 
+				   
+				</div>
+				<br>
+				<div class="form-group row">
+				   <label for="inputEmail3" class="col-sm-2 col-form-label">Previous-PIC(User) :</label>
+
+				   <div class="col-sm-3">
+					 <input type="text" class="form-control"  name="Previous_PIC" id="final_previous_pIC" >
+				   </div>
+				   <label for="inputEmail3" class="col-sm-2 col-form-label">S/N :</label>
+				   <div class="col-sm-3">
+					 <input type="text" class="form-control" required name="serial_number" id="final_serial_number" placeholder="">
+				   </div>
+				  
+				   
+				 </div>
+				<br>
+				<div class="form-group row">
+					<label for="inputEmail3" class="col-sm-2 col-form-label">Brand  :</label>
+					<div class="col-sm-3">
+					<select class="form-control" required name="Brand" id="Brand">
+					 <option value="default">Default</option>
+					 {% for entry in brand %}
+					 <option value="{{ entry.Brand_name }}">{{ entry.Brand_name }}</option>
+				 {% endfor %}
+				  </select>
+				 </div>
+					<label for="inputEmail3" class="col-sm-2 col-form-label">Model :</label>
+
+				 
+					<div class="col-sm-3">
+					  <select class="form-control" required name="model" id="model">
+						 <option value="default">Default</option>
+ 
+						 {% for entry in pctype %}
+						 <option value="{{ entry.ModelPC_name }}">{{ entry.ModelPC_name }}</option>
+					 {% endfor %}
+					  </select>
+					</div>
+					
+				  
+				  
+				 </div>
+				<br>
+				<div class="form-group row">
+					<label for="inputEmail3" class="col-sm-2 col-form-label">Asset No :</label>
+
+				  
+					<div class="col-sm-3">
+					  <input type="text" class="form-control"  name="asset_no" id="final_asset_no" placeholder="">
+					</div>
+					<label for="inputEmail3" class="col-sm-2 col-form-label">Block :</label>
+					<div class="col-sm-3">
+					  <select class="form-control" required name="block" id="block">
+						  <option value="default">Default</option>
+						  <option value="2">2</option>
+						  <option value="4">4</option>
+						  <option value="6">6</option>
+						  <option value="8">8</option>
+						  <option value="10">10</option>
+						  <option value="12">12</option>
+						  <option value="15">15</option>
+						  <option value="17">17</option>
+					  </select>
+					</div>
+					
+				 
+				  
+				 
+				 </div>
+				 <br>
+				  <div class="form-group row">
+					<label for="inputEmail3" class="col-sm-2 col-form-label">Location :</label>
+
+				  
+					<div class="col-sm-3">
+					   <select class="form-control" required name="location" id="location">
+						  <option value="default">Default</option>
+						  {% for entry in location %}
+						  <option value="{{ entry.location }}">{{ entry.location }}</option>
+					  {% endfor %}
+					   </select>
+					 </div>
+					<label for="inputEmail3" class="col-sm-2 col-form-label">Standard Installation  :</label>
+					<div class="col-sm-3">
+					<div class="form-check-inline">
+					   <input class="form-check-input" type="radio" required name="Standard_Installation" id="Standard_Installation_yes" value="Yes">
+					   <label class="form-check-label" for="inlineRadio1">Yes</label>
+					 </div>
+					 <div class="form-check-inline">
+					   <input class="form-check-input" type="radio" required name="Standard_Installation" id="Standard_Installation_no" value="No">
+					   <label class="form-check-label" for="inlineRadio2">No</label>
+					 </div>
+				   </div>
+				 
+			
+				  
+				
+				 </div>
+				 <br>
+				 <div class="form-group row">
+				   <label for="inputEmail3" class="col-sm-2 col-form-label">USB Unlock :</label>
+				   <div class="col-sm-3">
+					<div class="form-check-inline">
+						<input class="form-check-input" type="radio" required name="usb_unlock" id="usb_unlock_yes" value="Yes" >
+						<label class="form-check-label" for="inlineRadio1">Yes</label>
+					  </div>
+					  <div class="form-check-inline">
+						<input class="form-check-input" type="radio" required name="usb_unlock" id="usb_unlock_no" value="No" >
+						<label class="form-check-label" for="inlineRadio2">No</label>
+					  </div>
+					  
+				
+				   </div>
+				   <label for="inputEmail3" class="col-sm-2 col-form-label">CD Unlock :</label>
+				   <div class="col-sm-3">
+				   <div class="form-check form-check-inline">
+					<input class="form-check-input" type="radio" required name="cd_unlock" id="cd_unlock_yes" value="Yes">
+					<label class="form-check-label" for="inlineRadio1">Yes</label>
+				  </div>
+				  <div class="form-check form-check-inline">
+					<input class="form-check-input" type="radio" required name="cd_unlock" id="cd_unlock_no" value="No">
+					<label class="form-check-label" for="inlineRadio2">No</label>
+				  </div>
+				</div>
+			   
+
+				
+				
+			 </div>
+				 <br>
+				 <div class="form-group row">
+					<label for="inputEmail3" class="col-sm-2 col-form-label">Windows Version  :</label>
+					<div class="col-sm-3">
+						<select class="form-control" required name="Window_version" id="Window_version">
+						   <option value="default">Default</option>
+						   {% for entry in window %}
+						   <option value="{{ entry.windows }}">{{ entry.windows }}</option>
+					   {% endfor %}
+						</select>
+					  </div>
+					<label for="inputEmail3" class="col-sm-2 col-form-label">Microsoft Office  :</label>
+					<div class="col-sm-3">
+						<select class="form-control"  name="Microsoft_Office" id="Microsoft_Office">
+							<option value="default">Default</option>
+							<option value="None">None</option>
+
+							{% for entry in microsoft_office %}
+							<option value="{{ entry.microsoft_office }}">{{ entry.microsoft_office }}</option>
+						{% endfor %}
+						 </select>
+				   </div>
+				  
+				  
+				 </div>
+				 <br>
+				 <div class="form-group row">
+					<label for="inputEmail3" class="col-sm-2 col-form-label">Microsoft Office Licensed :</label>
+					<div class="col-sm-3">
+					 <input type="text" class="form-control" required name="Licensed_key" id="final_invoice" placeholder="">
+					  </div>
+					<label for="inputEmail3" class="col-sm-2 col-form-label">DOP :</label>
+					<div class="col-sm-3">
+					  <input type="date" class="form-control" required name="dop" id="final_dop" placeholder="">
+					</div>
+					 
+				 
+				  
+					
+				 </div>
+				 <br>
+				
+				<div class="form-group row">
+					<label for="inputEmail3" class="col-sm-3 col-form-label">DOP (Years) / Warranty-end-date :</label>
+
+				  
+					<div class="col-sm-3">
+					  <input type="date" class="form-control" required name="dopYear" id="final_dopYear" placeholder="">
+					</div>
+					<label for="inputEmail3" class="col-sm-2 col-form-label">PO :</label>
+					<div class="col-sm-3">
+					  <input type="text" class="form-control"  name="po" id="final_po" placeholder="">
+					</div>
+				   
+				
+				 
+				   
+				</div>
+				
+				<br>
+				
+				<br>
+				<div class="form-group row">
+					<label for="inputEmail3" class="col-sm-2 col-form-label">Invoice :</label>
+
+				  
+					<div class="col-sm-3">
+					  <input type="text" class="form-control"  name="invoice" id="final_invoice" placeholder="">
+					</div>
+				  <label for="inputEmail3" class="col-sm-2 col-form-label">Vendor :</label>
+				  <div class="col-sm-3">
+				   <select class="form-control" required name="vendor" id="vendor">
+					   <option value="default">Default</option>
+					  {% for entry in Vendor %}
+					  <option value="{{ entry.vendorname }}">{{ entry.vendorname }}</option>
+				  {% endfor %}
+				   </select>
+				 </div>
+			   
+					
+				  </div>
+				
+				<br>
+				<div class="form-group row">
+				   <label for="inputEmail3" class="col-sm-2 col-form-label">Processor Type :</label>
+				 <div class="col-sm-3">
+					<input type="text" class="form-control" name="processor" id="processor">
+
+				 </div>
+				 
+					<label for="inputEmail3" class="col-sm-2 col-form-label">RAM Type :</label>
+
+					<div class="col-sm-3">
+						<input type="text" class="form-control" name="ram_type" id="ram_type">
+					   
+				</div>
+		   
+			   </div>
+				<br>
+				<div class="form-group row">
+				   <label for="inputEmail3" class="col-sm-2 col-form-label">RAM Slot :</label>
+				   <div class="col-sm-3">
+					  <div class="form-check-inline">
+						  <input class="form-check-input" type="radio" required name="ram_slot" id="final_ram_slot_2" value="2">
+						  <label class="form-check-label" for="inlineRadio1">2</label>
+						</div>
+						<div class="form-check-inline">
+						  <input class="form-check-input" type="radio" required name="ram_slot" id="final_ram_slot_4" value="4">
+						  <label class="form-check-label" for="inlineRadio2">4</label>
+						</div>
+					
+				   </div>
+					<label for="inputEmail3" class="col-sm-2 col-form-label">Total RAM :</label>
+				  <div class="col-sm-3">
+					<input type="text" class="form-control"  name="total_RAM" id="total_RAM">
+				   
+				  </div>
+				
+
+				</div>
+				<br>
+				<div class="form-group row">
+				   <label for="inputEmail3" class="col-sm-2 col-form-label">Storage Type :</label>
+				  <div class="col-sm-3">
+				   <div class="form-check-inline">
+					   <input class="form-check-input" type="radio" required name="storage_type" id="storage_type_HDD" value="HDD">
+					   <label class="form-check-label" for="inlineRadio1">HDD</label>
+					 </div>
+					 <div class="form-check-inline">
+					   <input class="form-check-input" type="radio" required name="storage_type" id="storage_type_SDD" value="SDD">
+					   <label class="form-check-label" for="inlineRadio2">SDD</label>
+					 </div>
+			   
+				  </div>
+				 
+					<label for="inputEmail3" class="col-sm-2 col-form-label">Storage space :</label>
+
+				 
+				  <div class="col-sm-3">
+					  <input type="text" class="form-control" name="storageSpace" id="storageSpace">
+				  
+				  </div>
+				</div>
+				<br>
+			   
+				<br>
+				
+				
+			   
+				 
+				  
+				
+				
+				 
+				  <h3 class="text-center" style=" color: #564953;">Connection status</h3>
+				  <br>
+				  <div class="form-group row">
+					<label for="inputEmail3" class="col-sm-3 col-form-label">Connection Type :</label>
+					<div class="col-sm-3">
+					 <div class="form-check-inline">
+						 <input class="form-check-input" type="radio" required name="ConnectionType" id="ConnectionType_Intranet" value="Intranet" onclick="radioOffline()">
+						 <label class="form-check-label" for="inlineRadio1">Intranet</label>
+					   </div>
+					   <div class="form-check-inline">
+						 <input class="form-check-input" type="radio" required name="ConnectionType" id="ConnectionType_Internet" value="Internet" onclick="radioOffline()">
+						 <label class="form-check-label" for="inlineRadio2">Internet</label>
+					   </div>
+					   <div class="form-check-inline">
+						 <input class="form-check-input" type="radio" required name="ConnectionType" id="ConnectionType_Offline" value="Offline" onclick="radioOffline()">
+						 <label class="form-check-label" for="inlineRadio2">Offline</label>
+					   </div>
+				 
+					</div>
+					<label for="inputEmail3" class="col-sm-3 col-form-label">Joined-Domain :</label>
+					<div class="col-sm-3">
+					<div class="form-check form-check-inline">
+					 <input class="form-check-input" type="radio" required name="Joined_Domain" id="Joined_Domain_yes" value="Yes">
+					 <label class="form-check-label" for="inlineRadio1">Yes</label>
+				   </div>
+				   <div class="form-check form-check-inline">
+					 <input class="form-check-input" type="radio" required name="Joined_Domain" id="Joined_Domain_no" value="No">
+					 <label class="form-check-label" for="inlineRadio2">No</label>
+				   </div>
+				 </div>
+				
+
+				 
+				 
+			  </div>
+			  <br>
+				  <div class="form-group row">
+					<label for="inputEmail3" class="col-sm-3 col-form-label">LAN MAC Address  :</label>
+					<div class="col-sm-3">
+					   <input type="text" class="form-control" required name="lan_mac_address" id="final_lan_mac_address">
+					  
+					</div>
+				   
+					  <label for="inputEmail3" class="col-sm-3 col-form-label">LAN IP Address  :</label>
+
+					<div class="col-sm-3">
+					   <select  class="form-control" required name="lan_ip_address" id="final_lan_ip_address" onchange="ipchange()">
+						   <option value="default">Default</option>
+							
+
+						   </select>
+					 
+					</div>
+				  </div>
+				  <br>
+				  <div class="form-group row">
+					<label for="inputEmail3" class="col-sm-3 col-form-label">WLAN MAC Address :</label>
+					<div class="col-sm-3">
+					  <input type="text" class="form-control"  name="wlan_mac_address" id="wlan_mac_address" placeholder="">
+					</div>
+					<label for="inputEmail3" class="col-sm-3 col-form-label">WLAN IP Address :</label>
+					<div class="col-sm-3">
+						<input class="form-control"  type="text" name="wlan_ip_address" id="wlan_ip_address" value="None">
+						
+					
+					</div>
+					</div>
+<br>
+					
+				<br>
+				
+			  
+				 
+				  <div class="text-center">
+					<input type="submit" value="Submit" class="btn btn-primary" > 
+	
+				   </div>
+				</form>
+			
+	</div>
+	<div class="modalform-footer">
+		
+	</div>
+  
+  </div>
+
+<div id="updateformmodal" class="modalform">
+
+	<!-- Modal content -->
+	<div class="modalform-header">
+	  <span onclick="closeformupdate()" class="closeform">&times;</span>
+	 <h1 class="text-center">Update Computer</h1>
+	</div>
+	<div class="modalform-content">
+		<form method="POST" class="post-form" id="update-computer" onsubmit="UpdatePC(); return false">  
+			{% csrf_token %}
+			   
+			<h3 class="text-center" style=" color: #564953;">Computer Details</h3>
+
+			<div class="form-group row">
+			   <label for="inputEmail3" class="col-sm-2 col-form-label">PC Type:</label>
+			   <div class="col-sm-3">
+				   <select onchange="addpctypechange()" class="form-control" required name="update_machineType" id="update_machineType">
+					   <option value="default">Default</option>
+					   <option value="Office PC">Office PC</option>
+					   <option value="PC Machine">PC Machine</option>
+				   
+					</select>
+			   </div>
+			   
+			   <label for="inputEmail3" class="col-sm-2 col-form-label">Type of Purchase:</label>
+			  <div class="col-sm-3">
+			   <div class="form-check-inline">
+				   <input class="form-check-input" type="radio" required name="update_type_of_purchase" id="update_type_of_purchase_it" value="IT">
+				   <label class="form-check-label" for="inlineRadio1">IT</label>
+				 </div>
+				 <div class="form-check-inline">
+				   <input class="form-check-input" type="radio" required name="update_type_of_purchase" id="update_type_of_purchase_other" value="Other">
+				   <label class="form-check-label" for="inlineRadio2">Other</label>
+				 </div>
+		   
+			  </div>
+			   
+			 </div>
+			<br>
+			<div class="form-group row">
+			   <label for="inputEmail3" class="col-sm-2 col-form-label">Computer Status :</label>
+			   <div class="col-sm-3">
+				 <select class="form-control" required name="Computer_Status" id="update_Computer_Status">
+					   <option value="default">Default</option>
+					 <option value="In-use">In-use</option>In-Use
+					 <option value="Not in-use">Not in-use</option>
+					 <option value="Loan">Loan</option>
+				
+					 <option value="Pending Dispose">Pending Dispose</option>
+					 <option value="Dispose">Dispose</option>
+					
+
+
+
+				 </select>
+			   </div>
+			   <label for="inputEmail3" class="col-sm-2 col-form-label">Computer ID  :</label>
+			   <br><br>
+			   <div class="col-sm-3">
+				 <input type="text"  readonly="readonly" class="form-control" required name="update_Computer_ID"  id="update_Computer_ID" placeholder="">
+			   </div>
+			  
+				
+			 </div>
+			 <br>
+			<div class="form-group row">
+			   <label for="inputEmail3" class="col-sm-2 col-form-label">Current Computer ID :</label>
+
+			  
+			   <div class="col-sm-3">
+				 <input type="text" class="form-control" required name="update_Current_Computer_ID" id="update_Current_Computer">
+			   </div>
+			  <label for="inputEmail3" class="col-sm-2 col-form-label">PIC(User)  :</label>
+			  <div class="col-sm-3">
+				<input type="text" class="form-control" required name="update_pic"  id="update_pic">
+			  </div>
+			 
+			   
+			</div>
+			<br>
+			<div class="form-group row">
+			   <label for="inputEmail3" class="col-sm-2 col-form-label">Previous-PIC(User) :</label>
+
+			   <div class="col-sm-3">
+				 <input type="text" class="form-control"  name="update_Previous_PIC" id="update_previous_pic" >
+			   </div>
+			   <label for="inputEmail3" class="col-sm-2 col-form-label">Brand  :</label>
+				<div class="col-sm-3">
+				<select class="form-control" required name="update_Brand" id="update_Brand">
+				 <option value="default">Default</option>
+				 {% for entry in brand %}
+				 <option value="{{ entry.Brand_name }}">{{ entry.Brand_name }}</option>
+			 {% endfor %}
+			  </select>
+			 </div>
+			 
+			  
+			   
+			 </div>
+			<br>
+			<div class="form-group row">
+				<label for="inputEmail3" class="col-sm-2 col-form-label">Model :</label>
+
+			 
+				<div class="col-sm-3">
+				  <select class="form-control" required name="update_model" id="update_model">
+					 <option value="default">Default</option>
+ 
+					 {% for entry in pctype %}
+					 <option value="{{ entry.ModelPC_name }}">{{ entry.ModelPC_name }}</option>
+				 {% endfor %}
+				  </select>
+				</div>
+				
+				<label for="inputEmail3" class="col-sm-2 col-form-label">S/N :</label>
+				<div class="col-sm-3">
+				  <input type="text" class="form-control" required name="update_serial_number" id="update_serial_number" placeholder="">
+				</div>
+			 
+			  
+			  
+			 </div>
+			<br>
+			<div class="form-group row">
+				<label for="inputEmail3" class="col-sm-2 col-form-label">Asset No :</label>
+
+			  
+				<div class="col-sm-3">
+				  <input type="text" class="form-control"  name="update_asset_no" id="update_asset_no" placeholder="">
+				</div>
+				<label for="inputEmail3" class="col-sm-2 col-form-label">Block :</label>
+				<div class="col-sm-3">
+				  <select class="form-control" required name="update_block" id="update_block">
+					  <option value="default">Default</option>
+					  <option value="2">2</option>
+					  <option value="4">4</option>
+					  <option value="6">6</option>
+					  <option value="8">8</option>
+					  <option value="10">10</option>
+					  <option value="12">12</option>
+					  <option value="15">15</option>
+					  <option value="17">17</option>
+				  </select>
+				</div>
+			 
+			  
+			  
+			 
+			 </div>
+			 <br>
+			  <div class="form-group row">
+				<label for="inputEmail3" class="col-sm-2 col-form-label">Location :</label>
+
+			  
+				<div class="col-sm-3">
+				   <select class="form-control" required name="update_location" id="update_location">
+					  <option value="default">Default</option>
+					  {% for entry in location %}
+					  <option value="{{ entry.location }}">{{ entry.location }}</option>
+				  {% endfor %}
+				   </select>
+				 </div>
+				<label for="inputEmail3" class="col-sm-2 col-form-label">Standard Installation  :</label>
+				<div class="col-sm-3">
+				<div class="form-check-inline">
+				   <input class="form-check-input" type="radio" required name="update_Standard_Installation" id="update_Standard_Installation_yes" value="Yes">
+				   <label class="form-check-label" for="inlineRadio1">Yes</label>
+				 </div>
+				 <div class="form-check-inline">
+				   <input class="form-check-input" type="radio" required name="update_Standard_Installation" id="update_Standard_Installation_no" value="No">
+				   <label class="form-check-label" for="inlineRadio2">No</label>
+				 </div>
+			   </div>
+			   
+			   
+			  
+			
+			 </div>
+			 <br>
+				 <div class="form-group row">
+				   <label for="inputEmail3" class="col-sm-2 col-form-label">USB Unlock :</label>
+				   <div class="col-sm-3">
+					<div class="form-check-inline">
+						<input class="form-check-input" type="radio" required name="update_usb_unlock" id="update_usb_unlock_yes" value="Yes" >
+						<label class="form-check-label" for="inlineRadio1">Yes</label>
+					  </div>
+					  <div class="form-check-inline">
+						<input class="form-check-input" type="radio" required name="update_usb_unlock" id="update_usb_unlock_no" value="No" >
+						<label class="form-check-label" for="inlineRadio2">No</label>
+					  </div>
+					  
+				
+				   </div>
+				   <label for="inputEmail3" class="col-sm-2 col-form-label">CD Unlock :</label>
+				   <div class="col-sm-3">
+				   <div class="form-check form-check-inline">
+					<input class="form-check-input" type="radio" required name="update_cd_unlock" id="update_cd_unlock_yes" value="Yes">
+					<label class="form-check-label" for="inlineRadio1">Yes</label>
+				  </div>
+				  <div class="form-check form-check-inline">
+					<input class="form-check-input" type="radio" required name="update_cd_unlock" id="update_cd_unlock_no" value="No">
+					<label class="form-check-label" for="inlineRadio2">No</label>
+				  </div>
+				</div>
+			   
+
+				
+				
+			 </div>
+				 <br>
+			 <div class="form-group row">
+				<label for="inputEmail3" class="col-sm-2 col-form-label">Windows Version  :</label>
+				<div class="col-sm-3">
+					<select class="form-control" required name="update_Window_version" id="update_Window_version">
+					   <option value="default">Default</option>
+					   {% for entry in window %}
+					   <option value="{{ entry.windows }}">{{ entry.windows }}</option>
+				   {% endfor %}
+					</select>
+				  </div>
+				<label for="inputEmail3" class="col-sm-2 col-form-label">Microsoft Office  :</label>
+				<div class="col-sm-3">
+					<select class="form-control"  name="update_Microsoft_Office" id="update_Microsoft_Office">
+						<option value="default">Default</option>
+						<option value="None">None</option>
+
+						{% for entry in microsoft_office %}
+						<option value="{{ entry.microsoft_office }}">{{ entry.microsoft_office }}</option>
+					{% endfor %}
+					 </select>
+			   </div>
+			  
+			  
+			  
+			 </div>
+			 <br>
+			 <div class="form-group row">
+				<label for="inputEmail3" class="col-sm-2 col-form-label">Microsoft Office Licensed :</label>
+				<div class="col-sm-3">
+				 <input type="text" class="form-control"  name="update_Licensed_key" id="update_Licensed_key" placeholder="">
+				  </div>
+				<label for="inputEmail3" class="col-sm-2 col-form-label">DOP :</label>
+				<div class="col-sm-3">
+				  <input type="date" class="form-control" required name="update_dop" id="update_dop" placeholder="">
+				</div>
+			 
+			  
+			  
+				
+			 </div>
+			 <br>
+			
+			<div class="form-group row">
+				<label for="inputEmail3" class="col-sm-3 col-form-label">DOP (Years) / Warranty-end-date :</label>
+
+			  
+				<div class="col-sm-3">
+				  <input type="date" class="form-control" required name="update_dopYear" id="update_dopYear" placeholder="">
+				</div>
+				<label for="inputEmail3" class="col-sm-2 col-form-label">PO :</label>
+				<div class="col-sm-3">
+				  <input type="text" class="form-control"  name="update_po" id="update_po" placeholder="">
+				</div>
+			  
+			 
+			 
+			   
+			</div>
+			<br>
+		
+			<div class="form-group row">
+				<label for="inputEmail3" class="col-sm-2 col-form-label">Invoice :</label>
+
+			  
+				<div class="col-sm-3">
+				  <input type="text" class="form-control"  name="update_invoice" id="update_invoice" placeholder="">
+				</div>
+			   
+			  <label for="inputEmail3" class="col-sm-2 col-form-label">Vendor :</label>
+			  <div class="col-sm-3">
+			   <select class="form-control" required name="update_vendor" id="update_vendor">
+				   <option value="default">Default</option>
+				   <option value="TEST">TEST</option>
+				  {% for entry in Vendor %}
+				  <option value="{{ entry.vendorname }}">{{ entry.vendorname }}</option>
+			  {% endfor %}
+			   </select>
+			 </div>
+		   
+				
+			  </div>
+			
+			<br>
+			<div class="form-group row">
+			   <label for="inputEmail3" class="col-sm-2 col-form-label">Processor Type :</label>
+			 <div class="col-sm-3">
+				 <input type="text" class="form-control"  name="update_processor" id="update_processor">
+			 
+			 </div>
+			 
+				<label for="inputEmail3" class="col-sm-2 col-form-label">RAM Type :</label>
+
+				<div class="col-sm-3">
+					<input type="text" class="form-control"  name="update_ram_type" id="update_ram_type">
+					
+				
+			</div>
+	   
+		   </div>
+			<br>
+			<div class="form-group row">
+			   <label for="inputEmail3" class="col-sm-2 col-form-label">RAM Slot :</label>
+			   <div class="col-sm-3">
+				  <div class="form-check-inline">
+					  <input class="form-check-input" type="radio" required name="update_ram_slot" id="update_ram_slot_2" value="2">
+					  <label class="form-check-label" for="inlineRadio1">2</label>
+					</div>
+					<div class="form-check-inline">
+					  <input class="form-check-input" type="radio" required name="update_ram_slot" id="update_ram_slot_4" value="4">
+					  <label class="form-check-label" for="inlineRadio2">4</label>
+					</div>
+				
+			   </div>
+				<label for="inputEmail3" class="col-sm-2 col-form-label">Total RAM :</label>
+			  <div class="col-sm-3">
+			   <div class="form-check-inline">
+				<input type="text" class="form-control"  name="update_total_RAM" id="update_total_RAM">
+				
+			  
+				  
+				 </div>
+			  </div>
+			
+
+			</div>
+			<br>
+			<div class="form-group row">
+			   <label for="inputEmail3" class="col-sm-2 col-form-label">Storage Type :</label>
+			  <div class="col-sm-3">
+				
+				<div class="form-check-inline">
+					<input class="form-check-input" type="radio" required name="update_storage_type" id="update_storage_type_HDD" value="HDD">
+					<label class="form-check-label" for="inlineRadio1">HDD</label>
+				  </div>
+				  <div class="form-check-inline">
+					<input class="form-check-input" type="radio" required name="update_storage_type" id="update_storage_type_SDD" value="SDD">
+					<label class="form-check-label" for="inlineRadio2">SDD</label>
+				  </div>
+		   
+			  </div>
+			 
+				<label for="inputEmail3" class="col-sm-2 col-form-label">Storage space :</label>
+
+			 
+			  <div class="col-sm-3">
+				<input type="text" class="form-control"  name="update_storageSpace" id="update_storageSpace">
+				
+			  
+			   
+			  </div>
+			</div>
+			<br>
+		   
+			<br>
+			
+			
+		   
+			 
+			  
+			
+			<div class="container-c5 " id="formtab4">
+			 
+			  <h3 class="text-center" style=" color: #564953;">Connection status</h3>
+			  <br>
+			  <div class="form-group row">
+				<label for="inputEmail3" class="col-sm-3 col-form-label">Connection Type :</label>
+				<div class="col-sm-3">
+				 <div class="form-check-inline">
+					 <input class="form-check-input" type="radio" required name="update_ConnectionType" id="update_ConnectionType_Intranet" value="Intranet" onclick="radioUpdate()">
+					 <label class="form-check-label" for="inlineRadio1">Intranet</label>
+				   </div>
+				   <div class="form-check-inline">
+					 <input class="form-check-input" type="radio" required name="update_ConnectionType" id="update_ConnectionType_Internet" value="Internet" onclick="radioUpdate()">
+					 <label class="form-check-label" for="inlineRadio2">Internet</label>
+				   </div>
+				   <div class="form-check-inline">
+					 <input class="form-check-input" type="radio" required name="update_ConnectionType" id="update_ConnectionType_Offline" value="Offline" onclick="radioUpdate()">
+					 <label class="form-check-label" for="inlineRadio2">Offline</label>
+				   </div>
+			 
+				</div>
+				<label for="inputEmail3" class="col-sm-3 col-form-label">Joined-Domain :</label>
+				<div class="col-sm-3">
+				<div class="form-check form-check-inline">
+				 <input class="form-check-input" type="radio" required name="update_Joined_Domain" id="update_Joined_Domain_yes" value="Yes">
+				 <label class="form-check-label" for="inlineRadio1">Yes</label>
+			   </div>
+			   <div class="form-check form-check-inline">
+				 <input class="form-check-input" type="radio" required name="update_Joined_Domain" id="update_Joined_Domain_no" value="No">
+				 <label class="form-check-label" for="inlineRadio2">No</label>
+			   </div>
+			 </div>
+			
+
+			 
+			 
+		  </div>
+		  <br>
+			  <div class="form-group row">
+				<label for="inputEmail3" class="col-sm-3 col-form-label">LAN MAC Address  :</label>
+				<div class="col-sm-3">
+				   <input type="text" class="form-control" required name="update_lan_mac_address" id="update_lan_mac_address">
+				  
+				</div>
+			   
+				  <label for="inputEmail3" class="col-sm-3 col-form-label">LAN IP Address  :</label>
+
+				<div class="col-sm-3">
+				   <select  class="form-control" required name="update_lan_ip_address" id="update_lan_ip_address" >
+					   <option value="default">Default</option>
+						<option value="Release">Release</option>
+						<option value="Offline">Offline</option>
+
+
+
+					   </select>
+				 
+				</div>
+			  </div>
+			  <br>
+			  <div class="form-group row">
+				<label for="inputEmail3" class="col-sm-3 col-form-label">WLAN MAC Address :</label>
+				<div class="col-sm-3">
+				  <input type="text" class="form-control"  name="update_wlan_mac_address" id="update_wlan_mac_address" placeholder="">
+				</div>
+				<label for="inputEmail3" class="col-sm-3 col-form-label">WLAN IP Address :</label>
+				<div class="col-sm-3">
+					<input type="text" class="form-control" name="update_wlan_ip_address" id="update_wlan_ip_address">
+					
+				 
+				</div>
+				</div>
+<br>
+				
+			<br>
+			
+		   
+
+			 
+			 
+		  </div>
+			   <br>
+			  
+				 
+				  <div class="text-center">
+					<input type="submit" value="Submit" class="btn btn-primary"  > 
+	
+				   </div>
+				</form>
+			
+	</div>
+	<div class="modalform-footer">
+		
+	</div>
+  
+  </div>
+
+<div id="exportdata" class="modalform">
+
+	<!-- Modal content -->
+	<div class="modalform-header">
+	  <span onclick="closeexportdata()" class="closeform">&times;</span>
+	 <h1 class="text-center">Export data</h1>
+	</div>
+	<div class="modalform-content">
+		<form method="POST" class="post-form" id="exportdata" onsubmit="exportdata(); return false">  
+			{% csrf_token %}
+			   
+			<h3 class="text-center" style=" color: #564953;">Export data Computer Details</h3>
+			<div>
+				<div class="form-check form-check-inline" style="padding-left: 2.5em;">
+					<input class="form-check-input" type="radio" name="inlineRadioOptions" id="allselect" value="all" onchange="openexport();" checked>
+					<label class="form-check-label" for="inlineRadio1">All Selection</label>
+				  </div>
+				<div class="form-check form-check-inline" style="padding-left: 7.5em;">
+					<input class="form-check-input" type="radio" name="inlineRadioOptions" id="customselect" value="custom" onchange="customexport();">
+					<label class="form-check-label" for="inlineRadio1">Custom Selection</label>
+				  </div>
+				<div class="form-group form-check-inline" style="padding-left: 3.5em;">
+					<label class="form-check-label" for="inlineRadio1">Custom Selection Start</label>
+					<div class="col-sm-3">
+					 <input type="text" class="" name="customselectStart" id="customselectStart" >
+					</div>
+				  </div>
+				<div class="form-group form-check-inline" >
+					<label class="form-check-label" for="inlineRadio1">Custom Selection End</label>
+					<div class="col-sm-3">
+					 <input type="text" class="" name="customselectEnd" id="customselectEnd" >
+					</div>
+				  </div>
+				  <div class="form-group form-check-inline" >
+					<button type="button" id="SelectexportBTN" onclick="Searchcustomexport()" class="btn btn-primary">Search</button>
+				  </div>
+				</div>
+
+			   
+			   
+			
+			<br>
+		
+			<h3 class="text-center" style=" color: #564953;">Expected Output</h3>
+			<br>
+			<div class="text-center">
+				<button type="button" id="SelectexportBTN" onclick="downloadexport()" class="btn btn-primary">download</button>
+			</div>
+			<br>
+			<div class="table-responsive " style="height: 400px;">
+				<table class="table" id="computertable">
+					<thead class="table-dark" id="computer-list">
+					  <tr id="TRexport">
+						
+						<th scope="col">Computer ID</th>
+						<th scope="col">Current Computer ID</th>
+						<th scope="col">PC Type</th>
+						<th scope="col">PIC</th>
+						<th scope="col">Previous PIC</th>
+						
+						<th scope="col">Brand</th>
+						<th scope="col">Model</th>
+						<th scope="col">S/N</th>
+						<th scope="col">Asset No</th>
+						<th scope="col">DOP</th>
+						<th scope="col">DOP (Years) / Warranty-end-date</th>
+						<th scope="col">Vendor</th>
+						<th scope="col">PO</th>
+						<th scope="col">Invoice</th>
+						<th scope="col">Type of Purchase</th>
+						<th scope="col">Block</th>
+						<th scope="col">Location</th>
+
+						<th scope="col">Standard Installation</th>
+						<th scope="col">USB Unlock</th>
+						<th scope="col">CD Unlock</th>
+						<th scope="col">OS</th>
+						<th scope="col">Office Version</th>
+						<th scope="col">Office Product Key</th>
+						<th scope="col">Processor Type</th>
+						<th scope="col">RAM Type</th>
+						<th scope="col">RAM Slot</th>
+						<th scope="col">Total RAM</th>
+						<th scope="col">Type of Storage</th>
+						<th scope="col">Total Storage Value</th>
+						<th scope="col">Connection Type</th>
+						<th scope="col">Joined Domain</th>
+						<th scope="col">Lan NIC MAC</th>
+						<th scope="col">Lan IP Address</th>
+						<th scope="col">Wlan NIC MAC</th>
+						<th scope="col">Wlan IP Address</th>
+						<th scope="col">PC Status</th>
+						
+
+
+						
+						
+
+						
+					  </tr>
+					</thead>
+					
+					<tbody id="exportdataTD">
+					
+					
+
+					
+					  
+					</tbody>
+				  </table>
+				</div>
+			 
+	</div>
+	<div class="modalform-footer">
+		
+	</div>
+  
+  </div>
+
+  
+<div id="QRexportdata" class="modalform">
+
+	<!-- Modal content -->
+	<div class="modalform-header">
+	  <span onclick="closeexportQRdata()" class="closeform">&times;</span>
+	 <h1 class="text-center">Export data</h1>
+	</div>
+	<div class="modalform-content">
+		<form method="POST" class="post-form" id="exportdata" onsubmit=" return false">  
+			{% csrf_token %}
+			   
+			<h3 class="text-center" style=" color: #564953;">Export QR Code For Computer Details</h3>
+			<div>
+				<div class="form-check form-check-inline" style="padding-left: 2.5em;">
+					<input class="form-check-input" type="radio" name="inlineRadioOptions" id="allselectQR" value="all" onchange="openexport();" checked>
+					<label class="form-check-label" for="inlineRadio1">All Selection</label>
+				  </div>
+				<div class="form-check form-check-inline" style="padding-left: 7.5em;">
+					<input class="form-check-input" type="radio" name="inlineRadioOptions" id="customselectQR" value="custom" onchange="customexport();">
+					<label class="form-check-label" for="inlineRadio1">Custom Selection</label>
+				  </div>
+				<div class="form-group form-check-inline" style="padding-left: 3.5em;">
+					<label class="form-check-label" for="inlineRadio1">Custom Selection Start</label>
+					<div class="col-sm-3">
+					 <input type="text" class="" name="customselectStartQR" id="customselectStartQR" >
+					</div>
+				  </div>
+				<div class="form-group form-check-inline" >
+					<label class="form-check-label" for="inlineRadio1">Custom Selection End</label>
+					<div class="col-sm-3">
+					 <input type="text" class="" name="customselectEndQR" id="customselectEndQR" >
+					</div>
+				  </div>
+				  <div class="form-group form-check-inline" >
+					<button type="button" id="SelectexportBTN" onclick="SearchQRcustomexport()" class="btn btn-primary">Search</button>
+				  </div>
+				</div>
+
+			   
+			   
+			
+			<br>
+		
+			<h3 class="text-center" style=" color: #564953;">Expected Output</h3>
+			<br>
+			<div class="text-center">
+				<button type="button" id="SelectexportBTN" onclick="Downloadimagedata()" class="btn btn-primary">download</button>
+			</div>
+			<br>
+			<div class="table-responsive " style="height: 400px;">
+				<table class="table" id="computertable">
+					<thead class="table-dark" id="computer-list">
+					  <tr id="TRQRexport">
+						
+						<th scope="col">Computer ID</th>
+						<th scope="col">QR Code</th>
+
+					  </tr>
+					</thead>
+					
+					<tbody id="exportdataTDQR">
+					
+					
+
+					
+					  
+					</tbody>
+				  </table>
+				</div>
+			 
+	</div>
+	<div class="modalform-footer">
+		
+	</div>
+  
+  </div>
+  {% block javascript %}
+  <script>
+$(document).ready(function() {
+	
+		$.ajax({
+			type: 'Get',
+			
+			url: "{% url 'getcomputerdata' %}",
+		
+			success: function(response){
+				console.log(response)
+				$(trtable).empty();
+				var indexarray = 0
+				for (var item in response.data){
+					var tr = document.createElement("tr");
+						var td1 = document.createElement("td");
+						td1.innerHTML =response.data[item].computer_id;
+						var td2 = document.createElement("td");
+						td2.innerHTML =response.data[item].current_computer_id;
+						var td3 = document.createElement("td");
+						td3.innerHTML =response.data[item].pic;
+						var td4 = document.createElement("td");
+						td4.innerHTML =response.data[item].previous_pic;
+						var td5 = document.createElement("td");
+						td5.innerHTML =response.data[item].pccurrentstatus;
+						var td6 = document.createElement("td");
+						td6.innerHTML =response.data[item].pctype;
+						var td7 = document.createElement("td");
+						td7.innerHTML =response.data[item].Brand;
+						var td8 = document.createElement("td");
+						td8.innerHTML =response.data[item].Model;
+						var td9 = document.createElement("td");
+						td9.innerHTML =response.data[item].windows;
+						var td10 = document.createElement("td");
+						td10.innerHTML =response.data[item].serial_number;
+						
+						var td11 = document.createElement("td");
+						td11.innerHTML =response.data[item].asset_no;
+						var td12 = document.createElement("td");
+						td12.innerHTML =response.data[item].block;
+						var td13 = document.createElement("td");
+						td13.innerHTML =response.data[item].location;
+						var td14 = document.createElement("td");
+						td14.innerHTML =response.data[item].standard_installation;
+						var td36 = document.createElement("td");
+						td36.innerHTML =response.data[item].usbunlock;
+						var td37 = document.createElement("td");
+						td37.innerHTML =response.data[item].cdunlock;
+						var td15 = document.createElement("td");
+						td15.innerHTML =response.data[item].microsoft_office;
+						var td16 = document.createElement("td");
+						td16.innerHTML =response.data[item].microsoft_office_keys;
+						var td17 = document.createElement("td");
+						td17.innerHTML =response.data[item].dop;
+						var td18 = document.createElement("td");
+						td18.innerHTML =response.data[item].dop_Warranty_end_date;
+						var td19 = document.createElement("td");
+						td19.innerHTML =response.data[item].po;
+						var td20 = document.createElement("td");
+						td20.innerHTML =response.data[item].invoice;
+						var td21 = document.createElement("td");
+						td21.innerHTML =response.data[item].vendor;
+						var td22 = document.createElement("td");
+						td22.innerHTML =response.data[item].processor_type;
+						var td23 = document.createElement("td");
+						td23.innerHTML =response.data[item].ram_type;
+						var td24 = document.createElement("td");
+						td24.innerHTML =response.data[item].ram_slot;
+						var td25 = document.createElement("td");
+						td25.innerHTML =response.data[item].total_ram;
+						var td26 = document.createElement("td");
+						td26.innerHTML =response.data[item].storage_type;
+						var td27 = document.createElement("td");
+						td27.innerHTML =response.data[item].storage_space;
+						var td28 = document.createElement("td");
+						td28.innerHTML =response.data[item].lan_mac_address;
+						var td29 = document.createElement("td");
+						td29.innerHTML =response.data[item].lan_ip_address;
+						var td30 = document.createElement("td");
+						td30.innerHTML =response.data[item].wlan_mac_address;
+						var td31 = document.createElement("td");
+						td31.innerHTML =response.data[item].wlan_ip_address;
+						var td32 = document.createElement("td");
+						td32.innerHTML =response.data[item].joined_domain;
+						var td33 = document.createElement("td");
+						td33.innerHTML =response.data[item].connection_type;
+						var td34 = document.createElement("td");
+						var btnupdate = document.createElement("Button");
+						btnupdate.id= response.data[item].computer_id;
+						btnupdate.classList.add("btn");
+						btnupdate.classList.add("btn-primary");
+						btnupdate.innerHTML="Update";
+						btnupdate.addEventListener( "click", function() {
+							datatoUform(this.id)
+						
+						});
+						var role =  "{{Style}}";
+						if(role == "display:none"){
+							btnupdate.disabled =true;
+
+						}
+						else{
+							btnupdate.disabled =false;
+						}
+						td34.append(btnupdate);
+						var td35 = document.createElement("td");
+						td35.innerHTML =response.data[item].type_of_purchase;
+						
+						tr.append(td1);
+						tr.append(td2);
+						tr.append(td35);
+						tr.append(td3);
+					
+						tr.append(td4);
+						tr.append(td5);
+						tr.append(td6);
+						tr.append(td7);
+						tr.append(td8);
+						tr.append(td9);
+						tr.append(td10);
+						tr.append(td11);
+						tr.append(td12);
+						tr.append(td13);
+						tr.append(td14);
+						tr.append(td36);
+						tr.append(td37);
+						tr.append(td15);
+						tr.append(td16);
+						tr.append(td17);
+						tr.append(td18);
+						tr.append(td19);
+						tr.append(td20);
+						tr.append(td21);
+						tr.append(td22);
+						tr.append(td23);
+						tr.append(td24);
+						tr.append(td25);
+						tr.append(td26);
+						tr.append(td27);
+						tr.append(td28);
+						tr.append(td29);
+						tr.append(td30);
+						tr.append(td31);
+						tr.append(td32);
+						tr.append(td33);
+						tr.append(td34);
+						
+					
+						$(trtable).append(tr);
+						indexarray = indexarray + 1
+				}
+				var role =  "{{Style}}";
+
+				if(role == "display:none"){
+					document.getElementById('Add').disabled =true;
+
+				}
+				else{
+					document.getElementById('Add').disabled =false;
+				}
+
+				
+				
+			
+			
+				
+			}
+		});
+
+
+	
+});	
+
+function radioUpdate(){
+	if(document.getElementById("update_ConnectionType_Offline").checked == true){
+		document.getElementById("update_Joined_Domain_no").checked = true;
+		document.getElementById("update_lan_ip_address").value = "Offline";
+		document.getElementById("update_lan_ip_address").disabled = true;
+		
+
+	}
+	else{
+		var lanip = document.getElementById("update_lan_ip_address").value;
+		console.log(lanip);
+		if (lanip == "" || lanip == "Offline" ){
+			document.getElementById("update_Joined_Domain_no").checked = false;
+			document.getElementById("update_Joined_Domain_yes").checked = true;
+
+			document.getElementById("update_lan_ip_address").value = "default";
+			document.getElementById("update_lan_ip_address").disabled = false;
+		}
+		else if (lanip != "" || lanip != "Offline" ){
+			document.getElementById("update_Joined_Domain_no").checked = false;
+			document.getElementById("update_Joined_Domain_yes").checked = true;
+			document.getElementById("update_lan_ip_address").disabled = false;
+			var ipvalue = document.createElement("option");
+				ipvalue.value = lanip;
+				ipvalue.innerHTML = "(current ip) " + lanip;
+			document.getElementById("update_lan_ip_address").append(ipvalue);
+			document.getElementById("update_lan_ip_address").value = lanip;
+
+		}
+	
+
+	
+	}
+
+}
+function radioOffline(){
+
+
+		console.log(lanip);
+	if(document.getElementById("ConnectionType_Offline").checked == true){
+		document.getElementById("Joined_Domain_no").checked = true;
+		document.getElementById("final_lan_ip_address").value = "Offline";
+		document.getElementById("final_lan_ip_address").disabled = true;
+	
+
+	}
+	else{
+		document.getElementById("Joined_Domain_no").checked = false;
+		document.getElementById("final_lan_ip_address").value = "default";
+		document.getElementById("final_lan_ip_address").disabled = false;
+		
+	}
+	
+}
+
+function openform(){
+
+
+const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+
+$.ajax({
+	type: 'POST',
+	headers: {'X-CSRFToken': csrftoken},
+	mode: 'same-origin', // Do not send CSRF token to another domain.
+	url: "{% url 'rundatatoform' %}",
+	data :{
+		'type' : 'PC',
+	
+
+	}, 
+	success: function(data){
+		console.log(data);
+		var modalform = document.getElementById('addform');
+		modalform.style.display = 'block';
+		console.log(data);
+		document.getElementById("add-computer").reset();
+		if(parseInt(data.runnumber) < 10){
+			document.getElementById('final_Computer_ID').value = "UTM-PC000"+data.runnumber ;
+		} else if(parseInt(data.runnumber) >= 10 && parseInt(data.runnumber) < 100){
+			document.getElementById('final_Computer_ID').value = "UTM-PC00"+data.runnumber ;
+		}
+		else if(parseInt(data.runnumber) >= 100 && parseInt(data.runnumber) < 1000){
+			document.getElementById('final_Computer_ID').value = "UTM-PC0"+data.runnumber ;
+		}
+		else if(parseInt(data.runnumber) >= 1000 && parseInt(data.runnumber) < 10000){
+			document.getElementById('final_Computer_ID').value = "UTM-PC"+data.runnumber ;
+		}
+		var optionsOffline = document.createElement("option");
+		optionsOffline.innerHTML = "Offline";
+		optionsOffline.value = "Offline";
+		var select = document.getElementById('final_lan_ip_address');
+			select.append(optionsOffline);
+		for (var key in data.ip){
+			var options = document.createElement("option");
+			options.innerHTML = data.ip[key].ip_address;
+			options.value = data.ip[key].ip_address;
+			var select = document.getElementById('final_lan_ip_address');
+			select.append(options);
+			console.log(data.ip[key].ip_address)
+		}
+		for (var key in data.ip){
+			var options = document.createElement("option");
+			options.innerHTML = data.ip[key].ip_address;
+			options.value = data.ip[key].ip_address;
+		
+			var select2 = document.getElementById('wlan_ip_address');
+
+		
+			select2.append(options);
+			console.log(data.ip[key].ip_address)
+		}
+		
+
+		
+		
+	}
+});
+}
+
+function openexport(){
+	
+	$.ajax({
+			type: 'Get',
+			
+			url: "{% url 'getcomputerdata' %}",
+		
+			success: function(response){
+				document.getElementById("exportdata").style.display = 'block';
+				document.getElementById('customselectStart').readOnly = true;
+				document.getElementById('customselectEnd').readOnly = true;
+
+				document.getElementById("SelectexportBTN").disabled = true ;
+				$(exportdataTD).empty();
+				for (var item in response.data){
+					var tr = document.createElement("tr");
+						var td1 = document.createElement("td");
+						td1.innerHTML =response.data[item].computer_id;
+						var td2 = document.createElement("td");
+						td2.innerHTML =response.data[item].current_computer_id;
+						var td3 = document.createElement("td");
+						td3.innerHTML =response.data[item].pctype;
+						var td4 = document.createElement("td");
+						td4.innerHTML =response.data[item].pic;
+						var td5 = document.createElement("td");
+						td5.innerHTML =response.data[item].previous_pic;
+						var td6 = document.createElement("td");
+						td6.innerHTML =response.data[item].Brand;
+						var td7 = document.createElement("td");
+						td7.innerHTML =response.data[item].Model;
+						var td8 = document.createElement("td");
+						td8.innerHTML =response.data[item].serial_number;
+						var td9 = document.createElement("td");
+						td9.innerHTML =response.data[item].asset_no;
+						var td10 = document.createElement("td");
+						td10.innerHTML =response.data[item].dop;
+						var td11 = document.createElement("td");
+						td11.innerHTML =response.data[item].dop_Warranty_end_date;
+						var td12 = document.createElement("td");
+						td12.innerHTML =response.data[item].vendor;
+						var td13 = document.createElement("td");
+						td13.innerHTML =response.data[item].po;
+						var td14 = document.createElement("td");
+						td14.innerHTML =response.data[item].invoice;
+						var td15 = document.createElement("td");
+						td15.innerHTML =response.data[item].type_of_purchase;
+						var td16 = document.createElement("td");
+						td16.innerHTML =response.data[item].block;
+						var td17 = document.createElement("td");
+						td17.innerHTML =response.data[item].location;
+						var td18 = document.createElement("td");
+						td18.innerHTML =response.data[item].standard_installation;
+						var td34 = document.createElement("td");
+						td34.innerHTML =response.data[item].usbunlock;
+						var td35 = document.createElement("td");
+						td35.innerHTML =response.data[item].usbunlock;
+						var td19 = document.createElement("td");
+						td19.innerHTML =response.data[item].windows;
+						var td20 = document.createElement("td");
+						td20.innerHTML =response.data[item].microsoft_office;
+						var td21 = document.createElement("td");
+						td21.innerHTML =response.data[item].microsoft_office_keys;
+						var td22 = document.createElement("td");
+						td22.innerHTML =response.data[item].processor_type;
+						var td23 = document.createElement("td");
+						td23.innerHTML =response.data[item].ram_type;
+						var td24 = document.createElement("td");
+						td24.innerHTML =response.data[item].ram_slot;
+						var td25 = document.createElement("td");
+						td25.innerHTML =response.data[item].total_ram;
+						var td26 = document.createElement("td");
+						td26.innerHTML =response.data[item].storage_type;
+						var td36 = document.createElement("td");
+						td36.innerHTML =response.data[item].storage_space;
+						var td27 = document.createElement("td");
+						td27.innerHTML =response.data[item].connection_type;
+						var td28 = document.createElement("td");
+						td28.innerHTML =response.data[item].joined_domain;
+						var td29 = document.createElement("td");
+						td29.innerHTML =response.data[item].lan_mac_address;
+						var td30 = document.createElement("td");
+						td30.innerHTML =response.data[item].lan_ip_address;
+						var td31 = document.createElement("td");
+						td31.innerHTML =response.data[item].wlan_mac_address;
+						var td32 = document.createElement("td");
+						td32.innerHTML =response.data[item].wlan_ip_address;
+						var td33 = document.createElement("td");
+						td33.innerHTML =response.data[item].pccurrentstatus;
+		
+					
+						tr.append(td1);
+						tr.append(td2);
+					
+						tr.append(td3);
+					
+						tr.append(td4);
+						tr.append(td5);
+						tr.append(td6);
+						tr.append(td7);
+						tr.append(td8);
+						tr.append(td9);
+						tr.append(td10);
+						tr.append(td11);
+						tr.append(td12);
+						tr.append(td13);
+						tr.append(td14);
+						tr.append(td15);
+						tr.append(td16);
+						tr.append(td17);
+					
+						tr.append(td18);
+						
+						tr.append(td34);
+
+tr.append(td35);
+						tr.append(td19);
+						tr.append(td20);
+						tr.append(td21);
+						tr.append(td22);
+						tr.append(td23);
+						tr.append(td24);
+						tr.append(td25);
+						tr.append(td26);
+						tr.append(td36);
+						tr.append(td27);
+						tr.append(td28);
+						tr.append(td29);
+						tr.append(td30);
+						tr.append(td31);
+						tr.append(td32);
+						tr.append(td33);
+						
+						$(exportdataTD).append(tr);
+						
+				}
+			
+
+				
+				
+			
+			
+				
+			}
+		});
+}
+
+function customexport(){
+	document.getElementById('customselectStart').readOnly = false;
+	document.getElementById('customselectEnd').readOnly = false;
+
+document.getElementById("SelectexportBTN").disabled = false ;
+console.log("hello world")
+}
+
+function Searchcustomexport(){
+	
+
+		var dataStart = document.getElementById("customselectStart").value;
+		var dataEnd = document.getElementById("customselectEnd").value;
+		if((dataStart == "" || dataStart == null) || (dataEnd == ""|| dataEnd == null)){
+			alert("Fill the box first");
+		}
+		else
+		{
+			var data1 = dataStart.replace('UTM-PC','');
+			var datafinal1 = parseInt(data1);
+			var data2 = dataEnd.replace('UTM-PC','');
+			var datafinal2 = parseInt(data2);
+			// while(datafinal1 <= datafinal2){
+			// 	if(datafinal1 < 10){
+			// 		data = "UTM-PC00"+datafinal1 ;
+			// 	} else if(datafinal1 >= 10 && datafinal1 < 100){
+			// 		data= "UTM-PC0"+datafinal1;
+			// 	}
+			// 	else if(datafinal1 >= 100 && datafinal1 < 1000){
+			// 		data= "UTM-PC"+datafinal1;
+			// 	}
+			// 	else if(datafinal1 >= 1000 && datafinal1 < 10000){
+			// 		data= "UTM-PC"+datafinal1;
+			// 	}
+			// 	arraydata.push(data);
+			
+			// 	datafinal1++;
+			// 		}
+				
+				const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+				// var formData = new FormData();
+  				// formData.append('dataarray', arraydata);
+				$.ajax({
+					type: 'POST',
+					headers: {'X-CSRFToken': csrftoken},
+					mode: 'same-origin', // Do not send CSRF token to another domain.
+					url: "{% url 'getcustomPCdata' %}",
+					data : {'data1': datafinal1, 'data2': datafinal2}, 
+					
+					success: function(response){
+						console.log(response);
+						$(exportdataTD).empty();
+				for (var item in response.data){
+					var tr = document.createElement("tr");
+					var td1 = document.createElement("td");
+						td1.innerHTML =response.data[item].computer_id;
+						var td2 = document.createElement("td");
+						td2.innerHTML =response.data[item].current_computer_id;
+						var td3 = document.createElement("td");
+						td3.innerHTML =response.data[item].pctype;
+						var td4 = document.createElement("td");
+						td4.innerHTML =response.data[item].pic;
+						var td5 = document.createElement("td");
+						td5.innerHTML =response.data[item].previous_pic;
+						var td6 = document.createElement("td");
+						td6.innerHTML =response.data[item].Brand;
+						var td7 = document.createElement("td");
+						td7.innerHTML =response.data[item].Model;
+						var td8 = document.createElement("td");
+						td8.innerHTML =response.data[item].serial_number;
+						var td9 = document.createElement("td");
+						td9.innerHTML =response.data[item].asset_no;
+						var td10 = document.createElement("td");
+						td10.innerHTML =response.data[item].dop;
+						var td11 = document.createElement("td");
+						td11.innerHTML =response.data[item].dop_Warranty_end_date;
+						var td12 = document.createElement("td");
+						td12.innerHTML =response.data[item].vendor;
+						var td13 = document.createElement("td");
+						td13.innerHTML =response.data[item].po;
+						var td14 = document.createElement("td");
+						td14.innerHTML =response.data[item].invoice;
+						var td15 = document.createElement("td");
+						td15.innerHTML =response.data[item].type_of_purchase;
+						var td16 = document.createElement("td");
+						td16.innerHTML =response.data[item].block;
+						var td17 = document.createElement("td");
+						td17.innerHTML =response.data[item].location;
+						var td18 = document.createElement("td");
+						td18.innerHTML =response.data[item].standard_installation;
+						var td19 = document.createElement("td");
+						td19.innerHTML =response.data[item].windows;
+						var td20 = document.createElement("td");
+						td20.innerHTML =response.data[item].microsoft_office;
+						var td21 = document.createElement("td");
+						td21.innerHTML =response.data[item].microsoft_office_keys;
+						var td22 = document.createElement("td");
+						td22.innerHTML =response.data[item].processor_type;
+						var td23 = document.createElement("td");
+						td23.innerHTML =response.data[item].ram_type;
+						var td24 = document.createElement("td");
+						td24.innerHTML =response.data[item].ram_slot;
+						var td25 = document.createElement("td");
+						td25.innerHTML =response.data[item].total_ram;
+						var td26 = document.createElement("td");
+						td26.innerHTML =response.data[item].storage_type;
+						var td27 = document.createElement("td");
+						td27.innerHTML =response.data[item].connection_type;
+						var td28 = document.createElement("td");
+						td28.innerHTML =response.data[item].joined_domain;
+						var td29 = document.createElement("td");
+						td29.innerHTML =response.data[item].lan_mac_address;
+						var td30 = document.createElement("td");
+						td30.innerHTML =response.data[item].lan_ip_address;
+						var td31 = document.createElement("td");
+						td31.innerHTML =response.data[item].wlan_mac_address;
+						var td32 = document.createElement("td");
+						td32.innerHTML =response.data[item].wlan_ip_address;
+						var td33 = document.createElement("td");
+						td33.innerHTML =response.data[item].pccurrentstatus;
+		
+					
+						tr.append(td1);
+						tr.append(td2);
+					
+						tr.append(td3);
+					
+						tr.append(td4);
+						tr.append(td5);
+						tr.append(td6);
+						tr.append(td7);
+						tr.append(td8);
+						tr.append(td9);
+						tr.append(td10);
+						tr.append(td11);
+						tr.append(td12);
+						tr.append(td13);
+						tr.append(td14);
+						tr.append(td15);
+						tr.append(td16);
+						tr.append(td17);
+						tr.append(td18);
+						tr.append(td19);
+						tr.append(td20);
+						tr.append(td21);
+						tr.append(td22);
+						tr.append(td23);
+						tr.append(td24);
+						tr.append(td25);
+						tr.append(td26);
+						tr.append(td27);
+						tr.append(td28);
+						tr.append(td29);
+						tr.append(td30);
+						tr.append(td31);
+						tr.append(td32);
+						tr.append(td33);
+						
+						
+						$(exportdataTD).append(tr);
+						
+				}
+				
+
+		
+		
+	}
+});
+}
+					
+		}
+
+
+function openQRexport(){
+	
+	$.ajax({
+			type: 'Get',
+			
+			url: "{% url 'getcomputerdata' %}",
+		
+			success: function(response){
+				document.getElementById("QRexportdata").style.display = 'block';
+				document.getElementById('customselectStart').readOnly = true;
+				document.getElementById('customselectEnd').readOnly = true;
+
+				document.getElementById("SelectexportBTN").disabled = true ;
+				$(exportdataTDQR).empty();
+				for (var item in response.data){
+					var tr = document.createElement("tr");
+						var td1 = document.createElement("td");
+						td1.innerHTML =response.data[item].computer_id;
+						var td2 = document.createElement("td");
+						var x = document.createElement("IMG");
+						x.setAttribute("src", '/media/pc/' + response.data[item].computer_id + '.png');
+						x.setAttribute("width", "100");
+						x.setAttribute("height", "100");
+						x.setAttribute("alt", response.data[item].computer_id);
+						td2.append(x)
+					
+					
+						tr.append(td1);
+						tr.append(td2);
+					
+						
+						$(exportdataTDQR).append(tr);
+						
+				}
+			
+
+				
+				
+			
+			
+				
+			}
+		});
+}
+
+function SearchQRcustomexport(){
+	
+
+	var dataStart = document.getElementById("customselectStartQR").value;
+	var dataEnd = document.getElementById("customselectEndQR").value;
+	if((dataStart == "" || dataStart == null) || (dataEnd == ""|| dataEnd == null)){
+		alert("Fill the box first");
+	}
+	else
+	{
+		var data1 = dataStart.replace('UTM-PC','');
+		var datafinal1 = parseInt(data1);
+		var data2 = dataEnd.replace('UTM-PC','');
+		var datafinal2 = parseInt(data2);
+		var type_selection = "Custom"
+		// while(datafinal1 <= datafinal2){
+		// 	if(datafinal1 < 10){
+		// 		data = "UTM-PC00"+datafinal1 ;
+		// 	} else if(datafinal1 >= 10 && datafinal1 < 100){
+		// 		data= "UTM-PC0"+datafinal1;
+		// 	}
+		// 	else if(datafinal1 >= 100 && datafinal1 < 1000){
+		// 		data= "UTM-PC"+datafinal1;
+		// 	}
+		// 	else if(datafinal1 >= 1000 && datafinal1 < 10000){
+		// 		data= "UTM-PC"+datafinal1;
+		// 	}
+		// 	arraydata.push(data);
+		
+		// 	datafinal1++;
+		// 		}
+			
+			const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+			// var formData = new FormData();
+			  // formData.append('dataarray', arraydata);
+			$.ajax({
+				type: 'POST',
+				headers: {'X-CSRFToken': csrftoken},
+				mode: 'same-origin', // Do not send CSRF token to another domain.
+				url: "{% url 'GetQRPCData' %}",
+				data : {'data1': datafinal1, 'data2': datafinal2 , 'type' :type_selection }, 
+				
+				success: function(response){
+					console.log(response);
+					$(exportdataTDQR).empty();
+			for (var item in response.data){
+				var tr = document.createElement("tr");
+						var td1 = document.createElement("td");
+						td1.innerHTML =response.data[item].computer_id;
+						var td2 = document.createElement("td");
+						var x = document.createElement("IMG");
+						x.setAttribute("src", '/media/pc/' + response.data[item].computer_id + '.png');
+						x.setAttribute("width", "100");
+						x.setAttribute("height", "100");
+						x.setAttribute("alt", response.data[item].computer_id);
+						td2.append(x)
+					
+					
+						tr.append(td1);
+						tr.append(td2);
+					
+						
+						$(exportdataTDQR).append(tr);
+					
+					
+					
+					
+					
+			}
+			
+
+	
+	
+}
+});
+}
+				
+	}
+
+function closeexportQRdata(){
+	document.getElementById("QRexportdata").style.display = 'none';
+}
+function closeexportdata(){
+	document.getElementById("exportdata").style.display = 'none';
+}
+// 		
+function addpctypechange() {
+    var x = document.getElementById("machineType").value;
+    if(x == "Office PC"){
+      var CID = document.getElementById("final_Computer_ID").value;
+      var CUCID = document.getElementById("final_Current_Computer");
+      CUCID.value = CID;
+      CUCID.setAttribute('readonly', true);
+	  
+    }
+    if(x == "PC Machine"){
+      var CID = document.getElementById("final_Computer_ID").value;
+      var CUCID = document.getElementById("final_Current_Computer");
+      CUCID.value = "none";
+	  CUCID.removeAttribute("readonly");
+	 
+
+      
+    }
+  }
+
+  function ipchange() {
+	var select2 = document.getElementById('wlan_ip_address').value;
+	var select1 = document.getElementById('final_lan_ip_address').value;
+	if (select1 == select2) {
+		alert('Please select Different IP for each Lan and Wlan ip address')
+	}
+	 
+
+      
+    }
+  
+function addPC(){
+		var pic = $('input[name="pic"]').val().trim();
+		if( document.getElementById("type_of_purchase_it").checked == true){
+			var type_of_purchase = document.getElementById("type_of_purchase_it").value;
+
+		}
+		else{
+			var type_of_purchase = document.getElementById("type_of_purchase_other").value;
+		}
+
+		
+		var Previous_PIC = $('input[name="Previous_PIC"]').val().trim();
+		var Computer_ID = $('input[name="Computer_ID"]').val().trim();
+		var Current_Computer_ID = $('input[name="Current_Computer_ID"]').val().trim();
+		var Brand = document.getElementById("Brand").value;
+		var model = document.getElementById("model").value;
+		var serial_number = $('input[name="serial_number"]').val().trim();
+		var asset_no = $('input[name="asset_no"]').val().trim();
+		var vendor = document.getElementById("vendor").value;
+		var machineType =document.getElementById("machineType").value;
+		var processor = document.getElementById("processor").value;
+		var ram_type = document.getElementById("ram_type").value;
+		if( document.getElementById("final_ram_slot_2").checked == true){
+			var ram_slot = document.getElementById("final_ram_slot_2").value;
+
+		}
+		else{
+			var ram_slot = document.getElementById("final_ram_slot_4").value;
+		}
+		
+		var total_RAM = document.getElementById("total_RAM").value;
+
+		
+		if( document.getElementById("storage_type_HDD").checked == true){
+			var storage_type = document.getElementById("storage_type_HDD").value;
+
+		}
+		else{
+			var storage_type = document.getElementById("storage_type_SDD").value;
+		}
+		
+	
+		
+		var storageSpace = document.getElementById("storageSpace").value;
+
+		var dop = $('input[name="dop"]').val().trim();
+		var dopYear = $('input[name="dopYear"]').val().trim();
+		var po = $('input[name="po"]').val().trim();
+		var invoice = $('input[name="invoice"]').val().trim();
+		var block = document.getElementById("block").value;
+		var location = document.getElementById("location").value;
+		var Standard_Installation = $('input[name="Standard_Installation"]').val();
+		if( document.getElementById("Standard_Installation_yes").checked == true){
+			var Standard_Installation = document.getElementById("Standard_Installation_yes").value;
+
+		}
+		else{
+			var Standard_Installation = document.getElementById("Standard_Installation_no").value;
+		}
+		if( document.getElementById("usb_unlock_yes").checked == true){
+			var usb_unlock = document.getElementById("usb_unlock_yes").value;
+
+		}
+		else{
+			var usb_unlock = document.getElementById("usb_unlock_no").value;
+		}
+		if( document.getElementById("cd_unlock_yes").checked == true){
+			var cd_unlock = document.getElementById("cd_unlock_yes").value;
+
+		}
+		else{
+			var cd_unlock = document.getElementById("cd_unlock_no").value;
+		}
+		
+		var Microsoft_Office = document.getElementById("Microsoft_Office").value;
+		var Licensed_key = $('input[name="Licensed_key"]').val().trim();
+		var Window_version = document.getElementById("Window_version").value;
+		var lan_mac_address = $('input[name="lan_mac_address"]').val().trim();
+		var lan_ip_address = document.getElementById("final_lan_ip_address").value;
+		var wlan_mac_address = $('input[name="wlan_mac_address"]').val().trim();
+		var wlan_ip_address = $('input[name="wlan_ip_address"]').val().trim();
+		if( document.getElementById("Joined_Domain_yes").checked == true){
+			var Joined_Domain = document.getElementById("Joined_Domain_yes").value;
+
+		}
+		else{
+			var Joined_Domain = document.getElementById("Joined_Domain_no").value;
+		}
+		
+		if( document.getElementById("ConnectionType_Intranet").checked == true){
+			var ConnectionType = document.getElementById("ConnectionType_Intranet").value;
+
+		}
+		else if( document.getElementById("ConnectionType_Internet").checked == true){
+			var ConnectionType = document.getElementById("ConnectionType_Internet").value;
+		}
+		else if( document.getElementById("ConnectionType_Offline").checked == true){
+			var ConnectionType = document.getElementById("ConnectionType_Offline").value;
+		}
+		
+		var Computer_Status = document.getElementById("Computer_Status").value;
+		const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+		if(Computer_Status == "default"){
+			alert("You can't pick default in Computer Status option ");
+		}
+		
+		else if(Brand == "default"){
+			alert("You can't pick default in Brand option ");
+
+		}
+		else if(location == "default"){
+			alert("You can't pick default in Location option ");
+
+		}
+		else if(block == "default"){
+			alert("You can't pick default in Block option ");
+
+		}
+		
+		else if(vendor == "default"){
+			alert("You can't pick default in Vendor option ");
+
+		}
+		else if(lan_ip_address == "default"){
+			alert("You can't pick default in IP Address option ");
+
+		}
+		else if(machineType == "default"){
+			alert("You can't pick default in PC Type option ");
+
+		}
+		else {
+			
+
+		$.ajax({
+			type: 'POST',
+			headers: {'X-CSRFToken': csrftoken},
+        	mode: 'same-origin', // Do not send CSRF token to another domain.
+			url: "{% url 'addcomputerform' %}",
+			data :{
+				'pic' : pic, 'Previous_PIC' : Previous_PIC, 'Computer_ID' : Computer_ID,
+				'Current_Computer_ID' : Current_Computer_ID, 'Brand' : Brand, 'model' : model,
+				'serial_number' : serial_number, 'asset_no' : asset_no, 'vendor' : vendor,
+				'machineType' : machineType, 'processor' : processor, 'ram_type' : ram_type,
+				'ram_slot' : ram_slot, 'total_RAM' : total_RAM, 'storage_type' : storage_type,
+				'storageSpace' : storageSpace, 'dop' : dop, 'dopYear' : dopYear,
+				'po' : po, 'invoice' : invoice, 'block' : block,
+				'location' : location, 'Standard_Installation' : Standard_Installation, 'Microsoft_Office' : Microsoft_Office,
+				'Licensed_key' : Licensed_key, 'Window_version' : Window_version, 'lan_mac_address' : lan_mac_address,
+				'lan_ip_address' : lan_ip_address, 'wlan_mac_address' : wlan_mac_address, 'wlan_ip_address' : wlan_ip_address,
+				'Joined_Domain' : Joined_Domain, 'ConnectionType' : ConnectionType, 'Computer_Status' : Computer_Status, 'type_of_purchase': type_of_purchase,
+				'usb_unlock' : usb_unlock, 'cd_unlock': cd_unlock
+			
+
+			}, 
+			success: function(data){
+				console.log(data);
+				console.log("Success Post");
+				updatetable();
+				closeform();
+
+
+				
+
+			}
+		});
+	}
+
+		
+}
+	
+function datatoUform(btnid){
+	const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+
+	$.ajax({
+			type: 'POST',
+			headers: {'X-CSRFToken': csrftoken},
+        	mode: 'same-origin', // Do not send CSRF token to another domain.
+			url: "{% url 'getdataupdate' %}",
+			data :{
+				'id' : btnid,
+			
+
+			}, 
+			success: function(data){
+				var modalform = document.getElementById('updateformmodal');
+				console.log(data)
+				modalform.style.display = 'block';
+				
+				
+				if(data.type_of_purchase == 'IT'){
+					document.getElementById('update_type_of_purchase_it').checked = true;
+				}
+				else{
+					document.getElementById('update_type_of_purchase_other').checked = true;
+				}
+				document.getElementById('update_pic').value = data.pic ;
+				document.getElementById('update_previous_pic').value = data.previous_pic ;
+				document.getElementById('update_Computer_ID').value = data.computer_id ;
+				 document.getElementById('update_Current_Computer').value = data.current_computer_id ;
+				document.getElementById("update_Brand").value = data.Brand ;
+				console.log(data.Model);
+				document.getElementById("update_model").value = data.Model ;
+				document.getElementById('update_serial_number').value = data.serial_number ;
+				document.getElementById('update_asset_no').value = data.asset_no ;
+				document.getElementById("update_vendor").value = data.vendor ;
+				document.getElementById("update_machineType").value = data.pctype ;
+				document.getElementById("update_processor").value = data.processor_type ;
+				document.getElementById('update_ram_type').value = data.ram_type;
+				document.getElementById('update_storageSpace').value = data.storage_space;
+				if(data.ram_slot == '2'){
+					document.getElementById('update_ram_slot_2').checked = true;
+				}
+				else{
+					document.getElementById('update_ram_slot_4').checked = true;
+				}
+			
+				document.getElementById('update_total_RAM').value = data.total_ram;
+				
+				if(data.storage_type == 'HDD'){
+					document.getElementById('update_storage_type_HDD').checked = true;
+				}
+				else{
+					document.getElementById('update_storage_type_SDD').checked = true;
+				}
+				if(data.usbunlock == 'Yes'){
+					document.getElementById('update_usb_unlock_yes').checked = true;
+				}
+				else{
+					document.getElementById('update_usb_unlock_no').checked = true;
+				
+				}
+				if(data.cdunlock == 'Yes'){
+					document.getElementById('update_cd_unlock_yes').checked = true;
+				}
+				else{
+					document.getElementById('update_cd_unlock_no').checked = true;
+				
+				}
+				
+			
+	
+			
+				
+				document.getElementById('update_dop').value = data.dop ;
+				document.getElementById('update_dopYear').value = data.dop_Warranty_end_date ;
+				document.getElementById('update_po').value = data.po ;
+				document.getElementById('update_invoice').value = data.invoice ;
+				document.getElementById('update_block').value = data.block ;
+				document.getElementById("update_location").value = data.location ;
+				if(data.standard_installation == 'Yes'){
+					document.getElementById('update_Standard_Installation_yes').checked = true ;
+				} else {
+					document.getElementById('update_Standard_Installation_no').checked = true ;
+				}
+
+				
+				document.getElementById("update_Microsoft_Office").value = data.microsoft_office ;
+		
+				document.getElementById('update_Licensed_key').value = data.microsoft_office_keys ;
+				if(data.windows == "Windows 10 Pro" || data.windows == "Windows 10 Pro 64bit"){
+					document.getElementById("update_Window_version").value = "Windows 10 Pro 64bit" ;
+
+				}
+				else if(data.windows != "Windows 10 Pro" || data.windows != "Windows 10 Pro 64bit"){
+					document.getElementById("update_Window_version").value = data.windows ;
+
+				}
+				document.getElementById('update_lan_mac_address').value = data.lan_mac_address ;
+				document.getElementById('update_lan_ip_address').options.length = 0;
+
+				var ipselect = document.getElementById('update_lan_ip_address');
+				var ipselect = document.getElementById('update_lan_ip_address');
+				var optionRelease = document.createElement("option");
+				optionRelease.value = "Release";
+				optionRelease.innerHTML = "Release";
+				ipselect.append(optionRelease);
+				var optionoffline = document.createElement("option");
+				optionoffline.value = "Offline";
+				optionoffline.innerHTML = "Offline";
+				ipselect.append(optionoffline);
+				var ipvalue = document.createElement("option");
+				ipvalue.value = data.lan_ip_address;
+				ipvalue.innerHTML = "(current ip) " + data.lan_ip_address;
+				var ipvalue = document.createElement("option");
+				ipvalue.value = data.lan_ip_address;
+				ipvalue.innerHTML = "(current ip) " + data.lan_ip_address;
+				
+				
+				ipselect.append(ipvalue);
+				for (var key in data.ip){
+					var options = document.createElement("option");
+					options.innerHTML = data.ip[key].ip_address;
+					options.value = data.ip[key].ip_address;
+					ipselect.append(options);
+				}
+				document.getElementById('update_lan_ip_address').value = data.lan_ip_address ;
+				if (data.lan_ip_address == "Offline"){
+					document.getElementById('update_lan_ip_address').disabled = true
+				}
+				document.getElementById('update_wlan_mac_address').value = data.wlan_mac_address ;
+				document.getElementById('update_wlan_ip_address').value = data.wlan_ip_address ;
+				if(data.joined_domain == 'Yes'){
+					document.getElementById('update_Joined_Domain_yes').checked = true ;
+				} else {
+					document.getElementById('update_Joined_Domain_no').checked = true ;
+				}
+				if(data.connection_type == 'Intranet'){
+					document.getElementById('update_ConnectionType_Intranet').checked = true ;
+				} else if(data.connection_type == 'Internet') {
+					document.getElementById('update_ConnectionType_Internet').checked = true ;
+				} else {
+					document.getElementById('update_ConnectionType_Offline').checked = true ;
+				}
+				if (data.pccurrentstatus == "In-Use" || data.pccurrentstatus == "In-use"){
+					document.getElementById("update_Computer_Status").value = "In-use" ;
+				}
+				else if (data.pccurrentstatus != "In-Use" || data.pccurrentstatus != "In-use"){
+					document.getElementById("update_Computer_Status").value = data.pccurrentstatus  ;
+				}
+				
+				console.log(data.pccurrentstatus);
+
+			
+				
+			}
+		});
+
+}
+
+
+
+
+function updatetable(){
+	$.ajax({
+			type: 'Get',
+			
+			url: "{% url 'getcomputerdata' %}",
+		
+			success: function(response){
+				$(trtable).empty();
+				for (var item in response.data){
+					var tr = document.createElement("tr");
+						var td1 = document.createElement("td");
+						td1.innerHTML =response.data[item].computer_id;
+						var td2 = document.createElement("td");
+						td2.innerHTML =response.data[item].current_computer_id;
+						var td3 = document.createElement("td");
+						td3.innerHTML =response.data[item].pic;
+						var td4 = document.createElement("td");
+						td4.innerHTML =response.data[item].previous_pic;
+						var td5 = document.createElement("td");
+						td5.innerHTML =response.data[item].pccurrentstatus;
+						var td6 = document.createElement("td");
+						td6.innerHTML =response.data[item].pctype;
+						var td7 = document.createElement("td");
+						td7.innerHTML =response.data[item].Brand;
+						var td8 = document.createElement("td");
+						td8.innerHTML =response.data[item].Model;
+						var td9 = document.createElement("td");
+						td9.innerHTML =response.data[item].windows;
+						var td10 = document.createElement("td");
+						td10.innerHTML =response.data[item].serial_number;
+						var td11 = document.createElement("td");
+						td11.innerHTML =response.data[item].asset_no;
+						var td12 = document.createElement("td");
+						td12.innerHTML =response.data[item].block;
+						var td13 = document.createElement("td");
+						td13.innerHTML =response.data[item].location;
+						var td14 = document.createElement("td");
+						td14.innerHTML =response.data[item].standard_installation;
+						var td36 = document.createElement("td");
+						td36.innerHTML =response.data[item].usbunlock;
+						var td37 = document.createElement("td");
+						td37.innerHTML =response.data[item].cdunlock;
+						var td15 = document.createElement("td");
+						td15.innerHTML =response.data[item].microsoft_office;
+						var td16 = document.createElement("td");
+						td16.innerHTML =response.data[item].microsoft_office_keys;
+						var td17 = document.createElement("td");
+						td17.innerHTML =response.data[item].dop;
+						var td18 = document.createElement("td");
+						td18.innerHTML =response.data[item].dop_Warranty_end_date;
+						var td19 = document.createElement("td");
+						td19.innerHTML =response.data[item].po;
+						var td20 = document.createElement("td");
+						td20.innerHTML =response.data[item].invoice;
+						var td21 = document.createElement("td");
+						td21.innerHTML =response.data[item].vendor;
+						var td22 = document.createElement("td");
+						td22.innerHTML =response.data[item].processor_type;
+						var td23 = document.createElement("td");
+						td23.innerHTML =response.data[item].ram_type;
+						var td24 = document.createElement("td");
+						td24.innerHTML =response.data[item].ram_slot;
+						var td25 = document.createElement("td");
+						td25.innerHTML =response.data[item].total_ram;
+						var td26 = document.createElement("td");
+						td26.innerHTML =response.data[item].storage_type;
+						var td27 = document.createElement("td");
+						td27.innerHTML =response.data[item].storage_space;
+						var td28 = document.createElement("td");
+						td28.innerHTML =response.data[item].lan_mac_address;
+						var td29 = document.createElement("td");
+						td29.innerHTML =response.data[item].lan_ip_address;
+						var td30 = document.createElement("td");
+						td30.innerHTML =response.data[item].wlan_mac_address;
+						var td31 = document.createElement("td");
+						td31.innerHTML =response.data[item].wlan_ip_address;
+						var td32 = document.createElement("td");
+						td32.innerHTML =response.data[item].joined_domain;
+						var td33 = document.createElement("td");
+						td33.innerHTML =response.data[item].connection_type;
+						var td34 = document.createElement("td");
+						var btnupdate = document.createElement("Button");
+						btnupdate.id= response.data[item].computer_id;
+						btnupdate.classList.add("btn");
+						btnupdate.classList.add("btn-primary");
+						btnupdate.innerHTML="Update";
+						btnupdate.addEventListener( "click", function() {
+							datatoUform(this.id)
+						
+						});
+						var role =  "{{Style}}";
+						if(role == "display:none"){
+							btnupdate.disabled =true;
+
+						}
+						else{
+							btnupdate.disabled =false;
+						}
+						td34.append(btnupdate);
+						var td35 = document.createElement("td");
+						td35.innerHTML =response.data[item].type_of_purchase;
+						tr.append(td1);
+						tr.append(td2);
+						tr.append(td35);
+						tr.append(td3);
+					
+						tr.append(td4);
+						tr.append(td5);
+						tr.append(td6);
+						tr.append(td7);
+						tr.append(td8);
+						tr.append(td9);
+						tr.append(td10);
+						tr.append(td11);
+						tr.append(td12);
+						tr.append(td13);
+						tr.append(td14);
+						tr.append(td36);
+						tr.append(td37);
+						tr.append(td15);
+						tr.append(td16);
+						tr.append(td17);
+						tr.append(td18);
+						tr.append(td19);
+						tr.append(td20);
+						tr.append(td21);
+						tr.append(td22);
+						tr.append(td23);
+						tr.append(td24);
+						tr.append(td25);
+						tr.append(td26);
+						tr.append(td27);
+						tr.append(td28);
+						tr.append(td29);
+						tr.append(td30);
+						tr.append(td31);
+						tr.append(td32);
+						tr.append(td33);
+						tr.append(td34);
+					
+						$(trtable).append(tr);
+						
+				}
+				
+				
+			
+			
+				
+			}
+		});
+}
+ 
+
+function UpdatePC(){
+	var pic = $('input[name="update_pic"]').val().trim();
+		if( document.getElementById("update_type_of_purchase_it").checked == true){
+			var type_of_purchase = document.getElementById("update_type_of_purchase_it").value;
+
+		}
+		else{
+			var type_of_purchase = document.getElementById("update_type_of_purchase_other").value;
+		}
+
+		
+		var Previous_PIC = $('input[name="update_Previous_PIC"]').val();
+		var Computer_ID = $('input[name="update_Computer_ID"]').val().trim();
+		var Current_Computer_ID = $('input[name="update_Current_Computer_ID"]').val();
+		var Brand = document.getElementById("update_Brand").value;
+		var model = document.getElementById("update_model").value;
+		var serial_number = $('input[name="update_serial_number"]').val();
+		var asset_no = $('input[name="update_asset_no"]').val();
+		var vendor = document.getElementById("update_vendor").value;
+		var machineType =document.getElementById("update_machineType").value;
+		var processor = document.getElementById("update_processor").value;
+		var ram_type = document.getElementById("update_ram_type").value;
+		if( document.getElementById("update_ram_slot_2").checked == true){
+			var ram_slot = document.getElementById("update_ram_slot_2").value;
+
+		}
+		else{
+			var ram_slot = document.getElementById("update_ram_slot_4").value;
+		}
+		var total_RAM = document.getElementById("update_total_RAM").value;
+		if( document.getElementById("update_storage_type_HDD").checked == true){
+			var storage_type = document.getElementById("update_storage_type_HDD").value;
+
+		}
+		else{
+			var storage_type = document.getElementById("update_storage_type_SDD").value;
+		}
+		
+	
+		
+		var storageSpace = document.getElementById("update_storageSpace").value;
+
+		var dop = $('input[name="update_dop"]').val();
+		var dopYear = $('input[name="update_dopYear"]').val();
+		var po = $('input[name="update_po"]').val();
+		var invoice = $('input[name="update_invoice"]').val();
+		var block = document.getElementById("update_block").value;
+		var location = document.getElementById("update_location").value;
+		if( document.getElementById("update_Standard_Installation_yes").checked == true){
+			var Standard_Installation = document.getElementById("update_Standard_Installation_yes").value;
+
+		}
+		else{
+			var Standard_Installation = document.getElementById("update_Standard_Installation_no").value;
+		}
+		if( document.getElementById("update_usb_unlock_yes").checked == true){
+			var usb_unlock = document.getElementById("update_usb_unlock_yes").value;
+
+		}
+		else{
+			var usb_unlock = document.getElementById("update_usb_unlock_no").value;
+		}
+		if( document.getElementById("update_cd_unlock_yes").checked == true){
+			var cd_unlock = document.getElementById("update_cd_unlock_yes").value;
+
+		}
+		else{
+			var cd_unlock = document.getElementById("update_cd_unlock_no").value;
+		}
+		var Microsoft_Office = document.getElementById("update_Microsoft_Office").value;
+		var Licensed_key = $('input[name="update_Licensed_key"]').val();
+		var Window_version = document.getElementById("update_Window_version").value;
+		var lan_mac_address = $('input[name="update_lan_mac_address"]').val();
+		var lan_ip_address = document.getElementById("update_lan_ip_address").value;
+		var wlan_mac_address = $('input[name="update_wlan_mac_address"]').val();
+		var wlan_ip_address = $('input[name="update_wlan_ip_address"]').val();
+		if( document.getElementById("update_Joined_Domain_yes").checked == true){
+			var Joined_Domain = document.getElementById("update_Joined_Domain_yes").value;
+
+		}
+		else{
+			var Joined_Domain = document.getElementById("update_Joined_Domain_no").value;
+		}
+		
+		if( document.getElementById("update_ConnectionType_Intranet").checked == true){
+			var ConnectionType = document.getElementById("update_ConnectionType_Intranet").value;
+
+		}
+		else if( document.getElementById("update_ConnectionType_Internet").checked == true){
+			var ConnectionType = document.getElementById("update_ConnectionType_Internet").value;
+		}
+		else if( document.getElementById("update_ConnectionType_Offline").checked == true){
+			var ConnectionType = document.getElementById("update_ConnectionType_Offline").value;
+		}
+	
+		var Computer_Status = document.getElementById("update_Computer_Status").value;
+		const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+		if(Computer_Status == "default"){
+			alert("You can't pick default in Computer Status option ");
+		}
+	
+		else if(Brand == "default"){
+			alert("You can't pick default in Brand option ");
+
+		}
+		else if(location == "default"){
+			alert("You can't pick default in Location option ");
+
+		}
+		else if(block == "default"){
+			alert("You can't pick default in Block option ");
+
+		}
+		
+		else if(vendor == "default"){
+			alert("You can't pick default in Vendor option ");
+
+		}
+		else if(lan_ip_address == "default"){
+			alert("You can't pick default in IP Address option ");
+
+		}
+		else if(machineType == "default"){
+			alert("You can't pick default in PC Type option ");
+
+		}
+		else {
+			
+		$.ajax({
+			type: 'POST',
+			headers: {'X-CSRFToken': csrftoken},
+        	mode: 'same-origin', // Do not send CSRF token to another domain.
+			url: "{% url 'updateformpc' %}",
+			data :{
+				'pic' : pic, 'Previous_PIC' : Previous_PIC, 'Computer_ID' : Computer_ID,
+				'Current_Computer_ID' : Current_Computer_ID, 'Brand' : Brand, 'model' : model,
+				'serial_number' : serial_number, 'asset_no' : asset_no, 'vendor' : vendor,
+				'machineType' : machineType, 'processor' : processor, 'ram_type' : ram_type,
+				'ram_slot' : ram_slot, 'total_RAM' : total_RAM, 'storage_type' : storage_type,
+				'storageSpace' : storageSpace, 'dop' : dop, 'dopYear' : dopYear,
+				'po' : po, 'invoice' : invoice, 'block' : block,
+				'location' : location, 'Standard_Installation' : Standard_Installation, 'Microsoft_Office' : Microsoft_Office,
+				'Licensed_key' : Licensed_key, 'Window_version' : Window_version, 'lan_mac_address' : lan_mac_address,
+				'lan_ip_address' : lan_ip_address, 'wlan_mac_address' : wlan_mac_address, 'wlan_ip_address' : wlan_ip_address,
+				'Joined_Domain' : Joined_Domain, 'ConnectionType' : ConnectionType, 'Computer_Status' : Computer_Status, 'type_of_purchase': type_of_purchase,
+				'usb_unlock' : usb_unlock, 'cd_unlock': cd_unlock
+			
+
+			}, 
+			success: function(data){
+				console.log(data);
+				console.log("Success Post");
+				updatetable();
+				closeformupdate();
+
+				
+
+			}
+		});
+		}
+
+		
+}
+
+function updatetableExport(){
+	
+
+}
+
+function downloadexport(){
+	const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+
+	if(document.getElementById("allselect").checked == true){
+	type = 'all';
+
+	$.ajax({
+					type: 'POST',
+					headers: {'X-CSRFToken': csrftoken},
+					mode: 'same-origin', // Do not send CSRF token to another domain.
+					url: "{% url 'exportdatapc' %}",
+					data : {'type': type}, 
+					
+					success: function(response){
+						download_csv(response)
+
+					
+
+		
+		
+	}
+});
+
+}
+else{
+	type = 'custom';
+	var dataStart = document.getElementById("customselectStart").value;
+		var dataEnd = document.getElementById("customselectEnd").value;
+		if((dataStart == "" || dataStart == null) || (dataEnd == ""|| dataEnd == null)){
+			alert("Fill the box first");
+		}
+		else
+		{
+			var data1 = dataStart.replace('UTM-PC','');
+			var datafinal1 = parseInt(data1);
+			var data2 = dataEnd.replace('UTM-PC','');
+			var datafinal2 = parseInt(data2);
+			$.ajax({
+					type: 'POST',
+					headers: {'X-CSRFToken': csrftoken},
+					mode: 'same-origin', // Do not send CSRF token to another domain.
+					url: "{% url 'exportdatapc' %}",
+					data : {'type': type, 'datafinal1':datafinal1, 'datafinal2':datafinal2}, 
+					
+					success: function(response){
+						download_csv(response)
+
+					
+
+		
+		
+	}
+});
+
+	
+}
+}
+}
+
+function download_csv(dataexport) {
+
+	var headercsv  = ['Computer ID', 'Current Computer ID', 'Machine Type','PIC', 'Previous PIC',
+	 'Brand', 'Model', 'S/N','Asset No','DOP','DOP (Years) / Warranty-end-date',
+	'Vendor','PO','Invoice','Type of Purchase','Block','Location','Standard Installation','USB Unlock','CD Unlock',
+	'OS','Office Version','Office Product Key','Processor Type','RAM Type','RAM Slot','Total RAM',
+	'Type of Storage','Total Storage Value','Connection Type','Joined Domain',
+	'Lan NIC MAC','Lan IP Address','Wlan NIC MAC',	'Wlan IP Address','PC Status'];
+	let header = headercsv.join(',') + '\n';
+	let csv = header;
+	var data = dataexport.data;
+	
+	console.log(data);
+	data.forEach( obj => {
+                let row = [];
+                for (key in obj) {
+                    if (obj.hasOwnProperty(key)) {
+                        row.push(obj[key]);
+                    }
+                }
+                csv += row.join(',')+"\n";
+            });
+		
+    
+    var hiddenElement = document.createElement('a');
+    hiddenElement.href = 'data:text/csv;charset=utf-8,' + encodeURI(csv);
+    hiddenElement.target = '_blank';
+    hiddenElement.download = 'PC data.csv';
+    hiddenElement.click();
+}
+
+function Downloadimagedata(){
+	const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+
+	if(document.getElementById("allselectQR").checked == true){
+	type_selection = "All"
+	type = "PC"
+
+	$.ajax({
+					type: 'POST',
+					headers: {'X-CSRFToken': csrftoken},
+					mode: 'same-origin', // Do not send CSRF token to another domain.
+					url: "{% url 'create_pdf_based_OnImage' %}",
+					data : {'data_type': type, 'type_selection':type_selection}, 
+					
+					success: function(statusresponse){
+						donwloadpdfQR()
+
+					
+
+		
+		
+					}
+				});
+
+	}
+	else
+	{
+		type_selection = "Custom"
+		var dataStart = document.getElementById("customselectStartQR").value;
+		var dataEnd = document.getElementById("customselectEndQR").value;
+		var data1 = dataStart.replace('UTM-PC','');
+		var datafinal1 = parseInt(data1);
+		var data2 = dataEnd.replace('UTM-PC','');
+		var datafinal2 = parseInt(data2);
+		var type = "PC";
+
+		$.ajax({
+					type: 'POST',
+					headers: {'X-CSRFToken': csrftoken},
+					mode: 'same-origin', // Do not send CSRF token to another domain.
+					url: "{% url 'create_pdf_based_OnImage' %}",
+					data : {'data_type': type_selection,'data_type': type, 'type_selection':type_selection, 'data1':datafinal1, 'data2':datafinal2}, 
+					
+					success: function(statusresponse){
+						donwloadpdfQR()
+
+					
+
+		
+		
+					}
+				});
+
+	}
+	
+}
+function donwloadpdfQR(){
+	xhttp = new XMLHttpRequest();
+						xhttp.onreadystatechange = function() {
+							var a, today;
+							if (xhttp.readyState === 4 && xhttp.status === 200) {
+								a = document.createElement('a');
+								a.href = window.URL.createObjectURL(xhttp.response);
+								today = new Date();
+								a.download = "QR Code" + today.toDateString().split(" ").join("_") + ".pdf";
+								a.style.display = 'none';
+								document.body.appendChild(a);
+								return a.click();
+							}
+						};
+						xhttp.open("GET", "DownloadFileQR", true);
+						xhttp.setRequestHeader("Content-Type", "application/json");
+						xhttp.responseType = 'blob';
+						xhttp.send();
+}	
+
+function showResult(str) {
+	const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+
+  if (str.length==0) {
+    $.ajax({
+			type: 'Get',
+			
+			url: "{% url 'getcomputerdata' %}",
+		
+			success: function(response){
+				console.log(response)
+				$(trtable).empty();
+				var indexarray = 0
+				for (var item in response.data){
+					var tr = document.createElement("tr");
+						var td1 = document.createElement("td");
+						td1.innerHTML =response.data[item].computer_id;
+						var td2 = document.createElement("td");
+						td2.innerHTML =response.data[item].current_computer_id;
+						var td3 = document.createElement("td");
+						td3.innerHTML =response.data[item].pic;
+						var td4 = document.createElement("td");
+						td4.innerHTML =response.data[item].previous_pic;
+						var td5 = document.createElement("td");
+						td5.innerHTML =response.data[item].pccurrentstatus;
+						var td6 = document.createElement("td");
+						td6.innerHTML =response.data[item].pctype;
+						var td7 = document.createElement("td");
+						td7.innerHTML =response.data[item].Brand;
+						var td8 = document.createElement("td");
+						td8.innerHTML =response.data[item].Model;
+						var td9 = document.createElement("td");
+						td9.innerHTML =response.data[item].windows;
+						var td10 = document.createElement("td");
+						td10.innerHTML =response.data[item].serial_number;
+						
+						var td11 = document.createElement("td");
+						td11.innerHTML =response.data[item].asset_no;
+						var td12 = document.createElement("td");
+						td12.innerHTML =response.data[item].block;
+						var td13 = document.createElement("td");
+						td13.innerHTML =response.data[item].location;
+						var td14 = document.createElement("td");
+						td14.innerHTML =response.data[item].standard_installation;
+						var td36 = document.createElement("td");
+						td36.innerHTML =response.data[item].usbunlock;
+						var td37 = document.createElement("td");
+						td37.innerHTML =response.data[item].cdunlock;
+						var td15 = document.createElement("td");
+						td15.innerHTML =response.data[item].microsoft_office;
+						var td16 = document.createElement("td");
+						td16.innerHTML =response.data[item].microsoft_office_keys;
+						var td17 = document.createElement("td");
+						td17.innerHTML =response.data[item].dop;
+						var td18 = document.createElement("td");
+						td18.innerHTML =response.data[item].dop_Warranty_end_date;
+						var td19 = document.createElement("td");
+						td19.innerHTML =response.data[item].po;
+						var td20 = document.createElement("td");
+						td20.innerHTML =response.data[item].invoice;
+						var td21 = document.createElement("td");
+						td21.innerHTML =response.data[item].vendor;
+						var td22 = document.createElement("td");
+						td22.innerHTML =response.data[item].processor_type;
+						var td23 = document.createElement("td");
+						td23.innerHTML =response.data[item].ram_type;
+						var td24 = document.createElement("td");
+						td24.innerHTML =response.data[item].ram_slot;
+						var td25 = document.createElement("td");
+						td25.innerHTML =response.data[item].total_ram;
+						var td26 = document.createElement("td");
+						td26.innerHTML =response.data[item].storage_type;
+						var td27 = document.createElement("td");
+						td27.innerHTML =response.data[item].storage_space;
+						var td28 = document.createElement("td");
+						td28.innerHTML =response.data[item].lan_mac_address;
+						var td29 = document.createElement("td");
+						td29.innerHTML =response.data[item].lan_ip_address;
+						var td30 = document.createElement("td");
+						td30.innerHTML =response.data[item].wlan_mac_address;
+						var td31 = document.createElement("td");
+						td31.innerHTML =response.data[item].wlan_ip_address;
+						var td32 = document.createElement("td");
+						td32.innerHTML =response.data[item].joined_domain;
+						var td33 = document.createElement("td");
+						td33.innerHTML =response.data[item].connection_type;
+						var td34 = document.createElement("td");
+						var btnupdate = document.createElement("Button");
+						btnupdate.id= response.data[item].computer_id;
+						btnupdate.classList.add("btn");
+						btnupdate.classList.add("btn-primary");
+						btnupdate.innerHTML="Update";
+						btnupdate.addEventListener( "click", function() {
+							datatoUform(this.id)
+						
+						});
+						var role =  "{{Style}}";
+						if(role == "display:none"){
+							btnupdate.disabled =true;
+
+						}
+						else{
+							btnupdate.disabled =false;
+						}
+						td34.append(btnupdate);
+						var td35 = document.createElement("td");
+						td35.innerHTML =response.data[item].type_of_purchase;
+						
+						tr.append(td1);
+						tr.append(td2);
+						tr.append(td35);
+						tr.append(td3);
+					
+						tr.append(td4);
+						tr.append(td5);
+						tr.append(td6);
+						tr.append(td7);
+						tr.append(td8);
+						tr.append(td9);
+						tr.append(td10);
+						tr.append(td11);
+						tr.append(td12);
+						tr.append(td13);
+						tr.append(td14);
+						tr.append(td36);
+						tr.append(td37);
+						tr.append(td15);
+						tr.append(td16);
+						tr.append(td17);
+						tr.append(td18);
+						tr.append(td19);
+						tr.append(td20);
+						tr.append(td21);
+						tr.append(td22);
+						tr.append(td23);
+						tr.append(td24);
+						tr.append(td25);
+						tr.append(td26);
+						tr.append(td27);
+						tr.append(td28);
+						tr.append(td29);
+						tr.append(td30);
+						tr.append(td31);
+						tr.append(td32);
+						tr.append(td33);
+						tr.append(td34);
+						
+					
+						$(trtable).append(tr);
+						indexarray = indexarray + 1
+				}
+				var role =  "{{Style}}";
+
+				if(role == "display:none"){
+					document.getElementById('Add').disabled =true;
+
+				}
+				else{
+					document.getElementById('Add').disabled =false;
+				}
+
+				
+				
+			
+			
+				
+			}
+		});
+  }
+	else if(str.length !=0){
+		$.ajax({
+			type: 'POST',
+			headers: {'X-CSRFToken': csrftoken},
+        	mode: 'same-origin', // Do not send CSRF token to another domain.
+			url: "{% url 'searchPCdata' %}",
+			data :{
+				'data': str,
+			}, 
+			success: function(response){
+				
+				if (response){
+				$(trtable).empty();
+				var indexarray = 0
+				for (var item in response.data){
+					var tr = document.createElement("tr");
+						var td1 = document.createElement("td");
+						td1.innerHTML =response.data[item].computer_id;
+						var td2 = document.createElement("td");
+						td2.innerHTML =response.data[item].current_computer_id;
+						var td3 = document.createElement("td");
+						td3.innerHTML =response.data[item].pic;
+						var td4 = document.createElement("td");
+						td4.innerHTML =response.data[item].previous_pic;
+						var td5 = document.createElement("td");
+						td5.innerHTML =response.data[item].pccurrentstatus;
+						var td6 = document.createElement("td");
+						td6.innerHTML =response.data[item].pctype;
+						var td7 = document.createElement("td");
+						td7.innerHTML =response.data[item].Brand;
+						var td8 = document.createElement("td");
+						td8.innerHTML =response.data[item].Model;
+						var td9 = document.createElement("td");
+						td9.innerHTML =response.data[item].windows;
+						var td10 = document.createElement("td");
+						td10.innerHTML =response.data[item].serial_number;
+						
+						var td11 = document.createElement("td");
+						td11.innerHTML =response.data[item].asset_no;
+						var td12 = document.createElement("td");
+						td12.innerHTML =response.data[item].block;
+						var td13 = document.createElement("td");
+						td13.innerHTML =response.data[item].location;
+						var td14 = document.createElement("td");
+						td14.innerHTML =response.data[item].standard_installation;
+						var td36 = document.createElement("td");
+						td36.innerHTML =response.data[item].usbunlock;
+						var td37 = document.createElement("td");
+						td37.innerHTML =response.data[item].cdunlock;
+						var td15 = document.createElement("td");
+						td15.innerHTML =response.data[item].microsoft_office;
+						var td16 = document.createElement("td");
+						td16.innerHTML =response.data[item].microsoft_office_keys;
+						var td17 = document.createElement("td");
+						td17.innerHTML =response.data[item].dop;
+						var td18 = document.createElement("td");
+						td18.innerHTML =response.data[item].dop_Warranty_end_date;
+						var td19 = document.createElement("td");
+						td19.innerHTML =response.data[item].po;
+						var td20 = document.createElement("td");
+						td20.innerHTML =response.data[item].invoice;
+						var td21 = document.createElement("td");
+						td21.innerHTML =response.data[item].vendor;
+						var td22 = document.createElement("td");
+						td22.innerHTML =response.data[item].processor_type;
+						var td23 = document.createElement("td");
+						td23.innerHTML =response.data[item].ram_type;
+						var td24 = document.createElement("td");
+						td24.innerHTML =response.data[item].ram_slot;
+						var td25 = document.createElement("td");
+						td25.innerHTML =response.data[item].total_ram;
+						var td26 = document.createElement("td");
+						td26.innerHTML =response.data[item].storage_type;
+						var td27 = document.createElement("td");
+						td27.innerHTML =response.data[item].storage_space;
+						var td28 = document.createElement("td");
+						td28.innerHTML =response.data[item].lan_mac_address;
+						var td29 = document.createElement("td");
+						td29.innerHTML =response.data[item].lan_ip_address;
+						var td30 = document.createElement("td");
+						td30.innerHTML =response.data[item].wlan_mac_address;
+						var td31 = document.createElement("td");
+						td31.innerHTML =response.data[item].wlan_ip_address;
+						var td32 = document.createElement("td");
+						td32.innerHTML =response.data[item].joined_domain;
+						var td33 = document.createElement("td");
+						td33.innerHTML =response.data[item].connection_type;
+						var td34 = document.createElement("td");
+						var btnupdate = document.createElement("Button");
+						btnupdate.id= response.data[item].computer_id;
+						btnupdate.classList.add("btn");
+						btnupdate.classList.add("btn-primary");
+						btnupdate.innerHTML="Update";
+						btnupdate.addEventListener( "click", function() {
+							datatoUform(this.id)
+						
+						});
+						var role =  "{{Style}}";
+						if(role == "display:none"){
+							btnupdate.disabled =true;
+
+						}
+						else{
+							btnupdate.disabled =false;
+						}
+						td34.append(btnupdate);
+						var td35 = document.createElement("td");
+						td35.innerHTML =response.data[item].type_of_purchase;
+						
+						tr.append(td1);
+						tr.append(td2);
+						tr.append(td35);
+						tr.append(td3);
+					
+						tr.append(td4);
+						tr.append(td5);
+						tr.append(td6);
+						tr.append(td7);
+						tr.append(td8);
+						tr.append(td9);
+						tr.append(td10);
+						tr.append(td11);
+						tr.append(td12);
+						tr.append(td13);
+						tr.append(td14);
+						tr.append(td36);
+						tr.append(td37);
+						tr.append(td15);
+						tr.append(td16);
+						tr.append(td17);
+						tr.append(td18);
+						tr.append(td19);
+						tr.append(td20);
+						tr.append(td21);
+						tr.append(td22);
+						tr.append(td23);
+						tr.append(td24);
+						tr.append(td25);
+						tr.append(td26);
+						tr.append(td27);
+						tr.append(td28);
+						tr.append(td29);
+						tr.append(td30);
+						tr.append(td31);
+						tr.append(td32);
+						tr.append(td33);
+						tr.append(td34);
+						
+					
+						$(trtable).append(tr);
+						indexarray = indexarray + 1
+				}
+				var role =  "{{Style}}";
+
+				if(role == "display:none"){
+					document.getElementById('Add').disabled =true;
+
+				}
+				else{
+					document.getElementById('Add').disabled =false;
+				}
+
+				
+
+			}
+			else{
+					$(trtable).empty();
+					var indexarray = 0
+					var tr = document.createElement("tr");
+					var td1 = document.createElement("td");
+					td1.innerHTML ="Sorry there no data related to your finding";
+					td1.style.width = "1000px";
+					tr.append(td1);
+					$(trtable).append(tr);
+			}
+		}
+		});
+	  }
+	}
+
+ </script>
+  {% endblock javascript %}
+	<script src="{% static 'js/app.js' %}"></script>
+	<script src="{% static 'js/open form modal.js' %}"></script>
+	<script src="{% static 'js/computeradd.js' %}"></script>
+
+
+</body>
+
+</html>

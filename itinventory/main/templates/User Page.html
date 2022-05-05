@@ -1,0 +1,909 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta required name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+
+	<link rel="preconnect" href="https://fonts.gstatic.com">
+	<link rel="shortcut icon" href="{% static 'img/icons/icon-48x48.png' %}" />
+
+	<link rel="canonical" href="https://demo-basic.adminkit.io/pages-blank.html" />
+
+	<title>IT Inventory System</title>
+
+	<link href="{% static 'css/app.css' %}" rel="stylesheet">
+	<link href="{% static 'css/modalform.css' %}" rel="stylesheet">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+</head>
+
+<body>
+	<div class="wrapper">
+		<nav id="sidebar" class="sidebar js-sidebar">
+			<div class="sidebar-content js-simplebar">
+				<a class="sidebar-brand" href="{% url 'dashboard' %}">
+					<span class="align-middle">IT Inventory System</span>
+				</a>
+				<div style="{{Style}}">
+				<li class="sidebar-header">
+					Administrator Page
+				</li>
+		
+			<li class="sidebar-item">
+				<a class="sidebar-link" href="{% url 'admin:index' %}">
+	  <i class="align-middle" data-feather="sliders"></i> <span class="align-middle">Go to Admin </span>
+	</a>
+			</li>
+		</div>
+		<li class="sidebar-header">
+			Loan
+		</li>
+
+
+		<li class="sidebar-item">
+			<a class="sidebar-link" href="{% url 'loanpage' %}">
+  <i class="align-middle" data-feather="sliders"></i> <span class="align-middle">Loan Detail</span>
+</a>
+		</li>
+		
+		
+						<li class="sidebar-header">
+								Computer
+							</li>
+		
+							<li class="sidebar-item">
+								<a class="sidebar-link" href="{% url 'computerpage' %}">
+					  <i class="align-middle" data-feather="sliders"></i> <span class="align-middle">Computer Details</span>
+					</a>
+							</li>
+		
+				
+		
+						
+							<li class="sidebar-header">
+								Laptop
+							</li>
+		
+							<li class="sidebar-item">
+								<a class="sidebar-link" href="{% url 'laptoppage' %}">
+					  <i class="align-middle" data-feather="sliders"></i> <span class="align-middle">Laptop Detail</span>
+					</a>
+							</li>
+		
+				
+		
+					
+							<li class="sidebar-header">
+								Other
+							</li>
+		
+							<li class="sidebar-item">
+								<a class="sidebar-link" href="{% url 'Networkhardwarepage' %}">
+					  <i class="align-middle" data-feather="sliders"></i> <span class="align-middle">Network Hardware Detail</span>
+					</a>
+							</li>
+		
+							<li class="sidebar-header">
+								IP
+							</li>
+		
+							<li class="sidebar-item">
+								<a class="sidebar-link" href="{% url 'ippage' %}">
+					  <i class="align-middle" data-feather="sliders"></i> <span class="align-middle">IP Detail</span>
+					</a>
+							</li>
+		
+							
+							<li class="sidebar-header">
+								User
+							</li>
+		
+							<li class="sidebar-item">
+								<a class="sidebar-link" href="{% url 'userpage' %}">
+					  <i class="align-middle" data-feather="sliders"></i> <span class="align-middle">User Detail</span>
+					</a>
+							</li>
+							
+							<li class="sidebar-header">
+								software
+							</li>
+			
+		
+							<li class="sidebar-item">
+								<a class="sidebar-link" href="{% url 'software' %}">
+					  <i class="align-middle" data-feather="sliders"></i> <span class="align-middle">software User</span>
+					</a>
+							</li>
+							<div style="{{Style}}">
+								<li class="sidebar-header">
+									Upload Page
+								</li>
+						
+							<li class="sidebar-item">
+								<a class="sidebar-link" href="{% url 'uploadcsvdata' %}">
+					  <i class="align-middle" data-feather="sliders"></i> <span class="align-middle">Upload Page </span>
+					</a>
+							</li>
+						</div>
+			
+		
+		
+					
+					</div>
+				</nav>
+
+		<div class="main">
+			<nav class="navbar navbar-expand navbar-light navbar-bg">
+				<a class="sidebar-toggle js-sidebar-toggle">
+          <i class="hamburger align-self-center"></i>
+        </a>
+
+				<div class="navbar-collapse collapse">
+					<ul class="navbar-nav navbar-align">
+					
+						<li class="nav-item dropdown">
+							<a class="nav-icon dropdown-toggle d-inline-block d-sm-none" href="#" data-bs-toggle="dropdown">
+                <i class="align-middle" data-feather="settings"></i>
+              </a>
+
+							<a class="nav-link dropdown-toggle d-none d-sm-inline-block" href="#" data-bs-toggle="dropdown">
+                 <span class="text-dark">{{Username}}</span>
+              </a>
+							<div class="dropdown-menu dropdown-menu-end">
+								<div style="{{Style}}">
+								<a class="dropdown-item" href="{% url 'historypage' %}"><i class="align-middle me-1" data-feather="user"></i> History</a>
+							</div>
+								
+								<div class="dropdown-divider"></div>
+								<a class="dropdown-item" href="{% url 'logoutsystem' %}">Log out</a>
+							</div>
+						</li>
+					</ul>
+				</div>
+			</nav>
+
+
+			<main class="content">
+				<div class="container-fluid p-0">
+
+					<h1 class="h3 mb-3">User List</h1>
+                   
+					<div class="row">
+						<div class="col-12">
+							<div class="card">
+								<div class="card-header">
+									<button id="Add" onclick="openform()" class="btn btn-primary">Add User</button>
+                                    <div class="table-responsive ">
+                                        <table class="table limittablesize" id="computertable">
+                                            <thead class="table-dark" id="computer-list">
+                                              <tr>
+												
+                                                <th scope="col">Employee Number</th>
+												<th scope="col">Name</th>
+                                                <th scope="col">Email</th>
+                                                <th scope="col">Designation</th>
+												<th scope="col">Department</th>
+												<th scope="col">Block</th>
+                                                <th scope="col">Location</th>
+												
+												<th scope="col">vpn</th>
+												<th scope="col">vpn Account</th>
+												<th scope="col">Update</th>
+												<th scope="col">Delete</th>
+                                              
+												
+                                                
+                                              </tr>
+                                            </thead>
+                                            <tbody id="trtable">
+											
+											
+
+                                            
+                                              
+                                            </tbody>
+                                          </table>
+                                        </div>
+								</div>
+								<div class="card-body">
+								</div>
+							</div>
+						</div>
+					</div>
+
+				</div>
+			</main>
+
+			<footer class="footer">
+			
+			</footer>
+		</div>
+	</div>
+	<!-- The Modal -->
+<div id="addform" class="modalform">
+
+	<!-- Modal content -->
+	<div class="modalform-header">
+	  <span onclick="closeform()" class="closeform">&times;</span>
+	 <h1 class="text-center">Add User</h1>
+	</div>
+	<div class="modalform-content">
+		<form method="POST" class="post-form" id="add-IP" onsubmit="addUser();return false">  
+		
+				{% csrf_token %}
+			   
+				 <h3 class="text-center" style=" color: #564953;">User Details</h3>
+
+				 <div class="form-group row">
+					<label for="inputEmail3" class="col-sm-2 col-form-label">Employee Number:</label>
+					<div class="col-sm-3">
+						<input type="text" class="form-control" required  name="employee_number" id="employee_number">
+					</div>
+					
+				   
+					<label for="inputEmail3" class="col-sm-2 col-form-label">Name :</label>
+					<div class="col-sm-3">
+						<input type="text" class="form-control" required name="name" id="name">
+					</div>
+				  </div>
+				 <br>
+				 <div class="form-group row">
+					<label for="inputEmail3" class="col-sm-2 col-form-label">Email  :</label>
+					<br><br>
+					<div class="col-sm-3">
+					  <input type="text"   class="form-control" required name="email"  id="email" placeholder="">
+					</div>
+				   
+					  <label for="inputEmail3" class="col-sm-2 col-form-label">Designation :</label>
+ 
+				   
+					<div class="col-sm-3">
+					  <input type="text" class="form-control" required name="designation" id="designation">
+					</div>
+				  </div>
+				  <br>
+				  <div class="form-group row">
+					<label for="inputEmail3" class="col-sm-2 col-form-label">Department  :</label>
+					<br><br>
+					<div class="col-sm-3">
+					  <input type="text"   class="form-control" required name="department"  id="department" placeholder="">
+					</div>
+					<label for="inputEmail3" class="col-sm-2 col-form-label">block  :</label>
+					<br><br>
+					<div class="col-sm-3">
+						<select    class="form-control" required name="block"  id="block">
+
+							{% for entry in block %}
+							<option value="{{ entry.networkAsset_block }}">{{ entry.networkAsset_block }}</option>
+						{% endfor %}
+						</select>
+					</div>
+				   
+				   
+					
+				  </div>
+				  <br>
+				  <div class="form-group row">
+					<label for="inputEmail3" class="col-sm-2 col-form-label">location :</label>
+ 
+				   
+					<div class="col-sm-3">
+						<select    class="form-control" required name="location"  id="location">
+
+							{% for entry in location %}
+							<option value="{{ entry.networkAsset_location }}">{{ entry.networkAsset_location }}</option>
+						{% endfor %}
+						</select>
+					</div>
+					<label for="inputEmail3" class="col-sm-2 col-form-label">vpn :</label>
+ 
+				   
+					<div class="col-sm-3">
+						<div class="form-check form-check-inline">
+							<input class="form-check-input" type="radio"  name="vpn" id="vpn_yes" value="Yes">
+							<label class="form-check-label" for="inlineRadio1">Yes</label>
+						  </div>
+						  <div class="form-check form-check-inline">
+							<input class="form-check-input" type="radio"  name="vpn" id="vpn_no" value="No">
+							<label class="form-check-label" for="inlineRadio2">No</label>
+						  </div>
+					</div>
+				   
+					 
+				  </div>
+				  <br>
+				  <div class="form-group row">
+					
+					<label for="inputEmail3" class="col-sm-2 col-form-label">Vpn account  :</label>
+					<br><br>
+					<div class="col-sm-3">
+					  <input type="text"   class="form-control" required name="vpnaccount"  id="vpnaccount" placeholder="">
+					</div>
+					</div>
+					
+				  
+				
+				  
+				  <div class="text-center">
+					<input  type="submit" value="Submit" class="btn btn-primary" >
+	
+				   </div>
+				</form>
+	</div>
+	<div class="modalform-footer">
+		
+	</div>
+  
+  </div>
+
+<div id="updateformmodal" class="modalform">
+
+	<!-- Modal content -->
+	<div class="modalform-header">
+	  <span onclick="closeformupdate()" class="closeform">&times;</span>
+	 <h1 class="text-center">Update User</h1>
+	</div>
+	<div class="modalform-content">
+		<form method="POST" class="post-form" id="update-computer" onsubmit="UpdateUser(); return false">  
+		
+			{% csrf_token %}
+	
+			<h3 class="text-center" style=" color: #564953;">User Details</h3>
+
+			<div class="form-group row">
+			   <label for="inputEmail3" class="col-sm-2 col-form-label">Employee Number:</label>
+			   <div class="col-sm-3">
+				   <input type="text" class="form-control" required  name="Update_employee_number" id="Update_employee_number">
+			   </div>
+			   
+			  
+			   <label for="inputEmail3" class="col-sm-2 col-form-label">Name :</label>
+			   <div class="col-sm-3">
+				   <input type="text" class="form-control" required name="Update_name" id="Update_name">
+			   </div>
+			 </div>
+			<br>
+			<div class="form-group row">
+			   <label for="inputEmail3" class="col-sm-2 col-form-label">Email  :</label>
+			   <br><br>
+			   <div class="col-sm-3">
+				 <input type="text"   class="form-control" required name="Update_email"  id="Update_email" placeholder="">
+			   </div>
+			  
+				 <label for="inputEmail3" class="col-sm-2 col-form-label">Designation :</label>
+
+			  
+			   <div class="col-sm-3">
+				 <input type="text" class="form-control" required name="Update_designation" id="Update_designation">
+			   </div>
+			 </div>
+			 <br>
+			 <div class="form-group row">
+			   <label for="inputEmail3" class="col-sm-2 col-form-label">Department  :</label>
+			   <br><br>
+			   <div class="col-sm-3">
+				<input type="text"   class="form-control" required name="Update_department"  id="Update_department" placeholder="">
+			   </div>
+			   <label for="inputEmail3" class="col-sm-2 col-form-label">block  :</label>
+			   
+			   
+			   <div class="col-sm-3">
+				
+				 <select   class="form-control" required name="Update_block"  id="Update_block" placeholder="">
+				 <option value="default">Default</option>
+				 {% for entry in block %}
+				 <option value="{{ entry.networkAsset_block }}">{{ entry.networkAsset_block }}</option>
+			 {% endfor %}
+				 </select>
+			   </div>
+			  
+			  
+			   
+			 </div>
+			 <br>
+			 <div class="form-group row">
+			   <label for="inputEmail3" class="col-sm-2 col-form-label">location :</label>
+
+			  
+			   <div class="col-sm-3">
+				
+				 <select  class="form-control" required name="Update_location" id="Update_location">
+					<option value="default">Default</option>
+					{% for entry in location %}
+					<option value="{{ entry.networkAsset_location }}">{{ entry.networkAsset_location }}</option>
+				{% endfor %}
+				 </select>
+			   </div>
+			   <label for="inputEmail3" class="col-sm-2 col-form-label">vpn :</label>
+
+			  
+			   <div class="col-sm-3">
+				   <div class="form-check form-check-inline">
+					   <input class="form-check-input" type="radio"  name="Update_vpn" id="Update_vpn_yes" value="Yes">
+					   <label class="form-check-label" for="inlineRadio1">Yes</label>
+					 </div>
+					 <div class="form-check form-check-inline">
+					   <input class="form-check-input" type="radio"  name="Update_vpn" id="Update_vpn_no" value="No">
+					   <label class="form-check-label" for="inlineRadio2">No</label>
+					 </div>
+			   </div>
+			  
+				
+			 </div>
+			 <br>
+			 <div class="form-group row">
+			   
+			   <label for="inputEmail3" class="col-sm-2 col-form-label">Vpn account  :</label>
+			   <br><br>
+			   <div class="col-sm-3">
+				 <input type="text"   class="form-control" required name="Update_vpnaccount"  id="Update_vpnaccount" placeholder="">
+			   </div>
+			   </div>
+				 
+			   <br>
+			  
+				
+				  <div class="text-center">
+					<input type="submit" value="Submit" class="btn btn-primary" >
+	
+				   </div>
+				</form>
+	</div>
+	<div class="modalform-footer">
+		
+	</div>
+  
+  </div>
+
+ 	<!-- The Modal -->
+	 <div id="deleteform" class="modalform">
+
+		<!-- Modal content -->
+		<div class="modalform-header">
+		  <span onclick="closeformdelete()" class="closeform">&times;</span>
+		 <h1 class="text-center">Delete User Asset</h1>
+		</div>
+		<div class="modalform-content">
+			<div style="display: none">
+			<input type="text" name="pkdelete" id="pkdelete"></div>
+				   
+					<div class="d-flex justify-content-between">
+						<button class="btn btn-primary" onclick="deleteuser()">Delete</button>
+						<button class="btn btn-primary" onclick="closedeleteform()">Cancel</button>
+					</div>
+					  
+					
+					  
+				
+		</div>
+		<div class="modalform-footer">
+			
+		</div>
+	  
+	  </div>
+  {% block javascript %}
+  <script>
+$(document).ready(function() {
+		$.ajax({
+			type: 'Get',
+			cache: false,
+			url: "{% url 'getUserdata' %}",
+		
+			success: function(response){
+				console.log(response);
+				$(trtable).empty();
+				for (var item in response.data){
+					var tr = document.createElement("tr");
+						var td1 = document.createElement("td");
+						td1.innerHTML =response.data[item].employee_number;
+						var td2 = document.createElement("td");
+						td2.innerHTML =response.data[item].name;
+						var td3 = document.createElement("td");
+						td3.innerHTML =response.data[item].email;
+						var td4 = document.createElement("td");
+						td4.innerHTML =response.data[item].designation;
+						var td5 = document.createElement("td");
+						td5.innerHTML =response.data[item].department;
+						var td6 = document.createElement("td");
+						td6.innerHTML =response.data[item].block;
+						var td7 = document.createElement("td");
+						td7.innerHTML =response.data[item].location;
+					
+						var td9 = document.createElement("td");
+						td9.innerHTML =response.data[item].vpn;
+						var td10 = document.createElement("td");
+						td10.innerHTML =response.data[item].vpnaccount;
+					
+						var td11 = document.createElement("td");
+						var btnupdate = document.createElement("Button");
+						btnupdate.id= response.data[item].id;
+						btnupdate.classList.add("btn");
+						btnupdate.classList.add("btn-primary");
+						btnupdate.innerHTML="Update";
+						btnupdate.addEventListener( "click", function() {
+							datatoUform(this.id)
+						
+						});
+
+						var td12 = document.createElement("td");
+						var btndelete = document.createElement("Button");
+						console.log(response.data[item].id);
+						btndelete.id= response.data[item].id;
+						btndelete.classList.add("btn");
+						btndelete.classList.add("btn-primary");
+						btndelete.innerHTML="Delete";
+						btndelete.addEventListener( "click", function() {
+							opendeleteprompt(this.id)
+						
+						});
+						var role =  "{{Style}}";
+						if(role == "display:none"){
+							btnupdate.disabled =true;
+							btndelete.disabled =true;
+
+						}
+						else{
+							btnupdate.disabled =false;
+							btndelete.disabled =false;
+						}
+						td11.append(btnupdate);
+						td12.append(btndelete);
+
+						tr.append(td1);
+						tr.append(td2);
+						tr.append(td3);
+						tr.append(td4);
+						tr.append(td5);
+						tr.append(td6);
+						tr.append(td7);
+						
+						tr.append(td9);
+						tr.append(td10);
+						tr.append(td11);
+						tr.append(td12);
+
+
+						
+						
+					
+						$(trtable).append(tr);
+						
+				}
+				
+				var role =  "{{Style}}";
+				if(role == "display:none"){
+					document.getElementById('Add').disabled =true;
+
+				}
+				else{
+					document.getElementById('Add').disabled =false;
+				}
+
+			
+			
+				
+			}
+		});
+
+
+	
+});	
+
+
+function openform(){
+
+
+		var modalform = document.getElementById('addform');
+		modalform.style.display = 'block';
+		document.getElementById("add-IP").reset();
+	
+		
+
+		
+		
+	}
+function opendeleteprompt(btnid){
+				var modalform = document.getElementById('deleteform');
+				modalform.style.display = 'block';
+				document.getElementById('pkdelete').value = btnid;
+
+
+
+}
+function closedeleteform(){
+	var modalform = document.getElementById('deleteform');
+				modalform.style.display = 'none';
+}
+function deleteuser(){
+ var btnid =	document.getElementById('pkdelete').value  ;
+	const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+
+	$.ajax({
+			type: 'POST',
+			headers: {'X-CSRFToken': csrftoken},
+        	mode: 'same-origin', // Do not send CSRF token to another domain.
+			url: "{% url 'deleteuser' %}",
+			data :{
+				'id' : btnid,
+			
+
+			}, 
+			success: function(data){
+				
+				updatetable();
+				closedeleteform();
+				
+
+				
+				
+			}
+		});
+
+}
+
+function addUser(){
+		var employee_number = $('input[name="employee_number"]').val().trim();
+		var name = $('input[name="name"]').val().trim();
+		var email = $('input[name="email"]').val().trim();
+		var designation = $('input[name="designation"]').val().trim();
+		var block = document.getElementById('block').value;
+		var location = document.getElementById('location').value;
+		var department = $('input[name="department"]').val().trim();
+		if(document.getElementById('vpn_yes').checked == true){
+			var vpn =document.getElementById('vpn_yes').value;
+		}
+		else
+		{
+			var vpn =document.getElementById('vpn_no').value;
+
+		}
+		
+		var vpnaccount = $('input[name="vpnaccount"]').val().trim();
+		
+		
+		const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+		$.ajax({
+			type: 'POST',
+			headers: {'X-CSRFToken': csrftoken},
+        	mode: 'same-origin', // Do not send CSRF token to another domain.
+			url: "{% url 'AddAssetUser' %}",
+			data :{
+				'employee_number' : employee_number, 'name' : name, 'email' : email,
+						'designation' : designation, 'block' : block, 'location' : location,
+						 'vpn' : vpn, 'vpnaccount' : vpnaccount, 'department':department,
+
+			}, 
+			success: function(data){
+				console.log(data);
+				console.log("Success Post");
+				updatetable();
+				closeform();
+
+				
+
+			}
+		});
+		
+		
+		
+
+
+		
+}
+	
+function datatoUform(btnid){
+
+	const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+
+	$.ajax({
+			type: 'POST',
+			headers: {'X-CSRFToken': csrftoken},
+        	mode: 'same-origin', // Do not send CSRF token to another domain.
+			url: "{% url 'getUserdataupdate' %}",
+			data :{
+				'id' : btnid,
+			
+
+			}, 
+			success: function(data){
+				var modalform = document.getElementById('updateformmodal');
+				modalform.style.display = 'block';
+				document.getElementById('Update_employee_number').value = data.employee_number ;
+				document.getElementById('Update_name').value = data.name ;
+				document.getElementById('Update_email').value = data.email ;
+				document.getElementById('Update_designation').value = data.designation ;
+				document.getElementById('Update_department').value = data.department ;
+				document.getElementById('Update_block').value = data.block ;
+				document.getElementById('Update_location').value = data.location ;
+				
+				if(data.vpn = "Yes"){
+					document.getElementById('Update_vpn_yes').checked = true;
+				}
+				else{
+					document.getElementById('Update_vpn_no').checked= true;
+				}
+				
+				document.getElementById('Update_vpnaccount').value = data.vpnaccount ;
+
+				console.log(data);
+
+				
+				
+			}
+		});
+
+}
+
+
+
+
+function updatetable(){
+	$.ajax({
+			type: 'Get',
+			cache: false,
+			url: "{% url 'getUserdata' %}",
+		
+			success: function(response){
+				console.log(response);
+				$(trtable).empty();
+				for (var item in response.data){
+					var tr = document.createElement("tr");
+						var td1 = document.createElement("td");
+						td1.innerHTML =response.data[item].employee_number;
+						var td2 = document.createElement("td");
+						td2.innerHTML =response.data[item].name;
+						var td3 = document.createElement("td");
+						td3.innerHTML =response.data[item].email;
+						var td4 = document.createElement("td");
+						td4.innerHTML =response.data[item].designation;
+						var td5 = document.createElement("td");
+						td5.innerHTML =response.data[item].department;
+						var td6 = document.createElement("td");
+						td6.innerHTML =response.data[item].block;
+						var td7 = document.createElement("td");
+						td7.innerHTML =response.data[item].location;
+					
+						var td9 = document.createElement("td");
+						td9.innerHTML =response.data[item].vpn;
+						var td10 = document.createElement("td");
+						td10.innerHTML =response.data[item].vpnaccount;
+					
+						var td11 = document.createElement("td");
+						var btnupdate = document.createElement("Button");
+						btnupdate.id= response.data[item].id;
+						btnupdate.classList.add("btn");
+						btnupdate.classList.add("btn-primary");
+						btnupdate.innerHTML="Update";
+						btnupdate.addEventListener( "click", function() {
+							datatoUform(this.id)
+						
+						});
+
+						var td12 = document.createElement("td");
+						var btndelete = document.createElement("Button");
+						console.log(response.data[item].id);
+						btndelete.id= response.data[item].id;
+						btndelete.classList.add("btn");
+						btndelete.classList.add("btn-primary");
+						btndelete.innerHTML="Delete";
+						btndelete.addEventListener( "click", function() {
+							opendeleteprompt(this.id)
+						
+						});
+						var role =  "{{Style}}";
+						if(role == "display:none"){
+							btnupdate.disabled =true;
+							btndelete.disabled =true;
+
+						}
+						else{
+							btnupdate.disabled =false;
+							btndelete.disabled =false;
+						}
+						td11.append(btnupdate);
+						td12.append(btndelete);
+
+						tr.append(td1);
+						tr.append(td2);
+						tr.append(td3);
+						tr.append(td4);
+						tr.append(td5);
+						tr.append(td6);
+						tr.append(td7);
+						
+						tr.append(td9);
+						tr.append(td10);
+						tr.append(td11);
+						tr.append(td12);
+
+
+						
+						
+					
+						$(trtable).append(tr);
+						
+				}
+				
+				var role =  "{{Style}}";
+				if(role == "display:none"){
+					document.getElementById('Add').disabled =true;
+
+				}
+				else{
+					document.getElementById('Add').disabled =false;
+				}
+
+			
+			
+				
+			}
+		});
+}
+ 
+
+function UpdateUser(){
+	var employee_number = $('input[name="Update_employee_number"]').val().trim();
+		var name = $('input[name="Update_name"]').val().trim();
+		var email = $('input[name="Update_email"]').val().trim();
+		var designation = $('input[name="Update_designation"]').val().trim();
+		var block = document.getElementById('Update_block').value;
+		
+		var location = document.getElementById('Update_location').value;
+		var department = $('input[name="Update_department"]').val().trim();
+		if(document.getElementById('Update_vpn_yes').checked == true){
+			var vpn =document.getElementById('Update_vpn_yes').value;
+		}
+		else
+		{
+			var vpn =document.getElementById('Update_vpn_no').value;
+
+		}
+		
+		var vpnaccount = $('input[name="Update_vpnaccount"]').val().trim();
+		const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+		$.ajax({
+			type: 'POST',
+			headers: {'X-CSRFToken': csrftoken},
+        	mode: 'same-origin', // Do not send CSRF token to another domain.
+			url: "{% url 'updateformuser' %}",
+			data :{
+				'employee_number' : employee_number, 'name' : name, 'email' : email,
+						'designation' : designation, 'block' : block, 'location' : location, 'department':department,
+						  'vpn' : vpn, 'vpnaccount' : vpnaccount, 
+			}, 
+			success: function(data){
+				console.log(data);
+				console.log("Success Post");
+				updatetable();
+				closeformupdate();
+
+				
+
+			}
+		});
+
+		
+}
+
+ 
+
+ 
+ 
+ 
+ 
+ 
+ </script>
+  {% endblock javascript %}
+	<script src="{% static 'js/app.js' %}"></script>
+	<script src="{% static 'js/open form modal.js' %}"></script>
+	<script src="{% static 'js/computeradd.js' %}"></script>
+
+
+
+</body>
+
+</html>
