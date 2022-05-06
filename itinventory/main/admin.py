@@ -2,6 +2,7 @@ from django.contrib import admin
 from .models import *
 from specification.models import *
 
+#Change the look of the model in the admin page
 class runing_number(admin.ModelAdmin):
     list_display = ('asset_type', 'running_number')
     def get_author(self, obj):
@@ -18,7 +19,7 @@ class networkmodel(admin.ModelAdmin):
     list_display = ('model', 'asset_type')
     def get_author(self, obj):
         return obj.specification_NetworkHardwareModel
-# Register your models here.
+
 class ipmodel(admin.ModelAdmin):
     list_display = ('ip_address', 'ip_assisgned', 'status', 'remark')
     search_fields = ['ip_address', 'ip_assisgned', 'status', 'remark']
@@ -47,7 +48,8 @@ class LaptopDisplay(admin.ModelAdmin):
     
     def get_author(self, obj):
         return obj.main_Laptop
-        
+
+# Register your models here.     
 admin.site.register(Computer, PCDisplay)
 
 admin.site.register(Laptop, LaptopDisplay)

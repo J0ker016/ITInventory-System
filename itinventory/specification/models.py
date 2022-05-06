@@ -2,33 +2,38 @@ from django.db import models
 
 # Create your models here.
 
+# Brand table
 class Brand(models.Model):
     Brand_name = models.CharField(max_length=100)
     def __str__(self):
         return self.Brand_name
        
-
+# ModelPC table
 class ModelPC(models.Model):
     ModelPC_name = models.CharField(max_length=100)
     def __str__(self):
         return self.ModelPC_name
 
+# Modellaptop table
 class Modellaptop(models.Model):
     Modellaptop_name = models.CharField(max_length=100)
     def __str__(self):
         return self.Modellaptop_name
 
-
+# ModelPCMachine table
 class ModelPCMachine(models.Model):
     ModelPCMAchine_name = models.CharField(max_length=100)
     def __str__(self):
         return self.ModelPCMAchine_name
 
+# Processor_type table
 class Processor_type(models.Model):
     Processor_name = models.CharField(max_length=100)
     def __str__(self):
         return self.Processor_name
 
+
+# Software table
 typespftware = [
     ('Concurrent', 'Concurrent'),
     ('Non-Concurrent', 'Non-Concurrent'),
@@ -44,7 +49,7 @@ class Software(models.Model):
     Software_DOP = models.DateField(blank=True, null=True)
     
 
-
+# Ram_type table
 class Ram_type(models.Model):
     ram_type = models.CharField(max_length=100)
     def __str__(self):
@@ -54,6 +59,7 @@ class Ram_type(models.Model):
         # Add verbose name
         verbose_name = 'Ram Type'
 
+# Microsoft_office table
 class Microsoft_office(models.Model):
     microsoft_office = models.CharField(max_length=100)
     def __str__(self):
@@ -63,6 +69,7 @@ class Microsoft_office(models.Model):
         # Add verbose name
         verbose_name = 'Microsoft Office'
 
+# Location table
 class Location(models.Model):
     location = models.CharField(max_length=100)
     def __str__(self):
@@ -72,6 +79,7 @@ class Location(models.Model):
         # Add verbose name
         verbose_name = 'Location'
 
+# Windows table
 class Windows(models.Model):
     windows = models.CharField(max_length=100)
     def __str__(self):
@@ -81,6 +89,7 @@ class Windows(models.Model):
         # Add verbose name
         verbose_name = 'Window'
 
+# vendor table
 class vendor(models.Model):
     vendorname = models.CharField(max_length=100)
     def __str__(self):
@@ -89,6 +98,8 @@ class vendor(models.Model):
         db_table = 'vendor'
         # Add verbose name
         verbose_name = 'Vendor'
+
+# Hardware_type table
 class Hardware_type(models.Model):
     hardware_type = models.CharField(max_length=100)
     def __str__(self):
@@ -98,6 +109,8 @@ class Hardware_type(models.Model):
         # Add verbose name
         verbose_name = 'Hardware Type'
 
+
+# NetworkAsset_brand table
 class NetworkAsset_brand(models.Model):
     networkAsset_brand = models.CharField(max_length=100)
     def __str__(self):
@@ -108,6 +121,7 @@ class NetworkAsset_brand(models.Model):
         # Add verbose name
         verbose_name = 'Network Asset Brand Type'
 
+# Asset_running_number table
 class Asset_running_number(models.Model):
     asset_type = models.CharField(max_length=100)
     running_number = models.CharField(max_length=1000)
@@ -116,6 +130,7 @@ class Asset_running_number(models.Model):
         # Add verbose name
         verbose_name = 'Asset Running Number'
 
+# NetworkHardwareModel table
 networktype = [
     ('Wireless Dongle', 'Wireless Dongle'),
     ('Tape Library', 'Tape Library'),
@@ -141,7 +156,7 @@ class NetworkHardwareModel(models.Model):
         # Add verbose name
         verbose_name = 'Network Hardware Model'
    
-
+# NetworkAsset_vendor table
 class NetworkAsset_vendor(models.Model):
     networkAsset_vendor = models.CharField(max_length=100)
     def __str__(self):
@@ -151,6 +166,7 @@ class NetworkAsset_vendor(models.Model):
         # Add verbose name
         verbose_name = 'Network Asset Vendor'
 
+# NetworkAsset_location table
 class NetworkAsset_location(models.Model):
     networkAsset_location = models.CharField(max_length=100)
     def __str__(self):
@@ -160,6 +176,7 @@ class NetworkAsset_location(models.Model):
         # Add verbose name
         verbose_name = 'Network Asset Location'
 
+# NetworkAsset_block table
 class NetworkAsset_block(models.Model):
     networkAsset_block = models.CharField(max_length=100)
     def __str__(self):
@@ -169,6 +186,7 @@ class NetworkAsset_block(models.Model):
         # Add verbose name
         verbose_name = 'Network Asset Block'
 
+# storagevalue table
 class storagevalue(models.Model):
     Storagevalue = models.CharField(max_length=100)
     def __str__(self):

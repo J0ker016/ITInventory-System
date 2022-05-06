@@ -5,6 +5,7 @@ from django.utils.html import format_html
 
 # Create your models here/database.
 
+# Computer table
 class Computer(models.Model):
     computer_id = models.CharField(max_length=100)
     current_computer_id = models.CharField(max_length=100)
@@ -63,7 +64,7 @@ class Computer(models.Model):
 
 
   
-
+# Laptop table
 class Laptop(models.Model):
     computer_id = models.CharField(max_length=100)
     pic = models.CharField(max_length=100)
@@ -110,6 +111,7 @@ class Laptop(models.Model):
         # Add verbose name
         verbose_name = 'Laptop'
 
+# NetworkHardware table
 class NetworkHardware(models.Model):
     hardware_id = models.CharField(max_length=100)
     hardware_type = models.CharField(max_length=100)
@@ -136,7 +138,7 @@ class NetworkHardware(models.Model):
         verbose_name = 'Network Hardware'
     
 
-
+# UserAsset table
 class UserAsset(models.Model):
     employee_number = models.CharField(max_length=100)
     name = models.CharField(max_length=100)
@@ -153,6 +155,7 @@ class UserAsset(models.Model):
         # Add verbose name
         verbose_name = 'User Asset'
 
+# Loan table
 class Loan(models.Model):
     loan_id = models.CharField(max_length=100)
     employee_number = models.CharField(max_length=100)
@@ -168,7 +171,8 @@ class Loan(models.Model):
         db_table = 'Loan'
         # Add verbose name
         verbose_name = 'Loan'
-   
+
+# IP table   
 class IP(models.Model):
     ip_address = models.GenericIPAddressField()
     ip_assisgned = models.CharField(max_length=100, null=True, blank=True)
@@ -179,7 +183,7 @@ class IP(models.Model):
         # Add verbose name
         verbose_name = 'IP'
 
-
+# softwareUser table   
 class softwareUser(models.Model):
     Software_Type = models.CharField(max_length=100, null=True, blank=True)
     User_Type = models.CharField(max_length=100, null=True, blank=True)
@@ -190,6 +194,8 @@ class softwareUser(models.Model):
         db_table = 'software User'
         # Add verbose name
         verbose_name = 'software User'
+
+# loghistory table   
 class loghistory(models.Model):
     Time = models.CharField(max_length=100, null=True, blank=True)
     Username = models.CharField(max_length=100, null=True, blank=True)
@@ -199,10 +205,10 @@ class loghistory(models.Model):
         # Add verbose name
         verbose_name = 'Log History'
 
-class testdb(models.Model):
-    name_image = models.CharField(max_length=100, null=True, blank=True)
-    image_file = models.ImageField()
-    def image_tag(self):
-        return format_html('<img href="{0}" src="{0}" width="150" height="150" />'.format(self.image_file.url))
-    image_tag.allow_tags = True
-    image_tag.short_description = 'Image'
+# class testdb(models.Model):
+#     name_image = models.CharField(max_length=100, null=True, blank=True)
+#     image_file = models.ImageField()
+#     def image_tag(self):
+#         return format_html('<img href="{0}" src="{0}" width="150" height="150" />'.format(self.image_file.url))
+#     image_tag.allow_tags = True
+#     image_tag.short_description = 'Image'
