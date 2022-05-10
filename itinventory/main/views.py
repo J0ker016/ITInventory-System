@@ -282,6 +282,7 @@ def updateformpc(request):
             data.connection_type = request.POST['ConnectionType']
             datainternetCon = request.POST['ConnectionType']
             if standaad_installation == "Yes" or standaad_installation == "yes":
+                if not softwareUser.objects.filter(User_ID=data.computer_id, Software_Name ="Trend Micro").exists():
                             trend_micro = softwareUser()
                             trend_micro.Software_Type = "Non-Concurrent"
                             trend_micro.User_Type = "Machine"
@@ -289,6 +290,7 @@ def updateformpc(request):
                             trend_micro.Software_Version = "Apex one"
                             trend_micro.User_ID = data.computer_id
                             trend_micro.save()
+                if not softwareUser.objects.filter(User_ID=data.computer_id, Software_Name ="Teamviewer").exists():
                             teamviewer = softwareUser()
                             teamviewer.Software_Type = "Non-Concurrent"
                             teamviewer.User_Type = "Machine"
@@ -296,6 +298,7 @@ def updateformpc(request):
                             teamviewer.Software_Version = "Teamviewer Host"
                             teamviewer.User_ID = data.computer_id
                             teamviewer.save()
+                if not softwareUser.objects.filter(User_ID=data.computer_id, Software_Name ="TightVNC").exists():
                             vnc = softwareUser()
                             vnc.Software_Type = "Non-Concurrent"
                             vnc.User_Type = "Machine"
@@ -303,6 +306,7 @@ def updateformpc(request):
                             vnc.Software_Version = "tightvnc-2.8.63"
                             vnc.User_ID = data.computer_id
                             vnc.save()
+                if not softwareUser.objects.filter(User_ID=data.computer_id, Software_Name ="Marimba").exists():
                             marimba = softwareUser()
                             marimba.Software_Type = "Non-Concurrent"
                             marimba.User_Type = "Machine"
@@ -310,6 +314,7 @@ def updateformpc(request):
                             marimba.Software_Version = "SFSInventory_x64"
                             marimba.User_ID = data.computer_id
                             marimba.save()
+
             if (datainternetCon == "Intranet"):
 
                 if(request.POST['lan_ip_address'] == "Offline"):
@@ -351,6 +356,7 @@ def updateformpc(request):
                     ip.status = "In-use"
                     ip.ip_assisgned = data.computer_id
                     ip.save()
+                    data.lan_ip_address = request.POST['lan_ip_address']
          
 
             
