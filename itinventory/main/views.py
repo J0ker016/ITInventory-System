@@ -34,47 +34,6 @@ import mimetypes
 from reportlab.pdfgen import canvas
 from reportlab.lib.units import *
 
-# login function
-def login_user(request):
-    if request.method == "POST":
-        username_login = request.POST['username']
-        password_login = request.POST['password']
-        user = authenticate(request, username=username_login, password=password_login)
-        if user is not None:
-            login(request, user)
-            request.session['name'] = username_login
-            if request.user.is_staff:
-                request.session['role'] = 'staff'
-                request.session['styledivstaff'] = "display:block"
-            else:
-                request.session['role'] = 'Not staff'
-                request.session['styledivNotstaff'] = "display:none"
-
-            
-
-
-            return redirect("dashboard", )
-       
-      
-        else:
-            messages.success(request, ("There was an Error Logging in, Try Again"))
-            return redirect("login")
-
-    return render(request, "login.html", {})
-            
-# logout function
-def logoutsystem(request):
-    del request.session['name']
-    if (format(request.session.get('role')) == "staff"):
-        del request.session['styledivstaff']
-    else:
-        del request.session['styledivNotstaff']
-    del request.session['role']
-    logout(request)
-    return redirect("/")
- 
-
-
 # homepage
 def homepage(request):
     if request.session.get('name'):
@@ -92,64 +51,24 @@ def homepage(request):
     # create_qrcode()
     return render(request, 'pages-blank.html', context)
 
-# def testenvironment(request):
-#     return render(request, 'testpage.html')
-
-# def usagepcpie(request):
-#     if request.method == "POST":
-#         if request.POST['type'] == "Not-inuse":
-#             computerdata = Computer.objects.filter(Q(pccurrentstatus="Not in-use") | Q(pccurrentstatus="Not In-use"))
-#             return JsonResponse({"data":list(computerdata.values())})
-
-
-#End of home Page       
-
-
 # Computer Page
-
-#Get computer detail to the table
 def computerdetail(request):
-    #get data from table specification.ModelPC
     pctype = ModelPC.objects.all()
-
-    #get data from table specification.Processor_type
     processorType = Processor_type.objects.all()
-
-    #get data from table specification.Brand
     brand = Brand.objects.all()
-
-    #get data from table specification.Ram_type
     ram_type = Ram_type.objects.all()
-
-    #get data from table specification.Microsoft_office
     microsoft_office = Microsoft_office.objects.all()
-
-    #get data from table specification.Location
     location = Location.objects.all()
-
-    #get data from table specification.Windows
     window = Windows.objects.all()
-
-    #get data from table Main.Computer
     displaydata = Computer.objects.all()
-
-    #get data from table specification.storagevalue
     storage_value = storagevalue.objects.all()
-
-    #get amount data from table Main.Computer 
     tableend = Computer.objects.all().count()
     tablestart = 0
-
-    #get data from table specification.vendor
     Vendor = vendor.objects.all()
-
-    #create a range of data using tablestart and tableend
     tablerange = range(tablestart, tableend)
-
-    #get data from table specification.Asset_running_number
     runing_number = Asset_running_number.objects.filter(asset_type='PC').get()
    
-    #create a  session key name  "name"
+ 
     username =  format(request.session.get('name'))
     if (format(request.session.get('role')) == "staff"):
         style = format(request.session.get('styledivstaff'))
@@ -173,7 +92,6 @@ def computerdetail(request):
 
     return render(request, 'Computer Page.html', context)
 
-#send the data from Computer Add form to the database
 def addcomputerform(request):
     if request.method == "POST":
        
@@ -207,7 +125,7 @@ def addcomputerform(request):
         data.usbunlock = request.POST['usb_unlock']
         data.microsoft_office = request.POST['Microsoft_Office']
         data.microsoft_office_keys = request.POST['Licensed_key']
-        standard_installation = data.standard_installation
+        standaad_installation = data.standard_installation
         data.windows = request.POST['Window_version']
         data.lan_mac_address = request.POST['lan_mac_address']
         data.lan_ip_address = request.POST['lan_ip_address']
@@ -232,7 +150,7 @@ def addcomputerform(request):
                 log_history.Username = format(request.session.get('name'))
                 log_history.Activity = "Add A Computer By ID " + request.POST['Computer_ID']
                 log_history.save() 
-                if standard_installation == "Yes" or standard_installation == "yes":
+                if standaad_installation == "Yes" or standaad_installation == "yes":
                             trend_micro = softwareUser()
                             trend_micro.Software_Type = "Non-Concurrent"
                             trend_micro.User_Type = "Machine"
@@ -282,7 +200,7 @@ def addcomputerform(request):
                 log_history.Username = format(request.session.get('name'))
                 log_history.Activity = "Add A Computer By ID " + request.POST['Computer_ID']
                 log_history.save()
-                if standard_installation == "Yes" or standard_installation == "yes":
+                if standaad_installation == "Yes" or standaad_installation == "yes":
                             trend_micro = softwareUser()
                             trend_micro.Software_Type = "Non-Concurrent"
                             trend_micro.User_Type = "Machine"
@@ -319,7 +237,6 @@ def addcomputerform(request):
 
                 return HttpResponse('hai')
 
-#send the running number and IP from database to the view
 def rundatatoform(request):
     if request.method == "POST":
        id = request.POST["type"]
@@ -328,13 +245,9 @@ def rundatatoform(request):
        data = { 'runnumber' : computerdata.running_number, 'ip' : list(ip.values()) }
        return JsonResponse(data)
 
-#send the data from Computer Update form to the database
 def updateformpc(request):
         if request.method == "POST":
-            #call the data from the table Computer  using Computer_ID as the index key
             data = Computer.objects.filter(computer_id= request.POST['Computer_ID']).get()
-
-            #get the data from the form
             data.pic = request.POST['pic']
             data.type_of_purchase = request.POST['type_of_purchase']
             data.previous_pic = request.POST['Previous_PIC']
@@ -359,7 +272,7 @@ def updateformpc(request):
             data.block = request.POST['block']
             data.location = request.POST['location']
             data.standard_installation = request.POST['Standard_Installation']
-            standard_installation = request.POST['Standard_Installation']
+            standaad_installation = request.POST['Standard_Installation']
             data.microsoft_office = request.POST['Microsoft_Office']
             data.microsoft_office_keys = request.POST['Licensed_key']
             data.cdunlock = request.POST['cd_unlock']
@@ -368,10 +281,7 @@ def updateformpc(request):
             data.lan_mac_address = request.POST['lan_mac_address']
             data.connection_type = request.POST['ConnectionType']
             datainternetCon = request.POST['ConnectionType']
-
-            #check if standard_installation equal to yes
-            if standard_installation == "Yes" or standard_installation == "yes":
-                            #Create a trend micro user for the PC
+            if standaad_installation == "Yes" or standaad_installation == "yes":
                             trend_micro = softwareUser()
                             trend_micro.Software_Type = "Non-Concurrent"
                             trend_micro.User_Type = "Machine"
@@ -379,8 +289,6 @@ def updateformpc(request):
                             trend_micro.Software_Version = "Apex one"
                             trend_micro.User_ID = data.computer_id
                             trend_micro.save()
-
-                            #Create a teamviewer user for the PC
                             teamviewer = softwareUser()
                             teamviewer.Software_Type = "Non-Concurrent"
                             teamviewer.User_Type = "Machine"
@@ -388,8 +296,6 @@ def updateformpc(request):
                             teamviewer.Software_Version = "Teamviewer Host"
                             teamviewer.User_ID = data.computer_id
                             teamviewer.save()
-
-                            #Create a vnc user for the PC
                             vnc = softwareUser()
                             vnc.Software_Type = "Non-Concurrent"
                             vnc.User_Type = "Machine"
@@ -397,8 +303,6 @@ def updateformpc(request):
                             vnc.Software_Version = "tightvnc-2.8.63"
                             vnc.User_ID = data.computer_id
                             vnc.save()
-
-                            #Create a marimba user for the PC
                             marimba = softwareUser()
                             marimba.Software_Type = "Non-Concurrent"
                             marimba.User_Type = "Machine"
@@ -406,15 +310,10 @@ def updateformpc(request):
                             marimba.Software_Version = "SFSInventory_x64"
                             marimba.User_ID = data.computer_id
                             marimba.save()
-
-            #Check if type of connection is equal to Intranet
             if (datainternetCon == "Intranet"):
 
-                #Check if lan_ip_address is equal to Offline
                 if(request.POST['lan_ip_address'] == "Offline"):
                     Previous_IP = data.lan_ip_address
-
-                     #call the data from the table IP  using Previous_IP as the index key
                     if  IP.objects.filter(ip_address=Previous_IP).exists():
                         ip = IP.objects.get(ip_address=Previous_IP)
                         ip.status = "Not-inuse"
@@ -424,20 +323,19 @@ def updateformpc(request):
                     else:
                         data.lan_ip_address = "Offline"
 
-                #Check if lan_ip_address is equal to Offline    
-                elif((data.lan_ip_address == "Offline") ):
 
-                    #call the data from the table IP  using Previous_IP as the index key
+
+                    
+                elif((data.lan_ip_address == "Offline") ):
+                    
                     ip = IP.objects.get(ip_address=request.POST['lan_ip_address'])
                     ip.status = "In-use"
                     ip.ip_assisgned = data.computer_id
                     ip.save()
                     data.lan_ip_address = request.POST['lan_ip_address']
                   
-                #Check if lan_ip_address is equal to Release    
-                elif(request.POST['lan_ip_address'] == "Release"):
 
-                    #call the data from the table IP  using Previous_IP as the index key
+                elif(request.POST['lan_ip_address'] == "Release"):
                     Previous_IP = data.lan_ip_address
                     ip = IP.objects.get(ip_address=Previous_IP)
                     ip.status = "Not-inuse"
@@ -445,7 +343,7 @@ def updateformpc(request):
                     ip.save()
                     data.lan_ip_address = request.POST['lan_ip_address']
                  
-                #Check if lan_ip_address is equal to Release and lan_ip_address is not equal to Pending Dispose and lan_ip_address is not equal to Dispose
+
                 elif( (data.lan_ip_address == "Release") and (data.pccurrentstatus !="Pending Dispose") and (data.pccurrentstatus !="Dispose") ):
                 
                     data.lan_ip_address = request.POST['lan_ip_address']
@@ -453,11 +351,12 @@ def updateformpc(request):
                     ip.status = "In-use"
                     ip.ip_assisgned = data.computer_id
                     ip.save()
+         
 
-                #Check if previous lan_ip_address is not equal to lan_ip_address from form 
+            
+                
                 elif( data.lan_ip_address != request.POST['lan_ip_address']):
                     Previous_IP = data.lan_ip_address
-                    #Check if previous lan_ip_address is equal to Release or none
                     if Previous_IP == "Release" or  Previous_IP == "None":
                         data.lan_ip_address = request.POST['lan_ip_address']
                         ip = IP.objects.get(ip_address=request.POST['lan_ip_address'])
@@ -466,9 +365,11 @@ def updateformpc(request):
                         ip.save()
                         data.lan_ip_address = request.POST['lan_ip_address']
                     else:
+
+                       
+
                         
                         data.lan_ip_address = request.POST['lan_ip_address']
-                        #call the data from the table IP  using Previous_IP as the index key
                         ip = IP.objects.get(ip_address=request.POST['lan_ip_address'])
                         ip.status = "In-use"
                         ip.ip_assisgned = data.computer_id
@@ -490,30 +391,22 @@ def updateformpc(request):
                 data.joined_domain = request.POST['Joined_Domain']
                 data.pccurrentstatus = request.POST['Computer_Status']
                
-                #Insert the data into table
+            
                 data.save()
-
-                #Create a log history based on the data inserted
                 log_history = loghistory()
                 log_history.Time = datetime.now()
                 log_history.Username = format(request.session.get('name'))
                 log_history.Activity = "Update A Computer By ID " + request.POST['Computer_ID']
                 log_history.save()   
-
-                #Create a array of data from the sended data for creating qr code
                 arraydataQR = [ request.POST['Computer_ID'], request.POST['serial_number'], request.POST['Brand'], request.POST['model'] ]
                 type_create = 'Update'
-                #Call the function to create the qr code
                 create_qrcodePC(arraydataQR, type_create) 
                 
 
-                #return a HttpResponseRedirect to the Computer page
-                return HttpResponse('hai')  
 
-            #Check ifdatainternetCon is equal to Internet 
+                return HttpResponse('hai')   
+
             elif (datainternetCon == "Internet"):
-
-                #Check if form lan_ip_address is equal to Offline 
                 if(request.POST['lan_ip_address'] == "Offline"):
                     Previous_IP = data.lan_ip_address
                     if  IP.objects.filter(ip_address=Previous_IP).exists():
@@ -527,7 +420,7 @@ def updateformpc(request):
 
 
 
-                #Check if  lan_ip_address is equal to Offline     
+                    
                 elif((data.lan_ip_address == "Offline") ):
                     
                     ip = IP.objects.get(ip_address=request.POST['lan_ip_address'])
@@ -536,7 +429,7 @@ def updateformpc(request):
                     ip.save()
                     data.lan_ip_address = request.POST['lan_ip_address']
                     
-                #Check if form lan_ip_address is equal to Release     
+
                 elif(request.POST['lan_ip_address'] == "Release"):
                     Previous_IP = data.lan_ip_address
                     ip = IP.objects.get(ip_address=Previous_IP)
@@ -545,7 +438,7 @@ def updateformpc(request):
                     ip.save()
                     data.lan_ip_address = request.POST['lan_ip_address']
                
-                #Check if lan_ip_address is equal to Release and lan_ip_address is not equal to Pending Dispose and lan_ip_address is not equal to Dispose
+
                 elif( (data.lan_ip_address == "Release") and (data.pccurrentstatus !="Pending Dispose") and (data.pccurrentstatus !="Dispose") ):
                 
                     data.lan_ip_address = request.POST['lan_ip_address']
@@ -556,69 +449,56 @@ def updateformpc(request):
                  
 
             
-                #Check if previous lan_ip_address is not equal to lan_ip_address from form 
+                
                 elif( data.lan_ip_address != request.POST['lan_ip_address']):
                     Previous_IP = data.lan_ip_address
-
-                    #Check if previous lan_ip_address is equal to Release or none
                     if (Previous_IP == "Offline" or Previous_IP == "None" ):
                       
                         data.lan_ip_address = request.POST['lan_ip_address']
-                        #call the data from the table IP  using lan_ip_address from form as the index key
                         ip = IP.objects.get(ip_address=request.POST['lan_ip_address'])
                         ip.status = "In-use"
                         ip.ip_assisgned = data.computer_id
-                        ip.save()
-
                     else:
                     
                         data.lan_ip_address = request.POST['lan_ip_address']
-                        #call the data from the table IP  using lan_ip_address from form as the index key
                         ip = IP.objects.get(ip_address=request.POST['lan_ip_address'])
                         ip.status = "In-use"
                         ip.ip_assisgned = data.computer_id
-                        ip.save()
 
-                        #call the data from the table IP  using lan_ip_address from form as the index key
+                        ip.save()
                         Change_IP_status = IP.objects.get(ip_address= Previous_IP)
                         Change_IP_status.status = "Not-inuse"
                         Change_IP_status.ip_assisgned = "None"
+
                         Change_IP_status.save()
                      
                 else :
                     data.lan_ip_address = request.POST['lan_ip_address']
 
                 data.wlan_mac_address = request.POST['wlan_mac_address']
+
                 data.wlan_ip_address = request.POST['wlan_ip_address']
                 data.joined_domain = request.POST['Joined_Domain']
                 data.pccurrentstatus = request.POST['Computer_Status']
+              
+            
                 data.save()
-
-                #Create a log history based on the data inserted
                 log_history = loghistory()
                 log_history.Time = datetime.now()
                 log_history.Username = format(request.session.get('name'))
                 log_history.Activity = "Update A Computer By ID " + request.POST['Computer_ID']
                 log_history.save()
-
-                #Create a array of data from the sended data for creating qr code
                 arraydataQR = [ request.POST['Computer_ID'], request.POST['serial_number'], request.POST['Brand'], request.POST['model'] ]
                 type_create = 'Update'
-
-                #Call the function to create the qr code
                 create_qrcodePC(arraydataQR, type_create) 
 
 
-                #return a HttpResponseRedirect to the Computer page
+
                 return HttpResponse('hai')   
 
-            #Here if all the condition didn't meet so the data will be saved as it is
             else:
-                #check if lan_ip_address is equal to Offline
                 if(request.POST['lan_ip_address'] == "Offline"):
                     Previous_IP = data.lan_ip_address
-
-                    #check if lan_ip_address is exist in the table IP
                     if  IP.objects.filter(ip_address=Previous_IP).exists():
                         ip = IP.objects.get(ip_address=Previous_IP)
                         ip.status = "Not-inuse"
@@ -627,28 +507,25 @@ def updateformpc(request):
                         data.lan_ip_address = "Offline"
                     else:
                         data.lan_ip_address = "Offline"
-                
                 data.wlan_mac_address = request.POST['wlan_mac_address']
+
                 data.wlan_ip_address = request.POST['wlan_ip_address']
                 data.joined_domain = request.POST['Joined_Domain']
                 data.pccurrentstatus = request.POST['Computer_Status']
+               
+            
                 data.save()
-
-                #Create a log history based on the data inserted
                 log_history = loghistory()
                 log_history.Time = datetime.now()
                 log_history.Username = format(request.session.get('name'))
                 log_history.Activity = "Update A Computer By ID " + request.POST['Computer_ID']
                 log_history.save() 
-
-                #Create a array of data from the sended data for creating qr code
                 arraydataQR = [ request.POST['Computer_ID'], request.POST['serial_number'], request.POST['Brand'], request.POST['model'] ]
                 type_create = 'Update'
-
-                #Call the function to create the qr code
                 create_qrcodePC(arraydataQR, type_create) 
 
-                #return a HttpResponseRedirect to the Computer page
+
+
                 return HttpResponse('hai')   
 
 def getdataupdate(request):
@@ -839,6 +716,1332 @@ def searchPCdata(request):
     else:
        return HttpResponse('')
       
+  
+#mass upload page
+def uploadcsvdata(request):
+    if request.method == "POST":
+        if request.POST['typeofupload'] == 'Add':
+                if request.POST['Main_database'] == 'Computer':
+                    csv_file = request.FILES["csv_file"]
+                    df = pd.read_csv(csv_file)
+                    data1 = df.values.tolist()
+                    for k in data1:
+                        FinData = k 
+                        length = len(FinData)
+                        if  Computer.objects.filter(computer_id=FinData[0]).exists():
+                            
+                                errordata = "Yes"
+                             
+                                context ={
+                                    "error" : errordata,
+
+                                }
+                                return render(request, "Mass upload page.html", context)
+
+                    for keys in data1:
+                        x=2
+                        FinData = keys 
+                        length = len(FinData)
+                    
+                        #proceed to insert the data
+                        data = Computer()
+                        if FinData[0] == "None":
+                            runing_number = Asset_running_number.objects.filter(asset_type='PC').get()
+                            num = int(runing_number.running_number)
+                            if num < 10:
+                                data_cid = "UTM-PC000"+ str(num)
+                            elif ((num >= 10) and (num < 100)):
+                                data_cid= "UTM-PC00"+ str(num)
+                            elif ((num >= 100) and (num < 1000)):
+                                data_cid= "UTM-PC0"+ str(num)
+                            elif ((num >= 1000) and (num < 10000)):
+                                data_cid= "UTM-PC"+ str(num)
+                            data.computer_id = data_cid
+                            runing_number.running_number = num +1
+                            runing_number.save()
+                        else:
+                            data.computer_id = FinData[0]
+                        
+                        if FinData[1] == "None":
+                            
+                            data.current_computer_id =  data.computer_id
+                         
+                        else:
+                            data.current_computer_id = FinData[1]
+                        
+                        data.pctype = FinData[2]
+                        data.pic = FinData[3]
+                        data.previous_pic = FinData[4]
+                        data.Brand = FinData[5]
+                        data.Model = FinData[6]
+                        data.serial_number = FinData[7]
+                        data.asset_no = FinData[8]
+                        if FinData[9] == "None" or FinData[9] ==  "-":
+                            data.dop = FinData[9]
+                        else:
+                            date_time_obj = datetime.strptime(FinData[9], '%d/%m/%Y')
+                            change_date_format = date_time_obj.strftime('%d/%m/%Y')
+                            data.dop = change_date_format
+                              
+                        if FinData[10] == "None" or FinData[10] ==  "-":
+                            data.dop_Warranty_end_date = FinData[10]
+                        else:
+                            date_time_obj = datetime.strptime(FinData[10], '%d/%m/%Y')
+                            change_date_format = date_time_obj.strftime('%d/%m/%Y')
+                            data.dop_Warranty_end_date = change_date_format
+
+                        data.vendor = FinData[11]
+                        data.po = FinData[12]
+                        data.invoice = FinData[13]
+                        data.type_of_purchase = FinData[14]
+
+                        data.block = FinData[15]
+                        data.location = FinData[16]
+                        data.standard_installation = FinData[17]
+                        if FinData[17] == "Yes" or FinData[17] == "yes":
+                            if not softwareUser.objects.filter(User_ID=FinData[0], Software_Name="Trend Micro" ).exists():
+                                trend_micro = softwareUser()
+                                trend_micro.Software_Type = "Non-Concurrent"
+                                trend_micro.User_Type = "Machine"
+                                trend_micro.Software_Name = "Trend Micro"
+                                trend_micro.Software_Version = "Apex one"
+                                trend_micro.User_ID = data.computer_id
+                                trend_micro.save()
+                            if not softwareUser.objects.filter(User_ID=FinData[0], Software_Name="Teamviewer" ).exists():
+                                teamviewer = softwareUser()
+                                teamviewer.Software_Type = "Non-Concurrent"
+                                teamviewer.User_Type = "Machine"
+                                teamviewer.Software_Name = "Teamviewer"
+                                teamviewer.Software_Version = "Teamviewer Host"
+                                teamviewer.User_ID = data.computer_id
+                                teamviewer.save()
+                            if not softwareUser.objects.filter(User_ID=FinData[0], Software_Name="TightVNC" ).exists():
+                                vnc = softwareUser()
+                                vnc.Software_Type = "Non-Concurrent"
+                                vnc.User_Type = "Machine"
+                                vnc.Software_Name = "TightVNC"
+                                vnc.Software_Version = "tightvnc-2.8.63"
+                                vnc.User_ID = data.computer_id
+                                vnc.save()
+                            if not softwareUser.objects.filter(User_ID=FinData[0], Software_Name="Marimba" ).exists():
+                                marimba = softwareUser()
+                                marimba.Software_Type = "Non-Concurrent"
+                                marimba.User_Type = "Machine"
+                                marimba.Software_Name = "Marimba"
+                                marimba.Software_Version = "SFSInventory_x64"
+                                marimba.User_ID = data.computer_id
+                                marimba.save()
+                        data.usbunlock = FinData[18]
+                        data.cdunlock = FinData[19]
+                        data.windows = FinData[20]
+                        data.microsoft_office = FinData[21]
+                        data.microsoft_office_keys = FinData[22]
+                        data.processor_type = FinData[23]
+                        data.ram_type = FinData[24]
+                        data.ram_slot = FinData[25]
+                        data.total_ram = FinData[26]
+                        data.storage_type = FinData[27]
+                        data.storage_space = FinData[28]
+                        data.connection_type = FinData[29]
+                        data.joined_domain = FinData[30]
+                        data.lan_mac_address = FinData[31]
+                        if FinData[32] != "None":
+                            if  IP.objects.filter(ip_address=FinData[32], status = "Not-inuse").exists():
+                                ip = IP.objects.get(ip_address=FinData[32])
+                                ipdata= ip.ip_address
+                                data.lan_ip_address = ipdata
+                                ip.status = "In-use"
+                                ip.ip_assisgned = data.computer_id
+                                ip.save()
+                            else:
+                                errordata = "Yes"
+                                typeerror = 'IP'
+                                row = x
+                                iperror = FinData[30]
+                                ip = IP.objects.get(ip_address=FinData[32])
+                                computer_assignto =ip.ip_assisgned
+                          
+                                context ={
+                                    "error" : errordata,
+                                    "typeerror" : typeerror,
+                                    "row" : row,
+                                    "iperror" : iperror,
+                                    "Computer_assign": computer_assignto
+
+
+
+                                }
+                                return render(request, "Mass upload page.html", context)
+                        else:
+                            data.lan_ip_address = FinData[32]
+                        data.wlan_mac_address = FinData[33]
+                        if FinData[34] != "None":
+                            if  IP.objects.filter(ip_address=FinData[34], status = "Not-inuse").exists():
+                                ip = IP.objects.get(ip_address=FinData[34])
+                                ipdata= ip.ip_address
+                                data.wlan_ip_address = ipdata
+                                ip.status = "In-use"
+                                ip.ip_assisgned = data.computer_id
+                                ip.save()
+                            else:
+                                errordata = "Yes"
+                                typeerror = 'IP'
+                                row = x
+                                iperror = FinData[34]
+                                
+                                ip = IP.objects.get(ip_address=FinData[34])
+                                computer_assignto =ip.ip_assisgned
+                             
+                                context ={
+                                    "error" : errordata,
+                                    "typeerror" : typeerror,
+                                    "row" : row,
+                                    "iperror" : iperror,
+                                    "Computer_assign": computer_assignto
+
+
+
+                                }
+                                return render(request, "Mass upload page.html", context)
+                        else:
+                            data.wlan_ip_address = FinData[34]
+                        data.pccurrentstatus = FinData[35]
+
+
+                       
+                        if not Computer.objects.filter(computer_id=data.computer_id).exists():
+                            data.save()
+                      
+                            x=x+1
+    
+                            dataarray = [data.computer_id, FinData[7], FinData[5], FinData[6]]
+                            type_create = 'Create'
+                            create_qrcodePC(dataarray, type_create)
+
+                        else:
+                          
+                            errordata = "Yes"
+                            x=x+1
+
+                            
+
+                
+                    
+                    return redirect('uploadcsvdata')
+
+                if request.POST['Main_database'] == 'Laptop':
+                    csv_file = request.FILES["csv_file"]
+                 
+                    df = pd.read_csv(csv_file, encoding='unicode_escape')
+                    data1 = df.values.tolist()
+                    for k in data1:
+                        FinData = k 
+                        length = len(FinData)
+                        if  Laptop.objects.filter(computer_id=FinData[0]).exists():
+                                
+                                errordata = "Yes"
+                            
+                                context ={
+                                    "error" : errordata,
+
+                                }
+                                return render(request, "Mass upload page.html", context)
+
+                    for keys in data1:
+                        x =1
+                        FinData = keys 
+                        length = len(FinData)
+                 
+                        #proceed to insert the data
+                        data = Laptop()
+                        if FinData[0] == "None" or FinData[0] == "None":
+                            runing_number = Asset_running_number.objects.filter(asset_type='Laptop').get()
+                            num = int(runing_number.running_number)
+                            if num < 10:
+                                data_cid = "UTM-NB000"+ str(num)
+                            elif ((num >= 10) and (num < 100)):
+                                data_cid= "UTM-NB00"+ str(num)
+                            elif ((num >= 100) and (num < 1000)):
+                                data_cid= "UTM-NB0"+ str(num)
+                            elif ((num >= 1000) and (num < 10000)):
+                                data_cid= "UTM-NB"+ str(num)
+                            data.computer_id = data_cid
+                            runing_number.running_number = num +1
+                            runing_number.save()
+                        else:
+                            data.computer_id = FinData[0]
+                        
+                        if FinData[1] == "None":
+                            
+                            data.current_computer_id =  data.computer_id
+                         
+                        else:
+                            data.current_computer_id = FinData[1]
+                        data.pic = FinData[2]
+                        data.previous_pic = FinData[3]
+                        data.Brand = FinData[4]
+                        data.Model = FinData[5]
+                        data.serial_number = FinData[6]
+                        data.asset_no = FinData[7]
+                        if FinData[8] == "None" or FinData[8] ==  "-":
+                            data.dop = FinData[8]
+                        else:
+                            date_time_obj = datetime.strptime(FinData[8], '%d/%m/%Y')
+                            change_date_format = date_time_obj.strftime('%d/%m/%Y')
+                            data.dop = change_date_format
+                              
+                        if FinData[9] == "None" or FinData[9] ==  "-":
+                            data.dop_Warranty_end_date = FinData[9]
+                           
+                        else:
+                            date_time_obj = datetime.strptime(FinData[9], '%d/%m/%Y')
+                            change_date_format = date_time_obj.strftime('%d/%m/%Y')
+                            data.dop_Warranty_end_date = change_date_format
+                            
+                       
+                        
+                        data.vendor = FinData[10]
+                        data.po = FinData[11]
+                        data.invoice = FinData[12]
+                        data.type_of_purchase = FinData[13]
+
+                        data.block = FinData[14]
+                        data.location = FinData[15]
+                        data.standard_installation = FinData[16]
+                        if FinData[16] == "Yes" or FinData[16] == "yes":
+                            if not softwareUser.objects.filter(User_ID=FinData[0], Software_Name="Trend Micro" ).exists():
+                                trend_micro = softwareUser()
+                                trend_micro.Software_Type = "Non-Concurrent"
+                                trend_micro.User_Type = "Machine"
+                                trend_micro.Software_Name = "Trend Micro"
+                                trend_micro.Software_Version = "Apex one"
+                                trend_micro.User_ID = data.computer_id
+                                trend_micro.save()
+                            if not softwareUser.objects.filter(User_ID=FinData[0], Software_Name="Teamviewer" ).exists():
+                                teamviewer = softwareUser()
+                                teamviewer.Software_Type = "Non-Concurrent"
+                                teamviewer.User_Type = "Machine"
+                                teamviewer.Software_Name = "Teamviewer"
+                                teamviewer.Software_Version = "Teamviewer Host"
+                                teamviewer.User_ID = data.computer_id
+                                teamviewer.save()
+                            if not softwareUser.objects.filter(User_ID=FinData[0], Software_Name="TightVNC" ).exists():
+                                vnc = softwareUser()
+                                vnc.Software_Type = "Non-Concurrent"
+                                vnc.User_Type = "Machine"
+                                vnc.Software_Name = "TightVNC"
+                                vnc.Software_Version = "tightvnc-2.8.63"
+                                vnc.User_ID = data.computer_id
+                                vnc.save()
+                            if not softwareUser.objects.filter(User_ID=FinData[0], Software_Name="Marimba" ).exists():
+                                marimba = softwareUser()
+                                marimba.Software_Type = "Non-Concurrent"
+                                marimba.User_Type = "Machine"
+                                marimba.Software_Name = "Marimba"
+                                marimba.Software_Version = "SFSInventory_x64"
+                                marimba.User_ID = data.computer_id
+                                marimba.save()
+                        data.usbunlock = FinData[17]
+                        data.cdunlock = FinData[18]
+                        data.windows = FinData[19]
+                        data.microsoft_office = FinData[20]
+                        data.microsoft_office_keys = FinData[21]
+                        data.processor_type = FinData[22]
+                        data.ram_type = FinData[23]
+                        data.ram_slot = FinData[24]
+                        data.total_ram = FinData[25]
+                        data.storage_type = FinData[26]
+                        data.storage_space = FinData[27]
+                        data.connection_type = FinData[28]
+                        data.joined_domain = FinData[29]
+                        data.lan_mac_address = FinData[30]
+                        if FinData[31] != "None":
+                            if FinData[31] == "Offline" or FinData[31] == "offline" :
+                                data.lan_ip_address = FinData[31]
+
+                            elif  IP.objects.filter(ip_address=FinData[31], status = "Not-inuse").exists():
+                                ip = IP.objects.get(ip_address=FinData[31])
+                                ipdata= ip.ip_address
+                                data.lan_ip_address = ipdata
+                                ip.status = "In-use"
+                                ip.ip_assisgned = data.computer_id
+                                ip.save()
+                            else:
+                                errordata = "Yes"
+                                typeerror = 'IP'
+                                row = x
+                                iperror = FinData[31]
+                                ip = IP.objects.get(ip_address=FinData[31])
+                                computer_assignto =ip.ip_assisgned
+                            
+                                context ={
+                                    "error" : errordata,
+                                    "typeerror" : typeerror,
+                                    "row" : row,
+                                    "iperror" : iperror,
+                                    "Computer_assign": computer_assignto
+
+
+
+                                }
+                                return render(request, "Mass upload page.html", context)
+                        else:
+                            data.lan_ip_address = FinData[31]
+                        data.wlan_mac_address = FinData[32]
+                        if FinData[33] != "None":
+                            if FinData[33] == "Offline" or FinData[33] == "offline" :
+                                data.wlan_ip_address = FinData[33]
+                            elif  IP.objects.filter(ip_address=FinData[33], status = "Not-inuse").exists():
+                                ip = IP.objects.get(ip_address=FinData[33])
+                                ipdata= ip.ip_address
+                                data.wlan_ip_address = ipdata
+                                ip.status = "In-use"
+                                ip.ip_assisgned = data.computer_id
+                                ip.save()
+                            
+                            else:
+                                errordata = "Yes"
+                                typeerror = 'IP'
+                                row = x
+                                iperror = FinData[33]
+                                
+                                ip = IP.objects.get(ip_address=FinData[33])
+                                computer_assignto =ip.ip_assisgned
+                              
+                                context ={
+                                    "error" : errordata,
+                                    "typeerror" : typeerror,
+                                    "row" : row,
+                                    "iperror" : iperror,
+                                    "Computer_assign": computer_assignto
+
+
+
+                                }
+                                return render(request, "Mass upload page.html", context)
+                        else:
+                            data.wlan_ip_address = FinData[33]
+                        data.pccurrentstatus = FinData[34]
+                        if not Laptop.objects.filter(computer_id=data.computer_id).exists():
+                            data.save()
+                          
+                            x = x+1
+                            dataarray = [data.computer_id, FinData[6], FinData[4], FinData[5]]
+                            type_create = "Create"
+                            create_qrcodeLaptop(dataarray, type_create)
+                        else:
+                           
+                            errordata = "Yes"
+                            x = x+1
+
+                            
+
+                
+                    
+                    return redirect('uploadcsvdata')
+                        
+                
+                    
+                    return HttpResponse(context)
+                if request.POST['Main_database'] == 'NetworkHardware':
+                    csv_file = request.FILES["csv_file"]
+                    df = pd.read_csv(csv_file)
+                    data1 = df.values.tolist()
+                    for k in data1:
+                        FinData = k 
+                        length = len(FinData)
+                        if  NetworkHardware.objects.filter(hardware_id=FinData[0]).exists():
+                                
+                                errordata = "Yes"
+                               
+                                context ={
+                                    "error" : errordata,
+
+                                }
+                                return render(request, "Mass upload page.html", context)
+                    x =1 
+                    for keys in data1:
+                        FinData = keys 
+                        length = len(FinData)
+                 
+                        
+                        #proceed to insert the data
+                        data = NetworkHardware()
+                        if FinData[0] == "None":
+                           
+                            if FinData[1] == "CCTV_DVR":
+                                runing_number = Asset_running_number.objects.filter(asset_type='CCTV_DVR').get()
+                                num = int(runing_number.running_number)
+                                if num < 10:
+                                    data_cid = "CCTV000"+ str(num)
+                                elif ((num >= 10) and (num < 100)):
+                                    data_cid= "CCTV00"+ str(num)
+                                elif ((num >= 100) and (num < 1000)):
+                                    data_cid= "CCTV0"+ str(num)
+                                elif ((num >= 1000) and (num < 10000)):
+                                    data_cid= "CCTV"+ str(num)
+                                data.hardware_id = data_cid
+                                runing_number.running_number = num +1
+                                runing_number.save()
+                            elif FinData[1] == "CCTV":
+                                runing_number = Asset_running_number.objects.filter(asset_type='CCTV').get()
+                                num = int(runing_number.running_number)
+                                if num < 10:
+                                    data_cid = "UTM-CM000"+ str(num)
+                                elif ((num >= 10) and (num < 100)):
+                                    data_cid= "UTM-CM00"+ str(num)
+                                elif ((num >= 100) and (num < 1000)):
+                                    data_cid= "UTM-CM0"+ str(num)
+                                elif ((num >= 1000) and (num < 10000)):
+                                    data_cid= "UTM-CM"+ str(num)
+                                data.hardware_id = data_cid
+                                runing_number.running_number = num +1
+                                runing_number.save()
+                            elif FinData[1] == "AP":
+                                runing_number = Asset_running_number.objects.filter(asset_type='AP').get()
+                                num = int(runing_number.running_number)
+                                if num < 10:
+                                    data_cid = "UTM-AP000"+ str(num)
+                                elif ((num >= 10) and (num < 100)):
+                                    data_cid= "UTM-AP00"+ str(num)
+                                elif ((num >= 100) and (num < 1000)):
+                                    data_cid= "UTM-AP0"+ str(num)
+                                elif ((num >= 1000) and (num < 10000)):
+                                    data_cid= "UTM-AP"+ str(num)
+                                data.hardware_id = data_cid
+                                runing_number.running_number = num +1
+                                runing_number.save()
+                            elif FinData[1] == "CP":
+                                runing_number = Asset_running_number.objects.filter(asset_type='CP').get()
+                                num = int(runing_number.running_number)
+                                if num < 10:
+                                    data_cid = "UTM-CP000"+ str(num)
+                                elif ((num >= 10) and (num < 100)):
+                                    data_cid= "UTM-CP00"+ str(num)
+                                elif ((num >= 100) and (num < 1000)):
+                                    data_cid= "UTM-CP0"+ str(num)
+                                elif ((num >= 1000) and (num < 10000)):
+                                    data_cid= "UTM-CP"+ str(num)
+                                data.hardware_id = data_cid
+                                runing_number.running_number = num +1
+                                runing_number.save()
+                            elif FinData[1] == "Door_Access":
+                                runing_number = Asset_running_number.objects.filter(asset_type='Door_Access').get()
+                                num = int(runing_number.running_number)
+                                if num < 10:
+                                    data_cid = "DoorController000"+ str(num)
+                                elif ((num >= 10) and (num < 100)):
+                                    data_cid= "DoorControllerP00"+ str(num)
+                                elif ((num >= 100) and (num < 1000)):
+                                    data_cid= "DoorController0"+ str(num)
+                                elif ((num >= 1000) and (num < 10000)):
+                                    data_cid= "DoorController"+ str(num)
+                                data.hardware_id = data_cid
+                                runing_number.running_number = num +1
+                                runing_number.save()
+                            elif FinData[1] == "Switches":
+                                runing_number = Asset_running_number.objects.filter(asset_type='Switches').get()
+                                num = int(runing_number.running_number)
+                                if num < 10:
+                                    data_cid = "UTM-NW000"+ str(num)
+                                elif ((num >= 10) and (num < 100)):
+                                    data_cid= "UTM-NWP00"+ str(num)
+                                elif ((num >= 100) and (num < 1000)):
+                                    data_cid= "UTM-NW0"+ str(num)
+                                elif ((num >= 1000) and (num < 10000)):
+                                    data_cid= "UTM-NW"+ str(num)
+                                data.hardware_id = data_cid
+                                runing_number.running_number = num +1
+                                runing_number.save()
+                            elif FinData[1] == "Tape_Library":
+                                runing_number = Asset_running_number.objects.filter(asset_type='Tape_Library').get()
+                                num = int(runing_number.running_number)
+                                if num < 10:
+                                    data_cid = "UTM-TL000"+ str(num)
+                                elif ((num >= 10) and (num < 100)):
+                                    data_cid= "UTM-TL00"+ str(num)
+                                elif ((num >= 100) and (num < 1000)):
+                                    data_cid= "UTM-TL0"+ str(num)
+                                elif ((num >= 1000) and (num < 10000)):
+                                    data_cid= "UTM-TL"+ str(num)
+                                data.hardware_id = data_cid
+                                runing_number.running_number = num +1
+                                runing_number.save()
+                            elif FinData[1] == "Wireless_Dongle":
+                                runing_number = Asset_running_number.objects.filter(asset_type='Wireless_Dongle').get()
+                                num = int(runing_number.running_number)
+                                if num < 10:
+                                    data_cid = "Tenda Wireless000"+ str(num)
+                                elif ((num >= 10) and (num < 100)):
+                                    data_cid= "Tenda Wireless00"+ str(num)
+                                elif ((num >= 100) and (num < 1000)):
+                                    data_cid= "Tenda Wireless0"+ str(num)
+                                elif ((num >= 1000) and (num < 10000)):
+                                    data_cid= "Tenda Wireless"+ str(num)
+                                data.hardware_id = data_cid
+                                runing_number.running_number = num +1
+                                runing_number.save()
+                            elif FinData[1] == "Print_Server":
+                                runing_number = Asset_running_number.objects.filter(asset_type='Print_Server').get()
+                                num = int(runing_number.running_number)
+                                if num < 10:
+                                    data_cid = "UTM-PS000"+ str(num)
+                                elif ((num >= 10) and (num < 100)):
+                                    data_cid= "UTM-PS00"+ str(num)
+                                elif ((num >= 100) and (num < 1000)):
+                                    data_cid= "UTM-PS0"+ str(num)
+                                elif ((num >= 1000) and (num < 10000)):
+                                    data_cid= "UTM-PS"+ str(num)
+                                data.hardware_id = data_cid
+                                runing_number.running_number = num +1
+                                runing_number.save()
+                            elif FinData[1] == "Firewall":
+                                runing_number = Asset_running_number.objects.filter(asset_type='Firewall').get()
+                                num = int(runing_number.running_number)
+                                if num < 10:
+                                    data_cid = "UTM-FW000"+ str(num)
+                                elif ((num >= 10) and (num < 100)):
+                                    data_cid= "UTM-FW00"+ str(num)
+                                elif ((num >= 100) and (num < 1000)):
+                                    data_cid= "UTM-FW0"+ str(num)
+                                elif ((num >= 1000) and (num < 10000)):
+                                    data_cid= "UTM-FW"+ str(num)
+                                data.hardware_id = data_cid
+                                runing_number.running_number = num +1
+                                runing_number.save()
+                            elif FinData[1] == "UPS":
+                                data.hardware_id =  FinData[0]
+                            elif FinData[1] == "Server":
+                                runing_number = Asset_running_number.objects.filter(asset_type='Server').get()
+                                num = int(runing_number.running_number)
+                                if num < 10:
+                                    data_cid = "UTM-SV000"+ str(num)
+                                elif ((num >= 10) and (num < 100)):
+                                    data_cid= "UTM-SV00"+ str(num)
+                                elif ((num >= 100) and (num < 1000)):
+                                    data_cid= "UTM-SV0"+ str(num)
+                                elif ((num >= 1000) and (num < 10000)):
+                                    data_cid= "UTM-SV"+ str(num)
+                                data.hardware_id = data_cid
+                                runing_number.running_number = num +1
+                                runing_number.save()
+                                
+
+                        else:
+                            data.hardware_id = FinData[0]
+                        data.hardware_type = FinData[1]
+                        data.Brand = FinData[2]
+                        data.Model = FinData[3]
+                        data.serial_number = FinData[4]
+                        data.asset_no = FinData[5]
+                        if FinData[6] == "None" or FinData[6] ==  "-":
+                             data.dop = FinData[8]
+                        else:
+                            date_time_obj = datetime.strptime(FinData[6], '%d/%m/%Y')
+                            change_date_format = date_time_obj.strftime('%d/%m/%Y')
+                            data.dop = change_date_format
+                             
+                        if FinData[7] == "None" or FinData[7] ==  "-":
+                            data.dop_Warranty_end_date = FinData[9]
+                        else:
+                            date_time_obj = datetime.strptime(FinData[7], '%d/%m/%Y')
+                            change_date_format = date_time_obj.strftime('%d/%m/%Y')
+                            data.dop_Warranty_end_date = change_date_format
+                              
+                      
+                        data.vendor = FinData[8]
+                        data.po = FinData[9]
+                        data.invoice = FinData[10]
+                        data.block = FinData[11]
+                        data.location = FinData[12]
+
+                        data.mac_address = FinData[13]
+                        if FinData[14] != "None":
+                            if  IP.objects.filter(ip_address=FinData[14], status = "Not-inuse").exists():
+                                ip = IP.objects.get(ip_address=FinData[14])
+                                ipdata= ip.ip_address
+                                data.ip_address = ipdata
+                                ip.status = "In-use"
+                                ip.ip_assisgned = data.hardware_id
+                                ip.save()
+                            else:
+                                errordata = "Yes"
+                                typeerror = 'IP'
+                                row = x
+                                iperror = FinData[14]
+                                
+                                ip = IP.objects.get(ip_address=FinData[14])
+                                computer_assignto =ip.ip_assisgned
+                              
+                                context ={
+                                    "error" : errordata,
+                                    "typeerror" : typeerror,
+                                    "row" : row,
+                                    "iperror" : iperror,
+                                    "Computer_assign": computer_assignto
+
+
+
+                                }
+                                return render(request, "Mass upload page.html", context)
+                        else:
+                            data.ip_address = FinData[14]
+                        data.Current_Status = FinData[15]
+                       
+                        if not NetworkHardware.objects.filter(hardware_id=data.hardware_id).exists():
+                            data.save()
+                          
+                            x = x +1
+                        else:
+                          
+                            errordata = "Yes"
+
+                            
+
+                
+                    
+                    return redirect('uploadcsvdata')
+
+                if request.POST['Main_database'] == 'IP':
+                    csv_file = request.FILES["csv_file"]
+                    df = pd.read_csv(csv_file)
+                    data1 = df.values.tolist()
+                    for k in data1:
+                        FinData = k 
+                        length = len(FinData)
+                        if  IP.objects.filter(ip_address=FinData[0]).exists():
+                            
+                                errordata = "Yes"
+                            
+                                context ={
+                                    "error" : errordata,
+
+                                }
+                                return render(request, "Mass upload page.html", context)
+
+                    for keys in data1:
+                        FinData = keys 
+                        length = len(FinData)
+                   
+                        #proceed to insert the data
+                        data = IP()
+                        data.ip_address = FinData[0]
+                        
+                        data.ip_assisgned = FinData[1]
+                        
+                        data.status = FinData[2]
+                        data.remark = FinData[3]
+            
+                        if not IP.objects.filter(ip_address=data.ip_address).exists():
+                            data.save()
+                  
+                        else:
+                    
+                            errordata = "Yes"
+
+                            
+
+                
+                    
+                    return redirect('uploadcsvdata')    
+                  
+                if request.POST['Main_database'] == 'User':
+                    csv_file = request.FILES["csv_file"]
+                    df = pd.read_csv(csv_file)
+                    data1 = df.values.tolist()
+                    for k in data1:
+                        FinData = k 
+                        length = len(FinData)
+                        if  UserAsset.objects.filter(employee_number=FinData[0]).exists():
+                            
+                                errordata = "Yes"
+                      
+                                context ={
+                                    "error" : errordata,
+
+                                }
+                                return render(request, "Mass upload page.html", context)
+
+                    for keys in data1:
+                        FinData = keys 
+                        length = len(FinData)
+                      
+                        #proceed to insert the data
+                        data = UserAsset()
+                        data.employee_number = FinData[0]
+                        
+                        data.name = FinData[1]
+                        
+                        data.email = FinData[2]
+                        data.designation = FinData[3]
+                        data.department = FinData[4]
+                        data.block = FinData[5]
+                        data.location = FinData[6]
+                        data.vpn = FinData[7]
+                        data.vpnaccount = FinData[8]
+
+            
+                        if not UserAsset.objects.filter(employee_number=data.employee_number).exists():
+                            data.save()
+                    
+                        else:
+                      
+                            errordata = "Yes"
+
+                            
+
+                
+                    
+                    return redirect('uploadcsvdata')    
+                  
+                if request.POST['Main_database'] == 'Software User':
+                    csv_file = request.FILES["csv_file"]
+                    df = pd.read_csv(csv_file)
+                    data1 = df.values.tolist()
+                    for k in data1:
+                        FinData = k 
+                        length = len(FinData)
+                        if  softwareUser.objects.filter(Software_Type=FinData[0], User_Type= FinData[1], Software_Name=FinData[2], User_ID=FinData[3]).exists():
+                                
+                                errordata = "Yes"
+                              
+                                context ={
+                                    "error" : errordata,
+
+                                }
+                                return render(request, "Mass upload page.html", context)
+
+                    for keys in data1:
+                        FinData = keys 
+                        length = len(FinData)
+                       
+                        #proceed to insert the data
+                        data = softwareUser()
+                        data.Software_Type = FinData[0]
+                        
+                        data.User_Type = FinData[1]
+                        
+                        data.Software_Name = FinData[2]
+                        data.User_ID = FinData[3]
+                        data.Software_Version = FinData[4]
+                        
+
+            
+                        if not softwareUser.objects.filter(Software_Type=FinData[0], User_Type= FinData[1], Software_Name=FinData[2], User_ID=FinData[3]).exists():
+                            data.save()
+                    
+                        else:
+                     
+                            errordata = "Yes"
+
+                            
+
+                
+                    
+                    return redirect('uploadcsvdata')
+                  
+        if request.POST['typeofupload'] == 'Update':     
+                if request.POST['Main_database'] == 'Computer':
+                    csv_file = request.FILES["csv_file"]
+                    df = pd.read_csv(csv_file)
+                    data1 = df.values.tolist()
+                 
+                    for keys in data1:
+                        x=2
+                        FinData = keys 
+                        length = len(FinData)
+                  
+                        #proceed to insert the data
+                        data = Computer.objects.filter(computer_id= FinData[0]).get()
+                       
+                        data.computer_id = FinData[0]
+                        
+                      
+                        data.current_computer_id = FinData[1]
+                      
+                        
+                        data.pctype = FinData[2]
+                        data.pic = FinData[3]
+                        data.previous_pic = FinData[4]
+                        data.Brand = FinData[5]
+                        data.Model = FinData[6]
+                        data.serial_number = FinData[7]
+                        data.asset_no = FinData[8]
+                        if FinData[9] == "None" or FinData[9] ==  "-":
+                            data.dop = FinData[9]
+                        else:
+                            date_time_obj = datetime.strptime(FinData[9], '%d/%m/%Y')
+                            change_date_format = date_time_obj.strftime('%Y-%m-%d')
+                            data.dop = change_date_format
+                              
+                        if FinData[10] == "None" or FinData[10] ==  "-":
+                            data.dop_Warranty_end_date = FinData[10]
+                        else:
+                            date_time_obj = datetime.strptime(FinData[10], '%d/%m/%Y')
+                            change_date_format = date_time_obj.strftime('%Y-%m-%d')
+                            data.dop_Warranty_end_date = change_date_format
+                              
+                       
+                       
+                        data.vendor = FinData[11]
+                        data.po = FinData[12]
+                        data.invoice = FinData[13]
+                        data.type_of_purchase = FinData[14]
+
+                        data.block = FinData[15]
+                        data.location = FinData[16]
+                        data.standard_installation = FinData[17]
+                        standardinstall = data.standard_installation
+                        if FinData[17] == "Yes" or FinData[17] == "yes" :
+                            if not softwareUser.objects.filter(User_ID=FinData[0], Software_Name="Trend Micro" ).exists():
+                                trend_micro = softwareUser()
+                                trend_micro.Software_Type = "Non-Concurrent"
+                                trend_micro.User_Type = "Machine"
+                                trend_micro.Software_Name = "Trend Micro"
+                                trend_micro.Software_Version = "Apex one"
+                                trend_micro.User_ID = data.computer_id
+                                trend_micro.save()
+                            if not softwareUser.objects.filter(User_ID=FinData[0], Software_Name="Teamviewer" ).exists():
+                                teamviewer = softwareUser()
+                                teamviewer.Software_Type = "Non-Concurrent"
+                                teamviewer.User_Type = "Machine"
+                                teamviewer.Software_Name = "Teamviewer"
+                                teamviewer.Software_Version = "Teamviewer Host"
+                                teamviewer.User_ID = data.computer_id
+                                teamviewer.save()
+                            if not softwareUser.objects.filter(User_ID=FinData[0], Software_Name="TightVNC" ).exists():
+                                vnc = softwareUser()
+                                vnc.Software_Type = "Non-Concurrent"
+                                vnc.User_Type = "Machine"
+                                vnc.Software_Name = "TightVNC"
+                                vnc.Software_Version = "tightvnc-2.8.63"
+                                vnc.User_ID = data.computer_id
+                                vnc.save()
+                            if not softwareUser.objects.filter(User_ID=FinData[0], Software_Name="Marimba" ).exists():
+                                marimba = softwareUser()
+                                marimba.Software_Type = "Non-Concurrent"
+                                marimba.User_Type = "Machine"
+                                marimba.Software_Name = "Marimba"
+                                marimba.Software_Version = "SFSInventory_x64"
+                                marimba.User_ID = data.computer_id
+                                marimba.save()
+                        
+                        data.usbunlock = FinData[18]
+                        data.cdunlock = FinData[19]
+                        data.windows = FinData[20]
+                        data.microsoft_office = FinData[21]
+                        data.microsoft_office_keys = FinData[22]
+                        data.processor_type = FinData[23]
+                        data.ram_type = FinData[24]
+                        data.ram_slot = FinData[25]
+                        data.total_ram = FinData[26]
+                        data.storage_type = FinData[27]
+                        data.storage_space = FinData[28]
+                        data.connection_type = FinData[29]
+                        data.joined_domain = FinData[30]
+                        data.lan_mac_address = FinData[31]
+                        if ( FinData[32] == "Release" or FinData[32] == "release"):
+                            if (data.lan_ip_address != ""):
+                                ip = IP.objects.get(ip_address=data.lan_ip_address)
+                                ip.status = "Not-inuse"
+                                ip.ip_assisgned = "None"
+                                ip.save()
+                                data.lan_ip_address = FinData[32]
+                        else:
+                            previIP = data.lan_ip_address
+                            if ( previIP != FinData[32] ):
+                                if previIP == "Release":
+                                    if FinData[32] == "Offline":
+                                        data.lan_ip_address = FinData[32]
+                                    else:
+                                        ipNew = IP.objects.get(ip_address = FinData[32])
+                                        ipNew.status = "In-use"
+                                        ipNew.ip_assisgned = FinData[0]
+                                        ipNew.save()
+                                        data.lan_ip_address = FinData[32]
+
+
+                                elif previIP == "Offline" or previIP == "None":
+                                    if FinData[32]  == "Offline" or FinData[32] == "None":
+                                        data.lan_ip_address = FinData[32]
+                                    else:
+                                        ipNew = IP.objects.get(ip_address = FinData[32])
+                                        ipNew.status = "In-use"
+                                        ipNew.ip_assisgned = FinData[0]
+                                        ipNew.save()
+                                        data.lan_ip_address = FinData[32]
+
+                                    
+                                else:
+                                    ip = IP.objects.get(ip_address=previIP)
+                                    ip.status = "Not-inuse"
+                                    ip.ip_assisgned = "None"
+                                    ip.save()
+                                    ipNew = IP.objects.get(ip_address = FinData[32])
+                                    ipNew.status = "In-use"
+                                    ipNew.ip_assisgned = FinData[0]
+                                    ipNew.save()
+                                    data.lan_ip_address = FinData[32]
+
+
+                                
+                                
+                                
+                            else:
+                                data.lan_ip_address = FinData[32]
+
+                        
+                        data.wlan_mac_address = FinData[33]
+                       
+                        data.wlan_ip_address = FinData[34]
+                        data.pccurrentstatus = FinData[35]
+
+
+                       
+                     
+                        data.save()
+                        dataarray = [data.computer_id, FinData[7], FinData[5], FinData[6]]
+                        type_create = 'Update'
+                        create_qrcodePC(dataarray, type_create)
+                        
+                            
+
+                    
+                    return redirect('uploadcsvdata')
+
+                if request.POST['Main_database'] == 'Laptop':
+                    csv_file = request.FILES["csv_file"]
+                 
+                    df = pd.read_csv(csv_file, encoding='unicode_escape')
+                    data1 = df.values.tolist()
+                    
+
+                    for keys in data1:
+                        x =1
+                        FinData = keys 
+                        length = len(FinData)
+                  
+                        #proceed to insert the data
+                        data = Laptop.objects.filter(computer_id= FinData[0]).get()
+                        
+                        data.computer_id = FinData[0]
+                       
+                        data.current_computer_id = FinData[1]
+                        data.pic = FinData[2]
+                        data.previous_pic = FinData[3]
+                        data.Brand = FinData[4]
+                        data.Model = FinData[5]
+                        data.serial_number = FinData[6]
+                        data.asset_no = FinData[7]
+                        if FinData[8] == "None" or FinData[8] ==  "-":
+                            data.dop = FinData[8]
+                        else:
+                            date_time_obj = datetime.strptime(FinData[8], '%d/%m/%Y')
+                            change_date_format = date_time_obj.strftime('%Y-%m-%d')
+                            data.dop = change_date_format
+                              
+                        if FinData[9] == "None" or FinData[9] ==  "-":
+                            data.dop_Warranty_end_date = FinData[9]
+                           
+                        else:
+                            date_time_obj = datetime.strptime(FinData[9], '%d/%m/%Y')
+                            change_date_format = date_time_obj.strftime('%Y-%m-%d')
+                            data.dop_Warranty_end_date = change_date_format
+                            
+                       
+                        
+                        data.vendor = FinData[10]
+                        data.po = FinData[11]
+                        data.invoice = FinData[12]
+                        data.type_of_purchase = FinData[13]
+
+                        data.block = FinData[14]
+                        data.location = FinData[15]
+                        data.standard_installation = FinData[16]
+                        standardinstall =  data.standard_installation
+                        if FinData[16] == "Yes" or FinData[16] == "yes" :
+                            if not softwareUser.objects.filter(User_ID=FinData[0], Software_Name="Trend Micro" ).exists():
+                                trend_micro = softwareUser()
+                                trend_micro.Software_Type = "Non-Concurrent"
+                                trend_micro.User_Type = "Machine"
+                                trend_micro.Software_Name = "Trend Micro"
+                                trend_micro.Software_Version = "Apex one"
+                                trend_micro.User_ID = data.computer_id
+                                trend_micro.save()
+                            if not softwareUser.objects.filter(User_ID=FinData[0], Software_Name="Teamviewer" ).exists():
+                                teamviewer = softwareUser()
+                                teamviewer.Software_Type = "Non-Concurrent"
+                                teamviewer.User_Type = "Machine"
+                                teamviewer.Software_Name = "Teamviewer"
+                                teamviewer.Software_Version = "Teamviewer Host"
+                                teamviewer.User_ID = data.computer_id
+                                teamviewer.save()
+                            if not softwareUser.objects.filter(User_ID=FinData[0], Software_Name="TightVNC" ).exists():
+                                vnc = softwareUser()
+                                vnc.Software_Type = "Non-Concurrent"
+                                vnc.User_Type = "Machine"
+                                vnc.Software_Name = "TightVNC"
+                                vnc.Software_Version = "tightvnc-2.8.63"
+                                vnc.User_ID = data.computer_id
+                                vnc.save()
+                            if not softwareUser.objects.filter(User_ID=FinData[0], Software_Name="Marimba" ).exists():
+                                marimba = softwareUser()
+                                marimba.Software_Type = "Non-Concurrent"
+                                marimba.User_Type = "Machine"
+                                marimba.Software_Name = "Marimba"
+                                marimba.Software_Version = "SFSInventory_x64"
+                                marimba.User_ID = data.computer_id
+                                marimba.save()
+                        data.usbunlock = FinData[17]
+                        data.cdunlock = FinData[18]
+                        data.windows = FinData[19]
+                        data.microsoft_office = FinData[20]
+                        data.microsoft_office_keys = FinData[21]
+                        data.processor_type = FinData[22]
+                        data.ram_type = FinData[23]
+                        data.ram_slot = FinData[24]
+                        data.total_ram = FinData[25]
+                        data.storage_type = FinData[26]
+                        data.storage_space = FinData[27]
+                        data.connection_type = FinData[28]
+                 
+                        data.joined_domain = FinData[29]
+                        data.lan_mac_address = FinData[30]
+                        if ( FinData[31] == "Release" or FinData[31] == "release"):
+                            if (data.lan_ip_address != ""):
+                                ip = IP.objects.get(ip_address=data.lan_ip_address)
+                                ip.status = "Not-inuse"
+                                ip.ip_assisgned = "None"
+                                ip.save()
+                                data.lan_ip_address = FinData[31]
+                        else:
+                            previIP = data.lan_ip_address
+                            if ( previIP != FinData[31] ):
+                                if previIP == "Release":
+                                    if FinData[32] == "Offline":
+                                        data.lan_ip_address = FinData[32]
+                                    else:
+                                        ipNew = IP.objects.get(ip_address = FinData[32])
+                                        ipNew.status = "In-use"
+                                        ipNew.ip_assisgned = FinData[0]
+                                        ipNew.save()
+                                        data.lan_ip_address = FinData[32]
+                                elif previIP != "Offline" or previIP != "None" :
+
+                                    ip = IP.objects.get(ip_address=previIP)
+                                    ip.status = "Not-inuse"
+                                    ip.ip_assisgned = "None"
+                                    ip.save()
+                                    ipNew = IP.objects.get(ip_address = FinData[31])
+                                    ipNew.status = "In-use"
+                                    ipNew.ip_assisgned = FinData[0]
+                                    ipNew.save()
+                                    data.lan_ip_address = FinData[31]
+                                else:
+                                    ipNew = IP.objects.get(ip_address = FinData[31])
+                                    ipNew.status = "In-use"
+                                    ipNew.ip_assisgned = FinData[0]
+                                    ipNew.save()
+                                    data.lan_ip_address = FinData[31]
+                            else:
+                                data.lan_ip_address = FinData[31]
+                      
+                        data.wlan_mac_address = FinData[32]
+                        if ( FinData[33] == "Release" or FinData[33] == "release"):
+                            if (data.wlan_ip_address != ""):
+                                ip = IP.objects.get(ip_address=data.wlan_ip_address)
+                                ip.status = "Not-inuse"
+                                ip.ip_assisgned = "None"
+                                ip.save()
+                                data.wlan_ip_address = FinData[33]
+                        else:
+                            previIP = data.lan_ip_address
+                            if ( previIP != FinData[33]):
+                                if FinData[31] != "Offline" :
+                                    ip = IP.objects.get(ip_address=previIP)
+                                    ip.status = "Not-inuse"
+                                    ip.ip_assisgned = "None"
+                                    ip.save()
+                                    ipNew = IP.objects.get(ip_address = FinData[33])
+                                    ipNew.status = "In-use"
+                                    ipNew.ip_assisgned = FinData[0]
+                                    ipNew.save()
+                                    data.wlan_ip_address = FinData[33]
+                                else:
+                                    ipNew = IP.objects.get(ip_address = FinData[33])
+                                    ipNew.status = "In-use"
+                                    ipNew.ip_assisgned = FinData[0]
+                                    ipNew.save()
+                                    data.wlan_ip_address = FinData[33]
+
+                            else:
+                                data.wlan_ip_address = FinData[33]
+                      
+                        data.pccurrentstatus = FinData[34]
+                       
+                        data.save()
+                        dataarray = [data.computer_id, FinData[6], FinData[4], FinData[5]]
+                        type_create = "Update"
+                        create_qrcodeLaptop(dataarray, type_create)
+
+                            
+
+                
+                    
+                    return redirect('uploadcsvdata')
+                        
+                
+                    
+                    return HttpResponse(context)
+                
+                if request.POST['Main_database'] == 'NetworkHardware':
+                    csv_file = request.FILES["csv_file"]
+                    df = pd.read_csv(csv_file)
+                    data1 = df.values.tolist()
+                   
+                    x =1 
+                    for keys in data1:
+                        FinData = keys 
+                        length = len(FinData)
+                
+                        
+                        #proceed to insert the data
+                        data = NetworkHardware.objects.filter(hardware_id= FinData[0]).get()
+                       
+                        data.hardware_id = FinData[0]
+                        data.hardware_type = FinData[1]
+                        data.Brand = FinData[2]
+                        data.Model = FinData[3]
+                        data.serial_number = FinData[4]
+                        data.asset_no = FinData[5]
+                        if FinData[6] == "None" or FinData[6] ==  "-":
+                             data.dop = FinData[8]
+                        else:
+                            date_time_obj = datetime.strptime(FinData[6], '%d/%m/%Y')
+                            change_date_format = date_time_obj.strftime('%Y-%m-%d')
+                            data.dop = change_date_format
+                             
+                        if FinData[7] == "None" or FinData[7] ==  "-":
+                            data.dop_Warranty_end_date = FinData[9]
+                        else:
+                            date_time_obj = datetime.strptime(FinData[7], '%d/%m/%Y')
+                            change_date_format = date_time_obj.strftime('%Y-%m-%d')
+                            data.dop_Warranty_end_date = change_date_format
+                              
+                      
+                        data.vendor = FinData[8]
+                        data.po = FinData[9]
+                        data.invoice = FinData[10]
+                        data.block = FinData[11]
+                        data.location = FinData[12]
+
+                        data.mac_address = FinData[13]
+                        
+                        data.ip_address = FinData[14]
+                        data.Current_Status = FinData[15]
+                       
+                      
+                        data.save()
+                        
+
+                            
+
+                
+                    
+                    return redirect('uploadcsvdata')
+
+                if request.POST['Main_database'] == 'IP':
+                    csv_file = request.FILES["csv_file"]
+                    df = pd.read_csv(csv_file)
+                    data1 = df.values.tolist()
+                  
+
+                    for keys in data1:
+                        FinData = keys 
+                        length = len(FinData)
+                      
+                        #proceed to insert the data
+                        data = IP.objects.filter(ip_address= FinData[0]).get()
+                        data.ip_address = FinData[0]
+                        
+                        data.ip_assisgned = FinData[1]
+                        
+                        data.status = FinData[2]
+                        data.remark = FinData[3]
+            
+                      
+                        data.save()
+                          
+
+                            
+
+                
+                    
+                    return redirect('uploadcsvdata')    
+                  
+                if request.POST['Main_database'] == 'User':
+                    csv_file = request.FILES["csv_file"]
+                    df = pd.read_csv(csv_file)
+                    data1 = df.values.tolist()
+                  
+                    for keys in data1:
+                        FinData = keys 
+                        length = len(FinData)
+                   
+                        #proceed to insert the data
+                        data = UserAsset.objects.filter(employee_number= FinData[0]).get()
+                        data.employee_number = FinData[0]
+                        
+                        data.name = FinData[1]
+                        
+                        data.email = FinData[2]
+                        data.designation = FinData[3]
+                        data.department = FinData[4]
+                        data.block = FinData[5]
+                        data.location = FinData[6]
+                        data.vpn = FinData[7]
+                        data.vpnaccount = FinData[8]
+
+            
+                       
+                        data.save()
+                        
+
+                            
+
+                
+                    
+                    return redirect('uploadcsvdata')    
+                  
+                if request.POST['Main_database'] == 'Software User': 
+                    csv_file = request.FILES["csv_file"]
+                    df = pd.read_csv(csv_file)
+                    data1 = df.values.tolist()
+                    
+
+                    for keys in data1:
+                        FinData = keys 
+                        length = len(FinData)
+                   
+                        #proceed to insert the data
+                        data = softwareUser.objects.filter(User_ID= FinData[3], Software_Name= FinData[2]).get()
+                        data.Software_Type = FinData[0]
+                        
+                        data.User_Type = FinData[1]
+                        
+                        data.Software_Name = FinData[2]
+                        data.User_ID = FinData[3]
+                        data.Software_Version = FinData[4]
+                        
+
+            
+                       
+                        data.save()
+                       
+                        
+                    return redirect('uploadcsvdata')
+             
+    return render(request, 'Mass upload page.html')      
   
 
           
@@ -2073,7 +3276,35 @@ def getcustomIPdata(request):
 
 
 
-   
+# login function
+def login_user(request):
+    if request.method == "POST":
+        username_login = request.POST['username']
+        password_login = request.POST['password']
+        user = authenticate(request, username=username_login, password=password_login)
+        if user is not None:
+            login(request, user)
+            request.session['name'] = username_login
+            if request.user.is_staff:
+                request.session['role'] = 'staff'
+                request.session['styledivstaff'] = "display:block"
+            else:
+                request.session['role'] = 'Not staff'
+                request.session['styledivNotstaff'] = "display:none"
+
+            
+
+
+            return redirect("dashboard", )
+       
+      
+        else:
+            messages.success(request, ("There was an Error Logging in, Try Again"))
+            return redirect("login")
+
+    return render(request, "login.html", {})
+            
+     
 
 
 
@@ -2237,6 +3468,22 @@ def getloghistory(request):
 
 
 
+# logout function
+def logoutsystem(request):
+    del request.session['name']
+    if (format(request.session.get('role')) == "staff"):
+        del request.session['styledivstaff']
+    else:
+        del request.session['styledivNotstaff']
+    del request.session['role']
+    
+    
+
+
+    logout(request)
+
+    return redirect("/")
+ 
 
 # def startupcreateQR():
 #     dirctory = Path(__file__).resolve().parent.parent
@@ -2353,8 +3600,10 @@ def upload_LaptopQR(dataindex,data, type_Upload):
         form.qrcode_image = data
         form.save()
     else:
-        form.qrcode_image = data
+        form = Laptop.objects.filter(computer_id=dataindex).get()
+        form.qrcode_image = "Laptop/" + data
         if not Laptop.objects.filter(qrcode_image=data).exists():  
+           
             form.save()
         
             
@@ -2428,7 +3677,6 @@ def create_pdf_based_OnImage(request):
                             data= "UTM-PC"+ str(data1)
                         data1 = data1 + 1
                         arraydata.append(data)
-                        
         elif (datatype == "PC" and request.POST["type_selection"] == "All"):
              
 
@@ -2632,1276 +3880,6 @@ def create_pdf_based_OnImage(request):
             pdf.output(mediarootfile + output_file, "F") 
             
             return HttpResponse('hai')
-
-#mass upload page
-def uploadcsvdata(request):
-    if request.method == "POST":
-        if request.POST['typeofupload'] == 'Add':
-                if request.POST['Main_database'] == 'Computer':
-                    csv_file = request.FILES["csv_file"]
-                    df = pd.read_csv(csv_file)
-                    data1 = df.values.tolist()
-                    for k in data1:
-                        FinData = k 
-                        length = len(FinData)
-                        if  Computer.objects.filter(computer_id=FinData[0]).exists():
-                            
-                                errordata = "Yes"
-                             
-                                context ={
-                                    "error" : errordata,
-
-                                }
-                                return render(request, "Mass upload page.html", context)
-
-                    for keys in data1:
-                        x=2
-                        FinData = keys 
-                        length = len(FinData)
-                    
-                        #proceed to insert the data
-                        data = Computer()
-                        if FinData[0] == "None":
-                            runing_number = Asset_running_number.objects.filter(asset_type='PC').get()
-                            num = int(runing_number.running_number)
-                            if num < 10:
-                                data_cid = "UTM-PC000"+ str(num)
-                            elif ((num >= 10) and (num < 100)):
-                                data_cid= "UTM-PC00"+ str(num)
-                            elif ((num >= 100) and (num < 1000)):
-                                data_cid= "UTM-PC0"+ str(num)
-                            elif ((num >= 1000) and (num < 10000)):
-                                data_cid= "UTM-PC"+ str(num)
-                            data.computer_id = data_cid
-                            runing_number.running_number = num +1
-                            runing_number.save()
-                        else:
-                            data.computer_id = FinData[0]
-                        
-                        if FinData[1] == "None":
-                            
-                            data.current_computer_id =  data.computer_id
-                         
-                        else:
-                            data.current_computer_id = FinData[1]
-                        
-                        data.pctype = FinData[2]
-                        data.pic = FinData[3]
-                        data.previous_pic = FinData[4]
-                        data.Brand = FinData[5]
-                        data.Model = FinData[6]
-                        data.serial_number = FinData[7]
-                        data.asset_no = FinData[8]
-                        if FinData[9] == "None" or FinData[9] ==  "-":
-                            data.dop = FinData[9]
-                        else:
-                            date_time_obj = datetime.strptime(FinData[9], '%d/%m/%Y')
-                            change_date_format = date_time_obj.strftime('%d/%m/%Y')
-                            data.dop = change_date_format
-                              
-                        if FinData[10] == "None" or FinData[10] ==  "-":
-                            data.dop_Warranty_end_date = FinData[10]
-                        else:
-                            date_time_obj = datetime.strptime(FinData[10], '%d/%m/%Y')
-                            change_date_format = date_time_obj.strftime('%d/%m/%Y')
-                            data.dop_Warranty_end_date = change_date_format
-
-                        data.vendor = FinData[11]
-                        data.po = FinData[12]
-                        data.invoice = FinData[13]
-                        data.type_of_purchase = FinData[14]
-
-                        data.block = FinData[15]
-                        data.location = FinData[16]
-                        data.standard_installation = FinData[17]
-                        if FinData[17] == "Yes" or FinData[17] == "yes":
-                            if not softwareUser.objects.filter(User_ID=FinData[0], Software_Name="Trend Micro" ).exists():
-                                trend_micro = softwareUser()
-                                trend_micro.Software_Type = "Non-Concurrent"
-                                trend_micro.User_Type = "Machine"
-                                trend_micro.Software_Name = "Trend Micro"
-                                trend_micro.Software_Version = "Apex one"
-                                trend_micro.User_ID = data.computer_id
-                                trend_micro.save()
-                            if not softwareUser.objects.filter(User_ID=FinData[0], Software_Name="Teamviewer" ).exists():
-                                teamviewer = softwareUser()
-                                teamviewer.Software_Type = "Non-Concurrent"
-                                teamviewer.User_Type = "Machine"
-                                teamviewer.Software_Name = "Teamviewer"
-                                teamviewer.Software_Version = "Teamviewer Host"
-                                teamviewer.User_ID = data.computer_id
-                                teamviewer.save()
-                            if not softwareUser.objects.filter(User_ID=FinData[0], Software_Name="TightVNC" ).exists():
-                                vnc = softwareUser()
-                                vnc.Software_Type = "Non-Concurrent"
-                                vnc.User_Type = "Machine"
-                                vnc.Software_Name = "TightVNC"
-                                vnc.Software_Version = "tightvnc-2.8.63"
-                                vnc.User_ID = data.computer_id
-                                vnc.save()
-                            if not softwareUser.objects.filter(User_ID=FinData[0], Software_Name="Marimba" ).exists():
-                                marimba = softwareUser()
-                                marimba.Software_Type = "Non-Concurrent"
-                                marimba.User_Type = "Machine"
-                                marimba.Software_Name = "Marimba"
-                                marimba.Software_Version = "SFSInventory_x64"
-                                marimba.User_ID = data.computer_id
-                                marimba.save()
-                        data.usbunlock = FinData[18]
-                        data.cdunlock = FinData[19]
-                        data.windows = FinData[20]
-                        data.microsoft_office = FinData[21]
-                        data.microsoft_office_keys = FinData[22]
-                        data.processor_type = FinData[23]
-                        data.ram_type = FinData[24]
-                        data.ram_slot = FinData[25]
-                        data.total_ram = FinData[26]
-                        data.storage_type = FinData[27]
-                        data.storage_space = FinData[28]
-                        data.connection_type = FinData[29]
-                        data.joined_domain = FinData[30]
-                        data.lan_mac_address = FinData[31]
-                        if FinData[32] != "None":
-                            if  IP.objects.filter(ip_address=FinData[32], status = "Not-inuse").exists():
-                                ip = IP.objects.get(ip_address=FinData[32])
-                                ipdata= ip.ip_address
-                                data.lan_ip_address = ipdata
-                                ip.status = "In-use"
-                                ip.ip_assisgned = data.computer_id
-                                ip.save()
-                            else:
-                                errordata = "Yes"
-                                typeerror = 'IP'
-                                row = x
-                                iperror = FinData[30]
-                                ip = IP.objects.get(ip_address=FinData[32])
-                                computer_assignto =ip.ip_assisgned
-                          
-                                context ={
-                                    "error" : errordata,
-                                    "typeerror" : typeerror,
-                                    "row" : row,
-                                    "iperror" : iperror,
-                                    "Computer_assign": computer_assignto
-
-
-
-                                }
-                                return render(request, "Mass upload page.html", context)
-                        else:
-                            data.lan_ip_address = FinData[32]
-                        data.wlan_mac_address = FinData[33]
-                        if FinData[34] != "None":
-                            if  IP.objects.filter(ip_address=FinData[34], status = "Not-inuse").exists():
-                                ip = IP.objects.get(ip_address=FinData[34])
-                                ipdata= ip.ip_address
-                                data.wlan_ip_address = ipdata
-                                ip.status = "In-use"
-                                ip.ip_assisgned = data.computer_id
-                                ip.save()
-                            else:
-                                errordata = "Yes"
-                                typeerror = 'IP'
-                                row = x
-                                iperror = FinData[34]
-                                
-                                ip = IP.objects.get(ip_address=FinData[34])
-                                computer_assignto =ip.ip_assisgned
-                             
-                                context ={
-                                    "error" : errordata,
-                                    "typeerror" : typeerror,
-                                    "row" : row,
-                                    "iperror" : iperror,
-                                    "Computer_assign": computer_assignto
-
-
-
-                                }
-                                return render(request, "Mass upload page.html", context)
-                        else:
-                            data.wlan_ip_address = FinData[34]
-                        data.pccurrentstatus = FinData[35]
-
-
-                       
-                        if not Computer.objects.filter(computer_id=data.computer_id).exists():
-                            data.save()
-                      
-                            x=x+1
-    
-                            dataarray = [data.computer_id, FinData[7], FinData[5], FinData[6]]
-                            type_create = 'Create'
-                            create_qrcodePC(dataarray, type_create)
-
-                        else:
-                          
-                            errordata = "Yes"
-                            x=x+1
-
-                            
-
-                
-                    
-                    return redirect('uploadcsvdata')
-
-                if request.POST['Main_database'] == 'Laptop':
-                    csv_file = request.FILES["csv_file"]
-                 
-                    df = pd.read_csv(csv_file, encoding='unicode_escape')
-                    data1 = df.values.tolist()
-                    for k in data1:
-                        FinData = k 
-                        length = len(FinData)
-                        if  Laptop.objects.filter(computer_id=FinData[0]).exists():
-                                
-                                errordata = "Yes"
-                            
-                                context ={
-                                    "error" : errordata,
-
-                                }
-                                return render(request, "Mass upload page.html", context)
-
-                    for keys in data1:
-                        x =1
-                        FinData = keys 
-                        length = len(FinData)
-                 
-                        #proceed to insert the data
-                        data = Laptop()
-                        if FinData[0] == "None" or FinData[0] == "None":
-                            runing_number = Asset_running_number.objects.filter(asset_type='Laptop').get()
-                            num = int(runing_number.running_number)
-                            if num < 10:
-                                data_cid = "UTM-NB000"+ str(num)
-                            elif ((num >= 10) and (num < 100)):
-                                data_cid= "UTM-NB00"+ str(num)
-                            elif ((num >= 100) and (num < 1000)):
-                                data_cid= "UTM-NB0"+ str(num)
-                            elif ((num >= 1000) and (num < 10000)):
-                                data_cid= "UTM-NB"+ str(num)
-                            data.computer_id = data_cid
-                            runing_number.running_number = num +1
-                            runing_number.save()
-                        else:
-                            data.computer_id = FinData[0]
-                        
-                        if FinData[1] == "None":
-                            
-                            data.current_computer_id =  data.computer_id
-                         
-                        else:
-                            data.current_computer_id = FinData[1]
-                        data.pic = FinData[2]
-                        data.previous_pic = FinData[3]
-                        data.Brand = FinData[4]
-                        data.Model = FinData[5]
-                        data.serial_number = FinData[6]
-                        data.asset_no = FinData[7]
-                        if FinData[8] == "None" or FinData[8] ==  "-":
-                            data.dop = FinData[8]
-                        else:
-                            date_time_obj = datetime.strptime(FinData[8], '%d/%m/%Y')
-                            change_date_format = date_time_obj.strftime('%d/%m/%Y')
-                            data.dop = change_date_format
-                              
-                        if FinData[9] == "None" or FinData[9] ==  "-":
-                            data.dop_Warranty_end_date = FinData[9]
-                           
-                        else:
-                            date_time_obj = datetime.strptime(FinData[9], '%d/%m/%Y')
-                            change_date_format = date_time_obj.strftime('%d/%m/%Y')
-                            data.dop_Warranty_end_date = change_date_format
-                            
-                       
-                        
-                        data.vendor = FinData[10]
-                        data.po = FinData[11]
-                        data.invoice = FinData[12]
-                        data.type_of_purchase = FinData[13]
-
-                        data.block = FinData[14]
-                        data.location = FinData[15]
-                        data.standard_installation = FinData[16]
-                        if FinData[16] == "Yes" or FinData[16] == "yes":
-                            if not softwareUser.objects.filter(User_ID=FinData[0], Software_Name="Trend Micro" ).exists():
-                                trend_micro = softwareUser()
-                                trend_micro.Software_Type = "Non-Concurrent"
-                                trend_micro.User_Type = "Machine"
-                                trend_micro.Software_Name = "Trend Micro"
-                                trend_micro.Software_Version = "Apex one"
-                                trend_micro.User_ID = data.computer_id
-                                trend_micro.save()
-                            if not softwareUser.objects.filter(User_ID=FinData[0], Software_Name="Teamviewer" ).exists():
-                                teamviewer = softwareUser()
-                                teamviewer.Software_Type = "Non-Concurrent"
-                                teamviewer.User_Type = "Machine"
-                                teamviewer.Software_Name = "Teamviewer"
-                                teamviewer.Software_Version = "Teamviewer Host"
-                                teamviewer.User_ID = data.computer_id
-                                teamviewer.save()
-                            if not softwareUser.objects.filter(User_ID=FinData[0], Software_Name="TightVNC" ).exists():
-                                vnc = softwareUser()
-                                vnc.Software_Type = "Non-Concurrent"
-                                vnc.User_Type = "Machine"
-                                vnc.Software_Name = "TightVNC"
-                                vnc.Software_Version = "tightvnc-2.8.63"
-                                vnc.User_ID = data.computer_id
-                                vnc.save()
-                            if not softwareUser.objects.filter(User_ID=FinData[0], Software_Name="Marimba" ).exists():
-                                marimba = softwareUser()
-                                marimba.Software_Type = "Non-Concurrent"
-                                marimba.User_Type = "Machine"
-                                marimba.Software_Name = "Marimba"
-                                marimba.Software_Version = "SFSInventory_x64"
-                                marimba.User_ID = data.computer_id
-                                marimba.save()
-                        data.usbunlock = FinData[17]
-                        data.cdunlock = FinData[18]
-                        data.windows = FinData[19]
-                        data.microsoft_office = FinData[20]
-                        data.microsoft_office_keys = FinData[21]
-                        data.processor_type = FinData[22]
-                        data.ram_type = FinData[23]
-                        data.ram_slot = FinData[24]
-                        data.total_ram = FinData[25]
-                        data.storage_type = FinData[26]
-                        data.storage_space = FinData[27]
-                        data.connection_type = FinData[28]
-                        data.joined_domain = FinData[29]
-                        data.lan_mac_address = FinData[30]
-                        if FinData[31] != "None":
-                            if  IP.objects.filter(ip_address=FinData[31], status = "Not-inuse").exists():
-                                ip = IP.objects.get(ip_address=FinData[31])
-                                ipdata= ip.ip_address
-                                data.lan_ip_address = ipdata
-                                ip.status = "In-use"
-                                ip.ip_assisgned = data.computer_id
-                                ip.save()
-                            else:
-                                errordata = "Yes"
-                                typeerror = 'IP'
-                                row = x
-                                iperror = FinData[31]
-                                ip = IP.objects.get(ip_address=FinData[31])
-                                computer_assignto =ip.ip_assisgned
-                            
-                                context ={
-                                    "error" : errordata,
-                                    "typeerror" : typeerror,
-                                    "row" : row,
-                                    "iperror" : iperror,
-                                    "Computer_assign": computer_assignto
-
-
-
-                                }
-                                return render(request, "Mass upload page.html", context)
-                        else:
-                            data.lan_ip_address = FinData[31]
-                        data.wlan_mac_address = FinData[32]
-                        if FinData[33] != "None":
-                            if  IP.objects.filter(ip_address=FinData[33], status = "Not-inuse").exists():
-                                ip = IP.objects.get(ip_address=FinData[33])
-                                ipdata= ip.ip_address
-                                data.wlan_ip_address = ipdata
-                                ip.status = "In-use"
-                                ip.ip_assisgned = data.computer_id
-                                ip.save()
-                            
-                            else:
-                                errordata = "Yes"
-                                typeerror = 'IP'
-                                row = x
-                                iperror = FinData[33]
-                                
-                                ip = IP.objects.get(ip_address=FinData[33])
-                                computer_assignto =ip.ip_assisgned
-                              
-                                context ={
-                                    "error" : errordata,
-                                    "typeerror" : typeerror,
-                                    "row" : row,
-                                    "iperror" : iperror,
-                                    "Computer_assign": computer_assignto
-
-
-
-                                }
-                                return render(request, "Mass upload page.html", context)
-                        else:
-                            data.wlan_ip_address = FinData[33]
-                        data.pccurrentstatus = FinData[34]
-                        if not Laptop.objects.filter(computer_id=data.computer_id).exists():
-                            data.save()
-                          
-                            x = x+1
-                            dataarray = [data.computer_id, FinData[6], FinData[4], FinData[5]]
-                            type_create = "Create"
-                            create_qrcodeLaptop(dataarray, type_create)
-                        else:
-                           
-                            errordata = "Yes"
-                            x = x+1
-
-                            
-
-                
-                    
-                    return redirect('uploadcsvdata')
-                        
-                
-                    
-                    return HttpResponse(context)
-                if request.POST['Main_database'] == 'NetworkHardware':
-                    csv_file = request.FILES["csv_file"]
-                    df = pd.read_csv(csv_file)
-                    data1 = df.values.tolist()
-                    for k in data1:
-                        FinData = k 
-                        length = len(FinData)
-                        if  NetworkHardware.objects.filter(hardware_id=FinData[0]).exists():
-                                
-                                errordata = "Yes"
-                               
-                                context ={
-                                    "error" : errordata,
-
-                                }
-                                return render(request, "Mass upload page.html", context)
-                    x =1 
-                    for keys in data1:
-                        FinData = keys 
-                        length = len(FinData)
-                 
-                        
-                        #proceed to insert the data
-                        data = NetworkHardware()
-                        if FinData[0] == "None":
-                           
-                            if FinData[1] == "CCTV_DVR":
-                                runing_number = Asset_running_number.objects.filter(asset_type='CCTV_DVR').get()
-                                num = int(runing_number.running_number)
-                                if num < 10:
-                                    data_cid = "CCTV000"+ str(num)
-                                elif ((num >= 10) and (num < 100)):
-                                    data_cid= "CCTV00"+ str(num)
-                                elif ((num >= 100) and (num < 1000)):
-                                    data_cid= "CCTV0"+ str(num)
-                                elif ((num >= 1000) and (num < 10000)):
-                                    data_cid= "CCTV"+ str(num)
-                                data.hardware_id = data_cid
-                                runing_number.running_number = num +1
-                                runing_number.save()
-                            elif FinData[1] == "CCTV":
-                                runing_number = Asset_running_number.objects.filter(asset_type='CCTV').get()
-                                num = int(runing_number.running_number)
-                                if num < 10:
-                                    data_cid = "UTM-CM000"+ str(num)
-                                elif ((num >= 10) and (num < 100)):
-                                    data_cid= "UTM-CM00"+ str(num)
-                                elif ((num >= 100) and (num < 1000)):
-                                    data_cid= "UTM-CM0"+ str(num)
-                                elif ((num >= 1000) and (num < 10000)):
-                                    data_cid= "UTM-CM"+ str(num)
-                                data.hardware_id = data_cid
-                                runing_number.running_number = num +1
-                                runing_number.save()
-                            elif FinData[1] == "AP":
-                                runing_number = Asset_running_number.objects.filter(asset_type='AP').get()
-                                num = int(runing_number.running_number)
-                                if num < 10:
-                                    data_cid = "UTM-AP000"+ str(num)
-                                elif ((num >= 10) and (num < 100)):
-                                    data_cid= "UTM-AP00"+ str(num)
-                                elif ((num >= 100) and (num < 1000)):
-                                    data_cid= "UTM-AP0"+ str(num)
-                                elif ((num >= 1000) and (num < 10000)):
-                                    data_cid= "UTM-AP"+ str(num)
-                                data.hardware_id = data_cid
-                                runing_number.running_number = num +1
-                                runing_number.save()
-                            elif FinData[1] == "CP":
-                                runing_number = Asset_running_number.objects.filter(asset_type='CP').get()
-                                num = int(runing_number.running_number)
-                                if num < 10:
-                                    data_cid = "UTM-CP000"+ str(num)
-                                elif ((num >= 10) and (num < 100)):
-                                    data_cid= "UTM-CP00"+ str(num)
-                                elif ((num >= 100) and (num < 1000)):
-                                    data_cid= "UTM-CP0"+ str(num)
-                                elif ((num >= 1000) and (num < 10000)):
-                                    data_cid= "UTM-CP"+ str(num)
-                                data.hardware_id = data_cid
-                                runing_number.running_number = num +1
-                                runing_number.save()
-                            elif FinData[1] == "Door_Access":
-                                runing_number = Asset_running_number.objects.filter(asset_type='Door_Access').get()
-                                num = int(runing_number.running_number)
-                                if num < 10:
-                                    data_cid = "DoorController000"+ str(num)
-                                elif ((num >= 10) and (num < 100)):
-                                    data_cid= "DoorControllerP00"+ str(num)
-                                elif ((num >= 100) and (num < 1000)):
-                                    data_cid= "DoorController0"+ str(num)
-                                elif ((num >= 1000) and (num < 10000)):
-                                    data_cid= "DoorController"+ str(num)
-                                data.hardware_id = data_cid
-                                runing_number.running_number = num +1
-                                runing_number.save()
-                            elif FinData[1] == "Switches":
-                                runing_number = Asset_running_number.objects.filter(asset_type='Switches').get()
-                                num = int(runing_number.running_number)
-                                if num < 10:
-                                    data_cid = "UTM-NW000"+ str(num)
-                                elif ((num >= 10) and (num < 100)):
-                                    data_cid= "UTM-NWP00"+ str(num)
-                                elif ((num >= 100) and (num < 1000)):
-                                    data_cid= "UTM-NW0"+ str(num)
-                                elif ((num >= 1000) and (num < 10000)):
-                                    data_cid= "UTM-NW"+ str(num)
-                                data.hardware_id = data_cid
-                                runing_number.running_number = num +1
-                                runing_number.save()
-                            elif FinData[1] == "Tape_Library":
-                                runing_number = Asset_running_number.objects.filter(asset_type='Tape_Library').get()
-                                num = int(runing_number.running_number)
-                                if num < 10:
-                                    data_cid = "UTM-TL000"+ str(num)
-                                elif ((num >= 10) and (num < 100)):
-                                    data_cid= "UTM-TL00"+ str(num)
-                                elif ((num >= 100) and (num < 1000)):
-                                    data_cid= "UTM-TL0"+ str(num)
-                                elif ((num >= 1000) and (num < 10000)):
-                                    data_cid= "UTM-TL"+ str(num)
-                                data.hardware_id = data_cid
-                                runing_number.running_number = num +1
-                                runing_number.save()
-                            elif FinData[1] == "Wireless_Dongle":
-                                runing_number = Asset_running_number.objects.filter(asset_type='Wireless_Dongle').get()
-                                num = int(runing_number.running_number)
-                                if num < 10:
-                                    data_cid = "Tenda Wireless000"+ str(num)
-                                elif ((num >= 10) and (num < 100)):
-                                    data_cid= "Tenda Wireless00"+ str(num)
-                                elif ((num >= 100) and (num < 1000)):
-                                    data_cid= "Tenda Wireless0"+ str(num)
-                                elif ((num >= 1000) and (num < 10000)):
-                                    data_cid= "Tenda Wireless"+ str(num)
-                                data.hardware_id = data_cid
-                                runing_number.running_number = num +1
-                                runing_number.save()
-                            elif FinData[1] == "Print_Server":
-                                runing_number = Asset_running_number.objects.filter(asset_type='Print_Server').get()
-                                num = int(runing_number.running_number)
-                                if num < 10:
-                                    data_cid = "UTM-PS000"+ str(num)
-                                elif ((num >= 10) and (num < 100)):
-                                    data_cid= "UTM-PS00"+ str(num)
-                                elif ((num >= 100) and (num < 1000)):
-                                    data_cid= "UTM-PS0"+ str(num)
-                                elif ((num >= 1000) and (num < 10000)):
-                                    data_cid= "UTM-PS"+ str(num)
-                                data.hardware_id = data_cid
-                                runing_number.running_number = num +1
-                                runing_number.save()
-                            elif FinData[1] == "Firewall":
-                                runing_number = Asset_running_number.objects.filter(asset_type='Firewall').get()
-                                num = int(runing_number.running_number)
-                                if num < 10:
-                                    data_cid = "UTM-FW000"+ str(num)
-                                elif ((num >= 10) and (num < 100)):
-                                    data_cid= "UTM-FW00"+ str(num)
-                                elif ((num >= 100) and (num < 1000)):
-                                    data_cid= "UTM-FW0"+ str(num)
-                                elif ((num >= 1000) and (num < 10000)):
-                                    data_cid= "UTM-FW"+ str(num)
-                                data.hardware_id = data_cid
-                                runing_number.running_number = num +1
-                                runing_number.save()
-                            elif FinData[1] == "UPS":
-                                data.hardware_id =  FinData[0]
-                            elif FinData[1] == "Server":
-                                runing_number = Asset_running_number.objects.filter(asset_type='Server').get()
-                                num = int(runing_number.running_number)
-                                if num < 10:
-                                    data_cid = "UTM-SV000"+ str(num)
-                                elif ((num >= 10) and (num < 100)):
-                                    data_cid= "UTM-SV00"+ str(num)
-                                elif ((num >= 100) and (num < 1000)):
-                                    data_cid= "UTM-SV0"+ str(num)
-                                elif ((num >= 1000) and (num < 10000)):
-                                    data_cid= "UTM-SV"+ str(num)
-                                data.hardware_id = data_cid
-                                runing_number.running_number = num +1
-                                runing_number.save()
-                                
-
-                        else:
-                            data.hardware_id = FinData[0]
-                        data.hardware_type = FinData[1]
-                        data.Brand = FinData[2]
-                        data.Model = FinData[3]
-                        data.serial_number = FinData[4]
-                        data.asset_no = FinData[5]
-                        if FinData[6] == "None" or FinData[6] ==  "-":
-                             data.dop = FinData[8]
-                        else:
-                            date_time_obj = datetime.strptime(FinData[6], '%d/%m/%Y')
-                            change_date_format = date_time_obj.strftime('%d/%m/%Y')
-                            data.dop = change_date_format
-                             
-                        if FinData[7] == "None" or FinData[7] ==  "-":
-                            data.dop_Warranty_end_date = FinData[9]
-                        else:
-                            date_time_obj = datetime.strptime(FinData[7], '%d/%m/%Y')
-                            change_date_format = date_time_obj.strftime('%d/%m/%Y')
-                            data.dop_Warranty_end_date = change_date_format
-                              
-                      
-                        data.vendor = FinData[8]
-                        data.po = FinData[9]
-                        data.invoice = FinData[10]
-                        data.block = FinData[11]
-                        data.location = FinData[12]
-
-                        data.mac_address = FinData[13]
-                        if FinData[14] != "None":
-                            if  IP.objects.filter(ip_address=FinData[14], status = "Not-inuse").exists():
-                                ip = IP.objects.get(ip_address=FinData[14])
-                                ipdata= ip.ip_address
-                                data.ip_address = ipdata
-                                ip.status = "In-use"
-                                ip.ip_assisgned = data.hardware_id
-                                ip.save()
-                            else:
-                                errordata = "Yes"
-                                typeerror = 'IP'
-                                row = x
-                                iperror = FinData[14]
-                                
-                                ip = IP.objects.get(ip_address=FinData[14])
-                                computer_assignto =ip.ip_assisgned
-                              
-                                context ={
-                                    "error" : errordata,
-                                    "typeerror" : typeerror,
-                                    "row" : row,
-                                    "iperror" : iperror,
-                                    "Computer_assign": computer_assignto
-
-
-
-                                }
-                                return render(request, "Mass upload page.html", context)
-                        else:
-                            data.ip_address = FinData[14]
-                        data.Current_Status = FinData[15]
-                       
-                        if not NetworkHardware.objects.filter(hardware_id=data.hardware_id).exists():
-                            data.save()
-                          
-                            x = x +1
-                        else:
-                          
-                            errordata = "Yes"
-
-                            
-
-                
-                    
-                    return redirect('uploadcsvdata')
-
-                if request.POST['Main_database'] == 'IP':
-                    csv_file = request.FILES["csv_file"]
-                    df = pd.read_csv(csv_file)
-                    data1 = df.values.tolist()
-                    for k in data1:
-                        FinData = k 
-                        length = len(FinData)
-                        if  IP.objects.filter(ip_address=FinData[0]).exists():
-                            
-                                errordata = "Yes"
-                            
-                                context ={
-                                    "error" : errordata,
-
-                                }
-                                return render(request, "Mass upload page.html", context)
-
-                    for keys in data1:
-                        FinData = keys 
-                        length = len(FinData)
-                   
-                        #proceed to insert the data
-                        data = IP()
-                        data.ip_address = FinData[0]
-                        
-                        data.ip_assisgned = FinData[1]
-                        
-                        data.status = FinData[2]
-                        data.remark = FinData[3]
-            
-                        if not IP.objects.filter(ip_address=data.ip_address).exists():
-                            data.save()
-                  
-                        else:
-                    
-                            errordata = "Yes"
-
-                            
-
-                
-                    
-                    return redirect('uploadcsvdata')    
-                  
-                if request.POST['Main_database'] == 'User':
-                    csv_file = request.FILES["csv_file"]
-                    df = pd.read_csv(csv_file)
-                    data1 = df.values.tolist()
-                    for k in data1:
-                        FinData = k 
-                        length = len(FinData)
-                        if  UserAsset.objects.filter(employee_number=FinData[0]).exists():
-                            
-                                errordata = "Yes"
-                      
-                                context ={
-                                    "error" : errordata,
-
-                                }
-                                return render(request, "Mass upload page.html", context)
-
-                    for keys in data1:
-                        FinData = keys 
-                        length = len(FinData)
-                      
-                        #proceed to insert the data
-                        data = UserAsset()
-                        data.employee_number = FinData[0]
-                        
-                        data.name = FinData[1]
-                        
-                        data.email = FinData[2]
-                        data.designation = FinData[3]
-                        data.department = FinData[4]
-                        data.block = FinData[5]
-                        data.location = FinData[6]
-                        data.vpn = FinData[7]
-                        data.vpnaccount = FinData[8]
-
-            
-                        if not UserAsset.objects.filter(employee_number=data.employee_number).exists():
-                            data.save()
-                    
-                        else:
-                      
-                            errordata = "Yes"
-
-                            
-
-                
-                    
-                    return redirect('uploadcsvdata')    
-                  
-                if request.POST['Main_database'] == 'Software User':
-                    csv_file = request.FILES["csv_file"]
-                    df = pd.read_csv(csv_file)
-                    data1 = df.values.tolist()
-                    for k in data1:
-                        FinData = k 
-                        length = len(FinData)
-                        if  softwareUser.objects.filter(Software_Type=FinData[0], User_Type= FinData[1], Software_Name=FinData[2], User_ID=FinData[3]).exists():
-                                
-                                errordata = "Yes"
-                              
-                                context ={
-                                    "error" : errordata,
-
-                                }
-                                return render(request, "Mass upload page.html", context)
-
-                    for keys in data1:
-                        FinData = keys 
-                        length = len(FinData)
-                       
-                        #proceed to insert the data
-                        data = softwareUser()
-                        data.Software_Type = FinData[0]
-                        
-                        data.User_Type = FinData[1]
-                        
-                        data.Software_Name = FinData[2]
-                        data.User_ID = FinData[3]
-                        data.Software_Version = FinData[4]
-                        
-
-            
-                        if not softwareUser.objects.filter(Software_Type=FinData[0], User_Type= FinData[1], Software_Name=FinData[2], User_ID=FinData[3]).exists():
-                            data.save()
-                    
-                        else:
-                     
-                            errordata = "Yes"
-
-                            
-
-                
-                    
-                    return redirect('uploadcsvdata')
-                  
-        if request.POST['typeofupload'] == 'Update':     
-                if request.POST['Main_database'] == 'Computer':
-                    csv_file = request.FILES["csv_file"]
-                    df = pd.read_csv(csv_file)
-                    data1 = df.values.tolist()
-                 
-                    for keys in data1:
-                        x=2
-                        FinData = keys 
-                        length = len(FinData)
-                  
-                        #proceed to insert the data
-                        data = Computer.objects.filter(computer_id= FinData[0]).get()
-                       
-                        data.computer_id = FinData[0]
-                        
-                      
-                        data.current_computer_id = FinData[1]
-                      
-                        
-                        data.pctype = FinData[2]
-                        data.pic = FinData[3]
-                        data.previous_pic = FinData[4]
-                        data.Brand = FinData[5]
-                        data.Model = FinData[6]
-                        data.serial_number = FinData[7]
-                        data.asset_no = FinData[8]
-                        if FinData[9] == "None" or FinData[9] ==  "-":
-                            data.dop = FinData[9]
-                        else:
-                            date_time_obj = datetime.strptime(FinData[9], '%d/%m/%Y')
-                            change_date_format = date_time_obj.strftime('%Y-%m-%d')
-                            data.dop = change_date_format
-                              
-                        if FinData[10] == "None" or FinData[10] ==  "-":
-                            data.dop_Warranty_end_date = FinData[10]
-                        else:
-                            date_time_obj = datetime.strptime(FinData[10], '%d/%m/%Y')
-                            change_date_format = date_time_obj.strftime('%Y-%m-%d')
-                            data.dop_Warranty_end_date = change_date_format
-                              
-                       
-                       
-                        data.vendor = FinData[11]
-                        data.po = FinData[12]
-                        data.invoice = FinData[13]
-                        data.type_of_purchase = FinData[14]
-
-                        data.block = FinData[15]
-                        data.location = FinData[16]
-                        data.standard_installation = FinData[17]
-                        standardinstall = data.standard_installation
-                        if FinData[17] == "Yes" or FinData[17] == "yes" :
-                            if not softwareUser.objects.filter(User_ID=FinData[0], Software_Name="Trend Micro" ).exists():
-                                trend_micro = softwareUser()
-                                trend_micro.Software_Type = "Non-Concurrent"
-                                trend_micro.User_Type = "Machine"
-                                trend_micro.Software_Name = "Trend Micro"
-                                trend_micro.Software_Version = "Apex one"
-                                trend_micro.User_ID = data.computer_id
-                                trend_micro.save()
-                            if not softwareUser.objects.filter(User_ID=FinData[0], Software_Name="Teamviewer" ).exists():
-                                teamviewer = softwareUser()
-                                teamviewer.Software_Type = "Non-Concurrent"
-                                teamviewer.User_Type = "Machine"
-                                teamviewer.Software_Name = "Teamviewer"
-                                teamviewer.Software_Version = "Teamviewer Host"
-                                teamviewer.User_ID = data.computer_id
-                                teamviewer.save()
-                            if not softwareUser.objects.filter(User_ID=FinData[0], Software_Name="TightVNC" ).exists():
-                                vnc = softwareUser()
-                                vnc.Software_Type = "Non-Concurrent"
-                                vnc.User_Type = "Machine"
-                                vnc.Software_Name = "TightVNC"
-                                vnc.Software_Version = "tightvnc-2.8.63"
-                                vnc.User_ID = data.computer_id
-                                vnc.save()
-                            if not softwareUser.objects.filter(User_ID=FinData[0], Software_Name="Marimba" ).exists():
-                                marimba = softwareUser()
-                                marimba.Software_Type = "Non-Concurrent"
-                                marimba.User_Type = "Machine"
-                                marimba.Software_Name = "Marimba"
-                                marimba.Software_Version = "SFSInventory_x64"
-                                marimba.User_ID = data.computer_id
-                                marimba.save()
-                        
-                        data.usbunlock = FinData[18]
-                        data.cdunlock = FinData[19]
-                        data.windows = FinData[20]
-                        data.microsoft_office = FinData[21]
-                        data.microsoft_office_keys = FinData[22]
-                        data.processor_type = FinData[23]
-                        data.ram_type = FinData[24]
-                        data.ram_slot = FinData[25]
-                        data.total_ram = FinData[26]
-                        data.storage_type = FinData[27]
-                        data.storage_space = FinData[28]
-                        data.connection_type = FinData[29]
-                        data.joined_domain = FinData[30]
-                        data.lan_mac_address = FinData[31]
-                        if ( FinData[32] == "Release" or FinData[32] == "release"):
-                            if (data.lan_ip_address != ""):
-                                ip = IP.objects.get(ip_address=FinData[32])
-                                ip.status = "Not-inuse"
-                                ip.ip_assisgned = "None"
-                                ip.save()
-                        else:
-                            previIP = data.lan_ip_address
-                            if ( previIP != FinData[32] and FinData[32] != "Offline"):
-                                
-                                ip = IP.objects.get(ip_address=previIP)
-                                ip.status = "Not-inuse"
-                                ip.ip_assisgned = "None"
-                                ip.save()
-                                ipNew = IP.objects.get(ip_address = FinData[32])
-                                ipNew.status = "In-use"
-                                ipNew.ip_assisgned = FinData[0]
-                                ipNew.save()
-                            else:
-                                data.lan_ip_address = FinData[32]
-
-                        
-                        data.wlan_mac_address = FinData[33]
-                       
-                        data.wlan_ip_address = FinData[34]
-                        data.pccurrentstatus = FinData[35]
-
-
-                       
-                     
-                        data.save()
-                        dataarray = [data.computer_id, FinData[7], FinData[5], FinData[6]]
-                        type_create = 'Update'
-                        create_qrcodePC(dataarray, type_create)
-                        
-                            
-
-                    
-                    return redirect('uploadcsvdata')
-
-                if request.POST['Main_database'] == 'Laptop':
-                    csv_file = request.FILES["csv_file"]
-                 
-                    df = pd.read_csv(csv_file, encoding='unicode_escape')
-                    data1 = df.values.tolist()
-                    
-
-                    for keys in data1:
-                        x =1
-                        FinData = keys 
-                        length = len(FinData)
-                  
-                        #proceed to insert the data
-                        data = Laptop.objects.filter(computer_id= FinData[0]).get()
-                        
-                        data.computer_id = FinData[0]
-                       
-                        data.current_computer_id = FinData[1]
-                        data.pic = FinData[2]
-                        data.previous_pic = FinData[3]
-                        data.Brand = FinData[4]
-                        data.Model = FinData[5]
-                        data.serial_number = FinData[6]
-                        data.asset_no = FinData[7]
-                        if FinData[8] == "None" or FinData[8] ==  "-":
-                            data.dop = FinData[8]
-                        else:
-                            date_time_obj = datetime.strptime(FinData[8], '%d/%m/%Y')
-                            change_date_format = date_time_obj.strftime('%Y-%m-%d')
-                            data.dop = change_date_format
-                              
-                        if FinData[9] == "None" or FinData[9] ==  "-":
-                            data.dop_Warranty_end_date = FinData[9]
-                           
-                        else:
-                            date_time_obj = datetime.strptime(FinData[9], '%d/%m/%Y')
-                            change_date_format = date_time_obj.strftime('%Y-%m-%d')
-                            data.dop_Warranty_end_date = change_date_format
-                            
-                       
-                        
-                        data.vendor = FinData[10]
-                        data.po = FinData[11]
-                        data.invoice = FinData[12]
-                        data.type_of_purchase = FinData[13]
-
-                        data.block = FinData[14]
-                        data.location = FinData[15]
-                        data.standard_installation = FinData[16]
-                        standardinstall =  data.standard_installation
-                        if FinData[16] == "Yes" or FinData[16] == "yes" :
-                            if not softwareUser.objects.filter(User_ID=FinData[0], Software_Name="Trend Micro" ).exists():
-                                trend_micro = softwareUser()
-                                trend_micro.Software_Type = "Non-Concurrent"
-                                trend_micro.User_Type = "Machine"
-                                trend_micro.Software_Name = "Trend Micro"
-                                trend_micro.Software_Version = "Apex one"
-                                trend_micro.User_ID = data.computer_id
-                                trend_micro.save()
-                            if not softwareUser.objects.filter(User_ID=FinData[0], Software_Name="Teamviewer" ).exists():
-                                teamviewer = softwareUser()
-                                teamviewer.Software_Type = "Non-Concurrent"
-                                teamviewer.User_Type = "Machine"
-                                teamviewer.Software_Name = "Teamviewer"
-                                teamviewer.Software_Version = "Teamviewer Host"
-                                teamviewer.User_ID = data.computer_id
-                                teamviewer.save()
-                            if not softwareUser.objects.filter(User_ID=FinData[0], Software_Name="TightVNC" ).exists():
-                                vnc = softwareUser()
-                                vnc.Software_Type = "Non-Concurrent"
-                                vnc.User_Type = "Machine"
-                                vnc.Software_Name = "TightVNC"
-                                vnc.Software_Version = "tightvnc-2.8.63"
-                                vnc.User_ID = data.computer_id
-                                vnc.save()
-                            if not softwareUser.objects.filter(User_ID=FinData[0], Software_Name="Marimba" ).exists():
-                                marimba = softwareUser()
-                                marimba.Software_Type = "Non-Concurrent"
-                                marimba.User_Type = "Machine"
-                                marimba.Software_Name = "Marimba"
-                                marimba.Software_Version = "SFSInventory_x64"
-                                marimba.User_ID = data.computer_id
-                                marimba.save()
-                        data.usbunlock = FinData[17]
-                        data.cdunlock = FinData[18]
-                        data.windows = FinData[19]
-                        data.microsoft_office = FinData[20]
-                        data.microsoft_office_keys = FinData[21]
-                        data.processor_type = FinData[22]
-                        data.ram_type = FinData[23]
-                        data.ram_slot = FinData[24]
-                        data.total_ram = FinData[25]
-                        data.storage_type = FinData[26]
-                        data.storage_space = FinData[27]
-                        data.connection_type = FinData[28]
-                 
-                        data.joined_domain = FinData[29]
-                        data.lan_mac_address = FinData[30]
-                        if ( FinData[31] == "Release" or FinData[31] == "release"):
-                            if (data.lan_ip_address != ""):
-                                ip = IP.objects.get(ip_address=FinData[31])
-                                ip.status = "Not-inuse"
-                                ip.ip_assisgned = "None"
-                                ip.save()
-                                data.lan_ip_address = FinData[31]
-                        else:
-                            previIP = data.lan_ip_address
-                            if ( previIP != FinData[31] and FinData[31] != "Offline"):
-                                
-                                ip = IP.objects.get(ip_address=previIP)
-                                ip.status = "Not-inuse"
-                                ip.ip_assisgned = "None"
-                                ip.save()
-                                ipNew = IP.objects.get(ip_address = FinData[31])
-                                ipNew.status = "In-use"
-                                ipNew.ip_assisgned = FinData[0]
-                                ipNew.save()
-                                data.lan_ip_address = FinData[31]
-                            else:
-                                data.lan_ip_address = FinData[31]
-                      
-                        data.wlan_mac_address = FinData[32]
-                        if ( FinData[33] == "Release" or FinData[33] == "release"):
-                            if (data.lan_ip_address != ""):
-                                ip = IP.objects.get(ip_address=FinData[33])
-                                ip.status = "Not-inuse"
-                                ip.ip_assisgned = "None"
-                                ip.save()
-                                data.wlan_ip_address = FinData[33]
-                        else:
-                            previIP = data.lan_ip_address
-                            if ( previIP != FinData[33]):
-                                
-                                ip = IP.objects.get(ip_address=previIP)
-                                ip.status = "Not-inuse"
-                                ip.ip_assisgned = "None"
-                                ip.save()
-                                ipNew = IP.objects.get(ip_address = FinData[33])
-                                ipNew.status = "In-use"
-                                ipNew.ip_assisgned = FinData[0]
-                                ipNew.save()
-                                data.wlan_ip_address = FinData[33]
-                            else:
-                                data.wlan_ip_address = FinData[33]
-                      
-                        data.pccurrentstatus = FinData[34]
-                       
-                        data.save()
-                        dataarray = [data.computer_id, FinData[6], FinData[4], FinData[5]]
-                        type_create = "Update"
-                        create_qrcodeLaptop(dataarray, type_create)
-
-                            
-
-                
-                    
-                    return redirect('uploadcsvdata')
-                        
-                
-                    
-                    return HttpResponse(context)
-                
-                if request.POST['Main_database'] == 'NetworkHardware':
-                    csv_file = request.FILES["csv_file"]
-                    df = pd.read_csv(csv_file)
-                    data1 = df.values.tolist()
-                   
-                    x =1 
-                    for keys in data1:
-                        FinData = keys 
-                        length = len(FinData)
-                
-                        
-                        #proceed to insert the data
-                        data = NetworkHardware.objects.filter(hardware_id= FinData[0]).get()
-                       
-                        data.hardware_id = FinData[0]
-                        data.hardware_type = FinData[1]
-                        data.Brand = FinData[2]
-                        data.Model = FinData[3]
-                        data.serial_number = FinData[4]
-                        data.asset_no = FinData[5]
-                        if FinData[6] == "None" or FinData[6] ==  "-":
-                             data.dop = FinData[8]
-                        else:
-                            date_time_obj = datetime.strptime(FinData[6], '%d/%m/%Y')
-                            change_date_format = date_time_obj.strftime('%Y-%m-%d')
-                            data.dop = change_date_format
-                             
-                        if FinData[7] == "None" or FinData[7] ==  "-":
-                            data.dop_Warranty_end_date = FinData[9]
-                        else:
-                            date_time_obj = datetime.strptime(FinData[7], '%d/%m/%Y')
-                            change_date_format = date_time_obj.strftime('%Y-%m-%d')
-                            data.dop_Warranty_end_date = change_date_format
-                              
-                      
-                        data.vendor = FinData[8]
-                        data.po = FinData[9]
-                        data.invoice = FinData[10]
-                        data.block = FinData[11]
-                        data.location = FinData[12]
-
-                        data.mac_address = FinData[13]
-                        
-                        data.ip_address = FinData[14]
-                        data.Current_Status = FinData[15]
-                       
-                      
-                        data.save()
-                        
-
-                            
-
-                
-                    
-                    return redirect('uploadcsvdata')
-
-                if request.POST['Main_database'] == 'IP':
-                    csv_file = request.FILES["csv_file"]
-                    df = pd.read_csv(csv_file)
-                    data1 = df.values.tolist()
-                  
-
-                    for keys in data1:
-                        FinData = keys 
-                        length = len(FinData)
-                      
-                        #proceed to insert the data
-                        data = IP.objects.filter(ip_address= FinData[0]).get()
-                        data.ip_address = FinData[0]
-                        
-                        data.ip_assisgned = FinData[1]
-                        
-                        data.status = FinData[2]
-                        data.remark = FinData[3]
-            
-                      
-                        data.save()
-                          
-
-                            
-
-                
-                    
-                    return redirect('uploadcsvdata')    
-                  
-                if request.POST['Main_database'] == 'User':
-                    csv_file = request.FILES["csv_file"]
-                    df = pd.read_csv(csv_file)
-                    data1 = df.values.tolist()
-                  
-                    for keys in data1:
-                        FinData = keys 
-                        length = len(FinData)
-                   
-                        #proceed to insert the data
-                        data = UserAsset.objects.filter(employee_number= FinData[0]).get()
-                        data.employee_number = FinData[0]
-                        
-                        data.name = FinData[1]
-                        
-                        data.email = FinData[2]
-                        data.designation = FinData[3]
-                        data.department = FinData[4]
-                        data.block = FinData[5]
-                        data.location = FinData[6]
-                        data.vpn = FinData[7]
-                        data.vpnaccount = FinData[8]
-
-            
-                       
-                        data.save()
-                        
-
-                            
-
-                
-                    
-                    return redirect('uploadcsvdata')    
-                  
-                if request.POST['Main_database'] == 'Software User': 
-                    csv_file = request.FILES["csv_file"]
-                    df = pd.read_csv(csv_file)
-                    data1 = df.values.tolist()
-                    
-
-                    for keys in data1:
-                        FinData = keys 
-                        length = len(FinData)
-                   
-                        #proceed to insert the data
-                        data = softwareUser.objects.filter(User_ID= FinData[3], Software_Name= FinData[2]).get()
-                        data.Software_Type = FinData[0]
-                        
-                        data.User_Type = FinData[1]
-                        
-                        data.Software_Name = FinData[2]
-                        data.User_ID = FinData[3]
-                        data.Software_Version = FinData[4]
-                        
-
-            
-                       
-                        data.save()
-                       
-                        
-                    return redirect('uploadcsvdata')
-             
-    return render(request, 'Mass upload page.html')      
-  
 
 
        
