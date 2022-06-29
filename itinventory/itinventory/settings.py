@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-jou0dq7@8l#sj9elh5wf!uro#=+)4f!v2^q#12=2i)h(o_vdnk
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['192.168.0.186', '127.0.0.1']
+ALLOWED_HOSTS = ['*' ]
 
 
 # Application definition
@@ -78,14 +78,13 @@ WSGI_APPLICATION = 'itinventory.wsgi.application'
 
 DATABASES = {
    'default': {
-   "ENGINE": "mssql",
-        "NAME": "django",
+   "ENGINE": "django.db.backends.postgresql_psycopg2",
+        "NAME": "it_inventory",
         "USER": "sa",
         "PASSWORD": "#Un1steel09",
-        "HOST": "192.168.0.186",
-        
-        "OPTIONS": {"driver": "ODBC Driver 17 for SQL Server", 
-        },
+        "HOST": "localhost",
+         
+      
     }
 }
 

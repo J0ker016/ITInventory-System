@@ -78,5 +78,5 @@ admin.site.register(NetworkAsset_block)
 admin.site.register(storagevalue)
 admin.site.register(softwareUser)
 admin.site.register(loghistory)
-admin.site.register(testdb, testtable)
+# admin.site.register(testdb, testtable)
 # Register your models here.
